@@ -1,8 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import 'antd/dist/antd.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'hover.css/css/hover-min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+//
+import WebFont from 'webfontloader';
+
+WebFont.load({
+	google: {
+		families: [ 'Rajdhani', 'sans-serif' ]
+	}
+});
+//
 
 ReactDOM.render(
   <React.StrictMode>
