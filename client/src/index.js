@@ -5,20 +5,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'hover.css/css/hover-min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
 //
 import WebFont from 'webfontloader';
 
 WebFont.load({
 	google: {
-		families: [ 'Rajdhani', 'sans-serif' ]
+		families: [ 'Roboto', 'sans-serif' ]
 	}
 });
 //
 
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter>
     <App />
-  </React.StrictMode>,
+  </BrowserRouter>
+  ,
   document.getElementById('root')
 );
 
