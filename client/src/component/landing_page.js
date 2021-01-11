@@ -32,7 +32,11 @@ export const LandingPage = (props) => {
                 <h1 className="display-3 mb-12 python">Python Autograder</h1>
 
                 <p className="lead"> Welcome to my web site</p>
-                <Button>Normal Button</Button>
+                <Button  onClick={() => {
+                        auth.login(() => {
+                          props.history.push("/home");
+                        });
+                      }}>Normal Button</Button>
                 <TomatoButton>Tomato Button</TomatoButton>
                 <Form
                   name="normal_login"
@@ -43,6 +47,7 @@ export const LandingPage = (props) => {
                 >
                   <Form.Item
                     name="StudentID"
+    
                     rules={[
                       {
                         required: true,
@@ -90,7 +95,7 @@ export const LandingPage = (props) => {
                     <button
                       type="button"
                       className="login-form-button"
-                      class="btn btn-primary"
+                      
                       onClick={() => {
                         auth.login(() => {
                           props.history.push("/home");
