@@ -1,0 +1,80 @@
+  .login-form {
+    background-color: rgb(201, 201, 201);
+    padding-left: 255px;
+    padding-right: 255px;
+    padding-block-start: 100px ;
+    border-radius: 25px;
+    
+  }
+  .login-form-forgot {
+    float: right;
+  }
+  .ant-col-rtl .login-form-forgot {
+    float: left;
+  }
+  .login-form-button {
+    width: 100%;
+    padding-bottom: 25pxgi;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .image-background {
+    
+    background: url('./component/images/coding.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 45%;
+    height: 100vh;
+   
+  }
+
+  .color-background {
+    position: relative;
+    background: conic-gradient(from 227.45deg at -8.46% 60.3%, #E2E2C0 -45deg, #0E4291 60.81deg, #E2E2C0 315deg, #0E4291 420.81deg);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+   
+  }
+  .landing-inner {
+    padding-top: 220px;
+    
+  }
+
+  .python{
+    font-family: Roboto;
+    font-size: 85px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+  }
+
+  
+  .dark-overlay {
+    background-color:rgba(57, 67, 92, 0.79);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45%;
+    height: 100%;
+  }
+  
+  .card-form {
+    opacity: 0.9;
+  }
+  
+  .latest-profiles-img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .form-control::placeholder {
+    color: #bbb !important;
+  }
+  
+
+  
+  
