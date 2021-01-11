@@ -8,13 +8,14 @@ import './App.css'
 function App() {
   return (
     <div className="App">
+      
       <Switch>
         <Route exact path= "/" component={LandingPage}/>
         <Route exact path= "/register" component={RegisterPage}/>
         <ProtectedRoute exact path= "/home" component={HomePage}/>
         <Route path= "*" component={() => "404 NOT FOUND"} />
+        
       </Switch>
-      
     </div>
   );
 }
