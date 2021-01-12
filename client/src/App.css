@@ -1,81 +1,51 @@
   .login-form {
-    background-color: rgb(201, 201, 201);
-    padding-left: 255px;
-    padding-right: 255px;
+    background-color: #F2F2F2;
+    padding-left: 120px;
+    padding-right: 120px;
     padding-block-start: 50px ;
     padding-block-end: 50px;
     border-radius: 25px;
-    
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgb(0, 0, 0, 0.2) ;
+    justify-content: center;
+    text-align: center;
+    font-family: Roboto;
   }
-  .login-form-forgot {
-    float: right;
-  }
-  .ant-col-rtl .login-form-forgot {
+  .login-form-remember {
     float: left;
   }
+  
+  
   .login-form-button {
     width: 100%;
-    border-radius: 8px;
+    
   }
 
   img {
     width: 100%;
   }
 
-  .image-background {
-    
-    background: url('./component/images/coding.jpg') no-repeat;
-    background-size: cover;
-    background-position: center;
-    width: 45%;
-    height: 100vh;
-   
-  }
-
-  .color-background {
-    position: relative;
-    background: conic-gradient(from 227.45deg at -8.46% 60.3%, #E2E2C0 -45deg, #0E4291 60.81deg, #E2E2C0 315deg, #0E4291 420.81deg);
-    background-size: cover;
-    background-position: center;
+  .landing{
+    height: 100%;
+    position: absolute;
     width: 100%;
-    height: 100vh;
-   
-  }
-  .landing-inner {
-    padding-top: 220px;
-    
+    margin: auto;
+    background: conic-gradient(from 227.45deg at -8.46% 60.3%, #E2E2C0 -45deg, #0E4291 60.81deg, #E2E2C0 315deg, #0E4291 420.81deg);
   }
 
-  .python{
-    font-family: Roboto;
-    font-size: 85px;
-    font-weight: bold;
-    color: rgb(255, 255, 255);
+  .landing-content{
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  
   .dark-overlay {
     background-color:rgba(57, 67, 92, 0.79);
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 45%;
+    width: 100%;
     height: 100%;
   }
-  
-  .card-form {
-    opacity: 0.9;
-  }
-  
-  .latest-profiles-img {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .form-control::placeholder {
-    color: #bbb !important;
-  }
-  
 
   
   
