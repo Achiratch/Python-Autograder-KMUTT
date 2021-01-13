@@ -14,38 +14,13 @@
     float: left;
   }
   
-  
   .login-form-button {
     width: 100%;
-    
   }
 
-  img {
-    width: 100%;
-  }
 
-  .landing{
-    height: 100%;
-    position: absolute;
-    width: 100%;
-    margin: auto;
-    background: conic-gradient(from 227.45deg at -8.46% 60.3%, #E2E2C0 -45deg, #0E4291 60.81deg, #E2E2C0 315deg, #0E4291 420.81deg);
-  }
 
-  .landing-content{
-    width: 100%;
-    min-height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 
-  .dark-overlay {
-    background-color:rgba(57, 67, 92, 0.79);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
 
   
   

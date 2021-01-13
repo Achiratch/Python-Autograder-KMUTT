@@ -1,57 +1,93 @@
-import React from "react";
+import React, { Component } from "react";
 import auth from "./auth";
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
-import { Form, Row, Col, Input, Button, Checkbox } from "antd";
+import { Form, Col, Input, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import coding_image from "./images/coding.jpg";
 import logo_python from "./images/logo_python.png";
-export const LandingPage = (props) => {
-  const Coding_Image = styled.div`
-    width: 100%;
-    height: 100vh;
-    background-image: url(${coding_image});
+///Stlyed-------------------------------
+const Coding_Image = styled.div`
+  width: 100%;
+  height: 100vh;
+  background-image: url(${coding_image});
+  background-repeat: no-repeat;
+  width: calc(100% - 170px);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 1;
+`;
 
-    background-repeat: no-repeat;
+const Landing = styled.div`
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  margin: auto;
+  background: conic-gradient(
+    from 227.45deg at -8.46% 60.3%,
+    #e2e2c0 -45deg,
+    #0e4291 60.81deg,
+    #e2e2c0 315deg,
+    #0e4291 420.81deg
+  );
+`;
+const Landing_Content = styled.div`
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
-    width: calc(100% - 170px);
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    z-index: 1;
-  `;
+const Login_Form = styled.div`
+  background-color: #f2f2f2;
+  padding-left: 120px;
+  padding-right: 120px;
+  padding-block-start: 50px;
+  padding-block-end: 50px;
+  border-radius: 25px;
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgb(0, 0, 0, 0.2);
+  justify-content: center;
+  text-align: center;
+  font-family: Roboto;
+`;
 
-  const Logo_Python = styled.div`
-    background-image: url(${logo_python});
-    background-size: cover;
+const Logo_Python = styled.div`
+  background-image: url(${logo_python});
+  background-size: cover;
 
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 20vh;
-    height: 20vh;
-    justify-content: center;
-  `;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20vh;
+  height: 20vh;
+  justify-content: center;
+`;
 
-  const Welcome_Message = styled.h1`
-    padding-block-start: 300px;
-    font-size: 85px;
-    font-family: Roboto;
-    font-weight: bold;
-    color: rgb(255, 255, 255);
-    text-align: center;
-  `;
+const Welcome_Message = styled.h1`
+  padding-block-start: 300px;
+  font-size: 85px;
+  font-family: Roboto;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  background-color: rgba(57, 67, 92, 0.79);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+`;
+///Stlyed-------------------------------
 
-  return (
-    <div>
-      <div class="landing">
-        <div className="landing-content">
+class LandingPage extends Component {
+  render() {
+    return (
+      <Landing>
+        <Landing_Content>
           <Col xs={0} sm={0} md={0} lg={12}>
             <Coding_Image>
-              <Welcome_Message className="dark-overlay">
-                Python Autograder
-              </Welcome_Message>
+              <Welcome_Message>Python Autograder</Welcome_Message>
             </Coding_Image>
           </Col>
 
@@ -63,7 +99,6 @@ export const LandingPage = (props) => {
                 remember: true,
               }}
             >
-              
               <Form.Item>
                 <Logo_Python />
               </Form.Item>
@@ -102,8 +137,10 @@ export const LandingPage = (props) => {
               </Form.Item>
 
               <Form.Item>
-                <Form.Item name="remember" valuePropName="checked" noStyle  >
-                  <Checkbox className="login-form-remember">Remember me</Checkbox>
+                <Form.Item name="remember" valuePropName="checked" noStyle>
+                  <Checkbox className="login-form-remember">
+                    Remember me
+                  </Checkbox>
                 </Form.Item>
               </Form.Item>
 
@@ -118,7 +155,7 @@ export const LandingPage = (props) => {
                   class="btn btn-success btn-lg btn-block"
                   onClick={() => {
                     auth.login(() => {
-                      props.history.push("/home");
+                      this.props.history.push("/home");
                     });
                   }}
                 >
@@ -127,8 +164,10 @@ export const LandingPage = (props) => {
               </Form.Item>
             </Form>
           </Col>
-        </div>
-      </div>
-    </div>
-  );
-};
+        </Landing_Content>
+      </Landing>
+    );
+  }
+}
+
+export default LandingPage;
