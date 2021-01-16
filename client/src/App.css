@@ -7,7 +7,6 @@
     border-radius: 25px;
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgb(0, 0, 0, 0.2) ;
     justify-content: center;
-    text-align: center;
     font-family: Roboto;
   }
   .login-form-remember {
@@ -16,6 +15,23 @@
   
   .login-form-button {
     width: 100%;
+    justify-content: center;
+  }
+  .text{
+    text-align: center;
+  }
+
+  .register-form{
+    border-radius: 25px;
+    background-color: #F2F2F2;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgb(0, 0, 0, 0.2) ;
+    justify-content: center;
+    
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-block-start: 20px ;
+    padding-block-end: 20px;
+    font-family: Roboto;
   }
 
 

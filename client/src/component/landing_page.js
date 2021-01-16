@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import auth from "./auth";
 import { Link } from "react-router-dom";
-import "antd/dist/antd.css";
 import { Form, Col, Input, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import styled from "styled-components";
@@ -39,19 +38,9 @@ const Landing_Content = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const Login_Form = styled.div`
-  background-color: #f2f2f2;
-  padding-left: 120px;
-  padding-right: 120px;
-  padding-block-start: 50px;
-  padding-block-end: 50px;
-  border-radius: 25px;
-  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgb(0, 0, 0, 0.2);
-  justify-content: center;
-  text-align: center;
-  font-family: Roboto;
+  h2{
+    text-align:center;
+  }
 `;
 
 const Logo_Python = styled.div`
@@ -68,13 +57,13 @@ const Logo_Python = styled.div`
 
 const Welcome_Message = styled.h1`
   padding-block-start: 300px;
+  padding-block-end: 300px;
   font-size: 85px;
   font-family: Roboto;
   font-weight: bold;
   color: rgb(255, 255, 255);
   text-align: center;
   background-color: rgba(57, 67, 92, 0.79);
-  position: absolute;
   width: 100%;
   height: 100%;
 `;
@@ -95,8 +84,9 @@ class LandingPage extends Component {
             <Form
               name="normal_login"
               className="login-form"
+              size="large"
               initialValues={{
-                remember: true,
+                remember: false,
               }}
             >
               <Form.Item>
@@ -144,7 +134,7 @@ class LandingPage extends Component {
                 </Form.Item>
               </Form.Item>
 
-              <Form.Item>
+              <Form.Item className="text">
                 <Link to="./register">Sign up </Link>
                 <a>if you don't have an account yet</a>
               </Form.Item>
