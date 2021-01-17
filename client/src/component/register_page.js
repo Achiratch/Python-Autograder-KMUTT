@@ -110,10 +110,14 @@ class RegisterPage extends Component {
     console.log("[FORM]: Submitting the form");
     const _data = this.formRef.current.getFieldsValue();
     console.log(_data);
+    auth.login(() => {
+      this.props.history.push("/");
+    });
     
   }
 
   render() {
+    
     return (
       <Landing>
         <Landing_Content>
@@ -233,7 +237,6 @@ class RegisterPage extends Component {
                     class="btn btn-success btn-lg btn-block"
                     type="primary"
                     htmlType="submit"
-                    
                   >
                     Register
                   </button>

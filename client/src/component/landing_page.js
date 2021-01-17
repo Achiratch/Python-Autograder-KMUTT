@@ -38,8 +38,8 @@ const Landing_Content = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  h2{
-    text-align:center;
+  h2 {
+    text-align: center;
   }
 `;
 
@@ -70,7 +70,25 @@ const Welcome_Message = styled.h1`
 ///Stlyed-------------------------------
 
 class LandingPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      is_requesting: false,
+    };
+    this.formRef = React.createRef();
+    this.onFormSubmitHandler = this.onFormSubmitHandler.bind(this);
+  }
+  async onFormSubmitHandler() {
+    console.log("[FORM]: Submitting the form");
+    const _data = this.formRef.current.getFieldsValue();
+    console.log(_data);
+    auth.login(() => {
+      this.props.history.push("/home");
+    });
+  }
+
   render() {
+    
     return (
       <Landing>
         <Landing_Content>
@@ -85,6 +103,8 @@ class LandingPage extends Component {
               name="normal_login"
               className="login-form"
               size="large"
+              onFinish={this.onFormSubmitHandler}
+              ref={this.formRef}
               initialValues={{
                 remember: false,
               }}
@@ -140,14 +160,10 @@ class LandingPage extends Component {
               </Form.Item>
               <Form.Item>
                 <button
-                  type="button"
+                  type="primary"
+                  htmlType="submit"
                   className="login-form-button"
                   class="btn btn-success btn-lg btn-block"
-                  onClick={() => {
-                    auth.login(() => {
-                      this.props.history.push("/home");
-                    });
-                  }}
                 >
                   Sign in
                 </button>
