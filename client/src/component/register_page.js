@@ -3,12 +3,7 @@ import styled from "styled-components";
 import auth from "./auth";
 import writing_image from "./images/writing.jpg";
 import logo_python from "./images/logo_python.png";
-import {
-  Form,
-  Input,
-  Tooltip,
-  Col,
-} from "antd";
+import { Form, Input, Tooltip, Col } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 
 const Landing = styled.div`
@@ -88,8 +83,8 @@ const formItemLayout = {
 };
 
 const Holder_Form = styled.div`
-  h2{
-    text-align:center;
+  h2 {
+    text-align: center;
   }
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -97,7 +92,7 @@ const Holder_Form = styled.div`
   }
 `;
 
-class Register extends Component {
+class RegisterPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -115,6 +110,7 @@ class Register extends Component {
     console.log("[FORM]: Submitting the form");
     const _data = this.formRef.current.getFieldsValue();
     console.log(_data);
+    
   }
 
   render() {
@@ -237,6 +233,7 @@ class Register extends Component {
                     class="btn btn-success btn-lg btn-block"
                     type="primary"
                     htmlType="submit"
+                    
                   >
                     Register
                   </button>
@@ -250,4 +247,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default RegisterPage;
