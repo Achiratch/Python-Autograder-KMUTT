@@ -1,14 +1,26 @@
-import React from "react";
+import React, { Component } from "react";
 import auth from "./auth";
-export const HomePage = props => {
+import  Navbar  from "./navbar";
+class HomePage extends Component {
+  render() {
     return (
-        <div>
-            <h1>Python</h1>
-            <button  type="button" class="btn btn-primary" onClick={() => {
-                auth.logout(() => {
-                    props.history.push("/");
-                });
-            }}>Logout</button>
-        </div>
-    )
+      <div>
+        <Navbar/>
+        <h1>Content</h1>
+        <button
+          type="button"
+          class="btn btn-primary"
+          onClick={() => {
+            auth.logout(() => {
+              this.props.history.push("/");
+            });
+          }}
+        >
+          Logout
+        </button>
+      </div>
+    );
+  }
 }
+
+export default HomePage;

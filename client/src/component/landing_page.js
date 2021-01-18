@@ -41,6 +41,7 @@ const Landing_Content = styled.div`
   h2 {
     text-align: center;
   }
+  
 `;
 
 const Logo_Python = styled.div`
