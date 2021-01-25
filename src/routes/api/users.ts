@@ -9,7 +9,7 @@ import validateRegisterInput from "../../validation/register"
 // Load User model
 import User from "../../models/User";
 
-// @route GET api/users/register
+// @route POST api/users/register
 // @desc Register user
 // @acccess Public
 router.post("/register", (req: Request, res: Response) => {
