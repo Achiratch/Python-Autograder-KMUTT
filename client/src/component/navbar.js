@@ -197,8 +197,8 @@ export default function Navbar() {
               <a>Edit Profile</a>
             </li>
             <li>
-              <Link type="button" to="/" class="btn btn-danger">
-                <FontAwesomeIcon icon={faSignOutAlt} size="md" color="white" />
+              <Link type="button" to="/" className="btn btn-danger">
+                <FontAwesomeIcon icon={faSignOutAlt} size="sm" color="white" />
                 Logout
               </Link>
             </li>

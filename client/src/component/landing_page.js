@@ -41,7 +41,6 @@ const Landing_Content = styled.div`
   h2 {
     text-align: center;
   }
-  
 `;
 
 const Logo_Python = styled.div`
@@ -89,7 +88,6 @@ class LandingPage extends Component {
   }
 
   render() {
-    
     return (
       <Landing>
         <Landing_Content>
@@ -162,9 +160,9 @@ class LandingPage extends Component {
               <Form.Item>
                 <button
                   type="primary"
-                  htmlType="submit"
+                  htmltype="submit"
                   className="login-form-button"
-                  class="btn btn-success btn-lg btn-block"
+                  className="btn btn-success btn-lg btn-block"
                 >
                   Sign in
                 </button>

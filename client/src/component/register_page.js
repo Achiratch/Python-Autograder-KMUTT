@@ -171,7 +171,7 @@ class RegisterPage extends Component {
                 >
                   <Input type="number" autoComplete="off" />
                 </Form.Item>
-                
+
                 <Form.Item
                   name="password"
                   label="Password"
@@ -257,9 +257,9 @@ class RegisterPage extends Component {
                 <Form.Item>
                   <button
                     className="login-form-button"
-                    class="btn btn-success btn-lg btn-block"
+                    className="btn btn-success btn-lg btn-block"
                     type="primary"
-                    htmlType="submit"
+                    htmltype="submit"
                   >
                     Register
                   </button>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import auth from "./auth";
-import   Navbar  from "./navbar";
+import Navbar from "./navbar";
 class HomePage extends Component {
   render() {
     return (
@@ -9,7 +9,7 @@ class HomePage extends Component {
         <h1>Content</h1>
         <button
           type="button"
-          class="btn btn-primary"
+          className="btn btn-primary"
           onClick={() => {
             auth.logout(() => {
               this.props.history.push("/");
