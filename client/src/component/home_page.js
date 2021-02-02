@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import auth from "./auth";
-import  Navbar  from "./navbar";
+import   Navbar  from "./navbar";
 class HomePage extends Component {
   render() {
     return (
       <div>
-        <Navbar/>
+        <Navbar />
         <h1>Content</h1>
         <button
           type="button"
