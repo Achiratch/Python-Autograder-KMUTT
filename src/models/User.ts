@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import IUser from '../interfaces/User'
 const Schema = mongoose.Schema;
 
 //Create Schema
@@ -8,26 +9,26 @@ const UserSchema = new Schema({
         required: true
 
     },
-    password:{
+    password: {
         type: String,
         required: true
     },
-    email:{
+    email: {
         type: String,
         require: true
     },
-    firstName:{
+    firstName: {
         type: String,
         required: true
     },
-    lastName:{
+    lastName: {
         type: String,
         requried: true
     },
-    date:{
+    date: {
         type: Date,
         default: Date.now()
     }
 });
 
-export default mongoose.model('users', UserSchema);
+export default mongoose.model<IUser>('users', UserSchema);

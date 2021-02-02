@@ -4,9 +4,12 @@
   "description": "Senior project",
   "main": "server.js",
   "scripts": {
-    "start": "node dist/server.js",
-    "dev": "nodemon src/server.ts",
-    "build": "tsc -p ."
+    "client-install": "npm install --prefix client",
+    "startjs": "node dist/server.js",
+    "start": "nodemon src/server.ts",
+    "build": "tsc -p .",
+    "client": "npm start --prefix client"
+
   },
   "repository": {
     "type": "git",
