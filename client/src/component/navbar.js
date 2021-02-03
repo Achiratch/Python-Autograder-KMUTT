@@ -25,7 +25,7 @@ const Nav = styled.div`
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-  background: rgba(39, 46, 65, 0.95); ;
+  background: rgba(39, 46, 65, 0.95); 
 `;
 
 const Logo = styled.div`
@@ -162,7 +162,7 @@ const useDetectOutsideClick = (el, initialState) => {
   return [isActive, setIsActive];
 };
 
-export default function Navbar() {
+ function Navbar() {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = () => setIsActive(!isActive);
@@ -208,3 +208,4 @@ export default function Navbar() {
     </Nav>
   );
 }
+export default Navbar;
