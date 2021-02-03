@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import auth from "./auth";
 import Navbar from "./navbar";
+import Footer from "./footer";
 class HomePage extends Component {
   render() {
     return (
@@ -18,6 +19,7 @@ class HomePage extends Component {
         >
           Logout
         </button>
+        <Footer />
       </div>
     );
   }
