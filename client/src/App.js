@@ -2,7 +2,7 @@ import LandingPage  from './component/landing_page'
 import RegisterPage  from './component/register_page'
 import  HomePage  from './component/home_page'
 import { BrowserRouter , Router, Route, Switch } from 'react-router-dom';
-import {ProtectedRoute} from './component/protected_route'
+import {ProtectedRoute} from './component/auth/protected_route'
 import './App.css'
 
 function App() {

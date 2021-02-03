@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import auth from "./auth";
+import auth from "./auth/auth";
 import writing_image from "./images/writing.jpg";
 import logo_python from "./images/logo_python.png";
 import { Form, Input, Tooltip, Col } from "antd";

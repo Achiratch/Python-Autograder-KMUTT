@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import auth from "./auth";
+import auth from "./auth/auth";
 import { Link } from "react-router-dom";
 import { Form, Col, Input, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
