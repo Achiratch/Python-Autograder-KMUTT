@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import auth from "./auth";
-import Navbar from "./navbar";
-import Footer from "./footer";
+import Navbar from "./layout/navbar";
+import Footer from "./layout/footer";
 class HomePage extends Component {
   render() {
     return (

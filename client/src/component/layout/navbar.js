@@ -6,7 +6,7 @@ import { faBell } from "@fortawesome/free-regular-svg-icons";
 import logo_python from "./images/logo_python.png";
 import styled from "styled-components";
 
-import auth from "./auth";
+import auth from "../auth";
 
 const Logo_Python = styled.div`
   background-image: url(${logo_python});
