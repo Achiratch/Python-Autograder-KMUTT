@@ -6,7 +6,8 @@ import 'hover.css/css/hover-min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-//
+
+// Font
 import WebFont from 'webfontloader';
 
 WebFont.load({
