@@ -6,6 +6,10 @@ import logo_python from "./images/logo_python.png";
 import { Form, Input, Tooltip, Col } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 
+import { connect } from "react-redux";
+import { registerUser } from "../redux/actions/authActions";
+
+
 const Landing = styled.div`
   height: 100%;
   position: absolute;
@@ -113,9 +117,11 @@ class RegisterPage extends Component {
     auth.login(() => {
       this.props.history.push("/");
     });
+    this.props.registerUser(_data);
   }
 
   render() {
+    const { user } = this.props.auth;
     return (
       <Landing>
         <Landing_Content>
@@ -139,7 +145,7 @@ class RegisterPage extends Component {
                   <Logo_Python />
                 </Form.Item>
                 <Form.Item>
-                  <h2>Sign up your account</h2>
+                  <h2>Sign up your account {user ? user.firstName : null}</h2>
                 </Form.Item>
                 <Form.Item
                   name="studentID"
@@ -273,4 +279,8 @@ class RegisterPage extends Component {
   }
 }
 
-export default RegisterPage;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { registerUser })(RegisterPage);
