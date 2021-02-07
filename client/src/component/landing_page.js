@@ -6,6 +6,9 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import coding_image from "./images/coding.jpg";
 import logo_python from "./images/logo_python.png";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { loginUser } from "../redux/actions/authActions";
 ///Stlyed-------------------------------
 const Coding_Image = styled.div`
   width: 100%;
@@ -175,4 +178,12 @@ class LandingPage extends Component {
   }
 }
 
-export default LandingPage;
+LandingPage.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(null, { loginUser })(LandingPage);
