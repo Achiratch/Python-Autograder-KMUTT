@@ -23,16 +23,16 @@ const Register = (req: Request, res: Response) => {
         return res.status(400).json(errors);
     }
 
-    User.findOne({ email: req.body.email, studentId: req.body.studentId }).then((user: IUser | null) => {
+    User.findOne({ email: req.body.email, studentID: req.body.studentID }).then((user: IUser | null) => {
         if (user?.email) {
             errors.email = "Email already exists"
             return res.status(400).json(errors.email)
-        } else if (user?.studentId) {
-            errors.studentId = "studentId already exists"
-            return res.status(400).json(errors.studentId)
+        } else if (user?.studentID) {
+            errors.studentID = "studentID already exists"
+            return res.status(400).json(errors.studentID)
         } else {
             const newUser: any = new User({
-                studentId: req.body.studentId,
+                studentID: req.body.studentID,
                 password: req.body.password,
                 email: req.body.email,
                 firstName: req.body.firstName,
@@ -63,15 +63,15 @@ const Login = (req: Request, res: Response) => {
         return res.status(400).json(errors);
     }
 
-    const studentId: number = req.body.studentId
+    const studentID: number = req.body.studentID
     const password = req.body.password
 
     //Find user by student id
 
-    User.findOne({ studentId }).then((user: IUser | null) => {
+    User.findOne({ studentID }).then((user: IUser | null) => {
         //check for user
         if (!user) {
-            errors.studentId = "User not found"
+            errors.studentID = "User not found"
             return res.status(404).json(errors)
         }
 
@@ -79,7 +79,7 @@ const Login = (req: Request, res: Response) => {
         bcrypt.compare(password, user.password).then((isMatch: boolean) => {
             if (isMatch) {
                 // User Matched
-                const payload = { id: user.id, studentId: user.studentId }// Create JWT Payload
+                const payload = { id: user.id, studentID: user.studentID }// Create JWT Payload
 
                 // Sign Token
                 jwt.sign(

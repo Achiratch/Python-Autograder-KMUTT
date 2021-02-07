@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 //Create Schema
 const UserSchema = new Schema({
-    studentId: {
+    studentID: {
         type: Number,
         required: true
 
