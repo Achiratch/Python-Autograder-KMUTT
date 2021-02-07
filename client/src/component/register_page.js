@@ -9,7 +9,6 @@ import { QuestionCircleOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import { registerUser } from "../redux/actions/authActions";
 
-
 const Landing = styled.div`
   height: 100%;
   position: absolute;
@@ -101,11 +100,18 @@ class RegisterPage extends Component {
     super(props);
     this.state = {
       is_requesting: false,
+      errors: {},
     };
 
     this.formRef = React.createRef();
     this.onFormSubmitHandler = this.onFormSubmitHandler.bind(this);
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   componentDidMount() {
     //this.formRef.useForm();
   }
@@ -121,7 +127,8 @@ class RegisterPage extends Component {
   }
 
   render() {
-    const { user } = this.props.auth;
+    const { errors } = this.state;
+
     return (
       <Landing>
         <Landing_Content>
@@ -145,7 +152,7 @@ class RegisterPage extends Component {
                   <Logo_Python />
                 </Form.Item>
                 <Form.Item>
-                  <h2>Sign up your account {user ? user.firstName : null}</h2>
+                  <h2>Sign up your account</h2>
                 </Form.Item>
                 <Form.Item
                   name="studentID"
@@ -278,9 +285,9 @@ class RegisterPage extends Component {
     );
   }
 }
-
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { registerUser })(RegisterPage);
