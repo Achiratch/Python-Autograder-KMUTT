@@ -5,9 +5,10 @@ import writing_image from "./images/writing.jpg";
 import logo_python from "./images/logo_python.png";
 import { Form, Input, Tooltip, Col } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
-
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { registerUser } from "../redux/actions/authActions";
+import { PropTypes } from "prop-types";
 
 const Landing = styled.div`
   height: 100%;
@@ -119,11 +120,7 @@ class RegisterPage extends Component {
     // Theese function will be exceuted if user passed the antd validation state
     console.log("[FORM]: Submitting the form");
     const _data = this.formRef.current.getFieldsValue();
-    console.log(_data);
-    auth.login(() => {
-      this.props.history.push("/");
-    });
-    this.props.registerUser(_data);
+    this.props.registerUser(_data, this.props.history);
   }
 
   render() {
@@ -193,6 +190,16 @@ class RegisterPage extends Component {
                       required: true,
                       message: "Please input your password!",
                     },
+                    ({ getFieldValue }) => ({
+                      validator(rule, value) {
+                        if (!value || value.length >= 6) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(
+                          `Password must be at least 6 characters!`
+                        );
+                      },
+                    }),
                   ]}
                   hasFeedback
                 >
@@ -285,9 +292,18 @@ class RegisterPage extends Component {
     );
   }
 }
+
+RegisterPage.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { registerUser })(RegisterPage);
+export default connect(mapStateToProps, { registerUser })(
+  withRouter(RegisterPage)
+);

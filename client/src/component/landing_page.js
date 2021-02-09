@@ -81,16 +81,28 @@ class LandingPage extends Component {
     this.formRef = React.createRef();
     this.onFormSubmitHandler = this.onFormSubmitHandler.bind(this);
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      auth.login(() => {
+        this.props.history.push("/home");
+      });
+    }
+
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   async onFormSubmitHandler() {
     console.log("[FORM]: Submitting the form");
     const _data = this.formRef.current.getFieldsValue();
-    console.log(_data);
-    auth.login(() => {
-      this.props.history.push("/home");
-    });
+    this.props.loginUser(_data, this.props.history);
   }
 
   render() {
+    const { errors } = this.state;
+
     return (
       <Landing>
         <Landing_Content>
@@ -118,7 +130,7 @@ class LandingPage extends Component {
                 <h2>Sign in your account</h2>
               </Form.Item>
               <Form.Item
-                name="StudentID"
+                name="studentID"
                 rules={[
                   {
                     required: true,
@@ -181,9 +193,11 @@ class LandingPage extends Component {
 LandingPage.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  errors: state.errors,
 });
 
-export default connect(null, { loginUser })(LandingPage);
+export default connect(mapStateToProps, { loginUser })(LandingPage);

@@ -9,17 +9,6 @@ class HomePage extends Component {
       <div>
         <Navbar />
         <h1>Content</h1>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => {
-            auth.logout(() => {
-              this.props.history.push("/");
-            });
-          }}
-        >
-          Logout
-        </button>
         <Footer />
       </div>
     );
