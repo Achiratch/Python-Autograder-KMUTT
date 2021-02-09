@@ -199,7 +199,7 @@ class RegisterPage extends Component {
                   <Input.Password />
                 </Form.Item>
                 <Form.Item
-                  name="confirmPassword"
+                  name="password2"
                   label="Confirm Password"
                   dependencies={["password"]}
                   hasFeedback
