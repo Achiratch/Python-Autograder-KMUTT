@@ -1,6 +1,8 @@
 import express, { Request, Response, Application, NextFunction } from "express";
 const router = express.Router();
 import controller from '../../controllers/user'
+import { Authorize } from '../../_helpers/authorize'
+import ROLE from '../../models/Role'
 
 // @route POST api/users/register
 // @desc Register user

@@ -23,6 +23,9 @@ mongoose
 // Use Routes
 app.use('/api/users', users)
 
+// Test Api
+app.get('/')
+
 const port: any = 5000
 
 app.listen(port, () => console.log(`Server running on port ${port}`))
