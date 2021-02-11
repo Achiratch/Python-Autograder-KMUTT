@@ -16,10 +16,10 @@ export const registerUser = (userData, history) => (dispath) => {
 };
 
 //Login - Get User Token
-export const loginUser = (userData ) => (dispath) => {
+export const loginUser = (userData) => (dispath) => {
   axios
     .post("/api/users/login", userData)
-    .then((res) => { 
+    .then((res) => {
       //Save to localStorage
       const { token } = res.data;
       //Set token to ls
@@ -30,9 +30,7 @@ export const loginUser = (userData ) => (dispath) => {
       const decoded = jwt_decode(token);
       //Set current user
       dispath(setCurrentUser(decoded));
-      
-      
-    } )
+    })
     .catch((err) => dispath({ type: GET_ERRORS, payload: err.response.data }));
 };
 
@@ -42,4 +40,14 @@ export const setCurrentUser = (decoded) => {
     type: SET_CURRENT_USER,
     payload: decoded,
   };
+};
+
+//Log user out
+export const logoutUser = () => (dispath) => {
+  //Remove token from localStorage
+  localStorage.removeItem('jwtToken');
+  //Remove auth header for future requests
+  setAuthToken(false);
+  //Set current user to {} which will set isAuthenticated to false
+  dispath(setCurrentUser({}))
 };

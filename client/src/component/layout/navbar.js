@@ -6,6 +6,10 @@ import { faBell } from "@fortawesome/free-regular-svg-icons";
 import logo_python from "../images/logo_python.png";
 import styled from "styled-components";
 
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../redux/actions/authActions";
+
 import auth from "../auth/auth";
 
 const Logo_Python = styled.div`
@@ -25,7 +29,7 @@ const Nav = styled.div`
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-  background: rgba(39, 46, 65, 0.95); 
+  background: rgba(39, 46, 65, 0.95);
 `;
 
 const Logo = styled.div`
@@ -138,6 +142,7 @@ const DropDownLink = styled.div`
   }
 `;
 
+
 const useDetectOutsideClick = (el, initialState) => {
   const [isActive, setIsActive] = useState(initialState);
 
@@ -162,10 +167,13 @@ const useDetectOutsideClick = (el, initialState) => {
   return [isActive, setIsActive];
 };
 
- function Navbar() {
+function Navbar(props) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = () => setIsActive(!isActive);
+  const{ isAuthenticated ,user} = props.auth;
+  const onLogoutClick = () => props.logoutUser();
+    
   return (
     <Nav>
       <Logo>
@@ -185,7 +193,7 @@ const useDetectOutsideClick = (el, initialState) => {
         </Bell>
 
         <DropDown onClick={onClick}>
-          <AccountName>Achiratch</AccountName>
+          <AccountName >{isAuthenticated ? user.studentID:null }</AccountName>
           <ChevonDown>
             <FontAwesomeIcon icon={faChevronDown} size="lg" color="white" />
           </ChevonDown>
@@ -197,8 +205,8 @@ const useDetectOutsideClick = (el, initialState) => {
               <a>Edit Profile</a>
             </li>
             <li>
-              <Link type="button" to="/" className="btn btn-danger">
-                <FontAwesomeIcon icon={faSignOutAlt} size="sm" color="white" />
+              <Link type="button" to="/" className="btn btn-danger" onClick={onLogoutClick}>
+                <FontAwesomeIcon icon={faSignOutAlt} size="sm" color="white"  />
                 Logout
               </Link>
             </li>
@@ -208,4 +216,13 @@ const useDetectOutsideClick = (el, initialState) => {
     </Nav>
   );
 }
-export default Navbar;
+Navbar.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logoutUser })(Navbar);

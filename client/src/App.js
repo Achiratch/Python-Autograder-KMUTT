@@ -2,7 +2,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./redux/utills/setAuthToken";
-import { setCurrentUser } from "./redux/actions/authActions";
+import { logoutUser, setCurrentUser } from "./redux/actions/authActions";
 
 import LandingPage from "./component/landing_page";
 import RegisterPage from "./component/register_page";
@@ -11,6 +11,7 @@ import { BrowserRouter, Router, Route, Switch } from "react-router-dom";
 import { ProtectedRoute } from "./component/auth/protected_route";
 
 import "./App.css";
+import { decode } from "jsonwebtoken";
 
 //Check for token
 if (localStorage.jwtToken) {
@@ -20,6 +21,16 @@ if (localStorage.jwtToken) {
   const decoded = jwt_decode(localStorage.jwtToken);
   //Set user and isAuhenicated
   store.dispatch(setCurrentUser(decoded));
+
+  //Check for expried token
+  const currentTime = Date.now() /1000;
+  if(decode.exp < currentTime){
+    //Logout user
+    store.dispatch(logoutUser());
+
+    //Redirect to login
+    window.location.href ='/';
+  }
 }
 
 function App() {
