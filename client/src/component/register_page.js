@@ -114,7 +114,9 @@ class RegisterPage extends Component {
   }
 
   componentDidMount() {
-    //this.formRef.useForm();
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/home");
+    }
   }
   async onFormSubmitHandler() {
     // Theese function will be exceuted if user passed the antd validation state

@@ -81,7 +81,13 @@ class LandingPage extends Component {
     this.formRef = React.createRef();
     this.onFormSubmitHandler = this.onFormSubmitHandler.bind(this);
   }
-
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      auth.login(() => {
+        this.props.history.push("/home");
+      });
+    }
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       auth.login(() => {
