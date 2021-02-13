@@ -36,7 +36,8 @@ const Register = (req: Request, res: Response) => {
                 password: req.body.password,
                 email: req.body.email,
                 firstName: req.body.firstName,
-                lastName: req.body.lastName
+                lastName: req.body.lastName,
+                role: req.body.role
             })
 
             bcrypt.genSalt(10, (err, salt) => {
@@ -79,7 +80,7 @@ const Login = (req: Request, res: Response) => {
         bcrypt.compare(password, user.password).then((isMatch: boolean) => {
             if (isMatch) {
                 // User Matched
-                const payload = { id: user.id, studentID: user.studentID }// Create JWT Payload
+                const payload = { id: user.id, studentID: user.studentID, role: user.role }// Create JWT Payload
 
                 // Sign Token
                 jwt.sign(
