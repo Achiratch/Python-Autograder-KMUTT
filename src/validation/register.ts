@@ -14,9 +14,9 @@ export default validateRegisterInput = (data: any) => {
     data.firstName = !isEmpty(data.firstName) ? data.firstName : '';
     data.lastName = !isEmpty(data.lastName) ? data.lastName : '';
 
-    if (!Validator.isLength(data.studentID, { min: 11, max: 11 })) {
-        errors.studentID = 'Please insert your 11 digits KMUTT student\'s Id';
-    }
+    // if (!Validator.isLength(data.studentID, { min: 11, max: 11 })) {
+    //     errors.studentID = 'Please insert your 11 digits KMUTT student\'s Id';
+    // }
     if (!Validator.isLength(data.firstName, { min: 2, max: 30 })) {
         errors.name = 'Firstname must be between 2 and 30 characters';
     }
