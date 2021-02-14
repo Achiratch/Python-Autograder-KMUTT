@@ -48,3 +48,7 @@
     transform: translateY(0);
     transition: all 0.3s ease-in-out;
   }
+
+  .datacamp-exercise {
+    margin-bottom: 0em;
+  }
