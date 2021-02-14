@@ -6,7 +6,7 @@ import keys from '../config/keys'
 // Load Input Validation
 import validateRegisterInput from "../validation/register"
 import validateLoginInput from "../validation/login"
-
+import isEmpty from '../validation/is-empty'
 // Load User interface
 import IUser from '../interfaces/User'
 
@@ -18,18 +18,41 @@ const Register = (req: Request, res: Response) => {
 
     const { errors, isValid } = validateRegisterInput(req.body)
 
+    const email: string = req.body.email
+    const studentID: number = req.body.studentID
     // Check Validation
     if (!isValid) {
         return res.status(400).json(errors);
     }
 
-    User.findOne({ email: req.body.email, studentID: req.body.studentID }).then((user: IUser | null) => {
-        if (user?.email) {
+    const checkEmail = () => {
+        return User.findOne({ email })
+    }
+
+    const checkStudentID = () => {
+        return User.findOne({ studentID })
+    }
+
+    const checkDuplicate = async () => {
+        let dEmail = await checkEmail()
+        let dStudentID = await checkStudentID()
+        if (dEmail) {
             errors.email = "Email already exists"
-            return res.status(400).json(errors.email)
-        } else if (user?.studentID) {
-            errors.studentID = "studentID already exists"
-            return res.status(400).json(errors.studentID)
+        }
+        if (dStudentID) {
+            errors.studentID = "StudentID already exists"
+        }
+        return errors
+    }
+
+
+    const createUser = async () => {
+        let dbErrors = await checkDuplicate()
+        const noDuplicate = isEmpty(dbErrors)
+        if (!noDuplicate) {
+            console.log(dbErrors)
+            return res.status(400).json(dbErrors)
+
         } else {
             const newUser: any = new User({
                 studentID: req.body.studentID,
@@ -51,9 +74,9 @@ const Register = (req: Request, res: Response) => {
                 })
             })
         }
+    }
 
-
-    })
+    createUser();
 }
 
 const Login = (req: Request, res: Response) => {
