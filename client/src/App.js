@@ -4,11 +4,18 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "./redux/utills/setAuthToken";
 import { logoutUser, setCurrentUser } from "./redux/actions/authActions";
 
+import { BrowserRouter, Router, Route, Switch } from "react-router-dom";
+import { ProtectedRoute } from "./component/auth/protected_route";
+
+//Page------------------------------------
 import LandingPage from "./component/landing_page";
 import RegisterPage from "./component/register_page";
 import HomePage from "./component/home_page";
-import { BrowserRouter, Router, Route, Switch } from "react-router-dom";
-import { ProtectedRoute } from "./component/auth/protected_route";
+import ExercisesPage from "./component/exercises_page";
+import ScoreBookPage from "./component/scorebook_page";
+import MemberPage from "./component/member_page";
+import CollectionsPage from "./component/collections_page";
+//----------------------------------------
 
 import "./App.css";
 import { decode } from "jsonwebtoken";
@@ -46,6 +53,30 @@ function App() {
             path="/home"
             role={ROLE.STUDENT}
             component={HomePage}
+          />
+          <ProtectedRoute
+            exact
+            path="/collections"
+            role={ROLE.STUDENT}
+            component={CollectionsPage}
+          />
+          <ProtectedRoute
+            exact
+            path="/exercises"
+            role={ROLE.STUDENT}
+            component={ExercisesPage}
+          />
+          <ProtectedRoute
+            exact
+            path="/scorebook"
+            role={ROLE.STUDENT}
+            component={ScoreBookPage}
+          />
+          <ProtectedRoute
+            exact
+            path="/member"
+            role={ROLE.STUDENT}
+            component={MemberPage}
           />
           <Route
             path="/403"
