@@ -1,10 +1,11 @@
 import React, { Component, useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import logo_python from "../images/logo_python.png";
 import styled from "styled-components";
+import "./layout.css";
 
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -61,28 +62,6 @@ const Menu = styled.div`
   }
 `;
 
-const MenuLink = styled.a`
-  padding: 1rem 2rem;
-  cursor: pointer;
-  text-align: center;
-  font-weight: 550;
-  font-family: Roboto;
-  text-decoration: none;
-  color: whitesmoke;
-  transition: all 0.2s ease-in-out;
-  border-radius: 50px;
-
-  &:hover {
-    color: black;
-    font-weight: 650;
-    text-decoration: none;
-    border-radius: 15px;
-    background-color: #f2f2f2;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px rgb(0, 0, 0, 0.2);
-    z-index: 1;
-  }
-`;
-
 const Bell = styled.span`
   padding: 0rem 1.5rem;
   cursor: pointer;
@@ -115,6 +94,7 @@ const AccountName = styled.a`
 
 const DropDown = styled.div`
   transition: 2s ease-in-out;
+  z-index: 10;
 `;
 
 const DropDownLink = styled.div`
@@ -141,7 +121,6 @@ const DropDownLink = styled.div`
     }
   }
 `;
-
 
 const useDetectOutsideClick = (el, initialState) => {
   const [isActive, setIsActive] = useState(initialState);
@@ -171,9 +150,9 @@ function Navbar(props) {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const onClick = () => setIsActive(!isActive);
-  const{ isAuthenticated ,user} = props.auth;
+  const { isAuthenticated, user } = props.auth;
   const onLogoutClick = () => props.logoutUser();
-    
+
   return (
     <Nav>
       <Logo>
@@ -182,8 +161,12 @@ function Navbar(props) {
       </Logo>
 
       <Menu>
-        <MenuLink>Class</MenuLink>
-        <MenuLink>Collection</MenuLink>
+        <NavLink className="nav-link" to="/home">
+          Class
+        </NavLink>
+        <NavLink className="nav-link" to="/collections">
+          Collection
+        </NavLink>
       </Menu>
       <Menu></Menu>
       <Menu></Menu>
@@ -193,7 +176,7 @@ function Navbar(props) {
         </Bell>
 
         <DropDown onClick={onClick}>
-          <AccountName >{isAuthenticated ? user.studentID:null }</AccountName>
+          <AccountName>{isAuthenticated ? user.studentID : null}</AccountName>
           <ChevonDown>
             <FontAwesomeIcon icon={faChevronDown} size="lg" color="white" />
           </ChevonDown>
@@ -205,8 +188,13 @@ function Navbar(props) {
               <a>Edit Profile</a>
             </li>
             <li>
-              <Link type="button" to="/" className="btn btn-danger" onClick={onLogoutClick}>
-                <FontAwesomeIcon icon={faSignOutAlt} size="sm" color="white"  />
+              <Link
+                type="button"
+                to="/"
+                className="btn btn-danger"
+                onClick={onLogoutClick}
+              >
+                <FontAwesomeIcon icon={faSignOutAlt} size="sm" color="white" />
                 Logout
               </Link>
             </li>
