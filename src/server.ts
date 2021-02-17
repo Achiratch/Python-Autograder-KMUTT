@@ -1,7 +1,8 @@
 import express, { Application, Request, Response } from 'express'
 import mongoose from 'mongoose'
 import passport from 'passport'
-
+import dotenv from 'dotenv'
+dotenv.config()
 import users from './routes/api/users'
 
 const app: Application = express()
@@ -13,6 +14,7 @@ app.use(express.json())
 // DB config
 import config from './config/keys'
 const db = config.mongoURI;
+
 
 // Connect to MongoDB
 mongoose
