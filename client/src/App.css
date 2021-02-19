@@ -37,10 +37,6 @@
 
 
 
-  body {
-    overflow: hidden;
-  }
-  
   
   .menu.active {
     opacity: 1;
@@ -51,4 +47,9 @@
 
   .datacamp-exercise {
     margin-bottom: 0em;
+  }
+
+  .body{
+    display: flex;
+    max-height: fit-content;
   }
