@@ -13,11 +13,80 @@
   
 }
 .nav-link:hover {
-    color: black;
     font-weight: 650;
     text-decoration: none;
     border-radius: 15px;
+    color: #1b1a24;
     background-color: #f2f2f2;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px rgb(0, 0, 0, 0.2);
     z-index: 1;
   }
+
+  .sidebar{
+    left:0;
+    height: auto;
+    position: static;
+    max-width: 270px;
+    max-height: fit-content;
+    background-color: #272e41;
+  }
+  .sidebar-head {
+    padding: 20px ;
+    padding-left: 20px;
+    padding-right: 20px;
+    justify-content: center;
+    background-image: url(https://images.unsplash.com/photo-1597589827307-d393da1520d2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=694&q=80) ;
+    background-position:0px ;
+    background-repeat: no-repeat;
+    text-decoration: none;
+  }
+ 
+  .sidebar-head h1{
+    font-weight: bold;
+    color: whitesmoke;
+  font-family: Roboto;
+  
+  }
+
+  .sidebar-head h2{
+    font-family: Roboto;
+    color: whitesmoke;
+
+    font-size: 20px;
+  }
+
+
+.menu-link{
+  display: block;
+  padding: 25px;
+  background-color: #272e41;
+  border-radius: 0px;
+  justify-content: center;
+  text-align: left;
+  font-weight: 400;
+  line-height: 20px;
+  box-sizing: border-box;
+  color: #aaaaaa;
+  
+}
+
+
+.menu-link:hover {
+  font-weight: 450;
+  text-decoration: none;
+  box-shadow:  0px 0px 10px rgb(0, 0, 0, 0.2);
+  color: #ffffff;
+  transition: ease-in-out 0.1s;
+  z-index: 1;
+  
+
+}
+
+.sidebar-link span{
+  padding-right: 10px;  
+}
+.active-sidebar{
+  background-color: #1a1924c2;
+  z-index: -1;
+}
+
