@@ -116,6 +116,8 @@ const DropDownLink = styled.div`
       color: grey;
       font-weight: 500px;
       text-decoration: none;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
       z-index: 1;
     }
   }
@@ -184,16 +186,11 @@ function Navbar(props) {
             className={`menu ${isActive ? "active" : "inactive"}`}
           >
             <li>
-              <a>Edit Profile</a>
+              Edit Profile
             </li>
             <li>
-              <Link
-                type="button"
-                to="/"
-                className="btn btn-danger"
-                onClick={onLogoutClick}
-              >
-                <FontAwesomeIcon icon={faSignOutAlt} size="sm" color="white" />
+              <Link to="/" className="drop-down-link" onClick={onLogoutClick}>
+                <FontAwesomeIcon icon={faSignOutAlt} size="lg" />
                 Logout
               </Link>
             </li>
