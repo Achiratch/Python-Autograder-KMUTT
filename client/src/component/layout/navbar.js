@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
@@ -185,9 +185,7 @@ function Navbar(props) {
             ref={dropdownRef}
             className={`menu ${isActive ? "active" : "inactive"}`}
           >
-            <li>
-              Edit Profile
-            </li>
+            <li>Edit Profile</li>
             <li>
               <Link to="/" className="drop-down-link" onClick={onLogoutClick}>
                 <FontAwesomeIcon icon={faSignOutAlt} size="lg" />
