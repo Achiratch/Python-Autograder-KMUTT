@@ -14,7 +14,7 @@ import IUser from '../interfaces/User'
 import User from '../models/User'
 
 
-const Register = (req: Request, res: Response) => {
+export const Register = (req: Request, res: Response) => {
 
     const { errors, isValid } = validateRegisterInput(req.body)
 
@@ -79,7 +79,7 @@ const Register = (req: Request, res: Response) => {
     createUser();
 }
 
-const Login = (req: Request, res: Response) => {
+export const Login = (req: Request, res: Response) => {
     const { errors, isValid } = validateLoginInput(req.body)
 
     // Check Validation
@@ -125,4 +125,4 @@ const Login = (req: Request, res: Response) => {
     })
 }
 
-export default { Login, Register }
+
