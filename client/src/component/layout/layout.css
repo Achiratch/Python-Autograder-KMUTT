@@ -21,6 +21,16 @@
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px rgb(0, 0, 0, 0.2);
     z-index: 1;
   }
+.drop-down-link{
+  text-decoration: none;
+  color: #f2f2f2;
+}
+
+.drop-down-link:hover{
+  text-decoration: none;
+  color: grey;
+}
+
 
   .sidebar{
     left:0;
@@ -78,9 +88,8 @@
   color: #ffffff;
   transition: ease-in-out 0.1s;
   z-index: 1;
-  
-
 }
+
 
 .sidebar-link span{
   padding-right: 10px;  

@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
@@ -116,6 +116,8 @@ const DropDownLink = styled.div`
       color: grey;
       font-weight: 500px;
       text-decoration: none;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
       z-index: 1;
     }
   }
@@ -183,17 +185,10 @@ function Navbar(props) {
             ref={dropdownRef}
             className={`menu ${isActive ? "active" : "inactive"}`}
           >
+            <li>Edit Profile</li>
             <li>
-              <a>Edit Profile</a>
-            </li>
-            <li>
-              <Link
-                type="button"
-                to="/"
-                className="btn btn-danger"
-                onClick={onLogoutClick}
-              >
-                <FontAwesomeIcon icon={faSignOutAlt} size="sm" color="white" />
+              <Link to="/" className="drop-down-link" onClick={onLogoutClick}>
+                <FontAwesomeIcon icon={faSignOutAlt} size="lg" />
                 Logout
               </Link>
             </li>

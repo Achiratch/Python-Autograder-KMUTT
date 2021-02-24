@@ -53,3 +53,40 @@
     display: flex;
     max-height: fit-content;
   }
+
+  .page-content{
+    width: 100%;
+  }
+
+  .head-content{
+    padding: 2rem 2rem 2rem;
+    background-color: rgb(255, 255, 255);
+  }
+
+  .search-box{
+    margin: 2rem 2rem 2rem;
+    font-size: 17px;
+    float: right;
+    border-bottom-width: 10px;
+    border-radius: 8px;
+    border-color: #272e41;
+    padding: 5px 5px 5px;
+    width: 180px;
+    color: black;
+    background-color: whitesmoke;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    
+  }
+
+    .search-box:focus {
+    width: 20%;
+    outline: none;
+    box-shadow: 0 0 5px rgb(0, 0, 0); 
+    z-index: 1;
+  }
+    
+
+  .table{
+    margin: 0;
+  }
