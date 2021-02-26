@@ -1,7 +1,16 @@
 import mongoose from "mongoose";
-import IUser from '../interfaces/User'
 import ROLE from './Role'
 const Schema = mongoose.Schema;
+
+export interface IUser extends mongoose.Document {
+    studentID: number;
+    password: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    role: string;
+    date: Date;
+}
 
 //Create Schema
 const UserSchema = new Schema({
@@ -37,4 +46,5 @@ const UserSchema = new Schema({
     }
 });
 
-export default mongoose.model<IUser>('users', UserSchema);
+const User = mongoose.model<IUser>('users', UserSchema)
+export default User

@@ -7,11 +7,10 @@ import keys from '../config/keys'
 import validateRegisterInput from "../validation/register"
 import validateLoginInput from "../validation/login"
 import isEmpty from '../validation/is-empty'
-// Load User interface
-import IUser from '../interfaces/User'
 
 // Load User models
-import User from '../models/User'
+
+import { IUser, default as User } from '../models/User'
 
 
 export const Register = (req: Request, res: Response) => {
@@ -54,7 +53,7 @@ export const Register = (req: Request, res: Response) => {
             return res.status(400).json(dbErrors)
 
         } else {
-            const newUser: any = new User({
+            const newUser: IUser = new User({
                 studentID: req.body.studentID,
                 password: req.body.password,
                 email: req.body.email,

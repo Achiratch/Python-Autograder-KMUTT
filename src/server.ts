@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 import users from './routes/api/users'
 import course from './routes/api/course'
-
+import { errorHandler } from './middleware/error'
 
 const app: Application = express()
 
@@ -34,10 +34,10 @@ require('./config/passport')(passport);
 app.use('/api/users', users)
 app.use('/api/course', course)
 
-
 // Test Api
 app.get('/')
-
+// ErrorHandler
+app.use(errorHandler)
 const port: any = 5000
 
 app.listen(port, () => console.log(`Server running on port ${port}`))

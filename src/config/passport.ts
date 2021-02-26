@@ -4,12 +4,10 @@ import { VerifyCallback } from "jsonwebtoken";
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const mongoose = require('mongoose');
-const User = mongoose.model('users');
 const keys = require('../config/keys');
 const { options } = require('../routes/api/users');
-
-import IUser from '../interfaces/User'
-
+import { Document } from 'mongoose'
+import { default as User } from '../models/User'
 
 const opts: any = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -19,8 +17,9 @@ module.exports = (passport: any) => {
     passport.use(
         new JwtStrategy(opts, (jwt_payload: any, done: VerifyCallback | any) => {
             User.findById(jwt_payload.id)
-                .then((user: IUser | null) => {
+                .then((user) => {
                     if (user) {
+
                         return done(null, user);
                     }
                     return done(null, false);

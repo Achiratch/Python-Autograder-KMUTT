@@ -1,4 +1,4 @@
-import { Document, ObjectId } from 'mongoose'
+import { Document, Mongoose, ObjectId } from 'mongoose'
 
 
 export default interface ICourse extends Document {
@@ -8,4 +8,5 @@ export default interface ICourse extends Document {
     semester: number;
     academicYear: number;
     dateCreate: Date;
+    createdBy: ObjectId
 }
