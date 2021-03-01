@@ -55,6 +55,7 @@
     overflow-x: hidden;
     overflow-y: hidden;
     min-height: 100vh;
+    background-color:rgb(240, 240, 240) ;
   }
 
   .page-content{
@@ -64,7 +65,10 @@
 
   .head-content{
     padding: 2rem 2rem 2rem;
-    background-color: rgb(255, 255, 255);
+    
+  }
+  .flex{
+    display: flex;
   }
 
   .search-box{
@@ -102,4 +106,21 @@
   .table-body:hover{
     background-color: rgb(211, 211, 211);
     transition: all 0.2s ease-out;
+  }
+
+  .background-card{
+    background-image: url(https://images.unsplash.com/photo-1597589827307-d393da1520d2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=694&q=80) ;
+    background-position:-150px ;
+    background-repeat: no-repeat;
+    text-decoration: none;
+    color: #F2F2F2;
+  }
+  .Typography{
+    color: #F2F2F2;
+    font-size: 3rem;
+    height: 80px;
+  }
+
+  .space-card{
+    padding-bottom: 3rem;
   }
