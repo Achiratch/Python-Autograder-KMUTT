@@ -67,17 +67,20 @@ function MemberPage() {
             ></input>
           </div>
           <div className="table-content">
-            <table className="table table-striped table-dark">
+            <table className="table ">
               <thead>
-                <tr>
-                  {data_test[0] && columns.map((heading) => <th>{heading}</th>)}
+                <tr className="border-table-header">
+                  <th>ID</th>
+                  <th>Fisrt Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody >
                 {data_test.map((row) => (
-                  <tr>
+                  <tr className="table-body">
                     {columns.map((column) => (
-                      <td>{row[column]} </td>
+                      <td >{row[column]} </td>
                     ))}
                   </tr>
                 ))}

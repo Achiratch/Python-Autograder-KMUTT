@@ -11,7 +11,7 @@ import { registerUser } from "../redux/actions/authActions";
 import { PropTypes } from "prop-types";
 
 const Landing = styled.div`
-  height: 100%;
+  height: auto;
   position: absolute;
   width: 100%;
   margin: auto;
@@ -87,6 +87,7 @@ const formItemLayout = {
 };
 
 const Holder_Form = styled.div`
+
   h2 {
     text-align: center;
   }

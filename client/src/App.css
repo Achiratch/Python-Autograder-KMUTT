@@ -94,3 +94,12 @@
   .table{
     margin: 0;
   }
+
+  .border-table-header{
+    border: 1.5rem;
+    background-color: #cccccc;
+  }
+  .table-body:hover{
+    background-color: rgb(211, 211, 211);
+    transition: all 0.2s ease-out;
+  }
