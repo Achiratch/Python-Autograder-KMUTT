@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import auth from "./auth/auth";
+import auth from "../auth/auth";
 import { Link } from "react-router-dom";
 import { Form, Col, Input, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import styled from "styled-components";
-import coding_image from "./images/coding.jpg";
-import logo_python from "./images/logo_python.png";
+import coding_image from "../images/coding.jpg";
+import logo_python from "../images/logo_python.png";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { loginUser } from "../redux/actions/authActions";
+import { loginUser } from "../../redux/actions/authActions";
 ///Stlyed-------------------------------
 const Coding_Image = styled.div`
   width: 100%;
@@ -70,7 +70,7 @@ const Welcome_Message = styled.h1`
   width: 100%;
   height: 100%;
 `;
-///Stlyed-------------------------------
+///-------------------------------
 
 class LandingPage extends Component {
   constructor(props) {

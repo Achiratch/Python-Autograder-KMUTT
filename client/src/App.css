@@ -98,6 +98,10 @@
   .table{
     margin: 0;
   }
+  .table-content{
+    border-radius: 1px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 0px 0px 30px rgb(0, 0, 0, 0.2) ;
+  }
 
   .border-table-header{
     border: 1.5rem;
@@ -124,3 +128,4 @@
   .space-card{
     padding-bottom: 3rem;
   }
+

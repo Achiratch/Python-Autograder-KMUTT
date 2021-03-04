@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Sidebar from "./layout/sidebar";
-import Navbar from "./layout/navbar";
-import Footer from "./layout/footer";
+import Sidebar from "../layout/sidebar";
+import Navbar from "../layout/navbar";
+import Footer from "../layout/footer";
 
 class ScoreBookPage extends Component {
   render() {

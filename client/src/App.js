@@ -8,13 +8,13 @@ import { BrowserRouter, Router, Route, Switch } from "react-router-dom";
 import { ProtectedRoute } from "./component/auth/protected_route";
 
 //Page------------------------------------
-import LandingPage from "./component/landing_page";
-import RegisterPage from "./component/register_page";
-import HomePage from "./component/home_page";
-import ExercisesPage from "./component/exercises_page";
-import ScoreBookPage from "./component/scorebook_page";
-import MemberPage from "./component/member_page";
-import CollectionsPage from "./component/collections_page";
+import LandingPage from "./component/pages/landing_page"
+import RegisterPage from "./component/pages/register_page";
+import HomePage from "./component/pages/home_page";
+import ExercisesPage from "./component/pages/exercises_page";
+import ScoreBookPage from "./component/pages/scorebook_page";
+import MemberPage from "./component/pages/member_page/member_page";
+import CollectionsPage from "./component/pages/collections_page";
 //----------------------------------------
 
 import "./App.css";

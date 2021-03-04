@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Navbar from "./layout/navbar";
-import Footer from "./layout/footer";
+import Navbar from "../layout/navbar";
+import Footer from "../layout/footer";
 
 import { Col, Row } from "antd";
 import { makeStyles } from "@material-ui/core/styles";

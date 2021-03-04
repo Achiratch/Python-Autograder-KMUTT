@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import auth from "./auth/auth";
-import writing_image from "./images/writing.jpg";
-import logo_python from "./images/logo_python.png";
+import writing_image from "../images/writing.jpg";
+import logo_python from "../images/logo_python.png";
 import { Form, Input, Tooltip, Col } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { registerUser } from "../redux/actions/authActions";
+import { registerUser } from "../../redux/actions/authActions";
 import { PropTypes } from "prop-types";
-
+///Stlyed-------------------------------
 const Landing = styled.div`
   height: auto;
   position: absolute;
@@ -96,6 +95,8 @@ const Holder_Form = styled.div`
     margin: 0;
   }
 `;
+///-------------------------------
+
 
 class RegisterPage extends Component {
   constructor(props) {
