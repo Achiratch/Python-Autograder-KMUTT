@@ -2,12 +2,18 @@ import React, { useState, useEffect } from "react";
 import Footer from "../../layout/footer";
 import Navbar from "../../layout/navbar";
 import Sidebar from "../../layout/sidebar";
+//CSS
+import "../member_page/member_page.css";
+
 //ANTD
 import { Breadcrumb } from "antd";
-import { HomeOutlined, UserOutlined } from "@ant-design/icons";
 
 //React-Table
 import { useTable } from "react-table";
+
+//ICON Fontawesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserMinus, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 
 //Material-UI
 import { responsiveFontSizes, Table } from "@material-ui/core";
@@ -54,7 +60,7 @@ function MemberPage() {
 
   const data_test = search(data);
   const columns = data[0] && Object.keys(data[0]);
-
+  const number_student = data.length;
   return (
     <div>
       <Navbar />
@@ -74,13 +80,38 @@ function MemberPage() {
             <LinearProgress />
           ) : (
             <div className="table-content">
-              <input
-                className="search-box"
-                type="text"
-                placeholder="Search"
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-              ></input>
+              <div>
+                <span className="number-student">
+                  <span>
+                    <h6 className="font-size-number">{number_student} Student</h6>
+                  </span>
+                </span>
+                <span className="button-member">
+                  <button className="delete-button">
+                    <span className="icon-button">
+                      <FontAwesomeIcon icon={faUserMinus} size="lg" />
+                    </span>
+                    Remove Member
+                  </button>
+                </span>
+                <span className="button-member">
+                  <button className="add-member-button">
+                    <span className="icon-button">
+                      <FontAwesomeIcon icon={faUserPlus} size="lg" />
+                    </span>
+                    Add Member
+                  </button>
+                </span>
+
+                <input
+                  className="search-box"
+                  type="text"
+                  placeholder="Search"
+                  value={q}
+                  onChange={(e) => setQ(e.target.value)}
+                ></input>
+              </div>
+
               <table className="table">
                 <thead>
                   <tr className="border-table-header">
