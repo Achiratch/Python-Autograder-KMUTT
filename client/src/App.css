@@ -21,7 +21,6 @@
   .text{
     text-align: center;
   }
-
   .register-form{
     border-radius: 25px;
     background-color: #F2F2F2;
@@ -36,7 +35,9 @@
   }
 
 
-
+  button:focus{
+    outline:none !important;
+  }
   
   .menu.active {
     opacity: 1;
@@ -65,48 +66,11 @@
 
   .head-content{
     padding: 2rem 2rem 2rem;
-    
   }
   .flex{
     display: flex;
   }
 
-  .search-box{
-    margin: 2rem 2rem 2rem;
-    font-size: 17px;
-    float: right;
-    border-bottom-width: 10px;
-    border-radius: 8px;
-    border-color: #272e41;
-    padding: 5px 5px 5px;
-    width: 180px;
-    color: black;
-    background-color: whitesmoke;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
-    
-  }
-
-    .search-box:focus {
-    width: 20%;
-    outline: none;
-    box-shadow: 0 0 5px rgb(0, 0, 0); 
-    z-index: 1;
-  }
-    
-
-  .table{
-    margin: 0;
-  }
-
-  .border-table-header{
-    border: 1.5rem;
-    background-color: #cccccc;
-  }
-  .table-body:hover{
-    background-color: rgb(211, 211, 211);
-    transition: all 0.2s ease-out;
-  }
 
   .background-card{
     background-image: url(https://images.unsplash.com/photo-1597589827307-d393da1520d2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=694&q=80) ;
@@ -124,3 +88,4 @@
   .space-card{
     padding-bottom: 3rem;
   }
+

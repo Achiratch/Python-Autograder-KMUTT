@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Footer from "./layout/footer";
-import Navbar from "./layout/navbar";
-import Sidebar from "./layout/sidebar";
+import Footer from "../layout/footer";
+import Navbar from "../layout/navbar";
+import Sidebar from "../layout/sidebar";
 
 class ExercisesPage extends Component {
   render() {

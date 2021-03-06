@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "./layout/navbar";
-import Footer from "./layout/footer";
-import Sidebar from "./layout/sidebar";
+import Navbar from "../layout/navbar";
+import Footer from "../layout/footer";
+import Sidebar from "../layout/sidebar";
 
 import styled from "styled-components";
 
