@@ -6,18 +6,18 @@ const Schema = mongoose.Schema;
 const ScoreSchema = new Schema({
     course: {
         type: Schema.Types.ObjectId,
-        ref: 'Course',
+        ref: 'courses',
         required: true
 
     },
     student: {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'users',
         required: true
     },
     assignment: {
         type: Schema.Types.ObjectId,
-        ref: 'Assignment',
+        ref: 'assignments',
         required: true
     },
     sendingStatus: {

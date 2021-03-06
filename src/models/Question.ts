@@ -8,12 +8,12 @@ const QuestionSchema = new Schema({
 
     assignment: {
         type: Schema.Types.ObjectId,
-        ref: 'Assignment',
+        ref: 'assignment',
         required: true
     },
     createBy: {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'user',
         required: true
     },
     level: {

@@ -6,18 +6,19 @@ const Schema = mongoose.Schema;
 const CourseTakingSchema = new Schema({
     course: {
         type: Schema.Types.ObjectId,
-        ref: 'Course',
+        ref: 'courses',
         required: true
 
     },
-    user: {
+    student: {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'users',
         required: true
     },
     status: {
         type: Boolean,
-        required: true
+        required: true,
+        default: true
     },
     dateCreate: {
         type: Date,
