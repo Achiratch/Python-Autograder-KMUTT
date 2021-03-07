@@ -65,10 +65,10 @@
   
 
   .search-box{
-    margin: 2rem 2rem 2rem;
+    margin: 2.5rem 2rem 2rem;
     font-size: 17px;
     float: left;
-    border-bottom-width: 10px;
+    border-bottom-width: 5px;
     border-radius: 8px;
     border-color: #272e41;
     padding: 5px 5px 5px;
@@ -81,6 +81,7 @@
   }
 
     .search-box:focus {
+    border-bottom-width: 6px;
     width: 25%;
     outline: none;
     box-shadow: 0 0 5px rgb(0, 0, 0); 

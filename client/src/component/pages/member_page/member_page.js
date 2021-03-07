@@ -7,6 +7,7 @@ import "../member_page/member_page.css";
 
 //ANTD
 import { Breadcrumb } from "antd";
+import { Pagination } from "antd";
 
 //React-Table
 import { useTable } from "react-table";
@@ -75,7 +76,6 @@ function MemberPage() {
               <Breadcrumb.Item>Member</Breadcrumb.Item>
             </Breadcrumb>
           </div>
-
           {loading ? (
             <LinearProgress />
           ) : (
@@ -83,7 +83,9 @@ function MemberPage() {
               <div>
                 <span className="number-student">
                   <span>
-                    <h6 className="font-size-number">{number_student} Student</h6>
+                    <h6 className="font-size-number">
+                      {number_student} Student
+                    </h6>
                   </span>
                 </span>
                 <span className="button-member">
@@ -131,6 +133,7 @@ function MemberPage() {
                   ))}
                 </tbody>
               </table>
+              <Pagination defaultCurrent={1} total={number_student} />
             </div>
           )}
         </div>
