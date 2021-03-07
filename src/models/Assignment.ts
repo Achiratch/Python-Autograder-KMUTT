@@ -6,13 +6,13 @@ const Schema = mongoose.Schema;
 const AssignmentSchema = new Schema({
     course: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Course',
+        ref: 'courses',
         required: true
 
     },
     createBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'users',
         required: true
     },
     type: {

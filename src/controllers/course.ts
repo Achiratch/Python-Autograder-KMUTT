@@ -1,7 +1,4 @@
 import { NextFunction, Request, Response } from 'express'
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
-import keys from '../config/keys'
 import asyncHandler from '../middleware/async'
 import ErrorResponse from '../utils/errorResponse'
 // Load Course interface
@@ -47,15 +44,37 @@ export const createCourse = asyncHandler(async (req: Request, res: Response, nex
 // @acess   Private
 export const GetAllCourse = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
 
-    let courses = await Course.find()
-    if (courses == null) {
+    try {
+        let courses = await Course.find().populate('createdBy', ['firstName', 'lastName'])
+
+        res.status(201).json({
+            success: true,
+            data: courses
+        });
+    } catch (error) {
+        console.log(error)
         return next(new ErrorResponse('No course found', 404))
+
+    }
+})
+
+// @desc    Get all course
+// @route   GET /api/course/teacher/:id
+// @acess   Private
+export const GetAllCourseByCreator = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const userId: any = req.params.id
+
+    try {
+        let courses = await Course.find({ createdBy: userId }).populate('createdBy', ['firstName', 'lastName'])
+        res.status(201).json({
+            success: true,
+            data: courses
+        });
+    } catch (error) {
+        console.log(error)
+        return next(new ErrorResponse('No course that created by this user found', 404))
     }
 
-    res.status(201).json({
-        success: true,
-        data: courses
-    });
 })
 
 // @desc    Get course by id
@@ -77,10 +96,10 @@ export const GetCourseById = asyncHandler(async (req: Request, res: Response, ne
 
 })
 
-// @desc    Get course by id
-// @route   GET /api/course/:id
+// @desc    Update course by id
+// @route   PUT /api/course/:id
 // @acess   Private
-export const DeleteCourseById = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+export const UpdateCourseById = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const { courseID, courseName, courseDescription, semester, academicYear, dateCreate }: ICourse = req.body
     const user = (req.user as IUser)
     const createdBy = user.id
@@ -90,7 +109,7 @@ export const DeleteCourseById = asyncHandler(async (req: Request, res: Response,
         return next(new ErrorResponse('No course with that id', 404))
     }
     if (courses?.createdBy != user.id) {
-        return next(new ErrorResponse(`Only course owner can delete course`, 403))
+        return next(new ErrorResponse(`Only course owner can update course detail`, 403))
     }
     let update = await courses.updateOne({
         courseID,
@@ -110,10 +129,10 @@ export const DeleteCourseById = asyncHandler(async (req: Request, res: Response,
 
 })
 
-// @desc    Get course by id
-// @route   GET /api/course/:id
+// @desc    Delete course by id
+// @route   DELETE /api/course/:id
 // @acess   Private
-export const UpdateCourseById = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+export const DeleteCourseById = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const user = req.user as IUser
 
     let courses = await Course.findById(req.params.id)
@@ -121,7 +140,7 @@ export const UpdateCourseById = asyncHandler(async (req: Request, res: Response,
         return next(new ErrorResponse('No course with that id', 404))
     }
     if (courses?.createdBy != user.id) {
-        return next(new ErrorResponse(`Only course owner can update course detail`, 403))
+        return next(new ErrorResponse(`Only course owner can delete course`, 403))
     }
     let remove = await courses?.remove()
     res.status(200).json({
