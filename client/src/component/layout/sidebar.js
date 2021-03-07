@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./layout.css";
+
+//ICON Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faUser } from "@fortawesome/free-regular-svg-icons";
 import { faBook } from "@fortawesome/free-solid-svg-icons";

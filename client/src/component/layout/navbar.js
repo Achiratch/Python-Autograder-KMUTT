@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
+
+//ICON Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
+
+
 import logo_python from "../images/logo_python.png";
 import styled from "styled-components";
 import "./layout.css";
