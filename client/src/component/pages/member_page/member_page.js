@@ -7,24 +7,39 @@ import "../member_page/member_page.css";
 
 //ANTD
 import { Breadcrumb } from "antd";
-import { Pagination } from "antd";
-
-//React-Table
-import { useTable } from "react-table";
 
 //ICON Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserMinus, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 
 //Material-UI
-import { responsiveFontSizes, Table } from "@material-ui/core";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import MaUTable from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
 import { LinearProgress } from "@material-ui/core";
+import { DataGrid } from "@material-ui/data-grid";
+
+
+const columns = [
+  { field: "id", headerName: "ID", width: 200, sortable: false },
+  { field: "firstName", headerName: "First name", width: 200, sortable: false },
+  { field: "lastName", headerName: "Last name", width: 200, sortable: false },
+  {
+    field: "email",
+    headerName: "Email",
+    type: "number",
+    width: 300,
+    sortable: false,
+  },
+  {
+    field: "fullName",
+    headerName: "Full name",
+    description: "This column has a value getter and is not sortable.",
+    sortable: false,
+    width: 200,
+    valueGetter: (params) =>
+      `${params.getValue("firstName") || ""} ${
+        params.getValue("lastName") || ""
+      }`,
+  },
+];
 
 function MemberPage() {
   //------Fetch Data---------------------------------------------
@@ -60,7 +75,6 @@ function MemberPage() {
   //---------------------------------------------------------------
 
   const data_test = search(data);
-  const columns = data[0] && Object.keys(data[0]);
   const number_student = data.length;
   return (
     <div>
@@ -114,26 +128,14 @@ function MemberPage() {
                 ></input>
               </div>
 
-              <table className="table">
-                <thead>
-                  <tr className="border-table-header">
-                    <th>ID</th>
-                    <th>Fisrt Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data_test.map((row) => (
-                    <tr className="table-body">
-                      {columns.map((column) => (
-                        <td>{row[column]} </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <Pagination defaultCurrent={1} total={number_student} />
+              <div className="flex" style={{ height: 720, width: "100%" }}>
+                <DataGrid
+                  rows={data_test}
+                  columns={columns}
+                  pageSize={10}
+                  checkboxSelection
+                />
+              </div>
             </div>
           )}
         </div>
