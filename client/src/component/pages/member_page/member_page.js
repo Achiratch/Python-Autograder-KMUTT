@@ -15,6 +15,7 @@ import { faUserMinus, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 //Material-UI
 import { LinearProgress } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
+import AddPopup from "./add_dialog";
 
 
 const columns = [
@@ -98,7 +99,7 @@ function MemberPage() {
                 <span className="number-student">
                   <span>
                     <h6 className="font-size-number">
-                      {number_student} Student
+                      {number_student} Students
                     </h6>
                   </span>
                 </span>
@@ -107,16 +108,11 @@ function MemberPage() {
                     <span className="icon-button">
                       <FontAwesomeIcon icon={faUserMinus} size="lg" />
                     </span>
-                    Remove Member
+                    Remove Students
                   </button>
                 </span>
                 <span className="button-member">
-                  <button className="add-member-button">
-                    <span className="icon-button">
-                      <FontAwesomeIcon icon={faUserPlus} size="lg" />
-                    </span>
-                    Add Member
-                  </button>
+                  <AddPopup />
                 </span>
 
                 <input
