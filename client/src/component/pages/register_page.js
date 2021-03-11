@@ -128,7 +128,6 @@ class RegisterPage extends Component {
   }
 
   render() {
-    const { errors } = this.state;
 
     return (
       <Landing>
@@ -280,8 +279,7 @@ class RegisterPage extends Component {
 
                 <Form.Item>
                   <button
-                    className="login-form-button"
-                    className="btn btn-success btn-lg btn-block"
+                    className="btn btn-success btn-lg btn-block login-form-button"
                     type="primary"
                     htmltype="submit"
                   >

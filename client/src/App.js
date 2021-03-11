@@ -10,7 +10,7 @@ import { ProtectedRoute } from "./component/auth/protected_route";
 //Page------------------------------------
 import LandingPage from "./component/pages/landing_page"
 import RegisterPage from "./component/pages/register_page";
-import HomePage from "./component/pages/home_page";
+import HomePage from "./component/pages/home_page/home_page";
 import ExercisesPage from "./component/pages/exercises_page";
 import ScoreBookPage from "./component/pages/scorebook_page";
 import MemberPage from "./component/pages/member_page/member_page";
