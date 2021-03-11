@@ -87,6 +87,8 @@ const columnsAdd = [
 ];
 
 export default function AddPopup() {
+
+  //--Open Dialog-----------------------------------------------
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -95,8 +97,6 @@ export default function AddPopup() {
   const handleClose = () => {
     setOpen(false);
   };
-  const [q, setQ] = useState("");
-  const [data, setData] = useState([]);
 
   //------Fetch Data---------------------------------------------
   useEffect(() => {
@@ -123,7 +123,8 @@ export default function AddPopup() {
     );
   }
   //---------------------------------------------------------------
-
+  const [q, setQ] = useState("");
+  const [data, setData] = useState([]);
   const student = search(data);
 
   return (

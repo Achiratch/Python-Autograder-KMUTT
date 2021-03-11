@@ -10,7 +10,7 @@ import { Breadcrumb } from "antd";
 
 //ICON Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserMinus, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { faUserMinus } from "@fortawesome/free-solid-svg-icons";
 
 //Material-UI
 import { LinearProgress } from "@material-ui/core";

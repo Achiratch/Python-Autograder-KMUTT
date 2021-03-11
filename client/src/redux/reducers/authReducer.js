@@ -5,7 +5,7 @@ const initailState = {
   isAuthenticated: false,
   user: {},
 };
-export default function (state = initailState, action) {
+export default function a(state = initailState, action) {
   switch (action.type) {
     case SET_CURRENT_USER:
         return {
