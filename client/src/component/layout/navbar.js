@@ -147,7 +147,7 @@ const useDetectOutsideClick = (el, initialState) => {
       window.removeEventListener("click", onClick);
     };
   }, [isActive, el]);
-
+  //console.log(isActive) checkBool
   return [isActive, setIsActive];
 };
 

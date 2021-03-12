@@ -17,7 +17,6 @@ import TextField from "@material-ui/core/TextField";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 
-
 //Style
 const styles = (theme) => ({
   root: {
@@ -87,7 +86,6 @@ const columnsAdd = [
 ];
 
 export default function AddPopup() {
-
   //--Open Dialog-----------------------------------------------
   const [open, setOpen] = useState(false);
 
@@ -146,14 +144,13 @@ export default function AddPopup() {
           Add Students
         </DialogTitle>
         <DialogContent dividers>
-          
           <TextField
             id="outlined-basic"
             label="Search"
             variant="outlined"
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            style={{margin: 30}}
+            style={{ margin: 30 }}
           />
           <div className="flex" style={{ height: 590, width: "100%" }}>
             <DataGrid
