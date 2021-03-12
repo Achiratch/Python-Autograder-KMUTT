@@ -15,8 +15,11 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
+//Dialog Form
 import CourseFrom from "./courseForm";
 
+//Redux
+import { connect } from "react-redux";
 //Style-Course-Card
 const useStyles = makeStyles({
   root: {
@@ -127,4 +130,4 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+export default connect() (HomePage);
