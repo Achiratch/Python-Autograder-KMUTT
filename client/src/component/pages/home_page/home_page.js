@@ -4,7 +4,7 @@ import Navbar from "../../layout/navbar";
 import Footer from "../../layout/footer";
 
 //ANTD
-import { Col, Row } from "antd";
+import { Col, Row, message } from "antd";
 
 //Material-UI
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,6 +20,11 @@ import CourseFrom from "./courseForm";
 
 //Redux
 import { connect } from "react-redux";
+import { createCourse } from "../../../redux/actions/createCourseActions";
+
+//PropTypes
+import { PropTypes } from "prop-types";
+
 //Style-Course-Card
 const useStyles = makeStyles({
   root: {
@@ -31,6 +36,20 @@ const useStyles = makeStyles({
 });
 
 class HomePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      is_requesting: false,
+      errors: {},
+    };
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+      message.error("This Course ID is already existed on this semester!");
+    }
+  }
+
   render() {
     return (
       <div>
@@ -130,4 +149,15 @@ class HomePage extends Component {
   }
 }
 
-export default connect() (HomePage);
+HomePage.propTypes = {
+  createCourse: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, { createCourse })(HomePage);

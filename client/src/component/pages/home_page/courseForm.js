@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import "./home_page.css";
 
 //ANTD
-import { Form, Input, Select, DatePicker } from "antd";
+import { Form, Input, Select, DatePicker, message } from "antd";
 import { Modal, Col } from "antd";
 
 //Material-UI
@@ -66,6 +66,7 @@ class CourseForm extends Component {
     const data = this.formRef.current.getFieldsValue();
     this.props.createCourse(data, this.props.history);
     this.handleCancel();
+    message.success("This Course has been created.");
   }
 
   render() {
