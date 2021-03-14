@@ -46,9 +46,10 @@ class CourseForm extends Component {
     visible: false,
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+  componentWillReceiveProps(newProps) {
+    if (newProps.errors) {
+      this.setState({ errors: newProps.errors });
+      message.error("This Course ID is already existed on this semester!");
     }
   }
 

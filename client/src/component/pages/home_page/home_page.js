@@ -43,12 +43,6 @@ class HomePage extends Component {
       errors: {},
     };
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
-      message.error("This Course ID is already existed on this semester!");
-    }
-  }
 
   render() {
     return (
