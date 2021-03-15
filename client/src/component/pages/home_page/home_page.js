@@ -1,10 +1,11 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
+import CourseCard from "./courseCard";
 //Layout
 import Navbar from "../../layout/navbar";
 import Footer from "../../layout/footer";
 
 //ANTD
-import { Col, Row, message } from "antd";
+import { Col, Row } from "antd";
 
 //Material-UI
 import { makeStyles } from "@material-ui/core/styles";
@@ -14,13 +15,17 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 //Dialog Form
 import CourseFrom from "./courseForm";
 
 //Redux
 import { connect } from "react-redux";
-import { createCourse } from "../../../redux/actions/createCourseActions";
+import {
+  getCourses,
+  createCourse,
+} from "../../../redux/actions/createCourseActions";
 
 //PropTypes
 import { PropTypes } from "prop-types";
@@ -36,15 +41,19 @@ const useStyles = makeStyles({
 });
 
 class HomePage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      is_requesting: false,
-      errors: {},
-    };
+  componentDidMount() {
+    this.props.getCourses();
   }
-
   render() {
+    const { courses, loading } = this.props.courses;
+    let courseCard;
+
+    if (courses === null || loading) {
+      courseCard = <CircularProgress disableShrink />;
+    } else {
+      courseCard = <CourseCard courses={courses} />;
+    }
+
     return (
       <div>
         <Navbar />
@@ -77,62 +86,7 @@ class HomePage extends Component {
                 <Col span={8}>
                   <CourseFrom />
                 </Col>
-
-                <Col span={8}>
-                  <Card className={useStyles.root}>
-                    <CardActionArea>
-                      <CardContent
-                        className="background-card"
-                        onClick={() => {
-                          this.props.history.push("/exercises");
-                        }}
-                      >
-                        <h1 className="Typography">CSS101</h1>
-                        <Typography
-                          variant="body2"
-                          color="text"
-                          component="h2"
-                          className="Typography"
-                        >
-                          Introduction coding Python
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                    <CardActions>
-                      <Button size="" color="primary">
-                        Share
-                      </Button>
-                      <Button size="small" color="primary">
-                        Learn More
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Col>
-                <Col span={8}>
-                  <Card className={useStyles.root}>
-                    <CardActionArea>
-                      <CardContent className="background-card">
-                        <h1 className="Typography">CSS101</h1>
-                        <Typography
-                          variant="body2"
-                          color="text"
-                          component="h2"
-                          className="Typography"
-                        >
-                          Introduction coding Python
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                    <CardActions>
-                      <Button size="" color="primary">
-                        Share
-                      </Button>
-                      <Button size="small" color="primary">
-                        Learn More
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Col>
+                {courseCard}
               </Row>
             </div>
           </div>
@@ -144,14 +98,12 @@ class HomePage extends Component {
 }
 
 HomePage.propTypes = {
-  createCourse: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
+  getCourses: PropTypes.func.isRequired,
+  course: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
-  errors: state.errors,
+  course: state.course,
 });
 
-export default connect(mapStateToProps, { createCourse })(HomePage);
+export default connect(mapStateToProps, { getCourses, createCourse })(HomePage);
