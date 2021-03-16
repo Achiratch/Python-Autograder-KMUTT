@@ -5,17 +5,19 @@ import CourseItem from "./courseItem";
 import PropTypes from "prop-types";
 
 class CourseCard extends Component {
+  
   render() {
-    const { courses } = this.props;
+    const { courses, data } = this.props;
+    console.log(courses);
+    console.log(data);
 
-    return courses.map((course) => (
-      <CourseItem key={course._id} course={course} />
+    return data.filter(course => (<CourseItem key={course._id} course={course} />
     ));
   }
 }
 
 CourseCard.propTypes = {
-  courses: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
 export default CourseCard;

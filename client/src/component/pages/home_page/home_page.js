@@ -45,13 +45,14 @@ class HomePage extends Component {
     this.props.getCourses();
   }
   render() {
-    const { courses, loading } = this.props.courses;
+    const { courses, loading } = this.props.course;
+    const { data } = this.props.data;
     let courseCard;
-
-    if (courses === null || loading) {
+    if ((courses, data === null || loading)) {
       courseCard = <CircularProgress disableShrink />;
     } else {
-      courseCard = <CourseCard courses={courses} />;
+      courseCard = <CourseCard courses={courses} data={data} />;
+      console.log(data);
     }
 
     return (
@@ -86,7 +87,7 @@ class HomePage extends Component {
                 <Col span={8}>
                   <CourseFrom />
                 </Col>
-                {courseCard}
+                <Col span={8}>{courseCard}</Col>
               </Row>
             </div>
           </div>
@@ -103,7 +104,8 @@ HomePage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  course: state.course,
+  course: state.createCourse,
+  data: state.createCourse.courses,
 });
 
 export default connect(mapStateToProps, { getCourses, createCourse })(HomePage);

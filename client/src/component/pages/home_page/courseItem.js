@@ -30,16 +30,12 @@ const useStyles = makeStyles({
 
 class CourseItem extends Component {
   render() {
-    const { course, auth } = this.props;
     return (
       <div>
-        <Col span={8}>
           <Card className={useStyles.root}>
             <CardActionArea>
-              <CardContent
-                className="background-card"
-              >
-                <h1 className="Typography">CSS101</h1>
+              <CardContent className="background-card">
+                <h1 className="Typography"></h1>
                 <Typography
                   variant="body2"
                   color="text"
@@ -59,16 +55,12 @@ class CourseItem extends Component {
               </Button>
             </CardActions>
           </Card>
-        </Col>
       </div>
     );
   }
 }
 
-CourseItem.propTypes = {
-  course: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-};
+CourseItem.propTypes = {};
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
