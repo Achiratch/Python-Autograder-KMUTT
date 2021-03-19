@@ -1,13 +1,13 @@
 import axios from "axios";
-import { CREATE_COURSE, GET_ERRORS, GET_COURSES, COURSE_LOADING } from "./type";
+import { ADD_COURSE, GET_ERRORS, GET_COURSES, COURSE_LOADING } from "./type";
 
 //Create Course
-export const createCourse = (courseData) => (dispatch) => {
+export const addCourse = (courseData) => (dispatch) => {
   axios
     .post("/api/course", courseData)
     .then((res) =>
       dispatch({
-        type: CREATE_COURSE,
+        type: ADD_COURSE,
         payload: res.data,
       })
     )

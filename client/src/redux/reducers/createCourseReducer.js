@@ -1,4 +1,4 @@
-import { CREATE_COURSE, GET_COURSES, COURSE_LOADING } from "../actions/type";
+import { ADD_COURSE, GET_COURSES, COURSE_LOADING } from "../actions/type";
 
 const initailState = {
   courses: [],
@@ -6,7 +6,7 @@ const initailState = {
   loading: false,
 };
 
-export default function createCourseReducer(state = initailState, action) {
+export default function c(state = initailState, action) {
   switch (action.type) {
     case COURSE_LOADING:
       return {
@@ -19,7 +19,7 @@ export default function createCourseReducer(state = initailState, action) {
         courses: action.payload,
         loading: false,
       };
-    case CREATE_COURSE:
+    case ADD_COURSE:
       return {
         ...state,
         courses: [action.payload, ...state.courses],

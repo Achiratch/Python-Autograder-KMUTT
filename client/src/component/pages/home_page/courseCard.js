@@ -5,14 +5,14 @@ import CourseItem from "./courseItem";
 import PropTypes from "prop-types";
 
 class CourseCard extends Component {
-  
+
   render() {
     const { courses, data } = this.props;
     console.log(courses);
     console.log(data);
 
-    return data.filter(course => (<CourseItem key={course._id} course={course} />
-    ));
+    return data.map(course => (<CourseItem key={course._id} course={course} />
+      ));
   }
 }
 

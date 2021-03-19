@@ -16,7 +16,7 @@ import Typography from "@material-ui/core/Typography";
 
 //Redux
 import { connect } from "react-redux";
-import { createCourse } from "../../../redux/actions/createCourseActions";
+import { addCourse } from "../../../redux/actions/createCourseActions";
 
 //PropTypes
 import { PropTypes } from "prop-types";
@@ -45,7 +45,6 @@ class CourseForm extends Component {
   state = {
     visible: false,
   };
-
   componentWillReceiveProps(newProps) {
     if (newProps.errors) {
       this.setState({ errors: newProps.errors });
@@ -65,7 +64,7 @@ class CourseForm extends Component {
   async onFormSubmitHandler() {
     console.log("[Create course]");
     const data = this.formRef.current.getFieldsValue();
-    this.props.createCourse(data, this.props.history);
+    this.props.addCourse(data);
     this.handleCancel();
     message.success("This Course has been created.");
   }
@@ -224,7 +223,7 @@ class CourseForm extends Component {
 }
 
 CourseForm.propTypes = {
-  createCourse: PropTypes.func.isRequired,
+  addCourse: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
 };
@@ -234,4 +233,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { createCourse })(CourseForm);
+export default connect(mapStateToProps, { addCourse })(CourseForm);

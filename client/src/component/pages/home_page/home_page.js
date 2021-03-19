@@ -24,7 +24,6 @@ import CourseFrom from "./courseForm";
 import { connect } from "react-redux";
 import {
   getCourses,
-  createCourse,
 } from "../../../redux/actions/createCourseActions";
 
 //PropTypes
@@ -43,6 +42,7 @@ const useStyles = makeStyles({
 class HomePage extends Component {
   componentDidMount() {
     this.props.getCourses();
+    console.log("Component did mount!");
   }
   render() {
     const { courses, loading } = this.props.course;
@@ -87,6 +87,7 @@ class HomePage extends Component {
                 <Col span={8}>
                   <CourseFrom />
                 </Col>
+
                 <Col span={8}>{courseCard}</Col>
               </Row>
             </div>
@@ -104,8 +105,8 @@ HomePage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  course: state.createCourse,
-  data: state.createCourse.courses,
+  course: state.course,
+  data: state.course.courses
 });
 
-export default connect(mapStateToProps, { getCourses, createCourse })(HomePage);
+export default connect(mapStateToProps, { getCourses })(HomePage);
