@@ -17,6 +17,7 @@ class CourseCard extends Component {
 }
 
 CourseCard.propTypes = {
+  course: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
 };
 

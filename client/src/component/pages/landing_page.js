@@ -88,7 +88,7 @@ class LandingPage extends Component {
       });
     }
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       auth.login(() => {
         this.props.history.push("/home");
