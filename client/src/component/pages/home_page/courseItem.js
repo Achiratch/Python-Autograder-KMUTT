@@ -17,6 +17,7 @@ import { PropTypes } from "prop-types";
 
 //Redux
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 //Style-Course-Card
 const useStyles = makeStyles({
@@ -30,37 +31,43 @@ const useStyles = makeStyles({
 
 class CourseItem extends Component {
   render() {
+    const { course } = this.props;
     return (
       <div>
+        <Link to={`/exercises/${course._id}`}>
           <Card className={useStyles.root}>
             <CardActionArea>
               <CardContent className="background-card">
-                <h1 className="Typography"></h1>
+                <h1 className="Typography">{this.props.course.courseID}</h1>
                 <Typography
                   variant="body2"
                   color="text"
                   component="h2"
                   className="Typography"
                 >
-                  Introduction coding Python
+                  {this.props.course.courseName}
                 </Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
               <Button size="" color="primary">
-                Share
+                Semeseter {this.props.course.semester}
               </Button>
               <Button size="small" color="primary">
-                Learn More
+                Year {this.props.course.academicYear}
               </Button>
             </CardActions>
           </Card>
+        </Link>
       </div>
     );
   }
 }
 
-CourseItem.propTypes = {};
+CourseItem.propTypes = {
+  course: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   auth: state.auth,

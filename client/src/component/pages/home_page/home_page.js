@@ -9,12 +9,6 @@ import { Col, Row } from "antd";
 
 //Material-UI
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 //Dialog Form
@@ -42,17 +36,16 @@ const useStyles = makeStyles({
 class HomePage extends Component {
   componentDidMount() {
     this.props.getCourses();
-    console.log("Component did mount!");
   }
   render() {
     const { courses, loading } = this.props.course;
-    const { data } = this.props.data;
+    
     let courseCard;
-    if ((courses, data === null || loading)) {
+    if ((courses === null || loading)) {
       courseCard = <CircularProgress disableShrink />;
     } else {
-      courseCard = <CourseCard courses={courses} data={data} />;
-      console.log(data);
+      courseCard = <CourseCard courses={courses}  />;
+      
     }
 
     return (
@@ -87,7 +80,6 @@ class HomePage extends Component {
                 <Col span={8}>
                   <CourseFrom />
                 </Col>
-
                 <Col span={8}>{courseCard}</Col>
               </Row>
             </div>
@@ -106,7 +98,6 @@ HomePage.propTypes = {
 
 const mapStateToProps = (state) => ({
   course: state.course,
-  data: state.course.courses
 });
 
 export default connect(mapStateToProps, { getCourses })(HomePage);

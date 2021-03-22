@@ -7,18 +7,14 @@ import PropTypes from "prop-types";
 class CourseCard extends Component {
 
   render() {
-    const { courses, data } = this.props;
-    console.log(courses);
-    console.log(data);
-
-    return data.map(course => (<CourseItem key={course._id} course={course} />
+    const { courses } = this.props;
+    return courses.map(course => (<CourseItem key={course._id} course={course} />
       ));
   }
 }
 
 CourseCard.propTypes = {
-  course: PropTypes.object.isRequired,
-  data: PropTypes.array.isRequired,
+  course: PropTypes.array.isRequired,
 };
 
 export default CourseCard;
