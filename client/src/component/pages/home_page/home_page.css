@@ -7,3 +7,13 @@
     bottom: -17px;
     right: 2rem;
 }
+
+.fake-loading{
+    justify-content: center;
+    text-align: center;
+    margin:80px;
+}
+
+.hover:hover{
+    text-decoration: none;
+}
