@@ -77,10 +77,7 @@ export const GetAllCourseByCreator = asyncHandler(async (req: Request, res: Resp
 export const GetCourseById = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     try {
         let courses = await Course.findById(req.params.id)
-        res.status(201).json({
-            success: true,
-            data: courses
-        });
+        res.status(201).json(courses);
 
     } catch {
         return next(new ErrorResponse('No course with that id', 404))
