@@ -33,10 +33,7 @@ export const createCourse = asyncHandler(async (req: Request, res: Response, nex
 
 
 
-    res.status(201).json({
-        success: true,
-        data: created_course
-    });
+    res.status(201).json(created_course);
 })
 
 // @desc    Get all course
@@ -47,10 +44,7 @@ export const GetAllCourse = asyncHandler(async (req: Request, res: Response, nex
     try {
         let courses = await Course.find().populate('createdBy', ['firstName', 'lastName'])
 
-        res.status(201).json({
-            success: true,
-            data: courses
-        });
+        res.status(201).json(courses);
     } catch (error) {
         console.log(error)
         return next(new ErrorResponse('No course found', 404))
