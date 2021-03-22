@@ -18,7 +18,7 @@ import CourseFrom from "./courseForm";
 import { connect } from "react-redux";
 import {
   getCourses,
-} from "../../../redux/actions/createCourseActions";
+} from "../../../redux/actions/courseActions";
 
 //PropTypes
 import { PropTypes } from "prop-types";
@@ -42,7 +42,7 @@ class HomePage extends Component {
     
     let courseCard;
     if ((courses === null || loading)) {
-      courseCard = <CircularProgress disableShrink />;
+      courseCard = <CircularProgress className="fake-loading" disableShrink />;
     } else {
       courseCard = <CourseCard courses={courses}  />;
       

@@ -1,4 +1,4 @@
-import { ADD_COURSE, GET_COURSES, COURSE_LOADING } from "../actions/type";
+import { ADD_COURSE, GET_COURSES,GET_COURSE, COURSE_LOADING } from "../actions/type";
 
 const initailState = {
   courses: [],
@@ -17,6 +17,12 @@ export default function c(state = initailState, action) {
       return {
         ...state,
         courses: action.payload,
+        loading: false,
+      };
+    case GET_COURSE:
+      return {
+        ...state,
+        course: action.payload,
         loading: false,
       };
     case ADD_COURSE:

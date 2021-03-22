@@ -16,7 +16,7 @@ import Typography from "@material-ui/core/Typography";
 
 //Redux
 import { connect } from "react-redux";
-import { addCourse } from "../../../redux/actions/createCourseActions";
+import { addCourse } from "../../../redux/actions/courseActions";
 
 //PropTypes
 import { PropTypes } from "prop-types";

@@ -34,7 +34,7 @@ class CourseItem extends Component {
     const { course } = this.props;
     return (
       <div>
-        <Link to={`/exercises/${course._id}`}>
+        <Link className="hover" to={`/exercises/${course._id}`}>
           <Card className={useStyles.root}>
             <CardActionArea>
               <CardContent className="background-card">

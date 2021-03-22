@@ -62,7 +62,7 @@ function App() {
           />
           <ProtectedRoute
             exact
-            path="/exercises"
+            path="/exercises/:id"
             role={ROLE.STUDENT}
             component={ExercisesPage}
           />

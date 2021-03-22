@@ -7,17 +7,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faUser } from "@fortawesome/free-regular-svg-icons";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 
-function Sidebar() {
+//PropTypes
+import { PropTypes } from "prop-types";
+
+function Sidebar(props) {
+  const {course} = props.course
   return (
     <div className="sidebar">
       <div className="sidebar-head">
-        <h1>CSS101</h1>
-        <h2>Introduction coding Python</h2>
+        <h1>{course.courseID}</h1>
+        <h2>{course.courseName}</h2>
       </div>
       <div className="sidebar-link">
         <NavLink
           exact
-          to="/exercises"
+          to={`/exercises/${course._id}`}
           activeClassName="active-sidebar"
           className="menu-link "
         >
@@ -28,7 +32,7 @@ function Sidebar() {
         </NavLink>
         <NavLink
           exact
-          to="scorebook"
+          to={`/scorebook/${course._id}`}
           className="menu-link"
           activeClassName="active-sidebar"
         >
@@ -51,6 +55,10 @@ function Sidebar() {
       </div>
     </div>
   );
+}
+
+Sidebar.propTypes={
+  course: PropTypes.object.isRequired
 }
 
 export default Sidebar;
