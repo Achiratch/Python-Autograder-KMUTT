@@ -17,6 +17,10 @@ import MemberPage from "./component/pages/member_page/member_page";
 import CollectionsPage from "./component/pages/collections_page";
 //----------------------------------------
 
+//Error-Page------------------------------
+import PageNotFound from "./component/error_pages/PageNotFound"
+import PageNeedPerrmission from "./component/error_pages/PageNeedPerrmission"
+//----------------------------------------
 import "./App.css";
 import { decode } from "jsonwebtoken";
 import ROLE from "./component/auth/Role";
@@ -80,9 +84,9 @@ function App() {
           />
           <Route
             path="/403"
-            component={() => "403 YOU DON'T HAVE PERRMISSION"}
+            component={PageNeedPerrmission}
           />
-          <Route path="*" component={() => "404 NOT FOUND"} />
+          <Route path="*" component={PageNotFound} />
         </Switch>
       </Provider>
     </div>
