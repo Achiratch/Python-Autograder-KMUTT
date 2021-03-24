@@ -1,7 +1,6 @@
 import React, { Component } from "react";
+import DeleteConfirm from "./deleteConfirm";
 
-//ANTD
-import { Col, Row } from "antd";
 
 //Material-UI
 import Card from "@material-ui/core/Card";
@@ -31,11 +30,11 @@ const useStyles = makeStyles({
 
 class CourseItem extends Component {
   render() {
-    const { course } = this.props;
+    const { course, auth } = this.props;
     return (
       <div>
-        <Link className="hover" to={`/exercises/${course._id}`}>
-          <Card className={useStyles.root}>
+        <Card className={useStyles.root}>
+          <Link className="hover" to={`/exercises/${course._id}`}>
             <CardActionArea>
               <CardContent className="background-card">
                 <h1 className="Typography">{this.props.course.courseID}</h1>
@@ -49,16 +48,19 @@ class CourseItem extends Component {
                 </Typography>
               </CardContent>
             </CardActionArea>
-            <CardActions>
-              <Button size="" color="primary">
-                Semeseter {this.props.course.semester}
-              </Button>
-              <Button size="small" color="primary">
-                Year {this.props.course.academicYear}
-              </Button>
-            </CardActions>
-          </Card>
-        </Link>
+          </Link>
+          <CardActions>
+            <Button size="" color="primary">
+              Semeseter {this.props.course.semester}
+            </Button>
+            <Button size="small" color="primary">
+              Year {this.props.course.academicYear}
+            </Button>
+            {course.createdBy._id === auth.user.id || course.createdBy === auth.user.id ?  (
+              <DeleteConfirm course={course}/>
+            ) : null}
+          </CardActions>
+        </Card>
       </div>
     );
   }
