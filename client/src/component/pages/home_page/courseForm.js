@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import "./home_page.css";
 
 //ANTD
-import { Form, Input, Select, DatePicker, message } from "antd";
+import { Form, Input, Select, message } from "antd";
 import { Modal, Col } from "antd";
 
 //Material-UI
@@ -48,7 +48,7 @@ class CourseForm extends Component {
   UNSAFE_componentWillReceiveProps(newProps) {
     if (newProps.errors) {
       this.setState({ errors: newProps.errors });
-      message.error("This Course ID is already existed on this semester!");
+      message.error(`${this.props.errors.error}`);
     }
   }
 
