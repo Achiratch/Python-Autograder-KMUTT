@@ -1,4 +1,10 @@
-import { ADD_COURSE, GET_COURSES,GET_COURSE, COURSE_LOADING } from "../actions/type";
+import {
+  ADD_COURSE,
+  GET_COURSES,
+  GET_COURSE,
+  COURSE_LOADING,
+  DELETE_COURSE,
+} from "../actions/type";
 
 const initailState = {
   courses: [],
@@ -30,7 +36,13 @@ export default function c(state = initailState, action) {
         ...state,
         courses: [action.payload, ...state.courses],
       };
-
+    case DELETE_COURSE:
+      return {
+        ...state,
+        courses: state.courses.filter(
+          (course) => course._id !== action.payload
+        ),
+      };
     default:
       return state;
   }

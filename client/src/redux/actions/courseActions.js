@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_COURSE, GET_ERRORS, GET_COURSES,GET_COURSE, COURSE_LOADING } from "./type";
+import { ADD_COURSE, GET_ERRORS, GET_COURSES,GET_COURSE, COURSE_LOADING,DELETE_COURSE } from "./type";
 
 //Create Course
 export const addCourse = (courseData) => (dispatch) => {
@@ -56,7 +56,23 @@ export const getCourses = () => (dispatch) => {
     );
 };
 
-
+//Delete Course 
+export const deleteCourse = (id) => (dispatch) => {
+  axios
+    .delete(`/api/course/${id}`)
+    .then((res) =>
+      dispatch({
+        type: DELETE_COURSE,
+        payload: id,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
 
 //Set loading state
 export const setCourseLoading = () => {
