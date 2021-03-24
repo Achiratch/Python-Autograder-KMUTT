@@ -6,10 +6,11 @@ import Footer from "../../layout/footer";
 
 //ANTD
 import { Col, Row } from "antd";
+import { Skeleton } from 'antd';
+
 
 //Material-UI
 import { makeStyles } from "@material-ui/core/styles";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 //Dialog Form
 import CourseFrom from "./courseForm";
@@ -42,7 +43,7 @@ class HomePage extends Component {
     
     let courseCard;
     if ((courses === null || loading)) {
-      courseCard = <CircularProgress className="fake-loading" disableShrink />;
+      courseCard = <Skeleton active />;
     } else {
       courseCard = <CourseCard courses={courses}  />;
       
