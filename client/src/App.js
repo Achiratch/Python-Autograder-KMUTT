@@ -72,13 +72,13 @@ function App() {
           />
           <ProtectedRoute
             exact
-            path="/scorebook"
+            path="/scorebook/:id"
             role={ROLE.STUDENT}
             component={ScoreBookPage}
           />
           <ProtectedRoute
             exact
-            path="/member"
+            path="/member/:id"
             role={ROLE.STUDENT}
             component={MemberPage}
           />

@@ -17,6 +17,12 @@ import { LinearProgress } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
 import AddPopup from "./add_dialog";
 
+//Redux
+import { connect } from "react-redux";
+import { getCourse } from "../../../redux/actions/courseActions";
+
+//PropTypes
+import { PropTypes } from "prop-types";
 
 const columns = [
   { field: "id", headerName: "ID", width: 200, sortable: false },
@@ -42,12 +48,11 @@ const columns = [
   },
 ];
 
-function MemberPage() {
+function MemberPage({course}) {
   //------Fetch Data---------------------------------------------
   const [data, setData] = useState([]);
   const [q, setQ] = useState("");
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     const fetchMembers = async () => {
       setLoading(true);
@@ -81,7 +86,7 @@ function MemberPage() {
     <div>
       <Navbar />
       <div className="body">
-        <Sidebar />
+        <Sidebar course={course} />
         <div className="page-content">
           <div className="head-content">
             <h1>Member</h1>
@@ -140,4 +145,14 @@ function MemberPage() {
     </div>
   );
 }
-export default MemberPage;
+
+MemberPage.propTypes = {
+  getCourse: PropTypes.func.isRequired,
+  course: PropTypes.object.isRequired,
+};
+
+function mapStateToProps(state) {
+  return { course: state.course };
+}
+
+export default connect(mapStateToProps, { getCourse })(MemberPage);

@@ -11,7 +11,7 @@ import { faBook } from "@fortawesome/free-solid-svg-icons";
 import { PropTypes } from "prop-types";
 
 function Sidebar(props) {
-  const {course} = props.course
+  const { course } = props.course;
   return (
     <div className="sidebar">
       <div className="sidebar-head">
@@ -43,7 +43,7 @@ function Sidebar(props) {
         </NavLink>
         <NavLink
           exact
-          to="/member"
+          to={`/member/${course._id}`}
           className="menu-link "
           activeClassName="active-sidebar"
         >
@@ -57,8 +57,8 @@ function Sidebar(props) {
   );
 }
 
-Sidebar.propTypes={
-  course: PropTypes.object.isRequired
-}
+Sidebar.propTypes = {
+  course: PropTypes.object.isRequired,
+};
 
 export default Sidebar;
