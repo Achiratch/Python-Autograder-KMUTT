@@ -52,3 +52,11 @@
 .delete{
     margin-right: 0.4rem;
 }
+
+.delete-button-trash{
+    padding-left: 2.2rem;
+}
+
+.trash{
+    margin-right: 0.5rem;
+}

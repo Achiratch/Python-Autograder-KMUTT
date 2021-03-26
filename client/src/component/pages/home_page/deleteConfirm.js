@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 //ANTD
 import { Modal, message } from "antd";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { ExclamationCircleOutlined, DeleteFilled } from "@ant-design/icons";
 
 //Material-UI
 import Button from "@material-ui/core/Button";
@@ -33,9 +33,13 @@ class DeleteConfirm extends Component {
     const { visible } = this.state;
     return (
       <div>
-        <Button color="secondary" onClick={this.showModal}>
-          DELETE COURSE
-        </Button>
+        <div className="delete-button-trash">
+          <Button  color="secondary" onClick={this.showModal}>
+            <DeleteFilled className="trash" style={{ fontSize: "18px" }} />
+            DELETE
+          </Button>
+        </div>
+
         <Modal
           closable={false}
           visible={visible}

@@ -3,12 +3,13 @@ import CourseItem from "./courseItem";
 
 //PropTypes
 import PropTypes from "prop-types";
+import { Col } from "antd";
 
 class CourseCard extends Component {
 
   render() {
     const { courses } = this.props;
-    return courses.map(course => (<CourseItem key={course._id} course={course} />
+    return courses.map(course => (<Col span={8}><CourseItem key={course._id} course={course} /></Col>
       ));
   }
 }

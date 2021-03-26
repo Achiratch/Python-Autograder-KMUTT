@@ -6,8 +6,7 @@ import Footer from "../../layout/footer";
 
 //ANTD
 import { Col, Row } from "antd";
-import { Skeleton } from 'antd';
-
+import { Skeleton } from "antd";
 
 //Material-UI
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,9 +16,7 @@ import CourseFrom from "./courseForm";
 
 //Redux
 import { connect } from "react-redux";
-import {
-  getCourses,
-} from "../../../redux/actions/courseActions";
+import { getCourses } from "../../../redux/actions/courseActions";
 
 //PropTypes
 import { PropTypes } from "prop-types";
@@ -40,13 +37,12 @@ class HomePage extends Component {
   }
   render() {
     const { courses, loading } = this.props.course;
-    
+
     let courseCard;
-    if ((courses === null || loading)) {
+    if (courses === null || loading) {
       courseCard = <Skeleton active />;
     } else {
-      courseCard = <CourseCard courses={courses}  />;
-      
+      courseCard = <CourseCard courses={courses} />;
     }
 
     return (
@@ -77,11 +73,11 @@ class HomePage extends Component {
               <h1>My Course</h1>
             </div>
             <div className="site-card-wrapper">
-              <Row gutter={16} className="space-card">
+              <Row gutter={[16, 16]} className="space-card">
                 <Col span={8}>
                   <CourseFrom />
                 </Col>
-                <Col span={8}>{courseCard}</Col>
+                {courseCard}
               </Row>
             </div>
           </div>
