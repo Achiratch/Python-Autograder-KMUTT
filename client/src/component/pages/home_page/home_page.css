@@ -54,9 +54,15 @@
 }
 
 .delete-button-trash{
-    padding-left: 2.2rem;
+    padding-left: 0.5rem;
+    margin-top: 0.3rem;
 }
 
 .trash{
     margin-right: 0.5rem;
+}
+
+.edit-button{
+    margin-top: 0.4rem;
+    margin-left: 3.5rem;
 }

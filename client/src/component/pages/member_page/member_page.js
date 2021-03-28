@@ -48,7 +48,7 @@ const columns = [
   },
 ];
 
-function MemberPage({course}) {
+function MemberPage(props) {
   //------Fetch Data---------------------------------------------
   const [data, setData] = useState([]);
   const [q, setQ] = useState("");
@@ -79,20 +79,20 @@ function MemberPage({course}) {
     );
   }
   //---------------------------------------------------------------
-
   const data_test = search(data);
   const number_student = data.length;
+  
   return (
     <div>
       <Navbar />
       <div className="body">
-        <Sidebar course={course} />
+        <Sidebar course={props.course} />
         <div className="page-content">
           <div className="head-content">
             <h1>Member</h1>
             <Breadcrumb>
               <Breadcrumb.Item href="/home">My Course</Breadcrumb.Item>
-              <Breadcrumb.Item>CSS101</Breadcrumb.Item>
+              <Breadcrumb.Item>{props.course.course.courseID}</Breadcrumb.Item>
               <Breadcrumb.Item>Member</Breadcrumb.Item>
             </Breadcrumb>
           </div>

@@ -12,7 +12,6 @@ class CollectionsPage extends Component {
       <div>
         <Navbar />
         <div className="body">
-          <Sidebar />
           <div>
             <h1>Collection</h1>
             <h1>Collection</h1>

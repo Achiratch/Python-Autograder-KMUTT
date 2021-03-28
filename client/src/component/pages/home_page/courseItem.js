@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import DeleteConfirm from "./deleteConfirm";
-
+import CourseEdit from "./courseEdit";
 
 //Material-UI
 import Card from "@material-ui/core/Card";
@@ -50,14 +50,16 @@ class CourseItem extends Component {
             </CardActionArea>
           </Link>
           <CardActions>
-            <Button size="" color="primary">
-              Semeseter {this.props.course.semester}
+            <Button size="medium" color="primary">
+              Semeseter {this.props.course.semester} / {this.props.course.academicYear}
             </Button>
-            <Button size="small" color="primary">
-              Year {this.props.course.academicYear}
-            </Button>
-            {course.createdBy._id === auth.user.id || course.createdBy === auth.user.id ?  (
-              <DeleteConfirm course={course}/>
+            
+            {course.createdBy._id === auth.user.id ||
+            course.createdBy === auth.user.id ? (
+              <div className="flex">
+                <CourseEdit course={course} />
+                <DeleteConfirm course={course} />
+              </div>
             ) : null}
           </CardActions>
         </Card>

@@ -34,7 +34,7 @@ class DeleteConfirm extends Component {
     return (
       <div>
         <div className="delete-button-trash">
-          <Button  color="secondary" onClick={this.showModal}>
+          <Button size="small" color="secondary" onClick={this.showModal}>
             <DeleteFilled className="trash" style={{ fontSize: "18px" }} />
             DELETE
           </Button>
