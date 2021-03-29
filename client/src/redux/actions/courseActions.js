@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_COURSE, GET_ERRORS, GET_COURSES,GET_COURSE, COURSE_LOADING,DELETE_COURSE } from "./type";
+import { ADD_COURSE, GET_ERRORS, GET_COURSES,GET_COURSE, COURSE_LOADING,UPDATE_COURSE,DELETE_COURSE } from "./type";
 
 //Create Course
 export const addCourse = (courseData) => (dispatch) => {
@@ -52,6 +52,24 @@ export const getCourses = () => (dispatch) => {
       dispatch({
         type: GET_COURSES,
         payload: null,
+      })
+    );
+};
+
+//Update Course
+export const editCourse = (id,courseData) => (dispatch) => {
+  axios
+    .put(`/api/course/${id}`,courseData)
+    .then((res) =>
+      dispatch({
+        type: UPDATE_COURSE,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
       })
     );
 };

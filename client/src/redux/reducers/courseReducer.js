@@ -4,6 +4,7 @@ import {
   GET_COURSE,
   COURSE_LOADING,
   DELETE_COURSE,
+  UPDATE_COURSE,
 } from "../actions/type";
 
 const initailState = {
@@ -35,6 +36,13 @@ export default function c(state = initailState, action) {
       return {
         ...state,
         courses: [action.payload, ...state.courses],
+      };
+    case UPDATE_COURSE:
+      return {
+        ...state,
+        courses: state.courses.filter(
+          (course) => course._id !== action.payload
+        ),
       };
     case DELETE_COURSE:
       return {
