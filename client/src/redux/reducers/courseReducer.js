@@ -39,6 +39,7 @@ export default function c(state = initailState, action) {
       };
     case UPDATE_COURSE:
       return {
+        ///Need to fix
         ...state,
         courses: state.courses.filter(
           (course) => course._id !== action.payload

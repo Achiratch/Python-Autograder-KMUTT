@@ -25,7 +25,6 @@ class DeleteConfirm extends Component {
   };
   onDeleteClick(id) {
     this.props.deleteCourse(id);
-    console.log(id)
     this.handleCancel();
     message.success(`Course ${this.props.course.courseID} has been deleted.`);
   }

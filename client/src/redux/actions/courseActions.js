@@ -59,7 +59,7 @@ export const getCourses = () => (dispatch) => {
 //Update Course
 export const editCourse = (id,courseData) => (dispatch) => {
   axios
-    .put(`/api/course/${id}`,courseData)
+    .put(`/api/course/${id}/update`,courseData)
     .then((res) =>
       dispatch({
         type: UPDATE_COURSE,

@@ -23,7 +23,7 @@ class CourseEdit extends Component {
     };
     const { course } = this.props;
     this.formRef = React.createRef();
-    this.onFormSubmitHandler = this.onFormSubmitHandler.bind(this,course._id);
+    this.onFormSubmitHandler = this.onFormSubmitHandler.bind(this, course._id);
   }
   state = { visible: false };
   UNSAFE_componentWillReceiveProps(newProps) {
@@ -45,8 +45,8 @@ class CourseEdit extends Component {
     console.log("[Edit course]");
     const data = this.formRef.current.getFieldsValue();
     console.log(data);
-    console.log(id)
-    this.props.editCourse(id,data);
+    console.log(id);
+    this.props.editCourse(id, data);
     this.handleCancel();
     message.success("This Course has been edited.");
   }
@@ -205,12 +205,11 @@ CourseEdit.propTypes = {
   editCourse: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  course: PropTypes.object.isRequired
+  course: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
-  
   auth: state.auth,
 });
 
