@@ -2,10 +2,10 @@ import React, { Component } from "react";
 
 //ANTD
 import { Modal, message, Col, Form, Input, Select } from "antd";
-import { ExclamationCircleOutlined, SettingOutlined } from "@ant-design/icons";
 
 //Material-UI
 import IconButton from "@material-ui/core/IconButton";
+import EditIcon from '@material-ui/icons/Edit';
 
 //PropTypes
 import { PropTypes } from "prop-types";
@@ -59,7 +59,7 @@ class CourseEdit extends Component {
       <div>
         <div className="edit-button">
           <IconButton size="small" onClick={this.showModal}>
-            <SettingOutlined style={{ fontSize: "18px" }} />
+            <EditIcon style={{ fontSize: "20px" }} />
           </IconButton>
         </div>
         <Modal

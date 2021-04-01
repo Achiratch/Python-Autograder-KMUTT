@@ -5,11 +5,11 @@ import Navbar from "../../layout/navbar";
 import Footer from "../../layout/footer";
 
 //ANTD
-import { Col, Row } from "antd";
 import { Skeleton } from "antd";
 
 //Material-UI
 import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
 
 //Dialog Form
 import CourseFrom from "./courseForm";
@@ -20,16 +20,6 @@ import { getCourses } from "../../../redux/actions/courseActions";
 
 //PropTypes
 import { PropTypes } from "prop-types";
-
-//Style-Course-Card
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 140,
-  },
-});
 
 class HomePage extends Component {
   componentDidMount() {
@@ -71,14 +61,16 @@ class HomePage extends Component {
           <div className="page-content container">
             <div className="head-content ">
               <h1>My Course</h1>
+              <Grid container spacing={4} fluid>
+                <Grid item xs={4} lg={4} md={6} sm={6}>
+                  <CourseFrom />
+                </Grid>
+              </Grid>
             </div>
             <div className="site-card-wrapper">
-              <Row gutter={[16, 16]} className="space-card">
-                <Col span={8}>
-                  <CourseFrom />
-                </Col>
+              <Grid container spacing={4} fluid>
                 {courseCard}
-              </Row>
+              </Grid>
             </div>
           </div>
         </div>

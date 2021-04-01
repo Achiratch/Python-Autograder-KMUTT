@@ -13,6 +13,8 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import AddIcon from "@material-ui/icons/Add";
+import Button from "@material-ui/core/Button";
 
 //Redux
 import { connect } from "react-redux";
@@ -74,19 +76,15 @@ class CourseForm extends Component {
     const { visible } = this.state;
     return (
       <div>
-        <Card className={useStyles.root} onClick={this.showModal}>
-          <CardActionArea>
-            <CardContent>
-              <h1 className="Typography">CREATE COURSE</h1>
-              <Typography
-                variant="body2"
-                color="text"
-                component="h2"
-                className="Typography"
-              ></Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
+        <Button
+          onClick={this.showModal}
+          variant="contained"
+          color="primary"
+          size="large"
+          startIcon={<AddIcon />}
+        >
+          Create Course
+        </Button>
 
         <Modal
           visible={visible}

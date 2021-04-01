@@ -3,6 +3,8 @@ import DeleteConfirm from "./deleteConfirm";
 import CourseEdit from "./courseEdit";
 
 //Material-UI
+import { Grid } from "@material-ui/core";
+import { CardMedia } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -36,30 +38,37 @@ class CourseItem extends Component {
         <Card className={useStyles.root}>
           <Link className="hover" to={`/exercises/${course._id}`}>
             <CardActionArea>
-              <CardContent className="background-card">
-                <h1 className="Typography">{this.props.course.courseID}</h1>
-                <Typography
-                  variant="body2"
-                  color="text"
-                  component="h2"
-                  className="Typography"
-                >
+              <CardMedia
+                component="img"
+                alt="Contemplative Reptile"
+                height="140"
+                image="https://images.unsplash.com/photo-1597589827307-d393da1520d2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=694&q=80"
+                title="Contemplative Reptile"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {this.props.course.courseID}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
                   {this.props.course.courseName}
                 </Typography>
               </CardContent>
             </CardActionArea>
           </Link>
           <CardActions>
-            <Button size="medium" color="primary">
-              Semeseter {this.props.course.semester} / {this.props.course.academicYear}
+            <Button size="small" color="primary">
+              Semeseter {this.props.course.semester} /{" "}
+              {this.props.course.academicYear}
             </Button>
-            
+
             {course.createdBy._id === auth.user.id ||
             course.createdBy === auth.user.id ? (
-              <div className="flex">
-                <CourseEdit course={course} />
-                <DeleteConfirm course={course} />
-              </div>
+              <Grid item xs={4} lg={4} md={6} sm={12}>
+                <div className="flex">
+                  <CourseEdit course={course} />
+                  <DeleteConfirm course={course} />
+                </div>
+              </Grid>
             ) : null}
           </CardActions>
         </Card>
