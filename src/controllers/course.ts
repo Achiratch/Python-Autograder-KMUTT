@@ -7,6 +7,7 @@ import ICourse from '../interfaces/Course'
 // Load Course models
 import Course from '../models/Course'
 import { default as User, IUser } from '../models/User'
+import isEmpty from '../validation/is-empty'
 
 // @desc    Create course
 // @route   POST /api/course
@@ -41,8 +42,29 @@ export const createCourse = asyncHandler(async (req: Request, res: Response, nex
 // @acess   Private
 export const GetAllCourse = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
 
+    const search = req.query.search as string
+    const page: number = req.query.page as any
+    const limit: number = parseInt(req.query.limit as string)
+    const semester = req.query.semester as any
+    const year = req.query.year as any
+
+    const queryArray = []
+    if (!isEmpty(search)) queryArray.push({ courseID: { $regex: search } })
+    if (!isEmpty(semester)) queryArray.push({ semester: semester })
+    if (!isEmpty(year)) queryArray.push({ academicYear: year })
+
+    let courses
+
     try {
-        let courses = await Course.find().populate('createdBy', ['firstName', 'lastName'])
+        if (queryArray.length === 0) {
+            courses = await Course.find().populate('createdBy', ['firstName', 'lastName'])
+
+        } else {
+            courses = await Course.find({ "$and": queryArray })
+                .skip(page > 0 ? ((page - 1) * limit) : 0)
+                .limit(limit)
+                .populate('createdBy', ['firstName', 'lastName'])
+        }
 
         res.status(201).json(courses);
     } catch (error) {
@@ -58,8 +80,29 @@ export const GetAllCourse = asyncHandler(async (req: Request, res: Response, nex
 export const GetAllCourseByCreator = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const userId: any = req.params.id
 
+    const search = req.query.search as string
+    const page: number = req.query.page as any
+    const limit: number = parseInt(req.query.limit as string)
+    const semester = req.query.semester as any
+    const year = req.query.year as any
+
+    const queryArray = []
+    queryArray.push({ createdBy: userId })
+    if (!isEmpty(search)) queryArray.push({ courseID: { $regex: search } })
+    if (!isEmpty(semester)) queryArray.push({ semester: semester })
+    if (!isEmpty(year)) queryArray.push({ academicYear: year })
+
+    let courses
     try {
-        let courses = await Course.find({ createdBy: userId }).populate('createdBy', ['firstName', 'lastName'])
+        if (queryArray.length === 1) {
+            courses = await Course.find(queryArray).populate('createdBy', ['firstName', 'lastName'])
+        } else {
+            courses = await Course.find({ "$and": queryArray })
+                .skip(page > 0 ? ((page - 1) * limit) : 0)
+                .limit(limit)
+                .populate('createdBy', ['firstName', 'lastName'])
+        }
+
         res.status(201).json({
             success: true,
             data: courses
@@ -88,7 +131,7 @@ export const GetCourseById = asyncHandler(async (req: Request, res: Response, ne
 })
 
 // @desc    Update course by id
-// @route   PUT /api/course/:id
+// @route   PUT /api/course/:id/update
 // @acess   Private
 export const UpdateCourseById = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const { courseID, courseName, courseDescription, semester, academicYear, dateCreate }: ICourse = req.body
