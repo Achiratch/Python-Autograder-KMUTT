@@ -88,7 +88,7 @@ function MemberPage(props) {
       <div className="body">
         <Sidebar course={props.course} />
         <div className="page-content">
-          <div className="head-content">
+          <div className="head-content-member">
             <h1>Member</h1>
             <Breadcrumb>
               <Breadcrumb.Item href="/home">My Course</Breadcrumb.Item>

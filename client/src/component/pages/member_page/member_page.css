@@ -87,7 +87,9 @@
     box-shadow: 0 0 5px rgb(0, 0, 0); 
     z-index: 1;
   }
-    
+  .head-content-member{
+    padding: 2rem 2rem 2rem;
+  }
 
   .table{
     margin: 0;
