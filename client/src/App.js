@@ -4,22 +4,22 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "./redux/utills/setAuthToken";
 import { logoutUser, setCurrentUser } from "./redux/actions/authActions";
 
-import { BrowserRouter, Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { ProtectedRoute } from "./component/auth/protected_route";
 
 //Page------------------------------------
-import LandingPage from "./component/pages/landing_page"
+import LandingPage from "./component/pages/landing_page";
 import RegisterPage from "./component/pages/register_page";
 import HomePage from "./component/pages/home_page/home_page";
-import ExercisesPage from "./component/pages/exercises_page";
-import ScoreBookPage from "./component/pages/scorebook_page";
+import ExercisesPage from "./component/pages/exercises_page/exercises_page";
+import ScoreBookPage from "./component/pages/scorebook_page/scorebook_page";
 import MemberPage from "./component/pages/member_page/member_page";
 import CollectionsPage from "./component/pages/collections_page";
 //----------------------------------------
 
 //Error-Page------------------------------
-import PageNotFound from "./component/error_pages/PageNotFound"
-import PageNeedPerrmission from "./component/error_pages/PageNeedPerrmission"
+import PageNotFound from "./component/error_pages/PageNotFound";
+import PageNeedPerrmission from "./component/error_pages/PageNeedPerrmission";
 //----------------------------------------
 import "./App.css";
 import { decode } from "jsonwebtoken";
@@ -60,7 +60,19 @@ function App() {
           />
           <ProtectedRoute
             exact
+            path="/home/student"
+            role={ROLE.STUDENT}
+            component={HomePage}
+          />
+          <ProtectedRoute
+            exact
             path="/collections"
+            role={ROLE.STUDENT}
+            component={CollectionsPage}
+          />
+          <ProtectedRoute
+            exact
+            path="/collections/student"
             role={ROLE.STUDENT}
             component={CollectionsPage}
           />
@@ -72,7 +84,19 @@ function App() {
           />
           <ProtectedRoute
             exact
+            path="/exercises/:id/student"
+            role={ROLE.STUDENT}
+            component={ExercisesPage}
+          />
+          <ProtectedRoute
+            exact
             path="/scorebook/:id"
+            role={ROLE.STUDENT}
+            component={ScoreBookPage}
+          />
+          <ProtectedRoute
+            exact
+            path="/scorebook/:id/student"
             role={ROLE.STUDENT}
             component={ScoreBookPage}
           />
@@ -82,10 +106,13 @@ function App() {
             role={ROLE.STUDENT}
             component={MemberPage}
           />
-          <Route
-            path="/403"
-            component={PageNeedPerrmission}
+          <ProtectedRoute
+            exact
+            path="/member/:id/student"
+            role={ROLE.STUDENT}
+            component={MemberPage}
           />
+          <Route path="/403" component={PageNeedPerrmission} />
           <Route path="*" component={PageNotFound} />
         </Switch>
       </Provider>
