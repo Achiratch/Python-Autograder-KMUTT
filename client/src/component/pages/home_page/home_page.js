@@ -8,9 +8,12 @@ import Footer from "../../layout/footer";
 import { Skeleton } from "antd";
 
 //Material-UI
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import TextField from "@material-ui/core/TextField";
 //Dialog Form
 import CourseFrom from "./courseForm";
 
@@ -60,12 +63,70 @@ class HomePage extends Component {
           </div>*/}
           <div className="page-content container">
             <div className="head-content ">
-              <h1>My Course</h1>
-              <Grid container spacing={4} fluid>
-                <Grid item xs={4} lg={4} md={6} sm={6}>
-                  <CourseFrom />
+              <h1 className="course-h1">My Course</h1>
+              <div className="flex">
+                <Grid container spacing={12}>
+                  <Grid item xs={12} lg={12} md={12} sm={12}>
+                    <div className="components">
+                      <CourseFrom />
+                      <div className="search-field">
+                        <div className="space-between-field">
+                          <FormControl
+                            variant="outlined"
+                            className="space-between-field"
+                          >
+                            <TextField
+                              size="small"
+                              id="outlined-basic"
+                              label="Search"
+                              variant="outlined"
+                              style={{ margin: 0 }}
+                            />
+                          </FormControl>
+                        </div>
+                        <div className="space-between-field">
+                          <FormControl variant="outlined" size="small">
+                            <InputLabel id="demo-simple-select-outlined-label">
+                              Semester
+                            </InputLabel>
+                            <Select
+                              labelId="demo-simple-select-outlined-label"
+                              id="demo-simple-select-outlined"
+                              // value={age}
+                              // onChange={handleChange}
+                              label="Semester"
+                              style={{ width: 120 }}
+                            >
+                              <MenuItem value={"1"}>1</MenuItem>
+                              <MenuItem value={"2"}>2</MenuItem>
+                            </Select>
+                          </FormControl>
+                        </div>
+                        <div className="space-between-field">
+                          <FormControl variant="outlined" size="small">
+                            <InputLabel id="demo-simple-select-outlined-label">
+                              Year
+                            </InputLabel>
+                            <Select
+                              labelId="demo-simple-select-outlined-label"
+                              id="demo-simple-select-outlined"
+                              // value={age}
+                              // onChange={handleChange}
+                              label="Year"
+                              style={{ width: 100 }}
+                            >
+                              <MenuItem value={"2021"}>2021</MenuItem>
+                              <MenuItem value={"2022"}>2022</MenuItem>
+                              <MenuItem value={"2023"}>2023</MenuItem>
+                              <MenuItem value={"2024"}>2024</MenuItem>
+                            </Select>
+                          </FormControl>
+                        </div>
+                      </div>
+                    </div>
+                  </Grid>
                 </Grid>
-              </Grid>
+              </div>
             </div>
             <div className="site-card-wrapper">
               <Grid container spacing={4} fluid>

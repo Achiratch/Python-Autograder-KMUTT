@@ -80,4 +80,21 @@
         margin-top: 0.4rem;
         margin-left: 15rem;
     }
-  }
+}
+
+.course-h1{
+    margin-bottom: 1rem;
+}
+
+.components{
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-field{
+    display: flex;
+}
+
+.space-between-field{
+    padding-left: 0.5rem;
+}
