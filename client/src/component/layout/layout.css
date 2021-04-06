@@ -26,6 +26,48 @@
   color: #f2f2f2;
 }
 
+.Drop-Down{
+  padding: 0rem;
+}
+.Drop-Down:hover{
+  color: #aaaaaa;
+}
+
+.Drop-Down-Link{
+  display: none;
+  position: absolute;
+  top: 90%;
+  width: 5rem;
+  background-color: #272e41;
+  padding: 0.6rem;
+  padding-right: auto;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 0px 0px 10px rgb(0, 0, 0, 0.2);
+  width: 10rem;
+  z-index: 2;
+}
+
+.Drop-Down-Link li{
+    color: whitesmoke;
+    margin-left: 1rem;
+    list-style-type: none;
+    z-index: 2;
+}
+
+li:hover{
+    color: grey;
+    font-weight: 500px;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.Drop-Down:hover .Drop-Down-Link {
+  display: block;
+  transition: all 2.75s ease-in-out;
+}
+
 .drop-down-link:hover{
   text-decoration: none;
   color: grey;
