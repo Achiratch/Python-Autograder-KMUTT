@@ -11,13 +11,13 @@ class CourseCard extends Component {
 
   render() {
     const { courses } = this.props;
-    return courses.map(course => (<Grid item xs={4} lg={4} md={6} sm={12}><CourseItem key={course._id} course={course} /></Grid>
+    return courses.map(course => (<Grid key={course._id} item xs={4} lg={4} md={6} sm={12}><CourseItem  course={course} /></Grid>
       ));
   }
 }
 
 CourseCard.propTypes = {
-  course: PropTypes.array.isRequired,
+ 
 };
 
 export default CourseCard;
