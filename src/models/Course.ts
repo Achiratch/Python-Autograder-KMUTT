@@ -3,7 +3,7 @@ import ICourse from '../interfaces/Course'
 const Schema = mongoose.Schema;
 
 //Create Schema
-const CourseSchema = new Schema({
+const CourseSchema = new Schema<ICourse>({
     courseID: {
         type: String,
         required: true
@@ -27,7 +27,8 @@ const CourseSchema = new Schema({
     },
     dateCreate: {
         type: Date,
-        default: Date.now()
+        default: Date.now(),
+        requried: true
     },
     createdBy: {
         type: Schema.Types.ObjectId,
@@ -35,5 +36,11 @@ const CourseSchema = new Schema({
         required: true
     }
 });
+
+CourseSchema.pre('save', function (next) {
+    this.courseID = this.courseID.toUpperCase()
+
+    next()
+})
 
 export default mongoose.model<ICourse>('courses', CourseSchema);

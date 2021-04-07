@@ -49,7 +49,7 @@ export const GetAllCourse = asyncHandler(async (req: Request, res: Response, nex
     const year = req.query.year as any
 
     const queryArray = []
-    if (!isEmpty(search)) queryArray.push({ courseID: { $regex: search } })
+    if (!isEmpty(search)) queryArray.push({ '$or': [{ courseID: { $regex: search } }, { courseName: { $regex: search } }] })
     if (!isEmpty(semester)) queryArray.push({ semester: semester })
     if (!isEmpty(year)) queryArray.push({ academicYear: year })
 
@@ -88,7 +88,7 @@ export const GetAllCourseByCreator = asyncHandler(async (req: Request, res: Resp
 
     const queryArray = []
     queryArray.push({ createdBy: userId })
-    if (!isEmpty(search)) queryArray.push({ courseID: { $regex: search } })
+    if (!isEmpty(search)) queryArray.push({ '$or': [{ courseID: { $regex: search } }, { courseName: { $regex: search } }] })
     if (!isEmpty(semester)) queryArray.push({ semester: semester })
     if (!isEmpty(year)) queryArray.push({ academicYear: year })
 
