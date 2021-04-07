@@ -29,7 +29,7 @@ class CourseEdit extends Component {
   UNSAFE_componentWillReceiveProps(newProps) {
     if (newProps.errors) {
       this.setState({ errors: newProps.errors });
-      message.error(`${this.props.errors.error}`);
+      //message.error(`${this.props.errors.error}`);
     }
   }
   showModal = () => {
@@ -53,7 +53,6 @@ class CourseEdit extends Component {
 
   render() {
     const { Option } = Select;
-    const { course } = this.props;
     const { visible } = this.state;
     return (
       <div>

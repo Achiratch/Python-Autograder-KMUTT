@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 
-
 import logo_python from "../images/logo_python.png";
 import styled from "styled-components";
 import "./layout.css";
@@ -30,7 +29,7 @@ const Logo_Python = styled.div`
 const Nav = styled.div`
   display: flex;
   z-index: 32;
-  padding: 0 2 rem;
+  padding: 0 2rem;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
@@ -80,6 +79,7 @@ const Bell = styled.span`
 
 const ChevonDown = styled.span`
   padding: 0rem 0.3rem;
+  margin-left: 0.5rem;
   cursor: pointer;
   justify-content: center;
   transition: all 0.2s ease-in-out;
@@ -94,67 +94,7 @@ const AccountName = styled.a`
     text-decoration: none;
   }
 `;
-
-const DropDown = styled.div`
-  transition: 2s ease-in-out;
-  z-index: 10;
-`;
-
-const DropDownLink = styled.div`
-  visibility: hidden;
-  opacity: 0;
-  position: absolute;
-  top: 110%;
-  width: 10rem;
-  background-color: #272e41;
-  padding: 0.5rem;
-  padding-right: auto;
-  border-radius: 5px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2), 0px 0px 10px rgb(0, 0, 0, 0.2);
-  width: 10rem;
-  li {
-    color: whitesmoke;
-    margin-left: 1rem;
-    list-style-type: none;
-    &:hover {
-      color: grey;
-      font-weight: 500px;
-      text-decoration: none;
-      transition: all 0.2s ease-in-out;
-      cursor: pointer;
-      z-index: 1;
-    }
-  }
-`;
-
-const useDetectOutsideClick = (el, initialState) => {
-  const [isActive, setIsActive] = useState(initialState);
-
-  useEffect(() => {
-    const onClick = (e) => {
-      // If the active element exists and is clicked outside of
-      if (el.current !== null && !el.current.contains(e.target)) {
-        setIsActive(!isActive);
-      }
-    };
-
-    // If the item is active (ie open) then listen for clicks outside
-    if (isActive) {
-      window.addEventListener("click", onClick);
-    }
-
-    return () => {
-      window.removeEventListener("click", onClick);
-    };
-  }, [isActive, el]);
-  //console.log(isActive) checkBool
-  return [isActive, setIsActive];
-};
-
 function Navbar(props) {
-  const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
-  const onClick = () => setIsActive(!isActive);
   const { isAuthenticated, user } = props.auth;
   const onLogoutClick = () => props.logoutUser();
 
@@ -180,15 +120,12 @@ function Navbar(props) {
           <FontAwesomeIcon icon={faBell} size="lg" color="white" />
         </Bell>
 
-        <DropDown onClick={onClick}>
+        <div className="Drop-Down">
           <AccountName>{isAuthenticated ? user.studentID : null}</AccountName>
           <ChevonDown>
             <FontAwesomeIcon icon={faChevronDown} size="lg" color="white" />
           </ChevonDown>
-          <DropDownLink
-            ref={dropdownRef}
-            className={`menu ${isActive ? "active" : "inactive"}`}
-          >
+          <div className="Drop-Down-Link">
             <li>Edit Profile</li>
             <li>
               <Link to="/" className="drop-down-link" onClick={onLogoutClick}>
@@ -196,8 +133,8 @@ function Navbar(props) {
                 Logout
               </Link>
             </li>
-          </DropDownLink>
-        </DropDown>
+          </div>
+        </div>
       </Menu>
     </Nav>
   );
