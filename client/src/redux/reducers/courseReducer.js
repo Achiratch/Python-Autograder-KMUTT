@@ -41,9 +41,19 @@ export default function c(state = initailState, action) {
       return {
         ///Need to fix
         ...state,
-        courses: state.courses.filter(
-          (course) => course._id !== action.payload
-        ),
+        courses: state.courses.map(
+          (course) => {
+          if(course._id === action.payload.message._id) {
+            return {
+               ...course,
+               courseID: action.payload.message.courseID,
+               courseName: action.payload.message.courseName,
+               courseDescription: action.payload.message.courseDescription,
+               semester: action.payload.message.semester,
+               academicYear: action.payload.message.academicYear,
+            }
+          } else return course;
+          }),
       };
     case DELETE_COURSE:
       return {
