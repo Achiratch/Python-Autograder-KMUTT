@@ -11,12 +11,16 @@ import Course from '../models/Course'
 import { model } from 'mongoose'
 import ICourse from '../interfaces/Course'
 
+import isEmpty from '../validation/is-empty'
+
+
 // @desc    Register course
 // @route   POST /api/course/register
 // @acess   Private
 export const RegisterCourse = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const user = req.user as IUser
     const student = user.id
+    const studentDetail = await User.findById(student)
 
     const { course, status, dateCreate }: ICourseTaking = req.body
     try {
@@ -26,15 +30,22 @@ export const RegisterCourse = asyncHandler(async (req: Request, res: Response, n
         return next(new ErrorResponse('We do not have this course!', 404))
     }
 
-    let f = await CourseTaking.findOne({ "$and": [{ student: student }, { course: course }] })
+    let f = await CourseTaking.findOne({ "$and": [{ 'student._id': studentDetail?._id }, { course: course }] })
 
     if (f) {
         return next(new ErrorResponse('You already have taken this course', 401))
     }
 
+    const StudentSchema = {
+        _id: studentDetail?._id,
+        studentID: studentDetail?.studentID,
+        email: studentDetail?.email,
+        firstName: studentDetail?.firstName,
+        lastName: studentDetail?.lastName
+    }
     const register_course = await CourseTaking.create({
         course,
-        student,
+        student: StudentSchema,
         status,
         dateCreate,
     })
@@ -52,6 +63,17 @@ export const RegisterCourse = asyncHandler(async (req: Request, res: Response, n
 export const GetAllStudentInCourse = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const courseId: any = req.params.id
 
+    const search = req.query.search as string
+    const page: number = req.query.page as any
+    const limit: number = parseInt(req.query.limit as string)
+
+
+    const queryArray = []
+    queryArray.push({ course: courseId })
+    if (!isEmpty(search)) queryArray.push({ "$or": [{ "student.firstName": { $regex: search } }, { "student.email": { $regex: search } }] })
+    console.log(queryArray)
+    console.log(search)
+
     try {
         let c = await Course.findOne({ _id: courseId })
 
@@ -59,9 +81,26 @@ export const GetAllStudentInCourse = asyncHandler(async (req: Request, res: Resp
         return next(new ErrorResponse('We do not have this course!', 404))
     }
 
-    let courseTakingDetail = await CourseTaking.find({ course: courseId })
-        .select('student')
-        .populate('student', ['studentID', 'firstName', 'lastName', 'email'])
+    let courseTakingDetail
+    if (queryArray.length === 1) {
+        courseTakingDetail = await CourseTaking.find({ "$and": queryArray })
+            .skip(page > 0 ? ((page - 1) * limit) : 0)
+            .limit(limit)
+    } else {
+        courseTakingDetail = await CourseTaking.find({ "$and": queryArray })
+            .select('student')
+            .skip(page > 0 ? ((page - 1) * limit) : 0)
+            .limit(limit).exec()
+
+        res.status(200).json({
+            success: true,
+            data: courseTakingDetail,
+            allStudents: courseTakingDetail.length
+
+        });
+    }
+
+
 
     if (courseTakingDetail.length === 0) {
         return next(new ErrorResponse('No student in this course', 404))
@@ -112,7 +151,7 @@ export const GetAllRegisterdCourses = asyncHandler(async (req: Request, res: Res
     }
 
     try {
-        let registerdCourses = await CourseTaking.find({ student: studentId })
+        let registerdCourses = await CourseTaking.find({ 'student._id': studentId })
             .select('course')
             .populate('course')
 

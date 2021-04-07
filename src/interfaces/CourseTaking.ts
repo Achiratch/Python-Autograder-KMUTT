@@ -5,7 +5,7 @@ import ICourse from './Course';
 
 export default interface ICourseTaking extends Document {
     course: ICourse | ObjectId;
-    student: IUser | ObjectId;
+    student: Document;
     status: boolean;
     dateCreate: Date;
 }
