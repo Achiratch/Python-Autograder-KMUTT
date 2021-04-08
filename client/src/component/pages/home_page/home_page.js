@@ -19,12 +19,35 @@ import CourseFrom from "./courseForm";
 
 //Redux
 import { connect } from "react-redux";
-import { getCourses } from "../../../redux/actions/courseActions";
+import {
+  getCourses,
+  getCoursesByFilter,
+} from "../../../redux/actions/courseActions";
 
 //PropTypes
 import { PropTypes } from "prop-types";
 
 class HomePage extends Component {
+  constructor(props) {
+    super(props);
+    this.filterByInput = this.filterByInput.bind(this);
+    this.filterBySemester = this.filterBySemester.bind(this);
+    this.state = {  value: "", search: "" };
+    //console.log("initail"+this.state.value);
+  }
+  filterByInput(e) {
+    this.setState({ value: e.target.value });
+    //this.setState({ search: e.target.value });
+    this.props.getCoursesByFilter((""),(e.target.value),(""),(""));
+    //console.log(e.target.value)
+    console.log(this.state.value)
+  }
+  filterBySemester(e) {
+    this.setState({ search: e.target.value });
+    //this.setState({ search: e.target.value });
+    this.props.getCoursesByFilter((e.target.value),(""),(""),(""));
+    console.log(this.state.search)
+  }
   componentDidMount() {
     this.props.getCourses();
   }
@@ -65,7 +88,7 @@ class HomePage extends Component {
             <div className="head-content ">
               <h1 className="course-h1">My Course</h1>
               <div className="flex">
-                <Grid container spacing={12}>
+                <Grid container spacing={10}>
                   <Grid item xs={12} lg={12} md={12} sm={12}>
                     <div className="components">
                       <CourseFrom />
@@ -76,6 +99,9 @@ class HomePage extends Component {
                             className="space-between-field"
                           >
                             <TextField
+                              value={this.state.value}
+                              onChange={this.filterByInput}
+                              autoComplete="off"
                               size="small"
                               id="outlined-basic"
                               label="Search"
@@ -84,7 +110,7 @@ class HomePage extends Component {
                             />
                           </FormControl>
                         </div>
-                        <div className="space-between-field">
+                        <div className="space-between-field" >
                           <FormControl variant="outlined" size="small">
                             <InputLabel id="demo-simple-select-outlined-label">
                               Semester
@@ -92,11 +118,12 @@ class HomePage extends Component {
                             <Select
                               labelId="demo-simple-select-outlined-label"
                               id="demo-simple-select-outlined"
-                              // value={age}
-                              // onChange={handleChange}
+                              value={this.state.search}
+                              onChange={this.filterBySemester}
                               label="Semester"
                               style={{ width: 120 }}
                             >
+                              <MenuItem value={""}>All</MenuItem>
                               <MenuItem value={"1"}>1</MenuItem>
                               <MenuItem value={"2"}>2</MenuItem>
                             </Select>
@@ -115,6 +142,7 @@ class HomePage extends Component {
                               label="Year"
                               style={{ width: 100 }}
                             >
+                              <MenuItem value={""}>All</MenuItem>
                               <MenuItem value={"2021"}>2021</MenuItem>
                               <MenuItem value={"2022"}>2022</MenuItem>
                               <MenuItem value={"2023"}>2023</MenuItem>
@@ -129,7 +157,7 @@ class HomePage extends Component {
               </div>
             </div>
             <div className="site-card-wrapper">
-              <Grid container spacing={4} fluid>
+              <Grid container spacing={4}>
                 {courseCard}
               </Grid>
             </div>
@@ -150,4 +178,6 @@ const mapStateToProps = (state) => ({
   course: state.course,
 });
 
-export default connect(mapStateToProps, { getCourses })(HomePage);
+export default connect(mapStateToProps, { getCourses, getCoursesByFilter })(
+  HomePage
+);

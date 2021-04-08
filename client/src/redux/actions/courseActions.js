@@ -1,5 +1,14 @@
 import axios from "axios";
-import { ADD_COURSE, GET_ERRORS, GET_COURSES,GET_COURSE, COURSE_LOADING,UPDATE_COURSE,DELETE_COURSE } from "./type";
+import {
+  ADD_COURSE,
+  GET_ERRORS,
+  GET_COURSES,
+  GET_COURSE,
+  COURSE_LOADING,
+  UPDATE_COURSE,
+  DELETE_COURSE,
+  GET_COURSES_BY_FILTER,
+} from "./type";
 
 //Create Course
 export const addCourse = (courseData) => (dispatch) => {
@@ -56,15 +65,41 @@ export const getCourses = () => (dispatch) => {
     );
 };
 
-//Update Course
-export const editCourse = (id,courseData) => (dispatch) => {
+//Get Courses By Filter
+export const getCoursesByFilter = (
+  semester,
+  search,
+  limit,
+  page
+) => (dispatch) => {
+  dispatch(setCourseLoading());
   axios
-    .put(`/api/course/${id}/update`,courseData)
+    .get(
+      `/api/course?semester=${semester}&search=${search}&limit=${limit}&page=${page}`
+    )
     .then((res) =>
+      dispatch({
+        type: GET_COURSES_BY_FILTER,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_COURSES_BY_FILTER,
+        payload: null,
+      })
+    );
+};
+
+//Update Course
+export const editCourse = (id, courseData) => (dispatch) => {
+  axios
+    .put(`/api/course/${id}/update`, courseData)
+    .then((res) => 
       dispatch({
         type: UPDATE_COURSE,
         payload: res.data,
-      })
+      }),
     )
     .catch((err) =>
       dispatch({
@@ -74,7 +109,7 @@ export const editCourse = (id,courseData) => (dispatch) => {
     );
 };
 
-//Delete Course 
+//Delete Course
 export const deleteCourse = (id) => (dispatch) => {
   axios
     .delete(`/api/course/${id}`)

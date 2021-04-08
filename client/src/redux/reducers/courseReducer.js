@@ -5,6 +5,7 @@ import {
   COURSE_LOADING,
   DELETE_COURSE,
   UPDATE_COURSE,
+  GET_COURSES_BY_FILTER,
 } from "../actions/type";
 
 const initailState = {
@@ -26,6 +27,12 @@ export default function c(state = initailState, action) {
         courses: action.payload,
         loading: false,
       };
+      case GET_COURSES_BY_FILTER:
+      return {
+        ...state,
+        courses: action.payload,
+        loading: false,
+      };
     case GET_COURSE:
       return {
         ...state,
@@ -39,7 +46,6 @@ export default function c(state = initailState, action) {
       };
     case UPDATE_COURSE:
       return {
-        ///Need to fix
         ...state,
         courses: state.courses.map(
           (course) => {
