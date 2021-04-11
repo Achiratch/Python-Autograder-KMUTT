@@ -137,7 +137,7 @@ class RegisterPage extends Component {
               <Welcome_Message>Python Autograder</Welcome_Message>
             </Writing_Image>
           </Col>
-          <Col xs={24} sm={16} md={16} lg={8}>
+          <Col xs={24} sm={24} md={24} lg={8}>
             <Holder_Form>
               <Form
                 onFinish={this.onFormSubmitHandler}
