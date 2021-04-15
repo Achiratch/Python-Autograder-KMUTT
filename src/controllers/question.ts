@@ -76,7 +76,7 @@ export const CreateQuestion = asyncHandler(async (req: Request, res: Response, n
             code: fs.readFileSync(sample.path, 'utf8')
         }
     }
-    const { name, level }: IQuestion = req.body
+    const { name, level, description }: IQuestion = req.body
     const TeacherSchema = {
         _id: teacher?._id,
         studentID: teacher?.studentID,
@@ -86,6 +86,7 @@ export const CreateQuestion = asyncHandler(async (req: Request, res: Response, n
     }
     const questionSchema = {
         name,
+        description,
         teacher: TeacherSchema,
         level,
         sct: sctDesc,

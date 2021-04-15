@@ -30,6 +30,10 @@ const QuestionSchema = new Schema<IQuestion>({
         type: String,
         required: true
     },
+    description: {
+        type: String,
+        required: true
+    },
     sct: {
         filename: {
             type: String,

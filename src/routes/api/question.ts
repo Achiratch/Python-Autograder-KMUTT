@@ -10,7 +10,7 @@ import { upload } from '../../middleware/upload'
 // @route POST api/users/register
 // @desc Register user
 // @acccess Public
-router.route("/add").post(protect, upload, CreateQuestion)
+router.route("/create").post(protect, upload, CreateQuestion)
 
 
 
