@@ -6,7 +6,7 @@
     border-color: #272e41;
     padding: 5px 5px 5px;
     color: black;
-    margin: 2rem 1rem 2rem;
+    margin: 0rem 1rem 2rem;
   }
 
   .delete-button{
@@ -30,20 +30,20 @@
     }
 
     .number-student {
-        margin: 0px 0px 0px;
         justify-content: center;
-        float: right;
-        margin: 3rem 1rem 2rem;
-        position: static;
+        margin: 1rem 1rem 2rem;
+        position: relative;
     }
     .font-size-number{
         font-size: large;
+        color: rgb(39, 39, 39);
     }
 
   .add-member-button{
     color: #F0F3F4;
     font-size: 17px;
     padding: 8px 60px ;
+    margin-left: 5rem;
     border-radius: 5px;
     border: none;
     background-color: #28B463;
@@ -65,7 +65,7 @@
   
 
   .search-box{
-    margin: 2.5rem 2rem 2rem;
+    margin: 0.4rem 2rem 2rem;
     font-size: 17px;
     float: left;
     border-bottom-width: 5px;
@@ -95,8 +95,8 @@
     margin: 0;
   }
   .table-content{
-    border-radius: 1px;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2), 0px -5px 10px rgb(0, 0, 0, 0.2) ;
+    border-radius: 0px;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2), 0px -5px 10px rgba(0, 0, 0, 0.103) ;
   }
 
   .border-table-header{
@@ -106,4 +106,25 @@
   .table-body:hover{
     background-color: rgb(211, 211, 211);
     transition: all 0.2s ease-out;
+  }
+
+  .search-member{
+    margin-left: 2rem;
+    padding: 5px;
+  }
+
+  .group-button-add{
+    margin-top: 1.7rem;
+    text-align: right;
+    padding-inline-start: 1;
+    position: sticky;
+  }
+
+  .cancel-button{
+    margin-right: 1.2rem;
+    width: 7rem;
+  }
+
+  .add-student-button{
+    width: 7rem;
   }
