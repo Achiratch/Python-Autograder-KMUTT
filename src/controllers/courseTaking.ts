@@ -3,13 +3,13 @@ import asyncHandler from '../middleware/async'
 import ErrorResponse from '../utils/errorResponse'
 // Load Course interface
 import ICourseTaking from '../interfaces/CourseTaking'
+import ICourse from '../interfaces/Course'
 
 // Load Course models
 import CourseTaking from '../models/CourseTaking'
 import User, { IUser } from '../models/User'
 import Course from '../models/Course'
 import { model } from 'mongoose'
-import ICourse from '../interfaces/Course'
 
 import isEmpty from '../validation/is-empty'
 
@@ -22,7 +22,7 @@ export const RegisterCourse = asyncHandler(async (req: Request, res: Response, n
     const student = user.id
     const studentDetail = await User.findById(student)
 
-    const { course, status, dateCreate }: ICourseTaking = req.body
+    const { course, status }: ICourseTaking = req.body
     try {
         let c = await Course.findOne({ _id: course })
 
@@ -47,14 +47,12 @@ export const RegisterCourse = asyncHandler(async (req: Request, res: Response, n
         course,
         student: StudentSchema,
         status,
-        dateCreate,
     })
 
     res.status(401).json({
         success: true,
         detail: register_course
     })
-
 })
 
 // @desc    Get All Register Info by courseId
@@ -199,4 +197,41 @@ export const KickStudentFromCourse = asyncHandler(async (req: Request, res: Resp
         message: "You already have kicked this student from this course!"
 
     });
+})
+
+// @desc    Get All UnRegisterd student by courseId
+// @route   GET /api/course/:id/invite
+// @acess   Private
+export const GetAllStudentNotInCourse = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const course_id: any = req.params.id
+
+    const search = req.query.search as string
+    const page: number = req.query.page as any
+    const limit: number = parseInt(req.query.limit as string)
+
+    // find registered students
+    let courseTakingDetail: any = await CourseTaking.find({ course: course_id }).select('student.studentID -_id')
+    courseTakingDetail = courseTakingDetail.map((s: any) => s.student.studentID)
+
+    if (courseTakingDetail.length === 0) {
+        return next(new ErrorResponse('No student in this course', 404))
+    }
+
+    const queryArray = []
+    queryArray.push({ studentID: { $nin: courseTakingDetail } })
+    if (!isEmpty(search)) queryArray.push({ "$or": [{ "firstName": { $regex: search } }, { "email": { $regex: search } }] })
+
+    let unregisteredStudent = await User.find({ "$and": queryArray })
+        .select('_id studentID email firstName lastName')
+        .skip(page > 0 ? ((page - 1) * limit) : 0)
+        .limit(limit)
+
+
+
+    res.status(200).json({
+        success: true,
+        data: unregisteredStudent,
+        allStudents: unregisteredStudent.length
+    });
+
 })

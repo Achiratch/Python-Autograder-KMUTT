@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 import ICourseTaking from '../interfaces/CourseTaking'
+import IProfile from "../interfaces/Profile";
 import User from "./User";
 const Schema = mongoose.Schema;
 
-const StudentSchema = new Schema({
+const StudentSchema = new Schema<IProfile>({
     studentID: {
         type: Number,
         required: true
