@@ -5,8 +5,11 @@ import dotenv from 'dotenv'
 dotenv.config()
 import users from './routes/api/users'
 import course from './routes/api/course'
-import { errorHandler } from './middleware/error'
+import question from './routes/api/question'
 
+import { errorHandler } from './middleware/error'
+import fs from 'fs'
+import path from 'path'
 const app: Application = express()
 
 // Body parser middleware
@@ -33,9 +36,23 @@ require('./config/passport')(passport);
 // Use Routes
 app.use('/api/users', users)
 app.use('/api/course', course)
+app.use('/api/question', question)
+
 
 // Test Api
-app.get('/')
+app.get('/test', (req, res) => {
+    // fs.readFile('F:/Senior Project/test/helloworld.py', 'utf8', (err, data) => {
+    //     if (err) {
+    //         console.error(err)
+    //         return
+    //     }
+    //     console.log(data)
+    //     const eiei = { code: data }
+    //     console.log(eiei.code)
+    //     res.json({ code: data })
+    // })
+    res.send("sdfdsf")
+});
 // ErrorHandler
 app.use(errorHandler)
 const port: any = 5000

@@ -108,7 +108,7 @@ export const Login = (req: Request, res: Response) => {
                 jwt.sign(
                     payload,
                     keys.secretOrKey,
-                    { expiresIn: 3600 },
+                    { expiresIn: 9999999999999 },
                     (err, token) => {
                         res.json({
                             success: true,
