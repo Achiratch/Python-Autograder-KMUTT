@@ -14,6 +14,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import SearchIcon from "@material-ui/icons/Search";
 //Dialog Form
 import CourseFrom from "./courseForm";
 
@@ -32,24 +34,38 @@ class HomePage extends Component {
     super(props);
     this.filterByInput = this.filterByInput.bind(this);
     this.filterBySemester = this.filterBySemester.bind(this);
-    this.state = {  value: "", search: "" };
+    this.filterByYear = this.filterByYear.bind(this);
+    this.filter = this.filter.bind(this);
+    this.state = { value: "", semester: "", year: "" };
+
     //console.log("initail"+this.state.value);
   }
+
   filterByInput(e) {
     this.setState({ value: e.target.value });
-    //this.setState({ search: e.target.value });
-    this.props.getCoursesByFilter((""),(e.target.value),(""),(""));
+    //this.props.getCoursesByFilter(e.target.value, "", "");
     //console.log(e.target.value)
-    console.log(this.state.value)
+    console.log(this.state.value);
   }
   filterBySemester(e) {
-    this.setState({ search: e.target.value });
-    //this.setState({ search: e.target.value });
-    this.props.getCoursesByFilter((e.target.value),(""),(""),(""));
-    console.log(this.state.search)
+    this.setState({ semester: e.target.value });
+    //this.props.getCoursesByFilter("", e.target.value, "");
+    console.log(this.state.semester);
+  }
+  filterByYear(e) {
+    this.setState({ year: e.target.value });
+    //this.props.getCoursesByFilter("", "", e.target.value);
+    console.log(this.state.year);
+  }
+  filter() {
+    this.props.getCoursesByFilter(
+      this.state.value,
+      this.state.semester,
+      this.state.year
+    );
   }
   componentDidMount() {
-    this.props.getCourses();
+    this.props.getCoursesByFilter("", "", "");
   }
   render() {
     const { courses, loading } = this.props.course;
@@ -86,7 +102,8 @@ class HomePage extends Component {
           </div>*/}
           <div className="page-content container">
             <div className="head-content ">
-              <h1 className="course-h1">My Course</h1>
+              <h1 className="course-h1">All Course</h1>
+              <h5 className="description"> These courses are available to students.</h5>
               <div className="flex">
                 <Grid container spacing={10}>
                   <Grid item xs={12} lg={12} md={12} sm={12}>
@@ -110,7 +127,7 @@ class HomePage extends Component {
                             />
                           </FormControl>
                         </div>
-                        <div className="space-between-field" >
+                        <div className="space-between-field">
                           <FormControl variant="outlined" size="small">
                             <InputLabel id="demo-simple-select-outlined-label">
                               Semester
@@ -137,18 +154,29 @@ class HomePage extends Component {
                             <Select
                               labelId="demo-simple-select-outlined-label"
                               id="demo-simple-select-outlined"
-                              // value={age}
-                              // onChange={handleChange}
+                              value={this.state.year}
+                              onChange={this.filterByYear}
                               label="Year"
                               style={{ width: 100 }}
                             >
                               <MenuItem value={""}>All</MenuItem>
+                              <MenuItem value={"2020"}>2020</MenuItem>
                               <MenuItem value={"2021"}>2021</MenuItem>
                               <MenuItem value={"2022"}>2022</MenuItem>
                               <MenuItem value={"2023"}>2023</MenuItem>
                               <MenuItem value={"2024"}>2024</MenuItem>
                             </Select>
                           </FormControl>
+                        </div>
+                        <div className="space-between-field">
+                          <Button
+                            variant="contained"
+                            size="large"
+                            color="primary"
+                            onClick={this.filter}
+                          >
+                            <SearchIcon fontSize="medium" />
+                          </Button>
                         </div>
                       </div>
                     </div>

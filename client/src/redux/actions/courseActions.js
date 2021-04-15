@@ -67,15 +67,14 @@ export const getCourses = () => (dispatch) => {
 
 //Get Courses By Filter
 export const getCoursesByFilter = (
-  semester,
   search,
-  limit,
-  page
+  semester,
+  year
 ) => (dispatch) => {
   dispatch(setCourseLoading());
   axios
     .get(
-      `/api/course?semester=${semester}&search=${search}&limit=${limit}&page=${page}`
+      `/api/course?search=${search}&semester=${semester}&year=${year}`
     )
     .then((res) =>
       dispatch({
