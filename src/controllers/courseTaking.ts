@@ -214,7 +214,7 @@ export const GetAllStudentNotInCourse = asyncHandler(async (req: Request, res: R
     courseTakingDetail = courseTakingDetail.map((s: any) => s.student.studentID)
 
     if (courseTakingDetail.length === 0) {
-        return next(new ErrorResponse('No student in this course', 404))
+        courseTakingDetail = [1]
     }
 
     const queryArray = []
