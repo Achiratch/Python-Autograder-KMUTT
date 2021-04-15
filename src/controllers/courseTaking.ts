@@ -235,3 +235,48 @@ export const GetAllStudentNotInCourse = asyncHandler(async (req: Request, res: R
     });
 
 })
+
+// @desc    Add students to course
+// @route   POST /api/course/invite
+// @acess   Private
+export const AddStudentsToCourse = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+
+    const { course, status }: ICourseTaking = req.body
+    try {
+        let c = await Course.findOne({ _id: course })
+
+    } catch {
+        return next(new ErrorResponse('We do not have this course!', 404))
+    }
+
+    const students: string[] = JSON.parse(req.body.students)
+    for (const student_id of students) {
+
+        const studentDetail = await User.findById(student_id)
+
+        let f = await CourseTaking.findOne({ "$and": [{ 'student._id': studentDetail?._id }, { course: course }] })
+
+        if (f) {
+            return next(new ErrorResponse('You already have taken this course', 401))
+        }
+
+        let StudentSchema = {
+            _id: studentDetail?._id,
+            studentID: studentDetail?.studentID,
+            email: studentDetail?.email,
+            firstName: studentDetail?.firstName,
+            lastName: studentDetail?.lastName
+        }
+        let register_course = await CourseTaking.create({
+            course,
+            student: StudentSchema,
+            status,
+        })
+
+    }
+
+    res.status(401).json({
+        success: true,
+        detail: "Successful"
+    })
+})
