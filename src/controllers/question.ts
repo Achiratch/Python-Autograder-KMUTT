@@ -150,8 +150,8 @@ export const GetAllQuestion = asyncHandler(async (req: Request, res: Response, n
 
 })
 
-// @desc    Get Question by id
-// @route   GET /api/question/:id
+// @desc    DELETE Question by id
+// @route   DELETE /api/question/:id
 // @acess   Private
 export const DeleteQuestionById = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const questionId = req.params.id
@@ -189,5 +189,138 @@ export const DeleteQuestionById = asyncHandler(async (req: Request, res: Respons
 
 })
 
+// @desc    Update Question
+// @route   PUT /api/question/create
+// @acess   Private
+export const EditQuestion = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const user = req.user as IUser
+    const teacherId = user.id
+    const teacher = await User.findById(teacherId)
+    const files = req.files as { [fieldname: string]: Express.Multer.File[] }
+    if (!files) {
+        return next(new ErrorResponse('please upload files', 400))
+    }
 
+    let question = await Question.findById(req.params.id)
+    if (!question) return next(new ErrorResponse(`We don't have this question id`, 400))
+
+    let solution
+    let sct
+    let preExercise
+    let sample
+
+    let solutionDesc: fileDesc = {
+        filename: "",
+        filepath: "",
+        code: ""
+    }
+    if (files['solution']) {
+        fs.unlink(question.solution.filepath as string, (err) => {
+            if (err) throw err
+        })
+
+        solution = files['solution'][0]
+        solutionDesc = {
+            filename: solution.originalname,
+            filepath: solution.path,
+            code: fs.readFileSync(solution.path, 'utf8')
+        }
+    } else {
+        solutionDesc = question.sct
+    }
+
+    let sctDesc: fileDesc = {
+        filename: "",
+        filepath: "",
+        code: ""
+    }
+    if (files['sct']) {
+        fs.unlink(question.sct.filepath as string, (err) => {
+            if (err) throw err
+        })
+        sct = files['sct'][0]
+        sctDesc = {
+            filename: sct.originalname,
+            filepath: sct.path,
+            code: fs.readFileSync(sct.path, 'utf8')
+        }
+    } else {
+        sctDesc = question.sct
+    }
+
+
+
+
+    let preExerciseDesc: fileDesc = {
+        filename: "",
+        filepath: "",
+        code: ""
+    }
+    if (files['preExercise']) {
+        fs.unlink(question.preExercise.filepath as string, (err) => {
+            if (err) throw err
+        })
+        preExercise = files['preExercise'][0]
+        preExerciseDesc = {
+            filename: preExercise.originalname,
+            filepath: preExercise.path,
+            code: fs.readFileSync(preExercise.path, 'utf8')
+        }
+    } else {
+        preExerciseDesc = question.preExercise
+    }
+
+    let sampleDesc: fileDesc = {
+        filename: "",
+        filepath: "",
+        code: ""
+    }
+
+    if (files['sample'] !== undefined) {
+        fs.unlink(question.sample.filepath as string, (err) => {
+            if (err) throw err
+        })
+        sample = files['sample'][0]
+        sampleDesc = {
+            filename: sample.originalname,
+            filepath: sample.path,
+            code: fs.readFileSync(sample.path, 'utf8')
+        }
+    } else {
+        sampleDesc = question.sample
+    }
+
+    let { name, level, description }: IQuestion = req.body
+
+    if (isEmpty(name)) name = question.name
+    if (isEmpty(level)) level = question.level
+    if (isEmpty(description)) description = question.description
+
+    const TeacherSchema = {
+        _id: teacher?._id,
+        studentID: teacher?.studentID,
+        email: teacher?.email,
+        firstName: teacher?.firstName,
+        lastName: teacher?.lastName
+    }
+    const questionSchema = {
+        name,
+        description,
+        teacher: TeacherSchema,
+        level,
+        sct: sctDesc,
+        solution: solutionDesc,
+        sample: sampleDesc,
+        preExercise: preExerciseDesc
+    }
+
+    const updated = await question.updateOne(questionSchema)
+    let updatedQuestion = await Question.findById(req.params.id)
+    console.log(updated)
+    res.status(401).json({
+        success: true,
+        detail: updatedQuestion
+    })
+
+})
 
