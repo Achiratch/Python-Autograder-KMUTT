@@ -19,6 +19,7 @@ import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 //Redux
 import { connect } from "react-redux";
 import { getCourse } from "../../../redux/actions/courseActions";
+import { getStudents ,getAllStudents } from "../../../redux/actions/memberAction";
 
 //PropTypes
 import { PropTypes } from "prop-types";
@@ -26,6 +27,8 @@ import { PropTypes } from "prop-types";
 class ExercisesPage extends Component {
   componentDidMount() {
     this.props.getCourse(this.props.match.params.id);
+    this.props.getStudents(this.props.match.params.id)
+    this.props.getAllStudents(this.props.match.params.id)
   }
   render() {
     const { course } = this.props;
@@ -167,4 +170,6 @@ const mapStateToProps = (state) => ({
   course: state.course,
 });
 
-export default connect(mapStateToProps, { getCourse })(ExercisesPage);
+export default connect(mapStateToProps, { getCourse, getStudents, getAllStudents })(
+  ExercisesPage
+);
