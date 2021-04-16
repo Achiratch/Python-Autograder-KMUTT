@@ -17,7 +17,7 @@ export const createCourse = asyncHandler(async (req: Request, res: Response, nex
     const user = (req.user as IUser)
     const createdBy = user.id
 
-    let c = await Course.findOne({ courseID: courseID, academicYear: academicYear, semester: semester })
+    let c = await Course.findOne({ courseID: courseID.toUpperCase(), academicYear: academicYear, semester: semester })
     if (c !== null) {
         return next(new ErrorResponse('This courseID is already existed on this semester!', 400))
     }

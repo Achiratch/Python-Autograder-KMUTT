@@ -86,7 +86,6 @@ export const GetAllStudentInCourse = asyncHandler(async (req: Request, res: Resp
             .limit(limit)
     } else {
         courseTakingDetail = await CourseTaking.find({ "$and": queryArray })
-            .select('student')
             .skip(page > 0 ? ((page - 1) * limit) : 0)
             .limit(limit).exec()
 
