@@ -18,8 +18,14 @@ import { getAllStudents } from "../../../redux/actions/memberAction";
 //Columns
 import { columns } from "./member_page";
 
-
 class AddPopup extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: [],
+    };
+  }
+
   state = {
     visible: false,
   };
@@ -33,7 +39,14 @@ class AddPopup extends Component {
   handleCancel = () => {
     this.setState({ visible: false });
   };
-  componentDidMount() {}
+
+  componentDidMount() {
+    this.props.getAllStudents(this.props.course.course._id);
+    //console.log(this.props.member.allStudents)
+    const b = this.props.member.allStudents;
+    b.forEach((i) => (i.id = i._id));
+    this.setState({user: b});
+  }
   render() {
     const { visible } = this.state;
     return (
@@ -62,7 +75,7 @@ class AddPopup extends Component {
           />
           <div className="flex" style={{ height: 390, width: "100%" }}>
             <DataGrid
-              rows={[]}
+              rows={this.state.user}
               columns={columns}
               pageSize={10}
               checkboxSelection
@@ -70,8 +83,12 @@ class AddPopup extends Component {
             />
           </div>
           <div className="group-button-add">
-            <button className="btn btn-secondary btn-lg cancel-button">Cancel</button>
-            <button className="btn btn-success btn-lg add-student-button">Add</button>
+            <button className="btn btn-secondary btn-lg cancel-button">
+              Cancel
+            </button>
+            <button className="btn btn-success btn-lg add-student-button">
+              Add
+            </button>
           </div>
         </Modal>
       </div>
@@ -81,6 +98,6 @@ class AddPopup extends Component {
 
 const mapStateToProps = (state) => ({
   course: state.course,
-  member: state.allStudents,
+  member: state.member,
 });
 export default connect(mapStateToProps, { getAllStudents })(AddPopup);

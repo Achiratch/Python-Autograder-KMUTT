@@ -29,11 +29,11 @@ export const getStudents = (id) => (dispatch) => {
 export const getAllStudents = (id) => (dispatch) => {
   dispatch(setStudentLoading());
   axios
-    .get(`/api/course/student`)
+    .get(`/api/course/${id}/invite`)
     .then((res) =>
       dispatch({
         type: GET_ALLSTUDENTS,
-        payload: res.data,
+        payload: res.data.data,
       })
     )
     .catch((err) =>

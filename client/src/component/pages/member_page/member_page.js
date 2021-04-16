@@ -80,7 +80,6 @@ function MemberPage(props) {
   //---------------------------------------------------------------
   //const number_student = data.length;
   //console.log(data);
-console.log(props.errors.success)
   let studentTable;
   if (props.member.loading === true) {
     studentTable = <LinearProgress />;
@@ -144,7 +143,7 @@ console.log(props.errors.success)
               </FormControl>
             </div>
             <span className="button-member">
-              <AddPopup />
+              <AddPopup course={props.course}/>
             </span>
             <span className="button-member">
               <button className="delete-button">
