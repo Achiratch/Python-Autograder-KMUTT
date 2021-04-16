@@ -8,6 +8,7 @@ export interface fileDesc {
 
 export default interface IQuestion extends Document {
     name: string,
+    description: string,
     sct: fileDesc,
     sample: fileDesc,
     solution: fileDesc,

@@ -18,7 +18,7 @@ import { model } from 'mongoose'
 import isEmpty from '../validation/is-empty'
 
 // @desc    Create Question
-// @route   POST /api/question
+// @route   POST /api/question/create
 // @acess   Private
 export const CreateQuestion = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const user = req.user as IUser
@@ -76,7 +76,7 @@ export const CreateQuestion = asyncHandler(async (req: Request, res: Response, n
             code: fs.readFileSync(sample.path, 'utf8')
         }
     }
-    const { name, level }: IQuestion = req.body
+    const { name, level, description }: IQuestion = req.body
     const TeacherSchema = {
         _id: teacher?._id,
         studentID: teacher?.studentID,
@@ -86,6 +86,7 @@ export const CreateQuestion = asyncHandler(async (req: Request, res: Response, n
     }
     const questionSchema = {
         name,
+        description,
         teacher: TeacherSchema,
         level,
         sct: sctDesc,
@@ -101,3 +102,92 @@ export const CreateQuestion = asyncHandler(async (req: Request, res: Response, n
     })
 
 })
+
+// @desc    Get Question by id
+// @route   GET /api/question/:id
+// @acess   Private
+export const GetQuestionById = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const questionId = req.params.id
+
+    const question = await Question.findById(questionId)
+
+    res.status(401).json({
+        success: true,
+        detail: question
+    })
+
+})
+
+// @desc    Get all Question 
+// @route   GET /api/question/
+// @acess   Private
+export const GetAllQuestion = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const page: number = req.query.page as any
+    const limit: number = parseInt(req.query.limit as string)
+    const level: string = req.query.level as any
+    const search: string = req.query.search as string
+
+    const queryArray = []
+    if (!isEmpty(search)) queryArray.push({ name: { $regex: search, $options: 'i' } })
+    if (!isEmpty(level)) queryArray.push({ level: level })
+
+    let question
+    if (queryArray.length > 0) {
+        question = await Question.find({ "$and": queryArray })
+            .skip(page > 0 ? ((page - 1) * limit) : 0)
+            .limit(limit).exec()
+
+    } else {
+        question = await Question.find()
+            .skip(page > 0 ? ((page - 1) * limit) : 0)
+            .limit(limit).exec()
+    }
+
+    res.status(401).json({
+        success: true,
+        detail: question
+    })
+
+})
+
+// @desc    Get Question by id
+// @route   GET /api/question/:id
+// @acess   Private
+export const DeleteQuestionById = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const questionId = req.params.id
+
+    const question = await Question.findById(questionId)
+    if (!question) {
+        return next(new ErrorResponse('No question with that id', 404))
+    }
+
+    fs.unlink(question?.solution.filepath as string, (err) => {
+        if (err) throw err
+    })
+    fs.unlink(question?.sct.filepath as string, (err) => {
+        if (err) throw err
+    })
+
+    if (!isEmpty(question?.sample.filepath)) {
+        fs.unlink(question?.sample.filepath as string, (err) => {
+            if (err) throw err
+        })
+    }
+
+    if (!isEmpty(question.preExercise.filepath)) {
+        fs.unlink(question?.preExercise.filepath as string, (err) => {
+            if (err) throw err
+        })
+    }
+
+    const deleteQuestion = await question.remove()
+
+    res.status(401).json({
+        success: true,
+        message: "Question is removed from db!"
+    })
+
+})
+
+
+
