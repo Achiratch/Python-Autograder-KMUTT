@@ -91,8 +91,6 @@ function MemberPage(props) {
             rows={data}
             columns={columns}
             pageSize={10}
-            checkboxSelection
-            Toolbar
             onSelectionModelChange={(item) => console.log(item)}
           />
         </div>
@@ -146,7 +144,7 @@ function MemberPage(props) {
               <AddPopup course={props.course}/>
             </span>
             <span className="button-member">
-              <button className="delete-button">
+              <button onClick className="delete-button">
                 <span className="icon-button">
                   <FontAwesomeIcon icon={faUserMinus} size="lg" />
                 </span>
