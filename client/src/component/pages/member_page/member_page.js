@@ -80,7 +80,6 @@ function MemberPage(props) {
   //---------------------------------------------------------------
   //const number_student = data.length;
   //console.log(data);
-console.log(props.errors.success)
   let studentTable;
   if (props.member.loading === true) {
     studentTable = <LinearProgress />;
@@ -92,8 +91,6 @@ console.log(props.errors.success)
             rows={data}
             columns={columns}
             pageSize={10}
-            checkboxSelection
-            Toolbar
             onSelectionModelChange={(item) => console.log(item)}
           />
         </div>
@@ -144,10 +141,10 @@ console.log(props.errors.success)
               </FormControl>
             </div>
             <span className="button-member">
-              <AddPopup />
+              <AddPopup course={props.course}/>
             </span>
             <span className="button-member">
-              <button className="delete-button">
+              <button onClick className="delete-button">
                 <span className="icon-button">
                   <FontAwesomeIcon icon={faUserMinus} size="lg" />
                 </span>

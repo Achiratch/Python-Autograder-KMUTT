@@ -4,6 +4,7 @@ import {
   GET_STUDENTS,
   GET_ALLSTUDENTS,
   GET_ERRORS,
+  ADD_STUDENT,
 } from "./type";
 
 //Get Students
@@ -29,11 +30,11 @@ export const getStudents = (id) => (dispatch) => {
 export const getAllStudents = (id) => (dispatch) => {
   dispatch(setStudentLoading());
   axios
-    .get(`/api/course/student`)
+    .get(`/api/course/${id}/invite`)
     .then((res) =>
       dispatch({
         type: GET_ALLSTUDENTS,
-        payload: res.data,
+        payload: res.data.data,
       })
     )
     .catch((err) =>
@@ -43,6 +44,25 @@ export const getAllStudents = (id) => (dispatch) => {
       })
     );
 };
+
+//Add Students to course
+export const addStudent = (studentData) => (dispatch) => {
+  axios
+    .post("/api/course/invite", studentData)
+    .then((res) =>
+      dispatch({
+        type: ADD_STUDENT,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: ADD_STUDENT,
+        payload: err.response.data,
+      })
+    );
+};
+
 //Set loading state
 export const setStudentLoading = () => {
   return {

@@ -16,4 +16,5 @@ export const COURSE_LOADING = "COURSE_LOADING";
 //Member
 export const GET_STUDENTS = "GET_STUDENTS";
 export const GET_ALLSTUDENTS = "GET_ALLSTUDENTS";
+export const ADD_STUDENT = "ADD_STUDENT";
 export const MEMBER_LOADING = "MEMBER_LOADING";

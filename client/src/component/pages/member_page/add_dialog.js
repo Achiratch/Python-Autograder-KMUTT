@@ -13,13 +13,26 @@ import { faTimes, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 //Redux
 import { connect } from "react-redux";
 import { getCourse } from "../../../redux/actions/courseActions";
-import { getAllStudents } from "../../../redux/actions/memberAction";
+import {
+  getAllStudents,
+  addStudent,
+} from "../../../redux/actions/memberAction";
 
 //Columns
 import { columns } from "./member_page";
 
+//PropTypes
+import { PropTypes } from "prop-types";
 
 class AddPopup extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: [],
+      selection: [],
+    };
+  }
+
   state = {
     visible: false,
   };
@@ -33,7 +46,25 @@ class AddPopup extends Component {
   handleCancel = () => {
     this.setState({ visible: false });
   };
-  componentDidMount() {}
+
+  sentStudent = () => {
+    const student = JSON.stringify(this.state.selection);
+    const studentData = {
+      students: student,
+      course: this.props.course.course._id,
+    };
+    this.props.addStudent(studentData);
+    this.handleCancel();
+    console.log(this.props.member.students.success);
+  };
+
+  componentDidMount() {
+    this.props.getAllStudents(this.props.course.course._id);
+    //console.log(this.props.member.allStudents)
+    const b = this.props.member.allStudents;
+    b.forEach((i) => (i.id = i._id));
+    this.setState({ user: b });
+  }
   render() {
     const { visible } = this.state;
     return (
@@ -62,16 +93,28 @@ class AddPopup extends Component {
           />
           <div className="flex" style={{ height: 390, width: "100%" }}>
             <DataGrid
-              rows={[]}
+              rows={this.state.user}
               columns={columns}
               pageSize={10}
               checkboxSelection
-              onSelectionModelChange={(item) => console.log(item)}
+              onSelectionModelChange={(item) =>
+                this.setState(
+                  { selection: item.selectionModel },
+                  console.log(this.state.selection)
+                )
+              }
             />
           </div>
           <div className="group-button-add">
-            <button className="btn btn-secondary btn-lg cancel-button">Cancel</button>
-            <button className="btn btn-success btn-lg add-student-button">Add</button>
+            <button onClick={this.handleCancel} className="btn btn-secondary btn-lg cancel-button">
+              Cancel
+            </button>
+            <button
+              onClick={this.sentStudent}
+              className="btn btn-success btn-lg add-student-button"
+            >
+              Add
+            </button>
           </div>
         </Modal>
       </div>
@@ -79,8 +122,14 @@ class AddPopup extends Component {
   }
 }
 
+AddPopup.propsTypes = {
+  addStudent: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   course: state.course,
-  member: state.allStudents,
+  member: state.member,
 });
-export default connect(mapStateToProps, { getAllStudents })(AddPopup);
+export default connect(mapStateToProps, { getAllStudents, addStudent })(
+  AddPopup
+);
