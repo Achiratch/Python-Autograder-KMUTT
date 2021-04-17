@@ -3,6 +3,7 @@ import {
   GET_STUDENTS,
   GET_ALLSTUDENTS,
   ADD_STUDENT,
+  DELETE_STUDENT
 } from "../actions/type";
 
 const initailState = {
@@ -37,6 +38,13 @@ export default function d(state = initailState, action) {
         ...state,
         students: [action.payload, ...state.students],
       };
+    case DELETE_STUDENT:
+      return{
+        ...state,
+        students: state.students.filter(
+          (student) => student._id !== action.payload,
+        ),
+      }
     default:
       return state;
   }
