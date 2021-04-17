@@ -126,8 +126,6 @@ export const GetCourseById = asyncHandler(async (req: Request, res: Response, ne
         return next(new ErrorResponse('No course with that id', 404))
     }
 
-
-
 })
 
 // @desc    Update course by id
@@ -151,7 +149,6 @@ export const UpdateCourseById = asyncHandler(async (req: Request, res: Response,
         courseDescription,
         semester,
         academicYear,
-        dateCreate,
         createdBy
     })
 

@@ -1,19 +1,53 @@
 import mongoose from "mongoose";
-import IAssignment from '../interfaces/Assignment'
+import IAssignment, { IQuestionDetail } from '../interfaces/Assignment'
 const Schema = mongoose.Schema;
 
 //Create Schema
 const AssignmentSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String
+    },
+    questions: {
+        type: [{
+            _id: {
+                type: mongoose.Schema.Types.ObjectId,
+                required: true
+            },
+            score: {
+                type: Number,
+                required: true
+            },
+        }],
+        required: true
+    },
+
     course: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'courses',
         required: true
 
     },
-    createBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
-        required: true
+    createdBy: {
+        studentID: {
+            type: Number,
+            required: true
+        },
+        email: {
+            type: String,
+            required: true
+        },
+        firstName: {
+            type: String,
+            required: true
+        },
+        lastName: {
+            type: String,
+            required: true
+        },
     },
     type: {
         type: String,

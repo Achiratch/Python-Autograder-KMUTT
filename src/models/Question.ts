@@ -20,7 +20,7 @@ const TeacherSchema = new Schema<IProfile>({
     },
     lastName: {
         type: String,
-        requried: true
+        required: true
     },
 })
 
@@ -37,29 +37,29 @@ const QuestionSchema = new Schema<IQuestion>({
     sct: {
         filename: {
             type: String,
-            require: true
+            required: true
         },
         filepath: {
             type: String,
-            require: true
+            required: true
         },
         code: {
             type: String,
-            require: true
+            required: true
         }
     },
     solution: {
         filename: {
             type: String,
-            require: true
+            required: true
         },
         filepath: {
             type: String,
-            require: true
+            required: true
         },
         code: {
             type: String,
-            require: true
+            required: true
         }
     },
     sample: {
@@ -88,7 +88,7 @@ const QuestionSchema = new Schema<IQuestion>({
     level: {
         type: Number,
         enum: [1, 2, 3, 4, 5],
-        requried: true
+        required: true
     },
     dateCreate: {
         type: Date,
