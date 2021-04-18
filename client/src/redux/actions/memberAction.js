@@ -58,7 +58,7 @@ export const addStudent = (studentData) => (dispatch) => {
     )
     .catch((err) =>
       dispatch({
-        type: ADD_STUDENT,
+        type: GET_ERRORS,
         payload: err.response.data,
       })
     );

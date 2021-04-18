@@ -16,6 +16,7 @@ import { getCourse } from "../../../redux/actions/courseActions";
 import {
   getAllStudents,
   addStudent,
+  getStudents,
 } from "../../../redux/actions/memberAction";
 
 //Columns
@@ -30,6 +31,19 @@ class AddPopup extends Component {
     this.state = {
       user: [],
       selection: [],
+    };
+    this.sentStudent = () => {
+      const student = JSON.stringify(this.state.selection);
+      const studentData = {
+        students: student,
+        course: this.props.course.course._id,
+      };
+      this.props.addStudent(studentData);
+      this.handleCancel();
+      //this.props.getStudents(this.props.course.course._id);
+      //this.props.getAllStudents(this.props.course.course._id);
+      console.log(studentData);
+      console.log(this.props.member.allStudents)
     };
   }
 
@@ -47,24 +61,15 @@ class AddPopup extends Component {
     this.setState({ visible: false });
   };
 
-  sentStudent = () => {
-    const student = JSON.stringify(this.state.selection);
-    const studentData = {
-      students: student,
-      course: this.props.course.course._id,
-    };
-    this.props.addStudent(studentData);
-    this.handleCancel();
-    console.log(this.props.member.students.success);
-  };
-
   componentDidMount() {
-    this.props.getAllStudents(this.props.course.course._id);
-    //console.log(this.props.member.allStudents)
-    const b = this.props.member.allStudents;
-    b.forEach((i) => (i.id = i._id));
-    this.setState({ user: b });
+    this.props.getStudents(this.props.course.course._id);
+    const allStudent = this.props.member.allStudents;
+    console.log(allStudent);
+    allStudent.forEach((i) => (i.id = i._id));
+    allStudent.map((data) => data.student);
+    this.setState({ user: allStudent });
   }
+
   render() {
     const { visible } = this.state;
     return (
@@ -98,15 +103,17 @@ class AddPopup extends Component {
               pageSize={10}
               checkboxSelection
               onSelectionModelChange={(item) =>
-                this.setState(
-                  { selection: item.selectionModel },
-                  console.log(this.state.selection)
-                )
+                this.setState(() => {
+                  return { selection: item.selectionModel };
+                })
               }
             />
           </div>
           <div className="group-button-add">
-            <button onClick={this.handleCancel} className="btn btn-secondary btn-lg cancel-button">
+            <button
+              onClick={this.handleCancel}
+              className="btn btn-secondary btn-lg cancel-button"
+            >
               Cancel
             </button>
             <button
@@ -130,6 +137,8 @@ const mapStateToProps = (state) => ({
   course: state.course,
   member: state.member,
 });
-export default connect(mapStateToProps, { getAllStudents, addStudent })(
-  AddPopup
-);
+export default connect(mapStateToProps, {
+  getAllStudents,
+  addStudent,
+  getStudents,
+})(AddPopup);
