@@ -10,12 +10,13 @@ import IQuestion, { fileDesc } from '../interfaces/Question'
 // Load Course models
 import CourseTaking from '../models/CourseTaking'
 import User, { IUser } from '../models/User'
-import Course from '../models/Course'
+import Assignment from '../models/Assignment'
 import Question from '../models/Question'
 import { model } from 'mongoose'
 
 
 import isEmpty from '../validation/is-empty'
+import { decodeBase64 } from 'bcryptjs'
 
 // @desc    Create Question
 // @route   POST /api/question/create
@@ -161,6 +162,12 @@ export const DeleteQuestionById = asyncHandler(async (req: Request, res: Respons
         return next(new ErrorResponse('No question with that id', 404))
     }
 
+    const assignment = await Assignment.find({ "questions._id": questionId })
+    console.log(assignment)
+    if (assignment.length > 0) {
+        return next(new ErrorResponse('This question is in assignment, please delete assignment first!', 400))
+    }
+
     fs.unlink(question?.solution.filepath as string, (err) => {
         if (err) throw err
     })
@@ -181,6 +188,7 @@ export const DeleteQuestionById = asyncHandler(async (req: Request, res: Respons
     }
 
     const deleteQuestion = await question.remove()
+
 
     res.status(401).json({
         success: true,

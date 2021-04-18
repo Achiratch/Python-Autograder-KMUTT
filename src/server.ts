@@ -6,6 +6,8 @@ dotenv.config()
 import users from './routes/api/users'
 import course from './routes/api/course'
 import question from './routes/api/question'
+import assignment from './routes/api/assignment'
+
 
 import { errorHandler } from './middleware/error'
 import fs from 'fs'
@@ -37,6 +39,7 @@ require('./config/passport')(passport);
 app.use('/api/users', users)
 app.use('/api/course', course)
 app.use('/api/question', question)
+app.use('/api/assignment', assignment)
 
 
 // Test Api
