@@ -74,6 +74,7 @@ class CourseForm extends Component {
   render() {
     const { Option } = Select;
     const { visible } = this.state;
+    const { TextArea } = Input;
     return (
       <div>
         <Button
@@ -163,7 +164,7 @@ class CourseForm extends Component {
                 ]}
                 hasFeedback
               >
-                <Input autoComplete="off" />
+                <TextArea autoComplete="off" />
               </Form.Item>
 
               <Form.Item
