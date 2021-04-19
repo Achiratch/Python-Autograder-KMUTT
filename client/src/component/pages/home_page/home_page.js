@@ -116,7 +116,7 @@ class HomePage extends Component {
                             className="space-between-field"
                           >
                             <TextField
-                              value={this.state.value}
+                              //value={this.state.value}
                               onChange={this.filterByInput}
                               autoComplete="off"
                               size="small"
@@ -135,7 +135,7 @@ class HomePage extends Component {
                             <Select
                               labelId="demo-simple-select-outlined-label"
                               id="demo-simple-select-outlined"
-                              value={this.state.search}
+                              //value={this.state.search}
                               onChange={this.filterBySemester}
                               label="Semester"
                               style={{ width: 120 }}
@@ -154,7 +154,7 @@ class HomePage extends Component {
                             <Select
                               labelId="demo-simple-select-outlined-label"
                               id="demo-simple-select-outlined"
-                              value={this.state.year}
+                              //value={this.state.year}
                               onChange={this.filterByYear}
                               label="Year"
                               style={{ width: 100 }}
