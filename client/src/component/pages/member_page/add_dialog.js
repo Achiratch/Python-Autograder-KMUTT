@@ -12,7 +12,6 @@ import { faTimes, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 
 //Redux
 import { connect } from "react-redux";
-import { getCourse } from "../../../redux/actions/courseActions";
 import {
   getAllStudents,
   addStudent,
@@ -28,9 +27,11 @@ import { PropTypes } from "prop-types";
 class AddPopup extends Component {
   constructor(props) {
     super(props);
+    this.filterByInput = this.filterByInput.bind(this);
     this.state = {
       user: [],
       selection: [],
+      search: "",
     };
     this.sentStudent = () => {
       const student = JSON.stringify(this.state.selection);
@@ -40,10 +41,12 @@ class AddPopup extends Component {
       };
       this.props.addStudent(studentData);
       this.handleCancel();
-      //this.props.getStudents(this.props.course.course._id);
-      //this.props.getAllStudents(this.props.course.course._id);
-      console.log(studentData);
-      console.log(this.props.member.allStudents)
+      this.props.getAllStudents(this.props.course.course._id, "");
+      const allStudent = this.props.member.allStudents;
+      console.log(allStudent);
+      allStudent.forEach((i) => (i.id = i._id));
+      allStudent.map((data) => data.student);
+      this.setState({ user: allStudent });
     };
   }
 
@@ -62,12 +65,27 @@ class AddPopup extends Component {
   };
 
   componentDidMount() {
-    this.props.getStudents(this.props.course.course._id);
+    this.props.getAllStudents(this.props.course.course._id, "");
     const allStudent = this.props.member.allStudents;
     console.log(allStudent);
     allStudent.forEach((i) => (i.id = i._id));
     allStudent.map((data) => data.student);
     this.setState({ user: allStudent });
+  }
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.member.allStudents !== prevProps.member.allStudents) {
+      const allStudent = this.props.member.allStudents;
+      console.log(allStudent);
+      allStudent.forEach((i) => (i.id = i._id));
+      allStudent.map((data) => data.student);
+      this.setState({ user: allStudent });
+    }
+  }
+  filterByInput(e) {
+    this.setState({ search: e.target.value });
+    console.log(e.target.value);
+    this.props.getAllStudents(this.props.course.course._id, e.target.value);
   }
 
   render() {
@@ -92,12 +110,12 @@ class AddPopup extends Component {
             size="small"
             label="Search"
             variant="outlined"
-            //value={q}
-            //onChange={(e) => setQ(e.target.value)}
+            onChange={this.filterByInput}
             style={{ margin: 10 }}
           />
           <div className="flex" style={{ height: 390, width: "100%" }}>
             <DataGrid
+              autoPageSize={true}
               rows={this.state.user}
               columns={columns}
               pageSize={10}

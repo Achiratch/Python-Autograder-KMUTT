@@ -29,14 +29,16 @@
     background-color: #d83c31;
     }
 
+  .block-invisible{
+    margin-left: 50%;
+  }
     .number-student {
-        justify-content: center;
         margin: 1rem 1rem 2rem;
         position: relative;
     }
     .font-size-number{
         font-size: large;
-        color: rgb(39, 39, 39);
+        color: rgb(59, 59, 59);
     }
 
   .add-member-button{

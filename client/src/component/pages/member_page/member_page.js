@@ -59,7 +59,7 @@ export const columns = [
 function MemberPage(props) {
   const [data, setData] = useState([]);
   const [selecter, setSelecter] = useState([]);
-  const [q, setQ] = useState("");
+  const [search, setSearch] = useState("");
   const deleteSelector = () => {
     props.deleteStudent(selecter.selecter);
     //props.getAllStudents(props.course.course._id);
@@ -73,7 +73,7 @@ function MemberPage(props) {
     //   f.forEach((i) => (i.id = i._id));
     //   setData(f);
   };
-  console.log(selecter.selecter)
+  console.log(selecter.selecter);
 
   //------Fetch Data---------------------------------------------
   useEffect(() => {
@@ -93,18 +93,14 @@ function MemberPage(props) {
   //---------------------------------------------------------------
 
   //------Search---------------------------------------------------
-  // function search(rows) {
-  //   return rows.filter(
-  //     (row) =>
-  //       row.studentID.toLowerCase().indexOf(q) > -1 ||
-  //       row.firstName.toLowerCase().indexOf(q) > -1 ||
-  //       row.lastName.toLowerCase().indexOf(q) > -1 ||
-  //       row.email.toLowerCase().indexOf(q) > -1
-  //   );
-  // }
+  const filterByInput = (e) => {
+    setSearch({ search: e.target.value });
+    console.log(e.target.value);
+    props.getStudents(props.course.course._id, e.target.value);
+    props.getAllStudents(props.course.course._id, "");
+  };
   //---------------------------------------------------------------
-  //const number_student = data.length;
-  //console.log(data);
+
   let studentTable;
   if (props.member.loading === true) {
     studentTable = <LinearProgress />;
@@ -156,8 +152,7 @@ function MemberPage(props) {
             <div className="search-member">
               <FormControl variant="outlined">
                 <TextField
-                  //value={this.state.value}
-                  //onChange={this.filterByInput}
+                  onChange={filterByInput}
                   autoComplete="off"
                   size="small"
                   id="outlined-basic"
@@ -167,24 +162,26 @@ function MemberPage(props) {
                 />
               </FormControl>
             </div>
-            <span className="button-member">
-              <AddPopup course={props.course} />
-            </span>
-            <span className="button-member">
-              <button onClick={deleteSelector} className="delete-button">
-                <span className="icon-button">
-                  <FontAwesomeIcon icon={faUserMinus} size="lg" />
+            {props.course.course.createdBy === props.auth.user.id ? (
+              <div>
+                <span className="button-member">
+                  <button onClick={deleteSelector} className="delete-button">
+                    <span className="icon-button">
+                      <FontAwesomeIcon icon={faUserMinus} size="lg" />
+                    </span>
+                    Remove Students
+                  </button>
                 </span>
-                Remove Students
-              </button>
-            </span>
-            <span className="number-student">
-              <span>
-                <h6 className="font-size-number">
-                  {props.member.students.length} Students
-                </h6>
-              </span>
-            </span>
+                <span className="button-member">
+                  <AddPopup course={props.course} />
+                </span>
+              </div>
+            ) : <div className="block-invisible"></div>}
+            <div className="number-student">
+              <h6 className="font-size-number">
+                {props.member.students.length} Students
+              </h6>
+            </div>
           </div>
           {studentTable}
         </div>
@@ -201,7 +198,12 @@ MemberPage.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return { course: state.course, member: state.member, errors: state.errors };
+  return {
+    course: state.course,
+    member: state.member,
+    errors: state.errors,
+    auth: state.auth,
+  };
 }
 
 export default connect(mapStateToProps, {

@@ -9,10 +9,10 @@ import {
 } from "./type";
 
 //Get Students
-export const getStudents = (id) => (dispatch) => {
+export const getStudents = (id,search) => (dispatch) => {
   dispatch(setStudentLoading());
   axios
-    .get(`/api/course/${id}/students`)
+    .get(`/api/course/${id}/students?search=${search}`)
     .then((res) =>
       dispatch({
         type: GET_STUDENTS,
@@ -28,10 +28,10 @@ export const getStudents = (id) => (dispatch) => {
 };
 
 //Get All Students
-export const getAllStudents = (id) => (dispatch) => {
+export const getAllStudents = (id,search) => (dispatch) => {
   dispatch(setStudentLoading());
   axios
-    .get(`/api/course/${id}/invite`)
+    .get(`/api/course/${id}/invite?search=${search}`)
     .then((res) =>
       dispatch({
         type: GET_ALLSTUDENTS,
