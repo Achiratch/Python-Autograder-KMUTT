@@ -49,7 +49,7 @@ const Python = styled.div`
   padding-left: 1rem;
   font-weight: 550;
   font-family: Roboto;
-  cursor: context-menu;
+  text-decoration: none;
 `;
 
 const Menu = styled.div`
@@ -100,10 +100,12 @@ function Navbar(props) {
 
   return (
     <Nav>
-      <Logo>
-        <Logo_Python />
-        <Python>Python Autograder</Python>
-      </Logo>
+      <NavLink className="logo-link" to="/home">
+        <Logo>
+          <Logo_Python />
+          <Python>Python Autograder</Python>
+        </Logo>
+      </NavLink>
 
       <Menu>
         <NavLink className="nav-link" to="/home">
