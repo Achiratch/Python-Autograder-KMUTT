@@ -52,7 +52,7 @@ class DeleteConfirm extends Component {
               className="icon"
               style={{ color: "#FFBB33", fontSize: "1.75rem" }}
             />
-            <p className="text">Are you sure delete this course ?</p>
+            <p className="text">Are you sure you want to delete this course ?</p>
           </div>
           <div className="course">
             <p>{this.props.course.courseID}</p>

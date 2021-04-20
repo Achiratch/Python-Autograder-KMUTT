@@ -22,7 +22,7 @@
 }
 
 .font{
-    font-size: 22px;
+    font-size: 19px;
     display: flex;
     margin-left: 1rem;
 }
@@ -34,14 +34,14 @@
 }
 
 .icon{
-    margin-top: 6px;
+    margin-top: 2px;
 }
 
 .course{
     text-align: center;
     margin-top: 1rem;
     margin-left: 3.7rem;
-    font-size: 18px;
+    font-size: 17px;
     display: flex;
     font-weight: 300;
 }
