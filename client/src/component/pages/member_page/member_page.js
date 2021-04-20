@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Footer from "../../layout/footer";
 import Navbar from "../../layout/navbar";
 import Sidebar from "../../layout/sidebar";
+import AddPopup from "./add_dialog";
+import DeletePopup from "./delete_dialog";
 //CSS
 import "../member_page/member_page.css";
 
@@ -16,7 +18,6 @@ import { faUserMinus } from "@fortawesome/free-solid-svg-icons";
 //Material-UI
 import { LinearProgress } from "@material-ui/core";
 import { DataGrid } from "@material-ui/data-grid";
-import AddPopup from "./add_dialog";
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 
@@ -60,19 +61,7 @@ function MemberPage(props) {
   const [data, setData] = useState([]);
   const [selecter, setSelecter] = useState([]);
   const [search, setSearch] = useState("");
-  const deleteSelector = () => {
-    props.deleteStudent(selecter.selecter);
-    //props.getAllStudents(props.course.course._id);
-    //console.log("1")
-    //console.log("2")
-    // const d = props.member.students;
-    // console.log(d)
-    //   d.forEach((i) => {i.student.registerID = i._id})
-    //   const f = d.map((data) => data.student)
-
-    //   f.forEach((i) => (i.id = i._id));
-    //   setData(f);
-  };
+  
   console.log(selecter.selecter);
 
   //------Fetch Data---------------------------------------------
@@ -165,12 +154,7 @@ function MemberPage(props) {
             {props.course.course.createdBy === props.auth.user.id ? (
               <div>
                 <span className="button-member">
-                  <button onClick={deleteSelector} className="delete-button">
-                    <span className="icon-button">
-                      <FontAwesomeIcon icon={faUserMinus} size="lg" />
-                    </span>
-                    Remove Students
-                  </button>
+                  <DeletePopup selecter={selecter} />
                 </span>
                 <span className="button-member">
                   <AddPopup course={props.course} />
