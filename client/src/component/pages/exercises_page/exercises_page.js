@@ -43,13 +43,13 @@ class ExercisesPage extends Component {
           <Sidebar course={course} />
           <div className="page-content">
             <div className="head-content-member">
-              <h1>Exercise</h1>
+              <h1>Assignment</h1>
               <Breadcrumb>
                 <Breadcrumb.Item href="/home">My Course</Breadcrumb.Item>
                 <Breadcrumb.Item>
                   {this.props.course.course.courseID}
                 </Breadcrumb.Item>
-                <Breadcrumb.Item>Exercise</Breadcrumb.Item>
+                <Breadcrumb.Item>Assignment </Breadcrumb.Item>
               </Breadcrumb>
             </div>
             {course.course.createdBy === auth.user.id ? (
@@ -59,7 +59,7 @@ class ExercisesPage extends Component {
                   <span className="icon-button">
                     <DeleteIcon />
                   </span>
-                  Delete Exercise
+                  Delete Assignment
                 </button>
               </div>
             ) : null}

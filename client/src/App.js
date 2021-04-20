@@ -14,7 +14,7 @@ import HomePage from "./component/pages/home_page/home_page";
 import ExercisesPage from "./component/pages/exercises_page/exercises_page";
 import ScoreBookPage from "./component/pages/scorebook_page/scorebook_page";
 import MemberPage from "./component/pages/member_page/member_page";
-import CollectionsPage from "./component/pages/collections_page";
+import CollectionsPage from "./component/pages/collections_page/collections_page";
 //----------------------------------------
 
 //Error-Page------------------------------
@@ -78,13 +78,13 @@ function App() {
           />
           <ProtectedRoute
             exact
-            path="/exercises/:id"
+            path="/assignment/:id"
             role={ROLE.STUDENT}
             component={ExercisesPage}
           />
           <ProtectedRoute
             exact
-            path="/exercises/:id/student"
+            path="/assignment/:id/student"
             role={ROLE.STUDENT}
             component={ExercisesPage}
           />

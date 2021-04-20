@@ -21,14 +21,14 @@ function Sidebar(props) {
       <div className="sidebar-link">
         <NavLink
           exact
-          to={`/exercises/${course._id}`}
+          to={`/assignment/${course._id}`}
           activeClassName="active-sidebar"
           className="menu-link "
         >
           <span>
             <FontAwesomeIcon icon={faBook} size="lg" />
           </span>
-          <span>Exercise</span>
+          <span>Assignment</span>
         </NavLink>
         <NavLink
           exact

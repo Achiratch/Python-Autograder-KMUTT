@@ -36,7 +36,7 @@ class CourseItem extends Component {
     return (
       <div>
         <Card className={useStyles.root}>
-          <Link className="hover" to={`/exercises/${course._id}`}>
+          <Link className="hover" to={`/assignment/${course._id}`}>
             <CardActionArea>
               <CardMedia
                 component="img"
