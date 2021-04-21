@@ -274,7 +274,7 @@ export const AddStudentsToCourse = asyncHandler(async (req: Request, res: Respon
 
     }
 
-    res.status(401).json({
+    res.status(201).json({
         success: true,
         detail: "Successful"
     })

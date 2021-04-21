@@ -97,7 +97,7 @@ export const CreateQuestion = asyncHandler(async (req: Request, res: Response, n
     }
     const question = await Question.create(questionSchema)
 
-    res.status(401).json({
+    res.status(201).json({
         success: true,
         detail: question
     })
@@ -112,7 +112,7 @@ export const GetQuestionById = asyncHandler(async (req: Request, res: Response, 
 
     const question = await Question.findById(questionId)
 
-    res.status(401).json({
+    res.status(200).json({
         success: true,
         detail: question
     })
@@ -144,7 +144,7 @@ export const GetAllQuestion = asyncHandler(async (req: Request, res: Response, n
             .limit(limit).exec()
     }
 
-    res.status(401).json({
+    res.status(200).json({
         success: true,
         detail: question
     })
@@ -190,7 +190,7 @@ export const DeleteQuestionById = asyncHandler(async (req: Request, res: Respons
     const deleteQuestion = await question.remove()
 
 
-    res.status(401).json({
+    res.status(200).json({
         success: true,
         message: "Question is removed from db!"
     })
@@ -325,7 +325,7 @@ export const EditQuestion = asyncHandler(async (req: Request, res: Response, nex
     const updated = await question.updateOne(questionSchema)
     let updatedQuestion = await Question.findById(req.params.id)
     console.log(updated)
-    res.status(401).json({
+    res.status(200).json({
         success: true,
         detail: updatedQuestion
     })
