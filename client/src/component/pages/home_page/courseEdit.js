@@ -140,9 +140,9 @@ class CourseEdit extends Component {
                     },
                   }),
                 ]}
-                hasFeedback
+                
               >
-                <TextArea autoComplete="off" />
+                <TextArea rows="3" autoComplete="off" />
               </Form.Item>
 
               <Form.Item
