@@ -10,7 +10,7 @@ import {
 } from "./type";
 
 //Create Question
-export const addCourse = (questionData) => (dispatch) => {
+export const addQuestion = (questionData) => (dispatch) => {
   axios
     .post("/api/question/create", questionData)
     .then((res) =>
@@ -34,7 +34,7 @@ export const getQuestions = () => (dispatch) => {
     .then((res) =>
       dispatch({
         type: GET_QUESTIONS,
-        payload: res.data,
+        payload: res.data.detail,
       })
     )
     .catch((err) =>
