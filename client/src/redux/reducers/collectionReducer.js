@@ -53,13 +53,13 @@ export default function d(state = initailState, action) {
     //       } else return course;
     //     }),
     //   };
-    // case DELETE_QUESTION:
-    //   return {
-    //     ...state,
-    //     courses: state.courses.filter(
-    //       (course) => course._id !== action.payload
-    //     ),
-    //   };
+     case DELETE_QUESTION:
+       return {
+         ...state,
+         questions: state.questions.filter(
+           (question) => question._id !== action.payload
+         ),
+       };
     default:
       return state;
   }
