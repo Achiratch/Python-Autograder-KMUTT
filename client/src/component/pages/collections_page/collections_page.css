@@ -14,15 +14,19 @@
     margin: 1rem 0rem 1rem;
     background-color: rgb(255, 255, 255);
     position: relative;
-    justify-content: space-between;
 }
 
-.question-box h1{
+.question-box .name{
   padding: 0.9rem;
   font-size: 18px;
 }
 
-.question-box h2{
+.question-box .level{
+  padding: 0.9rem;
+  font-size: 18px;
+}
+
+.question-box .createby{
   padding: 0.9rem ;
   font-size: 18px;
 }
@@ -30,9 +34,11 @@
 .question-button{
   text-align: center;
   justify-content: center;
-  border-radius: 10px;
-  margin: 0.4rem 2rem 0rem;
-  padding: 6px 60px ;
+  border-radius: 0px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin: 0rem 0rem 0rem;
+  padding: 12.5px 60px ;
   font-family: Roboto;
   font-size: 17px;
   color: #F0F3F4;
@@ -51,19 +57,49 @@
   ;
 
 }
+.name-group{
+  margin-left: 0; 
+  margin-right: auto;
+  position: inherit;
+}
+
+.createby-group{
+  margin-left: auto; 
+  margin-right: 0;
+  position: inherit;
+}
+
+.level-group{
+  margin-left: 0; 
+  margin-right: 0;
+  position: inherit;
+}
+
+.button-train{
+  margin-left: 0; 
+  margin-right: 0;
+  position: inherit;
+}
+
+.button-group{
+  padding-top: 1.5px;
+  margin-left: 0; 
+  margin-right: 0;
+  position: inherit;
+}
 
 #level-1{
- color: rgb(59, 146, 64);
+ color: #52c41a;
 }
 #level-2{
-  color: rgb(146, 62, 59);
+  color: #fadb14;
  }
  #level-3{
-  color: rgb(59, 146, 64);
+  color: #fa541c;
  }
  #level-4{
-  color: rgb(59, 146, 64);
+  color: #f5222d;
  }
  #level-5{
-  color: rgb(59, 146, 64);
+  color: #722ed1;
  }
