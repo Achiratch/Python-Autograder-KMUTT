@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import DeleteConfirm from "./deleteConfirm";
+
 //Material-UI
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 import PersonIcon from "@material-ui/icons/Person";
@@ -50,14 +52,16 @@ class QuestionItem extends Component {
             </IconButton>
             <DeleteConfirm question={question} />
           </div>
-          <div className="button-train">
-            <button className="question-button">
-              <span className="icon-button">
-                <EqualizerIcon />
-              </span>
-              TRAIN NOW
-            </button>
-          </div>
+          <Link to={`/collections/question/${question.name}`}>
+            <div className="button-train">
+              <button className="question-button">
+                <span className="icon-button">
+                  <EqualizerIcon />
+                </span>
+                TRAIN NOW
+              </button>
+            </div>
+          </Link>
         </div>
 
         <div className="flex question-box">

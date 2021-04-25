@@ -15,6 +15,7 @@ import ExercisesPage from "./component/pages/exercises_page/exercises_page";
 import ScoreBookPage from "./component/pages/scorebook_page/scorebook_page";
 import MemberPage from "./component/pages/member_page/member_page";
 import CollectionsPage from "./component/pages/collections_page/collections_page";
+import QuestionPage from "./component/pages/collections_page/question_page"
 //----------------------------------------
 
 //Error-Page------------------------------
@@ -75,6 +76,12 @@ function App() {
             path="/collections/student"
             role={ROLE.STUDENT}
             component={CollectionsPage}
+          />
+          <ProtectedRoute
+            exact
+            path="/collections/question/:id"
+            role={ROLE.STUDENT}
+            component={QuestionPage}
           />
           <ProtectedRoute
             exact
