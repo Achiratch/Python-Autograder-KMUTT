@@ -1,0 +1,2 @@
+check_object("a").has_equal_value(),
+check_function("print").check_args("a").has_equal_value()
