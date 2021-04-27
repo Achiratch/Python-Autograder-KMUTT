@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import CourseCard from "./courseCard";
+import CourseCard from "../home_page/courseCard";
 //Layout
 import Navbar from "../../layout/navbar";
 import Footer from "../../layout/footer";
@@ -18,19 +18,16 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
 //Dialog Form
-import CourseFrom from "./courseForm";
+import CourseFrom from "../home_page/courseForm";
 
 //Redux
 import { connect } from "react-redux";
-import {
-  getCourses,
-  getCoursesByFilter,
-} from "../../../redux/actions/courseActions";
+import { getStudentCourses } from "../../../redux/actions/courseActions";
 
 //PropTypes
 import { PropTypes } from "prop-types";
 
-class HomePage extends Component {
+class HomePageStudent extends Component {
   constructor(props) {
     super(props);
     this.filterByInput = this.filterByInput.bind(this);
@@ -41,7 +38,6 @@ class HomePage extends Component {
 
     //console.log("initail"+this.state.value);
   }
-
   filterByInput(e) {
     this.setState({ value: e.target.value });
     //this.props.getCoursesByFilter(e.target.value, "", "");
@@ -66,8 +62,8 @@ class HomePage extends Component {
     );
   }
   componentDidMount() {
-    this.props.getCoursesByFilter("", "", "");
-    console.log(this.props.auth.user.id)
+    console.log(this.props.auth.user.id);
+    this.props.getStudentCourses(this.props.auth.user.id, "", "", "");
   }
   render() {
     const { courses, loading } = this.props.course;
@@ -78,35 +74,14 @@ class HomePage extends Component {
     } else {
       courseCard = <CourseCard courses={courses} />;
     }
-
     return (
       <div>
         <Navbar />
         <div className="body">
           <div className="page-content container">
-            <Link to={`/home/student/${this.props.auth.user.id}`}>
-              <button>Student</button>
+            <Link to={`/home`}>
+              <button>ADMIN</button>
             </Link>
-            {/* <div data-datacamp-exercise data-lang="python" data-height="500rem">
-              <code data-type="pre-exercise-code">
-                # This will get executed each time the exercise gets initialized
-                b = 6
-              </code>
-              <code data-type="sample-code">
-                # Create a variable a, equal to 5 # Print out a
-              </code>
-              <code data-type="solution"></code>
-              <code data-type="sct">
-                test_object("a") test_function("print") success_msg("Great
-                job!")
-              </code>
-
-              <div data-type="hint">
-                Use the assignment operator (<code>=</code>) to create the
-                variable
-                <code>a</code>.
-              </div>
-            </div> */}
             <div className="head-content ">
               <h1 className="course-h1">All Course</h1>
               <h5 className="description">
@@ -116,7 +91,6 @@ class HomePage extends Component {
                 <Grid container spacing={10}>
                   <Grid item xs={12} lg={12} md={12} sm={12}>
                     <div className="components">
-                      <CourseFrom />
                       <div className="search-field">
                         <div className="space-between-field">
                           <FormControl
@@ -205,16 +179,8 @@ class HomePage extends Component {
   }
 }
 
-HomePage.propTypes = {
-  getCourses: PropTypes.func.isRequired,
-  course: PropTypes.object.isRequired,
-};
-
 const mapStateToProps = (state) => ({
   course: state.course,
-  auth: state.auth
+  auth: state.auth,
 });
-
-export default connect(mapStateToProps, { getCourses, getCoursesByFilter })(
-  HomePage
-);
+export default connect(mapStateToProps, { getStudentCourses })(HomePageStudent);

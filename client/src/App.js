@@ -7,7 +7,9 @@ import { logoutUser, setCurrentUser } from "./redux/actions/authActions";
 import { Route, Switch } from "react-router-dom";
 import { ProtectedRoute } from "./component/auth/protected_route";
 
-//Page------------------------------------
+//STUDENT-PAGE----------------------------------
+import HomePageStudent from "./component/pages/student/home_page";
+//ADMIN-PAGE------------------------------------
 import LandingPage from "./component/pages/landing_page";
 import RegisterPage from "./component/pages/register_page";
 import HomePage from "./component/pages/home_page/home_page";
@@ -53,6 +55,38 @@ function App() {
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/register" component={RegisterPage} />
+          {/* STUDENT */}
+          <ProtectedRoute
+            exact
+            path="/home/student/:id"
+            role={ROLE.STUDENT}
+            component={HomePageStudent}
+          />
+          <ProtectedRoute
+            exact
+            path="/collections/student"
+            role={ROLE.STUDENT}
+            component={CollectionsPage}
+          />
+          <ProtectedRoute
+            exact
+            path="/assignment/:id/student"
+            role={ROLE.STUDENT}
+            component={ExercisesPage}
+          />
+          <ProtectedRoute
+            exact
+            path="/scorebook/:id/student"
+            role={ROLE.STUDENT}
+            component={ScoreBookPage}
+          />
+          <ProtectedRoute
+            exact
+            path="/member/:id/student"
+            role={ROLE.STUDENT}
+            component={MemberPage}
+          />
+          {/* ADMIN */}
           <ProtectedRoute
             exact
             path="/home"
@@ -61,19 +95,7 @@ function App() {
           />
           <ProtectedRoute
             exact
-            path="/home/student"
-            role={ROLE.STUDENT}
-            component={HomePage}
-          />
-          <ProtectedRoute
-            exact
             path="/collections"
-            role={ROLE.STUDENT}
-            component={CollectionsPage}
-          />
-          <ProtectedRoute
-            exact
-            path="/collections/student"
             role={ROLE.STUDENT}
             component={CollectionsPage}
           />
@@ -91,31 +113,13 @@ function App() {
           />
           <ProtectedRoute
             exact
-            path="/assignment/:id/student"
-            role={ROLE.STUDENT}
-            component={ExercisesPage}
-          />
-          <ProtectedRoute
-            exact
             path="/scorebook/:id"
             role={ROLE.STUDENT}
             component={ScoreBookPage}
           />
           <ProtectedRoute
             exact
-            path="/scorebook/:id/student"
-            role={ROLE.STUDENT}
-            component={ScoreBookPage}
-          />
-          <ProtectedRoute
-            exact
             path="/member/:id"
-            role={ROLE.STUDENT}
-            component={MemberPage}
-          />
-          <ProtectedRoute
-            exact
-            path="/member/:id/student"
             role={ROLE.STUDENT}
             component={MemberPage}
           />
