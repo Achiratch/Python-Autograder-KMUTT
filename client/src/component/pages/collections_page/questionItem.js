@@ -52,7 +52,7 @@ class QuestionItem extends Component {
             </IconButton>
             <DeleteConfirm question={question} />
           </div>
-          <Link to={`/collections/question/${question.name}`}>
+          <Link to={`/collections/question/${question._id}`}>
             <div className="button-train">
               <button className="question-button">
                 <span className="icon-button">
