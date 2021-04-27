@@ -33,7 +33,7 @@ const Nav = styled.div`
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-  background: rgba(39, 46, 65, 0.95);
+  background: #010023;
 `;
 
 const Logo = styled.div`
@@ -47,7 +47,7 @@ const Python = styled.div`
   margin-top: auto;
   margin-bottom: auto;
   padding-left: 1rem;
-  font-weight: 550;
+  font-size: 18px;
   font-family: Roboto;
   text-decoration: none;
 `;
@@ -57,6 +57,8 @@ const Menu = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
+  font-size: 18px;
+  font-family: Roboto;
   @media (max-width: 758px) {
     overflow: hidden;
     flex-direction: column;

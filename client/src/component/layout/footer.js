@@ -5,7 +5,7 @@ const Foot = styled.div`
   display: flex;
   justify-content:center;
   color: whitesmoke;
-  background: rgba(39, 46, 65, 0.95);
+  background: #010023;
   text-align: center;
   padding: 2rem;
   font-family: Roboto;
