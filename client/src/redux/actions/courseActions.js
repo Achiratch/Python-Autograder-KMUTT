@@ -66,16 +66,10 @@ export const getCourses = () => (dispatch) => {
 };
 
 //Get Courses By Filter
-export const getCoursesByFilter = (
-  search,
-  semester,
-  year
-) => (dispatch) => {
+export const getCoursesByFilter = (search, semester, year) => (dispatch) => {
   dispatch(setCourseLoading());
   axios
-    .get(
-      `/api/course?search=${search}&semester=${semester}&year=${year}`
-    )
+    .get(`/api/course?search=${search}&semester=${semester}&year=${year}`)
     .then((res) =>
       dispatch({
         type: GET_COURSES_BY_FILTER,
@@ -90,15 +84,36 @@ export const getCoursesByFilter = (
     );
 };
 
+//Get Courses By student id
+export const getStudentCourses = (id, search, semester, year) => (dispatch) => {
+  dispatch(setCourseLoading());
+  axios
+    .get(
+      `/api/course/student/${id}?search=${search}&semester=${semester}&year=${year}`
+    )
+    .then((res) =>
+      dispatch({
+        type: GET_COURSES_BY_FILTER,
+        payload: res.data.courses,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_COURSES_BY_FILTER,
+        payload: null,
+      })
+    );
+};
+
 //Update Course
 export const editCourse = (id, courseData) => (dispatch) => {
   axios
     .put(`/api/course/${id}/update`, courseData)
-    .then((res) => 
+    .then((res) =>
       dispatch({
         type: UPDATE_COURSE,
         payload: res.data,
-      }),
+      })
     )
     .catch((err) =>
       dispatch({
