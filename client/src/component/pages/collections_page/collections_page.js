@@ -16,6 +16,7 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
+import Pagination from "@material-ui/lab/Pagination";
 
 //ANTD
 import { Skeleton } from "antd";
@@ -104,6 +105,9 @@ class CollectionsPage extends Component {
                 </Grid>
               </div>
               {questionBox}
+            </div>
+            <div className="pagination">
+              <Pagination count={1} color="primary" />
             </div>
           </div>
         </div>

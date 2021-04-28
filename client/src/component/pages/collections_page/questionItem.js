@@ -63,45 +63,6 @@ class QuestionItem extends Component {
             </div>
           </Link>
         </div>
-
-        <div className="flex question-box">
-          <div className="name-group">
-            <h1 className="name">
-              <span className="icon-button">
-                <AssignmentIcon style={{ fontSize: 25 }} />
-              </span>
-              Exercise : Python Calculator
-            </h1>
-          </div>
-
-          <div className="createby-group">
-            <h2 className="createby">
-              <span className="icon-button">
-                <PersonIcon />
-              </span>
-              Inam Wannafly
-            </h2>
-          </div>
-          <div className="level-group">
-            <h1 className="level">Level 5</h1>
-          </div>
-          <div className="button-group">
-            <IconButton aria-label="edit" size="medium">
-              <EditIcon />
-            </IconButton>
-            <IconButton aria-label="delete" color="secondary" size="medium">
-              <DeleteIcon fontSize="inherit" />
-            </IconButton>
-          </div>
-          <div className="button-train">
-            <button className="question-button">
-              <span className="icon-button">
-                <EqualizerIcon />
-              </span>
-              TRAIN NOW
-            </button>
-          </div>
-        </div>
       </div>
     );
   }
