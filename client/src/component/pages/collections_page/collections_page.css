@@ -112,5 +112,80 @@
  }
 
  .header{
-   margin: 2rem 2rem;
+   margin: 0.2rem 0.2rem;
+   border-radius: 15px;
+   background-color: #ffffff;
+ }
+
+ .name-header{
+   margin-left: 0;
+   padding: 1rem 1rem;
+   border-bottom-left-radius: 15px;
+   border-top-left-radius: 15px;
+   margin-right: 0;
+   background-color: #05192D;
+   position: inherit;
+ }
+
+ .name-header h1{
+  color: whitesmoke;
+  font-size: 30px;
+ }
+
+ .description-header{
+  background-color: #ffffff;
+  margin-top: 0.5rem;
+  margin-left: 0;
+  margin-right: 0;
+  position: inherit;
+ }
+
+ #description{
+   padding-left: 0.5rem;
+ }
+
+ #outputText{
+  margin-right: 0;
+ }
+
+ .level-header{
+   margin-right: 0;
+   margin-left: auto;
+   position: inherit;
+   padding: 1rem 1rem;
+   border-bottom-right-radius: 15px;
+   border-top-right-radius: 15px;
+   align-items: center;
+ }
+ #background-level-1{
+  background-color: #52c41a;
+ }
+
+ #background-level-2{
+  background-color: #fadb14;
+ }
+ 
+ #background-level-3{
+  background-color: #fa541c;
+ }
+
+ #background-level-4{
+  background-color: #f5222d;
+ }
+
+ #background-level-5{
+  background-color: #722ed1;
+ }
+
+.fa-medal{
+  margin-right: 0.5rem;
+  font-size: 30px;
+}
+ .level-header h2{
+  color: whitesmoke;
+  font-size: 15px;
+ }
+
+ .edit-code{
+   border-radius: 0.5rem;
  }
