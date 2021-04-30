@@ -53,7 +53,7 @@ export const getQuestion = (id) => (dispatch) => {
     .then((res) =>
       dispatch({
         type: GET_QUESTION,
-        payload: res.data,
+        payload: res.data.detail,
       })
     )
     .catch((err) =>
