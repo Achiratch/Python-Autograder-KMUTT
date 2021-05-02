@@ -26,8 +26,27 @@ import { connect } from "react-redux";
 import { getQuestions } from "../../../redux/actions/collectionAction";
 
 class CollectionsPage extends Component {
+  constructor(props) {
+    super(props);
+    this.filterByInput = this.filterByInput.bind(this);
+    this.filterByLevel = this.filterByLevel.bind(this);
+    this.filter = this.filter.bind(this);
+    this.state = { value: "", level: "" };
+  }
+  filterByInput(e) {
+    this.setState({ value: e.target.value });
+  }
+  filterByLevel(e) {
+    this.setState({ level: e.target.value });
+  }
+  filter() {
+    this.props.getQuestions(
+      this.state.value,
+      this.state.level,
+    );
+  }
   componentDidMount() {
-    this.props.getQuestions();
+    this.props.getQuestions("","");
   }
   render() {
     const { questions, loading } = this.props.collection;
@@ -56,8 +75,8 @@ class CollectionsPage extends Component {
                             className="space-between-field"
                           >
                             <TextField
-                              //value={this.state.value}
-                              //onChange={this.filterByInput}
+                              value={this.state.value}
+                              onChange={this.filterByInput}
                               autoComplete="off"
                               size="small"
                               id="outlined-basic"
@@ -75,8 +94,8 @@ class CollectionsPage extends Component {
                             <Select
                               labelId="demo-simple-select-outlined-label"
                               id="demo-simple-select-outlined"
-                              //value={this.state.search}
-                              onChange={this.filterBySemester}
+                              value={this.state.level}
+                              onChange={this.filterByLevel}
                               label="Level"
                               style={{ width: 100 }}
                             >

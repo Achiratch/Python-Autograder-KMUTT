@@ -27,10 +27,10 @@ export const addQuestion = (questionData) => (dispatch) => {
     );
 };
 //Get all Questions
-export const getQuestions = () => (dispatch) => {
+export const getQuestions = (search,level) => (dispatch) => {
   dispatch(setQuestionLoading());
   axios
-    .get("/api/question")
+    .get(`/api/question?search=${search}&level=${level}`)
     .then((res) =>
       dispatch({
         type: GET_QUESTIONS,
