@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import auth from "../auth/auth";
 import { Link } from "react-router-dom";
-import { Form, Col, Input, Checkbox } from "antd";
+import { Form, Col, Input, Checkbox ,message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import coding_image from "../images/coding.jpg";
@@ -77,6 +77,7 @@ class LandingPage extends Component {
     super(props);
     this.state = {
       is_requesting: false,
+      errors: ""
     };
     this.formRef = React.createRef();
     this.onFormSubmitHandler = this.onFormSubmitHandler.bind(this);
@@ -190,6 +191,8 @@ class LandingPage extends Component {
               </Form.Item>
             </Form>
           </Col>
+          {errors.password !== undefined ? (message.error(`${this.props.errors.password}`)) : null}
+          {errors.studentID !== undefined ? (message.error(`${this.props.errors.studentID}`)) : null}
         </Landing_Content>
       </Landing>
     );

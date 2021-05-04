@@ -50,7 +50,6 @@ class CourseForm extends Component {
   UNSAFE_componentWillReceiveProps(newProps) {
     if (newProps.errors) {
       this.setState({ errors: newProps.errors });
-      message.error(`${this.props.errors.error}`);
     }
   }
 
@@ -73,7 +72,7 @@ class CourseForm extends Component {
 
   render() {
     const { Option } = Select;
-    const { visible } = this.state;
+    const { visible, errors } = this.state;
     const { TextArea } = Input;
     return (
       <div>
@@ -162,7 +161,6 @@ class CourseForm extends Component {
                     },
                   }),
                 ]}
-                
               >
                 <TextArea rows="3" autoComplete="off" />
               </Form.Item>
@@ -216,6 +214,7 @@ class CourseForm extends Component {
             </Form>
           </Col>
         </Modal>
+        {errors.success === false ? (message.error(`${errors.error}`)) : null}
       </div>
     );
   }

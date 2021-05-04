@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import writing_image from "../images/writing.jpg";
 import logo_python from "../images/logo_python.png";
-import { Form, Input, Tooltip, Col } from "antd";
+import { Form, Input, Tooltip, Col ,message} from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -112,6 +112,7 @@ class RegisterPage extends Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
+      message.error(`Student ID has already exist`);
     }
   }
 
