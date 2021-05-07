@@ -40,13 +40,10 @@ class CollectionsPage extends Component {
     this.setState({ level: e.target.value });
   }
   filter() {
-    this.props.getQuestions(
-      this.state.value,
-      this.state.level,
-    );
+    this.props.getQuestions(this.state.value, this.state.level);
   }
   componentDidMount() {
-    this.props.getQuestions("","");
+    this.props.getQuestions("", "");
   }
   render() {
     const { questions, loading } = this.props.collection;
@@ -56,6 +53,17 @@ class CollectionsPage extends Component {
     } else {
       questionBox = <QuestionBox questions={questions} />;
     }
+    let pagination;
+    if (questions.length === 0) {
+      pagination = <div></div>;
+    } else {
+      pagination = (
+        <div className="pagination">
+          <Pagination count={1} color="primary" />
+        </div>
+      );
+    }
+
     return (
       <div>
         <Navbar />
@@ -125,9 +133,7 @@ class CollectionsPage extends Component {
               </div>
               {questionBox}
             </div>
-            <div className="pagination">
-              <Pagination count={1} color="primary" />
-            </div>
+            {pagination}
           </div>
         </div>
         <Footer />
