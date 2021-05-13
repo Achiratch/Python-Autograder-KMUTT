@@ -105,7 +105,7 @@ class CreateQuestionForm extends Component {
       },
       multiple: "false",
       maxCount: "1",
-      accept: ".txt",
+      accept: ".txt, .py",
     };
     //
     return (
@@ -229,7 +229,7 @@ class CreateQuestionForm extends Component {
                       message.error(`${info.file.name} file upload failed.`);
                     }
                     this.setState({ sct: info.file.originFileObj });
-                    console.log(this.state.sct)
+                    console.log(this.state.sct);
                   }}
                 >
                   <Button
