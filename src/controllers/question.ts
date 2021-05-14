@@ -144,9 +144,11 @@ export const GetAllQuestion = asyncHandler(async (req: Request, res: Response, n
             .limit(limit).exec()
     }
 
+    const questionCount = Question.estimatedDocumentCount()
     res.status(200).json({
         success: true,
-        detail: question
+        detail: question,
+        count: questionCount
     })
 
 })
