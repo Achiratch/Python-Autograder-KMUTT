@@ -13,7 +13,7 @@ export default interface IQuestion extends Document {
     sample: fileDesc,
     solution: fileDesc,
     preExercise: fileDesc,
-    createBy: Document;
+    createdBy: Document;
     level: string;
     dateCreate: Date;
 }

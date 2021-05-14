@@ -78,6 +78,7 @@ export const GetAssignmentById = asyncHandler(async (req: Request, res: Response
     const assignmentId = req.params.id
 
     const assignment = await Assignment.findById(assignmentId)
+    if (!assignment) return next(new ErrorResponse(`We don't have this assignment`, 404))
 
     res.status(200).json({
         success: true,
@@ -101,17 +102,17 @@ export const GetAllAssignment = asyncHandler(async (req: Request, res: Response,
 
     let assignment
     if (queryArray.length > 0) {
-        assignment = await Question.find({ "$and": queryArray })
+        assignment = await Assignment.find({ "$and": queryArray })
             .skip(page > 0 ? ((page - 1) * limit) : 0)
             .limit(limit).exec()
 
     } else {
-        assignment = await Question.find()
+        assignment = await Assignment.find()
             .skip(page > 0 ? ((page - 1) * limit) : 0)
             .limit(limit).exec()
     }
 
-    const assignmentCount = Assignment.estimatedDocumentCount()
+    const assignmentCount = (await Assignment.estimatedDocumentCount()).toFixed()
     res.status(200).json({
         success: true,
         detail: assignment,
@@ -168,7 +169,6 @@ export const UpdateAssignmentById = asyncHandler(async (req: Request, res: Respo
     } catch {
         return next(new ErrorResponse('No course with that id', 400))
     }
-    console.log(req.user)
     const user = await User.findById((req.user as IUser).id).select('studentID firstName lastName email -_id') as IUser
     const editedBy = {
         studentID: user.studentID,
@@ -197,21 +197,22 @@ export const UpdateAssignmentById = asyncHandler(async (req: Request, res: Respo
             return next(new ErrorResponse('Please input valid question id!!', 400))
         }
     })
-    const updatedAssignment = await assignment.updateOne({
+    const update = await assignment.updateOne({
         name,
         description,
         course,
-        createdBy: assignment.createBy,
+        createdBy: assignment.createdBy,
         questions,
         dueDate,
         totalScore,
         level,
         type
     })
+    const updatedAssignment = await Assignment.findById(assignmentId)
 
 
     res.status(201).json({
         success: true,
-        detail: assignment
+        detail: updatedAssignment
     });
 })
