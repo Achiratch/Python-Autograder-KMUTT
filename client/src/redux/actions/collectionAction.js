@@ -16,12 +16,12 @@ export const addQuestion = (questionData) => (dispatch) => {
     .then((res) =>
       dispatch({
         type: ADD_QUESTION,
-        payload: res.data,
+        payload: res.data.detail,
       })
     )
     .catch((err) =>
       dispatch({
-        type: ADD_QUESTION,
+        type: GET_ERRORS,
         payload: err.response.data,
       })
     );
@@ -30,7 +30,7 @@ export const addQuestion = (questionData) => (dispatch) => {
 export const getQuestions = (search,level) => (dispatch) => {
   dispatch(setQuestionLoading());
   axios
-    .get(`/api/question?search=${search}&level=${level}`)
+    .get(`/api/question?search=${search}&level=${level}&limit=${""}&page=${1}`)
     .then((res) =>
       dispatch({
         type: GET_QUESTIONS,
