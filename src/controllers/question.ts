@@ -88,7 +88,7 @@ export const CreateQuestion = asyncHandler(async (req: Request, res: Response, n
     const questionSchema = {
         name,
         description,
-        teacher: TeacherSchema,
+        createdBy: TeacherSchema,
         level,
         sct: sctDesc,
         solution: solutionDesc,
@@ -143,8 +143,8 @@ export const GetAllQuestion = asyncHandler(async (req: Request, res: Response, n
             .skip(page > 0 ? ((page - 1) * limit) : 0)
             .limit(limit).exec()
     }
-
-    const questionCount = Question.estimatedDocumentCount()
+    const questionCount = (await Question.estimatedDocumentCount()).toFixed()
+    console.log(questionCount)
     res.status(200).json({
         success: true,
         detail: question,
@@ -306,6 +306,8 @@ export const EditQuestion = asyncHandler(async (req: Request, res: Response, nex
     if (isEmpty(level)) level = question.level
     if (isEmpty(description)) description = question.description
 
+    const questionCreatedBy = question.createBy
+
     const TeacherSchema = {
         _id: teacher?._id,
         studentID: teacher?.studentID,
@@ -316,7 +318,7 @@ export const EditQuestion = asyncHandler(async (req: Request, res: Response, nex
     const questionSchema = {
         name,
         description,
-        teacher: TeacherSchema,
+        createdBy: questionCreatedBy,
         level,
         sct: sctDesc,
         solution: solutionDesc,

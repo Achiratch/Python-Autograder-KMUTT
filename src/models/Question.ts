@@ -84,7 +84,7 @@ const QuestionSchema = new Schema<IQuestion>({
             type: String,
         }
     },
-    createBy: TeacherSchema,
+    createdBy: TeacherSchema,
     level: {
         type: Number,
         enum: [1, 2, 3, 4, 5],
