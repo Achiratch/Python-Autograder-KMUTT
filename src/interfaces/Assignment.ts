@@ -9,7 +9,7 @@ export default interface IAssignment extends Document {
     name: string;
     description: string;
     course: ObjectId;
-    createBy: IProfile;
+    createdBy: IProfile;
     questions: IQuestionDetail[];
     dateCreate: Date;
     dueDate: Date;

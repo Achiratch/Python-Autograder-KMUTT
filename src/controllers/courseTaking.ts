@@ -78,7 +78,8 @@ export const GetAllStudentInCourse = asyncHandler(async (req: Request, res: Resp
     } catch {
         return next(new ErrorResponse('We do not have this course!', 404))
     }
-
+    const allStudentInCourse = await CourseTaking.find({ course: courseId })
+    const allStudentInCourseCount: Number = allStudentInCourse.length
     let courseTakingDetail
     if (queryArray.length === 1) {
         courseTakingDetail = await CourseTaking.find({ "$and": queryArray })
@@ -92,7 +93,7 @@ export const GetAllStudentInCourse = asyncHandler(async (req: Request, res: Resp
         res.status(200).json({
             success: true,
             data: courseTakingDetail,
-            allStudents: courseTakingDetail.length
+            allStudents: allStudentInCourseCount
 
         });
     }
@@ -106,7 +107,7 @@ export const GetAllStudentInCourse = asyncHandler(async (req: Request, res: Resp
     res.status(200).json({
         success: true,
         data: courseTakingDetail,
-        allStudents: courseTakingDetail.length
+        allStudents: allStudentInCourseCount
 
     });
 
@@ -225,12 +226,12 @@ export const GetAllStudentNotInCourse = asyncHandler(async (req: Request, res: R
         .skip(page > 0 ? ((page - 1) * limit) : 0)
         .limit(limit)
 
-
+    let unregisteredStudentCount = (await User.find({ studentID: { $nin: courseTakingDetail } })).length
 
     res.status(200).json({
         success: true,
         data: unregisteredStudent,
-        allStudents: unregisteredStudent.length
+        allStudents: unregisteredStudentCount
     });
 
 })
