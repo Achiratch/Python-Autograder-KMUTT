@@ -306,7 +306,7 @@ export const EditQuestion = asyncHandler(async (req: Request, res: Response, nex
     if (isEmpty(level)) level = question.level
     if (isEmpty(description)) description = question.description
 
-    const questionCreatedBy = question.createBy
+    const questionCreatedBy = question.createdBy
 
     const TeacherSchema = {
         _id: teacher?._id,
