@@ -52,16 +52,16 @@ class CreateQuestionForm extends Component {
     data_.append("solution", this.state.solution);
     console.log(data_);
     //solution 2
-    let formData = {
-      name: data.name,
-      description: data.description,
-      level: data.level,
-      preExercise: data.preExercise.file.originFileObj,
-      sample: data.sample.file.originFileObj,
-      sct: data.sct.file.originFileObj,
-      solution: data.solution.file.originFileObj,
-    };
-    console.log(formData);
+    // let formData = {
+    //   name: data.name,
+    //   description: data.description,
+    //   level: data.level,
+    //   preExercise: data.preExercise.file.originFileObj,
+    //   sample: data.sample.file.originFileObj,
+    //   sct: data.sct.file.originFileObj,
+    //   solution: data.solution.file.originFileObj,
+    // };
+    // console.log(formData);
 
     // add one or more of your files in FormData
     // again, the original file is located at the `originFileObj` key
@@ -76,7 +76,7 @@ class CreateQuestionForm extends Component {
     // delete data.preExercise.fileList;
     // delete data.sample.fileList;
     // delete data.solution.fileList;
-    console.log(data);
+    // console.log(data);
     this.props.addQuestion(data_);
     this.handleCancel();
     message.success("This Question has been created.");
@@ -229,7 +229,6 @@ class CreateQuestionForm extends Component {
                       message.error(`${info.file.name} file upload failed.`);
                     }
                     this.setState({ sct: info.file.originFileObj });
-                    console.log(this.state.sct);
                   }}
                 >
                   <Button
