@@ -34,7 +34,7 @@ export const getQuestions = (search,level) => (dispatch) => {
     .then((res) =>
       dispatch({
         type: GET_QUESTIONS,
-        payload: res.data.detail,
+        payload: res.data,
       })
     )
     .catch((err) =>

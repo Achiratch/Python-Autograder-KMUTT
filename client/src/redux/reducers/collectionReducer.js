@@ -23,7 +23,8 @@ export default function d(state = initailState, action) {
     case GET_QUESTIONS:
       return {
         ...state,
-        questions: action.payload,
+        questions: action.payload.detail,
+        count: action.payload.count,
         loading: false,
       };
     case GET_QUESTION:
