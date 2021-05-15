@@ -43,7 +43,7 @@ class CreateQuestionForm extends Component {
     const data = this.formRef.current.getFieldsValue();
     //solution 1
     let data_ = new FormData();
-    data_.append("name", data.description);
+    data_.append("name", data.name);
     data_.append("description", data.description);
     data_.append("level", data.level);
     data_.append("preExercise", this.state.preExercise);
