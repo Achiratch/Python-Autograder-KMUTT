@@ -38,7 +38,7 @@ class QuestionItem extends Component {
               <span className="icon-button">
                 <PersonIcon />
               </span>
-              Bill Gate
+              {question.createdBy.firstName}
             </h2>
           </div>
           <div className="level-group">
