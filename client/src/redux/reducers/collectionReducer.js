@@ -37,22 +37,25 @@ export default function d(state = initailState, action) {
         ...state,
         questions: [action.payload, ...state.questions],
       };
-    // case UPDATE_QUESTION:
-    //   return {
-    //     ...state,
-    //     courses: state.courses.map((course) => {
-    //       if (course._id === action.payload.message._id) {
-    //         return {
-    //           ...course,
-    //           courseID: action.payload.message.courseID,
-    //           courseName: action.payload.message.courseName,
-    //           courseDescription: action.payload.message.courseDescription,
-    //           semester: action.payload.message.semester,
-    //           academicYear: action.payload.message.academicYear,
-    //         };
-    //       } else return course;
-    //     }),
-    //   };
+     case UPDATE_QUESTION:
+       return {
+         ...state,
+         questions: state.questions.map((question) => {
+           console.log(action.payload._id)
+           if (question._id === action.payload._id) {
+             return {
+               ...question,
+               name: action.payload.name,
+               description: action.payload.description,
+               level: action.payload.level,
+               sct: action.payload.sct,
+               solution: action.payload.solution,
+               sample: action.payload.sample,
+               preExercise: action.payload.preExercise,
+             };
+           } else return question;
+         }),
+       };
      case DELETE_QUESTION:
        return {
          ...state,

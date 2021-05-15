@@ -64,6 +64,26 @@ export const getQuestion = (id) => (dispatch) => {
     );
 };
 
+//Update Question by id
+export const editQuestion = (id, questionData) => (dispatch) => {
+  axios
+    .put(`/api/question/${id}/edit`, questionData)
+    .then((res) =>
+      dispatch({
+        type: UPDATE_QUESTION,
+        payload: res.data.detail,
+      })
+    )
+    .catch((err) => {
+      console.log(err)
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.error,
+      })}
+    );
+    
+};
+
 //Delete Question by id
 export const deleteQuestion = (id) => (dispatch) => {
   axios
