@@ -10,12 +10,11 @@ import { Upload } from "antd";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
 
 //Redux
 import { connect } from "react-redux";
-import { editCourse } from "../../../redux/actions/courseActions";
+import { editQuestion } from "../../../redux/actions/collectionAction";
 
 class QuestionEdit extends Component {
   constructor(props) {
@@ -23,23 +22,29 @@ class QuestionEdit extends Component {
     this.state = {
       is_requesting: false,
       errors: {},
-      sct: [],
-      preExercise: [],
-      sample: [],
-      solution: [],
-      level: {},
-      description: {},
-      name: {},
+      sct: null,
+      preExercise: null,
+      sample: null,
+      solution: null,
+      level: null,
+      description: null,
+      name: null,
     };
     this.formRef = React.createRef();
-    this.onFormSubmitHandler = this.onFormSubmitHandler.bind(this);
+    this.onFormSubmitHandler = this.onFormSubmitHandler.bind(this, this.props.question._id);
   }
-  onFormSubmitHandler() {
+  UNSAFE_componentWillReceiveProps(newProps) {
+    if (newProps.errors) {
+      this.setState({ errors: newProps.errors });
+      message.error(`${this.props.errors.error}`);
+    }
+  }
+  onFormSubmitHandler(id) {
     console.log("[Create question]");
     const data = this.formRef.current.getFieldsValue();
     //solution 1
     let data_ = new FormData();
-    data_.append("name", data.description);
+    data_.append("name", data.name);
     data_.append("description", data.description);
     data_.append("level", data.level);
     data_.append("preExercise", this.state.preExercise);
@@ -47,10 +52,9 @@ class QuestionEdit extends Component {
     data_.append("sct", this.state.sct);
     data_.append("solution", this.state.solution);
     console.log(data_);
-    
-    this.props.addQuestion(data_);
+    this.props.editQuestion(id,data_);
     this.handleCancel();
-    message.success("This Question has been created.");
+    message.success("This Question has been edited.");
   }
   state = { visible: false };
   showModal = () => {
@@ -65,6 +69,7 @@ class QuestionEdit extends Component {
     const { Option } = Select;
     const { visible } = this.state;
     const { TextArea } = Input;
+    console.log(this.state.sct);
     //Upload file
     const props = {
       name: "file",
@@ -84,7 +89,7 @@ class QuestionEdit extends Component {
         <Modal
           visible={visible}
           width={550}
-          title="Create Question"
+          title="Edit Question"
           onCancel={this.handleCancel}
           footer={null}
         >
@@ -160,7 +165,9 @@ class QuestionEdit extends Component {
                   },
                 ]}
               >
-                <Select defaultValue={this.props.question.level} style={{ width: 60 }}>
+                <Select
+                  style={{ width: 60 }}
+                >
                   <Option value="1">1</Option>
                   <Option value="2">2</Option>
                   <Option value="3">3</Option>
@@ -174,7 +181,7 @@ class QuestionEdit extends Component {
                 label="File sct"
                 rules={[
                   {
-                    required: true,
+                    required: false,
                     message: "Please upload file!",
                   },
                 ]}
@@ -182,6 +189,12 @@ class QuestionEdit extends Component {
               >
                 <Upload
                   {...props}
+                  defaultFileList={[
+                    {
+                      name: this.props.question.sct.filename,
+                      status: "done",
+                    },
+                  ]}
                   onChange={(info) => {
                     if (info.file.status !== "uploading") {
                       console.log(info.file.originFileObj);
@@ -212,7 +225,7 @@ class QuestionEdit extends Component {
                 label="File preExercise"
                 rules={[
                   {
-                    required: true,
+                    required: false,
                     message: "Please upload file!",
                   },
                 ]}
@@ -220,6 +233,12 @@ class QuestionEdit extends Component {
               >
                 <Upload
                   {...props}
+                  defaultFileList={[
+                    {
+                      name: this.props.question.preExercise.filename,
+                      status: "done",
+                    },
+                  ]}
                   onChange={(info) => {
                     if (info.file.status !== "uploading") {
                       console.log(info.file.originFileObj);
@@ -250,7 +269,7 @@ class QuestionEdit extends Component {
                 label="File sample"
                 rules={[
                   {
-                    required: true,
+                    required: false,
                     message: "Please upload file!",
                   },
                 ]}
@@ -258,6 +277,12 @@ class QuestionEdit extends Component {
               >
                 <Upload
                   {...props}
+                  defaultFileList={[
+                    {
+                      name: this.props.question.sample.filename,
+                      status: "done",
+                    },
+                  ]}
                   onChange={(info) => {
                     if (info.file.status !== "uploading") {
                       console.log(info.file.originFileObj);
@@ -288,7 +313,7 @@ class QuestionEdit extends Component {
                 label="File solution"
                 rules={[
                   {
-                    required: true,
+                    required: false,
                     message: "Please upload file!",
                   },
                 ]}
@@ -296,6 +321,12 @@ class QuestionEdit extends Component {
               >
                 <Upload
                   {...props}
+                  defaultFileList={[
+                    {
+                      name: this.props.question.solution.filename,
+                      status: "done",
+                    },
+                  ]}
                   onChange={(info) => {
                     if (info.file.status !== "uploading") {
                       console.log(info.file.originFileObj);
@@ -326,7 +357,7 @@ class QuestionEdit extends Component {
                   type="primary"
                   htmltype="submit"
                 >
-                  Create
+                  Update
                 </button>
               </div>
             </Form>
@@ -336,4 +367,7 @@ class QuestionEdit extends Component {
     );
   }
 }
-export default connect() (QuestionEdit);
+const mapStateToProps = (state) => ({
+  errors: state.errors,
+});
+export default connect(mapStateToProps, { editQuestion })(QuestionEdit);
