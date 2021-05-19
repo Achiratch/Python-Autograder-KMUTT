@@ -30,8 +30,9 @@ class CollectionsPage extends Component {
     super(props);
     this.filterByInput = this.filterByInput.bind(this);
     this.filterByLevel = this.filterByLevel.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.filter = this.filter.bind(this);
-    this.state = { value: "", level: "" };
+    this.state = { value: "", level: "" , page: 1};
   }
   filterByInput(e) {
     this.setState({ value: e.target.value });
@@ -40,18 +41,26 @@ class CollectionsPage extends Component {
     this.setState({ level: e.target.value });
   }
   filter() {
-    this.props.getQuestions(this.state.value, this.state.level);
+    this.props.getQuestions(this.state.value, this.state.level, this.state.page);
+  }
+  handleChange(event, value) {
+    console.log(value)
+    this.setState({page: value});
+    this.props.getQuestions(this.state.value, this.state.level, value);
   }
   componentDidMount() {
     this.props.getQuestions("", "");
   }
   render() {
-    const { questions, loading } = this.props.collection;
+    const { questions, loading ,count } = this.props.collection;
+    let questionNumber = Number(count)
+    let pageNumber = questionNumber / 10 ;
+    let number = Math.ceil(pageNumber)
     let questionBox;
     if (questions === null || loading) {
       questionBox = <Skeleton active />;
     } else {
-      questionBox = <QuestionBox questions={questions} />;
+      questionBox = <QuestionBox questions={questions}/>;
     }
     let pagination;
     if (questions.length === 0) {
@@ -59,7 +68,7 @@ class CollectionsPage extends Component {
     } else {
       pagination = (
         <div className="pagination">
-          <Pagination count={1} color="primary" />
+          <Pagination count={number} page={this.state.page} onChange={this.handleChange}  color="primary" />
         </div>
       );
     }
