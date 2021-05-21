@@ -36,16 +36,17 @@ class QuestionPage extends Component {
   }
   render() {
     const { TextArea } = Input;
-    const { collection,sct } = this.props;
-    console.log(collection.question.name);
-    console.log(collection.question.level);
-    console.log(sct);
-
+    const { loading, question, sct, preExercise, sample, solution } =
+      this.props.collection;
     let dataCamp;
-    if (collection.loading === true) {
-      dataCamp = <div className="page-content"><LinearProgress /></div>;
-    } else
-    loadScript("https://cdn.datacamp.com/dcl-react.js.gz");
+    if (loading === true) {
+      dataCamp = (
+        <div className="page-content">
+          <LinearProgress />
+        </div>
+      );
+    } else if (loading === false) {
+      loadScript("https://cdn.datacamp.com/dcl-react.js.gz");
       dataCamp = (
         <div className="page-content">
           <div className="header flex">
@@ -77,7 +78,7 @@ class QuestionPage extends Component {
               ></TextArea>
             </div>
             <div
-              id={`background-level-${collection.question.level}`}
+              id={`background-level-${question.level}`}
               className="level-header flex"
             >
               <span>
@@ -87,23 +88,15 @@ class QuestionPage extends Component {
                   color="white"
                 />
               </span>
-              <h2>Level {collection.question.level}</h2>
+              <h2>Level {question.level}</h2>
             </div>
           </div>
           <div className="edit-code">
-            <div data-datacamp-exercise data-lang="python" data-height="500rem">
-              <code data-type="pre-exercise-code">
-                {/* {collection.question.preExercise.code} */}
-              </code>
-              <code data-type="sample-code">
-                {/* {collection.question.sample.code} */}
-              </code>
-              <code data-type="solution">
-                {/* {collection.question.solution.code} */}
-              </code>
-              <code data-type="sct">
-                {/* {collection.question.sct.code} */}
-              </code>
+            <div data-datacamp-exercise data-show-run-button data-lang="python" data-height="550rem">
+              <code data-type="pre-exercise-code">{preExercise}</code>
+              <code data-type="sample-code">{sample}</code>
+              <code data-type="solution">{solution}</code>
+              <code data-type="sct">{sct}</code>
 
               <div data-type="hint">
                 Use the assignment operator (<code>=</code>) to create the
@@ -114,6 +107,8 @@ class QuestionPage extends Component {
           </div>
         </div>
       );
+    }
+
     return (
       <div>
         <Navbar />
