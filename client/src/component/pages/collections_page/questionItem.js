@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import DeleteConfirm from "./deleteConfirm";
-import QuestionEdit from "./questionEdit"
+import QuestionEdit from "./questionEdit";
 
 //Material-UI
 import EqualizerIcon from "@material-ui/icons/Equalizer";
@@ -13,9 +13,12 @@ import EditIcon from "@material-ui/icons/Edit";
 //ANTD
 import { Popover } from "antd";
 
+//Redux
+import { connect } from "react-redux";
+
 class QuestionItem extends Component {
   render() {
-    const { question } = this.props;
+    const { question, auth } = this.props;
     const content = (
       <div>
         <p>Description: {question.description}</p>
@@ -46,10 +49,13 @@ class QuestionItem extends Component {
               Level {question.level}
             </h1>
           </div>
-          <div className="button-group">
-            <QuestionEdit question={question}/>
-            <DeleteConfirm question={question} />
-          </div>
+          {question.createdBy._id === auth.user.id ? (
+            <div className="button-group">
+              <QuestionEdit question={question} />
+              <DeleteConfirm question={question} />
+            </div>
+          ) : null}
+
           <Link to={`/collections/question/${question._id}`}>
             <div className="button-train">
               <button className="question-button">
@@ -65,4 +71,9 @@ class QuestionItem extends Component {
     );
   }
 }
-export default QuestionItem;
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(QuestionItem);
