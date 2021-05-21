@@ -69,7 +69,6 @@ class QuestionEdit extends Component {
     const { Option } = Select;
     const { visible } = this.state;
     const { TextArea } = Input;
-    console.log(this.state.sct);
     //Upload file
     const props = {
       name: "file",
