@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import Button from "@material-ui/core/Button";
+import Tooltip from "@material-ui/core/Tooltip";
 
 //Redux
 import { connect } from "react-redux";
@@ -31,7 +32,10 @@ class QuestionEdit extends Component {
       name: null,
     };
     this.formRef = React.createRef();
-    this.onFormSubmitHandler = this.onFormSubmitHandler.bind(this, this.props.question._id);
+    this.onFormSubmitHandler = this.onFormSubmitHandler.bind(
+      this,
+      this.props.question._id
+    );
   }
   UNSAFE_componentWillReceiveProps(newProps) {
     if (newProps.errors) {
@@ -52,7 +56,7 @@ class QuestionEdit extends Component {
     data_.append("sct", this.state.sct);
     data_.append("solution", this.state.solution);
     console.log(data_);
-    this.props.editQuestion(id,data_);
+    this.props.editQuestion(id, data_);
     this.handleCancel();
     message.success("This Question has been edited.");
   }
@@ -82,9 +86,12 @@ class QuestionEdit extends Component {
     //
     return (
       <>
-        <IconButton aria-label="edit" size="medium" onClick={this.showModal}>
-          <EditIcon />
-        </IconButton>
+        <Tooltip title="Edit">
+          <IconButton aria-label="edit" size="medium" onClick={this.showModal}>
+            <EditIcon />
+          </IconButton>
+        </Tooltip>
+
         <Modal
           visible={visible}
           width={550}
@@ -164,9 +171,7 @@ class QuestionEdit extends Component {
                   },
                 ]}
               >
-                <Select
-                  style={{ width: 60 }}
-                >
+                <Select style={{ width: 60 }}>
                   <Option value="1">1</Option>
                   <Option value="2">2</Option>
                   <Option value="3">3</Option>

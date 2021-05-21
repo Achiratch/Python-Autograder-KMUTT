@@ -6,6 +6,7 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 //Material-UI
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
+import Tooltip from "@material-ui/core/Tooltip";
 
 //PropTypes
 import { PropTypes } from "prop-types";
@@ -34,14 +35,16 @@ class DeleteConfirm extends Component {
     const { visible } = this.state;
     return (
       <>
-        <IconButton
-          aria-label="delete"
-          color="secondary"
-          size="medium"
-          onClick={this.showModal}
-        >
-          <DeleteIcon fontSize="inherit" />
-        </IconButton>
+        <Tooltip title="Delete">
+          <IconButton
+            aria-label="delete"
+            color="secondary"
+            size="medium"
+            onClick={this.showModal}
+          >
+            <DeleteIcon fontSize="inherit" />
+          </IconButton>
+        </Tooltip>
 
         <Modal
           closable={false}
