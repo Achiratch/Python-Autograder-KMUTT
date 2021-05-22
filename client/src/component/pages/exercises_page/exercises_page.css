@@ -37,39 +37,32 @@
         font-weight: 800;
         background-color: #219b54;
 }
-    
+
+.search-assignment{
+  display: flex;
+  margin-left: auto;
+  margin-right: 1.5rem;
+}
+
 .icon-button{
     padding-right: 1rem ;
 }
     
 .button-exercises{
-      margin-left: 3rem;
+      margin-left: 2rem;
+      margin-bottom: 32px;
 }
-
-.execercise-box{
-    border-width: 2rem;
-    border-radius: 15px;
-    border-color: black;
-    box-shadow:  0px 5px 5px rgba(0, 0, 0, 0.137);
-    height: 100px;
-    margin: 1rem 2rem 1rem;
-    background-color: rgb(255, 255, 255);
-    position: relative;
-    justify-content: space-between;
+.due-date{
+  margin-right: auto;
+  margin-left: 0px;
 }
-
-.execercise-box h1{
-  padding: 1rem;
-  font-size: 18px;
+@media only screen and (min-width: 1455px) {
+  .tool-box{
+    margin-top: 1.5rem;
+  }
 }
-
-.execercise-box h2{
-  padding: 0rem 1rem;
-  font-size: 18px;
-  color: grey;
-}
-
-.stat-button{
+@media only screen and (min-width: 1455px) {
+  .stat-button{
   text-align: center;
   justify-content: center;
   border-radius: 10px;
@@ -91,6 +84,55 @@
   background-color: #3990e2;
 
 }
+}
+@media only screen and (max-width: 1455px) {
+  .stat-button{
+    text-align: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 0.8rem 2rem 0rem;
+    padding: 12px 60px ;
+    font-family: Roboto;
+    font-size: 17px;
+    color: #F0F3F4;
+    font-weight: 700; 
+    border: none;
+    background-color: #40A3FF;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.096), 0px 0px 5px rgba(0, 0, 0, 0.096) ;
+    transition: all ease-in-out 0.1s;
+  }
+  
+  .stat-button:hover{
+    z-index: 1;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.151), 0px 0px 5px rgb(0, 0, 0.151, 0);
+    background-color: #3990e2;
+  
+  }
+}
+.execercise-box{
+    border-width: 2rem;
+    border-radius: 15px;
+    border-color: black;
+    box-shadow:  0px 5px 5px rgba(0, 0, 0, 0.137);
+    height: 100px;
+    margin: 1rem 2rem 1rem;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    justify-content: space-between;
+}
+
+.execercise-box h1{
+  padding: 1rem;
+  font-size: 18px;
+}
+
+.execercise-box h2{
+  padding: 0rem 1rem;
+  font-size: 14px;
+  color: grey;
+}
+
+
 
 #light{
   color: gold;
