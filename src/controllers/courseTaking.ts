@@ -80,20 +80,26 @@ export const GetAllStudentInCourse = asyncHandler(async (req: Request, res: Resp
     }
     const allStudentInCourse = await CourseTaking.find({ course: courseId })
     const allStudentInCourseCount: Number = allStudentInCourse.length
+    let dataSearchCount
     let courseTakingDetail
     if (queryArray.length === 1) {
         courseTakingDetail = await CourseTaking.find({ "$and": queryArray })
             .skip(page > 0 ? ((page - 1) * limit) : 0)
             .limit(limit)
+        dataSearchCount = await CourseTaking.find({ "$and": queryArray })
+
     } else {
         courseTakingDetail = await CourseTaking.find({ "$and": queryArray })
             .skip(page > 0 ? ((page - 1) * limit) : 0)
             .limit(limit).exec()
+        dataSearchCount = await CourseTaking.find({ "$and": queryArray })
+
 
         res.status(200).json({
             success: true,
             data: courseTakingDetail,
-            allStudents: allStudentInCourseCount
+            allStudents: allStudentInCourseCount,
+            dataSearchCount: dataSearchCount
 
         });
     }
@@ -107,8 +113,8 @@ export const GetAllStudentInCourse = asyncHandler(async (req: Request, res: Resp
     res.status(200).json({
         success: true,
         data: courseTakingDetail,
-        allStudents: allStudentInCourseCount
-
+        allStudents: allStudentInCourseCount,
+        dataSearchCount: dataSearchCount
     });
 
 })
@@ -227,11 +233,12 @@ export const GetAllStudentNotInCourse = asyncHandler(async (req: Request, res: R
         .limit(limit)
 
     let unregisteredStudentCount = (await User.find({ studentID: { $nin: courseTakingDetail } })).length
-
+    let unregisteredStudentSearchCount = await (await User.find({ "$and": queryArray })).length
     res.status(200).json({
         success: true,
         data: unregisteredStudent,
-        allStudents: unregisteredStudentCount
+        allStudents: unregisteredStudentCount,
+        allSearchStudents: unregisteredStudentSearchCount
     });
 
 })
