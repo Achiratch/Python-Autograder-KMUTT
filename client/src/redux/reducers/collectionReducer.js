@@ -25,6 +25,7 @@ export default function d(state = initailState, action) {
         ...state,
         questions: action.payload.detail,
         count: action.payload.count,
+        searchCount: action.payload.searchCount,
         loading: false,
       };
     case GET_QUESTION:

@@ -52,10 +52,14 @@ class CollectionsPage extends Component {
     this.props.getQuestions("", "");
   }
   render() {
-    const { questions, loading ,count } = this.props.collection;
+    const { questions, loading ,count ,searchCount} = this.props.collection;
     let questionNumber = Number(count)
     let pageNumber = questionNumber / 10 ;
     let number = Math.ceil(pageNumber)
+
+    let serachQuestionNumber = Number(searchCount)
+    let serachPageNumber = serachQuestionNumber / 10 ;
+    let searchNumber = Math.ceil(serachPageNumber)
     let questionBox;
     if (questions === null || loading) {
       questionBox = <Skeleton active />;
@@ -65,7 +69,13 @@ class CollectionsPage extends Component {
     let pagination;
     if (questions.length === 0) {
       pagination = <div></div>;
-    } else {
+    }  else if (searchCount !== null){
+      pagination = (
+        <div className="pagination">
+          <Pagination count={searchNumber} page={this.state.page} onChange={this.handleChange}  color="primary" />
+        </div>
+      );
+    } else if (questions.length > 0){
       pagination = (
         <div className="pagination">
           <Pagination count={number} page={this.state.page} onChange={this.handleChange}  color="primary" />
