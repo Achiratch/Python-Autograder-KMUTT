@@ -101,22 +101,27 @@ export const GetAllAssignment = asyncHandler(async (req: Request, res: Response,
     if (!isEmpty(level)) queryArray.push({ level: level })
 
     let assignment
+    let assignmentSearchCount
     if (queryArray.length > 0) {
         assignment = await Assignment.find({ "$and": queryArray })
             .skip(page > 0 ? ((page - 1) * limit) : 0)
             .limit(limit).exec()
+        assignmentSearchCount = await (await Assignment.find({ "$and": queryArray })).length
 
     } else {
         assignment = await Assignment.find()
             .skip(page > 0 ? ((page - 1) * limit) : 0)
             .limit(limit).exec()
+        assignmentSearchCount = await (await Assignment.find()).length
+
     }
 
     const assignmentCount = (await Assignment.estimatedDocumentCount()).toFixed()
     res.status(200).json({
         success: true,
         detail: assignment,
-        count: assignmentCount
+        count: assignmentCount,
+        searchCount: assignmentSearchCount
     })
 
 })
