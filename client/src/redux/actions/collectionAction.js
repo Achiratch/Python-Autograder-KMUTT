@@ -45,6 +45,25 @@ export const getQuestions = (search,level,page) => (dispatch) => {
     );
 };
 
+//Get all Questions with no limit
+export const getQuestionsNoLimit = () => (dispatch) => {
+  dispatch(setQuestionLoading());
+  axios
+    .get(`/api/question`)
+    .then((res) =>
+      dispatch({
+        type: GET_QUESTIONS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_QUESTIONS,
+        payload: null,
+      })
+    );
+};
+
 //Get Question by id
 export const getQuestion = (id) => (dispatch) => {
   dispatch(setQuestionLoading());
