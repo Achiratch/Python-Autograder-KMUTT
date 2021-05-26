@@ -39,19 +39,19 @@ export const CreateAssignment = asyncHandler(async (req: Request, res: Response,
     if (IsDulpicateQuestionExist) {
         return next(new ErrorResponse(`Don't insert dulpicate question in same assignment`, 400))
     }
-
-    questions.forEach(async question => {
-        try {
-            console.log(question)
+    const checkExistQuestion = async () => {
+        let loopError: number = 0
+        for (const question of questions) {
             const IsQuestion = await Question.findById(question._id)
             if (!IsQuestion) {
-                return next(new ErrorResponse('Please input valid question id!!', 400))
+                loopError++
             }
-
-        } catch {
-            return next(new ErrorResponse('Please input valid question id!!', 400))
         }
-    })
+        return loopError
+    }
+
+    const notExistQuestion = await checkExistQuestion()
+    if (notExistQuestion > 0) return next(new ErrorResponse('Please input valid question id', 400))
     const assignment = await Assignment.create({
         name,
         description,
@@ -220,4 +220,41 @@ export const UpdateAssignmentById = asyncHandler(async (req: Request, res: Respo
         success: true,
         detail: updatedAssignment
     });
+})
+
+// @desc    Get Assignment by id
+// @route   GET /api/assignment/:id
+// @acess   Private
+export const GetAssignmentByCourseId = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const courseId: any = req.params.id
+    const page: number = req.query.page as any
+    const limit: number = parseInt(req.query.limit as string)
+    const level: string = req.query.level as any
+    const search: string = req.query.search as string
+
+    const existCourse = await Course.findById(courseId)
+    if (!existCourse) return next(new ErrorResponse(`We don't have this course`, 404))
+
+    const queryArray = []
+    if (!isEmpty(search)) queryArray.push({ name: { $regex: search, $options: 'i' } })
+    if (!isEmpty(level)) queryArray.push({ level: level })
+    queryArray.push({ course: courseId })
+
+    let assignment
+    let assignmentSearchCount
+    if (queryArray.length > 0) {
+        assignment = await Assignment.find({ "$and": queryArray })
+            .skip(page > 0 ? ((page - 1) * limit) : 0)
+            .limit(limit).exec()
+        assignmentSearchCount = (await Assignment.find({ "$and": queryArray })).length
+
+    }
+
+    const assignmentCount = (await Assignment.estimatedDocumentCount()).toFixed()
+    res.status(200).json({
+        success: true,
+        detail: assignment,
+        count: assignmentCount,
+        searchCount: assignmentSearchCount
+    })
 })
