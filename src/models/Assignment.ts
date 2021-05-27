@@ -51,7 +51,7 @@ const AssignmentSchema = new Schema({
     },
     type: {
         type: String,
-        enum: ['exam', 'default'],
+        enum: ['exam', 'assignment'],
         required: true
     },
     level: {
