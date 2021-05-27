@@ -21,7 +21,7 @@ export const addAssignment = (assignmentData) => (dispatch) => {
     )
     .catch((err) =>
       dispatch({
-        type: ADD_ASSIGNMENT,
+        type: GET_ERRORS,
         payload: err.response.data,
       })
     );
@@ -52,6 +52,27 @@ export const getAssignments = (search, level, page) => (dispatch) => {
   axios
     .get(
       `/api/assignment`
+    )
+    .then((res) =>
+      dispatch({
+        type: GET_ASSIGNMENTS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ASSIGNMENTS,
+        payload: null,
+      })
+    );
+};
+
+//Get all Assignments by course id
+export const getAssignmentsByCourseId = (search, level, id) => (dispatch) => {
+  dispatch(setAssignmentLoading());
+  axios
+    .get(
+      `/api/assignment/course/${id}`
     )
     .then((res) =>
       dispatch({

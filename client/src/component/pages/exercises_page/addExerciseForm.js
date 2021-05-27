@@ -1,19 +1,64 @@
-import React, { Component } from "react";
-
+import React, { Component, useState } from "react";
 //ANTD
-import { Form, Input, Select, message, DatePicker } from "antd";
+import { Form, Input, Select, message, DatePicker, InputNumber } from "antd";
 import { Modal, Col } from "antd";
-
-import { Upload, Button } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { Transfer } from "antd";
 
 //Material-UI
 import AddBoxIcon from "@material-ui/icons/AddBox";
 
 //Redux
+import { addAssignment } from "../../../redux/actions/assignmentActions";
 import { connect } from "react-redux";
 
 class AddExercise extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      is_requesting: false,
+      errors: {},
+      mockData: null,
+      targetKeys: [],
+      question: [],
+    };
+    this.scoreInput = this.scoreInput.bind(this);
+    this.formRef = React.createRef();
+    this.onFormSubmitHandler = this.onFormSubmitHandler.bind(this);
+  }
+  scoreInput(e) {
+    this.setState({ score: e.target.value });
+  }
+
+  UNSAFE_componentWillReceiveProps(newProps) {
+    if (newProps.errors) {
+      this.setState({ errors: newProps.errors });
+      message.error(`${this.props.errors.error}`);
+    }
+    console.log(newProps.questions);
+    let a = newProps.questions;
+    a.forEach((i) => {
+      console.log(i._id);
+      i.key = i._id;
+    });
+    console.log(a);
+    this.setState({
+      mockData: a,
+    });
+  }
+
+  //Set chosen
+  handleChange = (targetKeys) => {
+    //console.log(targetKeys);
+    //console.log(targetKeys.map((arr) => arr === this.state.mockData))
+    this.setState({ targetKeys: targetKeys });
+  };
+
+  //Search question
+  filterOption = (inputValue, option) => option.name.indexOf(inputValue) > -1;
+  handleSearch = (dir, value) => {
+  };
+
+  //Modal
   state = {
     visible: false,
   };
@@ -25,39 +70,66 @@ class AddExercise extends Component {
   handleCancel = () => {
     this.setState({ visible: false });
   };
+
+  //Submit form
+  onFormSubmitHandler() {
+    console.log("[Create assignment]");
+    const data = this.formRef.current.getFieldsValue();
+    const length = data.questions.length;
+
+    for (let i = 0; i < length; i++) {
+      this.setState((prevState) => ({
+        question: [
+          ...prevState.question,
+          { _id: data.questions[i], score: data[i] },
+        ],
+      }));
+    }
+    const q = JSON.stringify(this.state.question)
+    const a = {
+      name: data.name,
+      description: data.description,
+      level: data.level,
+      dueDate: data.dueDate._d,
+      type: data.type,
+      course: this.props.course.course._id,
+      questions: q,
+    }
+    //let dataA = new FormData();
+    // dataA.append("name", data.name);
+    // dataA.append("description", data.description);
+    // dataA.append("level", data.level);
+    // dataA.append("dueDate", data.dueDate._d);
+    // dataA.append("type", data.type);
+    // dataA.append("course", this.props.course.course._id);
+    // dataA.append("questions", this.state.question);
+    //console.log(a);
+    this.props.addAssignment(a);
+    this.handleCancel();
+    message.success("This assignment has been created.");
+  }
+
   render() {
     const { Option } = Select;
     const { visible } = this.state;
     const { TextArea } = Input;
-    const props = {
-      name: "file",
-      action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-      headers: {
-        authorization: "authorization-text",
-      },
-      onChange(info) {
-        if (info.file.status !== "uploading") {
-          console.log(info.file, info.fileList);
-        }
-        if (info.file.status === "done") {
-          message.success(`${info.file.name} file uploaded successfully`);
-        } else if (info.file.status === "error") {
-          message.error(`${info.file.name} file upload failed.`);
-        }
-      },
-    };
+    console.log("mockData");
+    console.log(this.state.mockData);
+    console.log("Chosen");
+    console.log(this.state.targetKeys);
     return (
       <div>
         <button onClick={this.showModal} className="add-exercises-button">
           <span className="icon-button">
             <AddBoxIcon />
           </span>
-          Add Assignment
+          Create Assignment
         </button>
         <Modal
+          centered
           visible={visible}
-          width={600}
-          title="Add Exercise"
+          width={1000}
+          title="Create Assignment"
           onCancel={this.handleCancel}
           footer={null}
         >
@@ -168,21 +240,62 @@ class AddExercise extends Component {
                   <Option value="5">5</Option>
                 </Select>
               </Form.Item>
+
               <Form.Item
                 className="space"
-                name="file"
-                label="File"
+                name="questions"
+                label="Assignment"
                 rules={[
                   {
                     required: true,
-                    message: "Please upload file!",
+                    message: "Please choose assignment!",
                   },
                 ]}
               >
-                <Upload {...props}>
-                  <Button icon={<UploadOutlined />}>Click to Upload</Button>
-                </Upload>
+                <Transfer
+                  listStyle={{
+                    width: 300,
+                    height: 300,
+                  }}
+                  dataSource={this.state.mockData}
+                  showSearch
+                  titles={["Choices", "Chosen"]}
+                  filterOption={this.filterOption}
+                  targetKeys={this.state.targetKeys}
+                  onChange={this.handleChange}
+                  onSearch={this.handleSearch}
+                  render={(item) => item.name}
+                />
               </Form.Item>
+              {this.state.targetKeys >= [1]
+                ? this.state.targetKeys.map((name, arr) => (
+                    <Form.Item
+                      key={name}
+                      className="space"
+                      onChange={this.scoreInput}
+                      //value={this.state.score}
+                      name={`${arr}`}
+                      label={`Score assignment ${arr+1}`}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input score!",
+                        },
+                      ]}
+                    >
+                      <InputNumber min={1} max={100} />
+                    </Form.Item>
+                  ))
+                : null}
+              <div className="create-question-button">
+                <button
+                  className="btn btn-success btn-lg "
+                  type="primary"
+                  htmltype="submit"
+                >
+                  Create
+                </button>
+              </div>
             </Form>
           </Col>
         </Modal>
@@ -190,4 +303,10 @@ class AddExercise extends Component {
     );
   }
 }
-export default AddExercise;
+
+const mapStateToProps = (state) => ({
+  assignment: state.assignment,
+  course: state.course,
+  collection: state.collection,
+});
+export default connect(mapStateToProps, { addAssignment })(AddExercise);

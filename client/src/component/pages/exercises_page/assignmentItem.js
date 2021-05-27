@@ -22,7 +22,7 @@ class AssignmentItem extends Component {
               Assignment : {assignment.name}
             </h1>
             <h2>
-              By {assignment.createdBy.firstName}{" "}
+              By {assignment.createdBy.firstName}
               {assignment.createdBy.lastName} on {assignment.dateCreate}
             </h2>
           </div>

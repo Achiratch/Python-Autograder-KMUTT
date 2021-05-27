@@ -32,7 +32,8 @@ import {
   getStudents,
   getAllStudents,
 } from "../../../redux/actions/memberAction";
-import { getAssignments } from "../../../redux/actions/assignmentActions";
+import { getQuestionsNoLimit } from "../../../redux/actions/collectionAction";
+import { getAssignmentsByCourseId } from "../../../redux/actions/assignmentActions";
 
 //PropTypes
 import { PropTypes } from "prop-types";
@@ -42,13 +43,13 @@ class ExercisesPage extends Component {
     this.props.getCourse(this.props.match.params.id);
     this.props.getStudents(this.props.match.params.id, "");
     this.props.getAllStudents(this.props.match.params.id, "");
-    this.props.getAssignments("");
+    this.props.getAssignmentsByCourseId("","", this.props.match.params.id);
+    this.props.getQuestionsNoLimit();
   }
   render() {
     const { course, auth } = this.props;
+    const { questions } = this.props.collection;
     const { loading, assignments } = this.props.assignment;
-    console.log(loading);
-    console.log(assignments);
     let assignmentBox;
     if (loading === true) {
       assignmentBox = <LinearProgress />;
@@ -73,9 +74,9 @@ class ExercisesPage extends Component {
             </div>
 
             <div className="flex">
-              {course.course.createdBy === auth.user.id ? (
+              {course.course.createdBy === auth.user.id || questions !== null  ? (
                 <div className="button-exercises flex">
-                  <AddExercise />
+                  <AddExercise questions={questions}/>
                   {/* <button className="delete-exercises-button">
                   <span className="icon-button">
                     <DeleteIcon />
@@ -155,11 +156,13 @@ const mapStateToProps = (state) => ({
   course: state.course,
   auth: state.auth,
   assignment: state.assignment,
+  collection: state.collection,
 });
 
 export default connect(mapStateToProps, {
   getCourse,
   getStudents,
   getAllStudents,
-  getAssignments,
+  getQuestionsNoLimit,
+  getAssignmentsByCourseId,
 })(ExercisesPage);
