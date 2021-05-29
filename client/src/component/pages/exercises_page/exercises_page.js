@@ -68,7 +68,7 @@ class ExercisesPage extends Component {
     const { loading, assignments } = this.props.assignment;
     let assignmentBox;
     if (loading === true) {
-      assignmentBox = <LinearProgress />;
+      assignmentBox = <div className="loading"><LinearProgress /></div>;
     } else {
       assignmentBox = <AssignmentBox assignments={assignments} />;
     }

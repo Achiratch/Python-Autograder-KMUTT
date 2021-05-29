@@ -38,6 +38,25 @@
         background-color: #219b54;
 }
 
+.edit-exercises-button{
+  color: #F0F3F4;
+  font-size: 17px;
+  padding: 8px 60px ;
+  border-radius: 5px;
+  border: none;
+  background-color: #3f51b5;
+  font-weight: 700;
+  font-family: Roboto;
+  transition: all ease-in-out 0.1s;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.096), 0px 0px 5px rgba(0, 0, 0, 0.096) ;
+}
+.edit-exercises-button:hover{
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.178), 0px 0px 5px rgb(0, 0, 0.178, 0);
+  z-index: 1;
+  font-weight: 800;
+  background-color: #2a3da5;
+}
+
 .search-assignment{
   display: flex;
   margin-left: auto;
@@ -52,40 +71,48 @@
       margin-left: 2rem;
       margin-bottom: 32px;
 }
+
+.pub-date{
+  margin-right: 0px;
+  margin-left: auto;
+}
+
 .due-date{
-  margin-right: auto;
+  margin-right: 0px;
   margin-left: 0px;
 }
-@media only screen and (min-width: 1455px) {
-  .tool-box{
+
+@media only screen and (min-width: 1344px) {
+  .level-box{
     margin-top: 1.5rem;
   }
 }
-@media only screen and (min-width: 1455px) {
+
+@media only screen and (min-width: 1405px) {
   .stat-button{
-  text-align: center;
-  justify-content: center;
-  border-radius: 10px;
-  margin: 1.6rem 2rem 0rem;
-  padding: 12px 60px ;
-  font-family: Roboto;
-  font-size: 17px;
-  color: #F0F3F4;
-  font-weight: 700; 
-  border: none;
-  background-color: #40A3FF;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.096), 0px 0px 5px rgba(0, 0, 0, 0.096) ;
-  transition: all ease-in-out 0.1s;
+    text-align: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 1.6rem 2rem 0rem;
+    padding: 12px 60px ;
+    font-family: Roboto;
+    font-size: 17px;
+    color: #F0F3F4;
+    font-weight: 700; 
+    border: none;
+    background-color: #40A3FF;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.096), 0px 0px 5px rgba(0, 0, 0, 0.096) ;
+    transition: all ease-in-out 0.1s;
+  }
+  
+  .stat-button:hover{
+    z-index: 1;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.151), 0px 0px 5px rgb(0, 0, 0.151, 0);
+    background-color: #3990e2;
+  
+  }
 }
-
-.stat-button:hover{
-  z-index: 1;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.151), 0px 0px 5px rgb(0, 0, 0.151, 0);
-  background-color: #3990e2;
-
-}
-}
-@media only screen and (max-width: 1455px) {
+@media only screen and (max-width: 1404px) {
   .stat-button{
     text-align: center;
     justify-content: center;
@@ -122,17 +149,35 @@
 }
 
 .execercise-box h1{
-  padding: 1rem;
+  padding: 1rem 1rem 0.85rem;
   font-size: 18px;
 }
 
 .execercise-box h2{
-  padding: 0rem 1rem;
+  padding: 0rem 1rem ;
   font-size: 14px;
   color: grey;
 }
 
+.execercise-box h3{
+  padding-left: 2rem;
+  padding-top: 2.4rem;
+  font-size: 18px;
+}
 
+.due-date h2{
+  padding-top: 0.15rem;
+}
+
+.pub-date h2{
+  padding-top: 0.15rem;
+}
+
+
+
+.loading{
+  margin-top: 3px;
+}
 
 #light{
   color: gold;

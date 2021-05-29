@@ -1,12 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 //Material-UI
 import EmojiObjectsIcon from "@material-ui/icons/EmojiObjects";
-import EqualizerIcon from "@material-ui/icons/Equalizer";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import BuildIcon from "@material-ui/icons/Build";
-import Tooltip from "@material-ui/core/Tooltip";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import moment from "moment";
 
 class AssignmentItem extends Component {
   render() {
@@ -19,37 +17,37 @@ class AssignmentItem extends Component {
               <span id="light" className="icon-button">
                 <EmojiObjectsIcon style={{ fontSize: 25 }} />
               </span>
-              Assignment : {assignment.name}
+              {assignment.type} : {assignment.name}
             </h1>
             <h2>
-              By {assignment.createdBy.firstName}
-              {assignment.createdBy.lastName} on {assignment.dateCreate}
+              By {assignment.createdBy.firstName + " "}
+              {assignment.createdBy.lastName} on{" "}
+              {moment(assignment.dateCreate).format("LL")}
             </h2>
+          </div>
+          <div className="pub-date">
+            <h1>Publish Date</h1>
+            <h2>{moment(assignment.dateCreate).format("LLL")}</h2>
           </div>
           <div className="due-date">
             <h1>Due Date</h1>
-            <h2>25/8/2020 at 12.00 PM {assignment.dueDate}</h2>
+            <h2>{moment(assignment.dueDate).format("LLL")}</h2>
           </div>
-          <div className="tool-box">
-            <Tooltip title="Edit">
-              <IconButton aria-label="edit">
-                <EditIcon fontSize="inherit" />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Delete">
-              <IconButton aria-label="delete" color="secondary">
-                <DeleteIcon fontSize="inherit" />
-              </IconButton>
-            </Tooltip>
+          <div id="level-box">
+            <h3 id={"level-" + assignment.level} className="level">
+              Level {assignment.level}
+            </h3>
           </div>
-          <div className="exercise-name">
-            <button className="stat-button">
-              <span className="icon-button">
-                <EqualizerIcon />
-              </span>
-              Stat
-            </button>
-          </div>
+          <Link to={`/assignment/${assignment.course}/${assignment._id}`}>
+            <div className="exercise-name">
+              <button className="stat-button">
+                <span className="icon-button">
+                  <VisibilityIcon />
+                </span>
+                View
+              </button>
+            </div>
+          </Link>
         </div>
       </div>
     );

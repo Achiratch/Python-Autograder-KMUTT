@@ -14,6 +14,7 @@ import LandingPage from "./component/pages/landing_page";
 import RegisterPage from "./component/pages/register_page";
 import HomePage from "./component/pages/home_page/home_page";
 import ExercisesPage from "./component/pages/exercises_page/exercises_page";
+import AssignmentViewPage from "./component/pages/exercises_page/assignmentView_page"
 import ScoreBookPage from "./component/pages/scorebook_page/scorebook_page";
 import MemberPage from "./component/pages/member_page/member_page";
 import CollectionsPage from "./component/pages/collections_page/collections_page";
@@ -110,6 +111,12 @@ function App() {
             path="/assignment/:id"
             role={ROLE.STUDENT}
             component={ExercisesPage}
+          />
+          <ProtectedRoute
+            exact
+            path="/assignment/:id/:id"
+            role={ROLE.STUDENT}
+            component={AssignmentViewPage}
           />
           <ProtectedRoute
             exact
