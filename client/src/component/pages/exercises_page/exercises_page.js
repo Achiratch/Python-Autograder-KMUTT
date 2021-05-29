@@ -39,6 +39,22 @@ import { getAssignmentsByCourseId } from "../../../redux/actions/assignmentActio
 import { PropTypes } from "prop-types";
 
 class ExercisesPage extends Component {
+  constructor(props) {
+    super(props);
+    this.filterByInput = this.filterByInput.bind(this);
+    this.filterByLevel = this.filterByLevel.bind(this);
+    this.filter = this.filter.bind(this);
+    this.state = { value: "", level: "" };
+  }
+  filterByInput(e) {
+    this.setState({ value: e.target.value });
+  }
+  filterByLevel(e) {
+    this.setState({ level: e.target.value });
+  }
+  filter() {
+    this.props.getAssignmentsByCourseId(this.state.value, this.state.level, this.props.match.params.id);
+  }
   componentDidMount() {
     this.props.getCourse(this.props.match.params.id);
     this.props.getStudents(this.props.match.params.id, "");
@@ -74,15 +90,9 @@ class ExercisesPage extends Component {
             </div>
 
             <div className="flex">
-              {course.course.createdBy === auth.user.id || questions !== null  ? (
+              {course.course.createdBy === auth.user.id  ? (
                 <div className="button-exercises flex">
                   <AddExercise questions={questions}/>
-                  {/* <button className="delete-exercises-button">
-                  <span className="icon-button">
-                    <DeleteIcon />
-                  </span>
-                  Delete Assignment
-                </button> */}
                 </div>
               ) : null}
               <div className="search-assignment">
@@ -93,8 +103,8 @@ class ExercisesPage extends Component {
                       className="space-between-field"
                     >
                       <TextField
-                        // value={this.state.value}
-                        // onChange={this.filterByInput}
+                        value={this.state.value}
+                        onChange={this.filterByInput}
                         autoComplete="off"
                         size="small"
                         id="outlined-basic"
@@ -112,8 +122,8 @@ class ExercisesPage extends Component {
                       <Select
                         labelId="demo-simple-select-outlined-label"
                         id="demo-simple-select-outlined"
-                        //value={this.state.level}
-                        // onChange={this.filterByLevel}
+                        value={this.state.level}
+                        onChange={this.filterByLevel}
                         label="Level"
                         style={{ width: 100 }}
                       >
@@ -131,7 +141,7 @@ class ExercisesPage extends Component {
                       variant="contained"
                       size="large"
                       color="primary"
-                      //onClick={this.filter}
+                      onClick={this.filter}
                     >
                       <SearchIcon fontSize="medium" />
                     </Button>

@@ -72,7 +72,7 @@ export const getAssignmentsByCourseId = (search, level, id) => (dispatch) => {
   dispatch(setAssignmentLoading());
   axios
     .get(
-      `/api/assignment/course/${id}`
+      `/api/assignment/course/${id}?search=${search}&level=${level}`
     )
     .then((res) =>
       dispatch({
