@@ -216,8 +216,8 @@ class AddExercise extends Component {
                 ]}
               >
                 <Select style={{ width: 250 }}>
-                  <Option value="exam">Exam</Option>
-                  <Option value="assignment">Assignment</Option>
+                  <Option value="Exam">Exam</Option>
+                  <Option value="Assignment">Assignment</Option>
                 </Select>
               </Form.Item>
               <Form.Item
