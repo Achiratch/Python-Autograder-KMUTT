@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 //ANTD
 import { Form, Input, Select, message, DatePicker, InputNumber } from "antd";
 import { Modal, Col } from "antd";
@@ -34,13 +34,10 @@ class AddExercise extends Component {
       this.setState({ errors: newProps.errors });
       message.error(`${this.props.errors.error}`);
     }
-    console.log(newProps.questions);
     let a = newProps.questions;
     a.forEach((i) => {
-      console.log(i._id);
       i.key = i._id;
     });
-    console.log(a);
     this.setState({
       mockData: a,
     });
@@ -48,8 +45,6 @@ class AddExercise extends Component {
 
   //Set chosen
   handleChange = (targetKeys) => {
-    //console.log(targetKeys);
-    //console.log(targetKeys.map((arr) => arr === this.state.mockData))
     this.setState({ targetKeys: targetKeys });
   };
 
@@ -113,10 +108,6 @@ class AddExercise extends Component {
     const { Option } = Select;
     const { visible } = this.state;
     const { TextArea } = Input;
-    console.log("mockData");
-    console.log(this.state.mockData);
-    console.log("Chosen");
-    console.log(this.state.targetKeys);
     return (
       <div>
         <button onClick={this.showModal} className="add-exercises-button">
