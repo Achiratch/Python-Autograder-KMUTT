@@ -2,7 +2,7 @@ import { Document, ObjectId } from 'mongoose'
 import IProfile from './Profile';
 export interface IQuestionDetail {
     _id: ObjectId;
-    score: Number;
+    score: number;
 }
 
 export default interface IAssignment extends Document {
@@ -13,7 +13,7 @@ export default interface IAssignment extends Document {
     questions: IQuestionDetail[];
     dateCreate: Date;
     dueDate: Date;
-    totalScore: Number;
+    totalScore: number;
     level: string;
     type: string;
 }

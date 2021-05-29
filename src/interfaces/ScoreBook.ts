@@ -1,14 +1,12 @@
 import { Document, ObjectId } from 'mongoose'
 import { fileDesc } from './Question'
 
-export default interface IScore extends Document {
+export default interface IScoreBook extends Document {
     course: ObjectId;
     student: ObjectId;
     assignment: ObjectId;
-    question: ObjectId;
     sendingStatus: string;
-    answer: fileDesc;
-    score: string;
+    score: number;
     sentDate: Date;
 
 }

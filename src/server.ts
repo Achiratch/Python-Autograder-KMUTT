@@ -7,6 +7,7 @@ import users from './routes/api/users'
 import course from './routes/api/course'
 import question from './routes/api/question'
 import assignment from './routes/api/assignment'
+import score from './routes/api/score'
 
 
 import { errorHandler } from './middleware/error'
@@ -40,6 +41,7 @@ app.use('/api/users', users)
 app.use('/api/course', course)
 app.use('/api/question', question)
 app.use('/api/assignment', assignment)
+app.use('/api/score', score)
 
 
 // Test Api

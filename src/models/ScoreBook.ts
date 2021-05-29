@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-import IScore from '../interfaces/Score'
+import IScoreBook from '../interfaces/ScoreBook'
 const Schema = mongoose.Schema;
 
 //Create Schema
-const ScoreSchema = new Schema({
+const ScoreBookSchema = new Schema({
     course: {
         type: Schema.Types.ObjectId,
         ref: 'courses',
@@ -20,28 +20,9 @@ const ScoreSchema = new Schema({
         ref: 'assignments',
         required: true
     },
-    question: {
-        type: Schema.Types.ObjectId,
-        ref: 'questions',
-        required: true
-    },
     sendingStatus: {
         type: String,
         requried: true
-    },
-    answer: {
-        filename: {
-            type: String,
-            required: true
-        },
-        filepath: {
-            type: String,
-            required: true
-        },
-        code: {
-            type: String,
-            required: true
-        }
     },
     score: {
         type: String,
@@ -54,4 +35,4 @@ const ScoreSchema = new Schema({
 
 });
 
-export default mongoose.model<IScore>('scores', ScoreSchema);
+export default mongoose.model<IScoreBook>('scorebooks', ScoreBookSchema);
