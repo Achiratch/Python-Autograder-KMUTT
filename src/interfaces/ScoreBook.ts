@@ -1,9 +1,10 @@
 import { Document, ObjectId } from 'mongoose'
 import { fileDesc } from './Question'
+import IProfile from './Profile'
 
 export default interface IScoreBook extends Document {
     course: ObjectId;
-    student: ObjectId;
+    student: IProfile;
     assignment: ObjectId;
     sendingStatus: string;
     score: number;

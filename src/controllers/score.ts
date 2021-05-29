@@ -32,6 +32,12 @@ export const CreateScoreByUpload = asyncHandler(async (req: Request, res: Respon
     const user = req.user as IUser
     const studentId = user.id
     const student = await User.findById(studentId)
+    const studentProfile = {
+        studentID: user.studentID,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+    }
     const file = req.file
     const { course, assignment, question, score }: IScore = req.body
 
@@ -120,10 +126,10 @@ export const CreateScoreByUpload = asyncHandler(async (req: Request, res: Respon
         }
     }
 
-    const existedScoreBook = await ScoreBook.findOne({ "$and": [{ student: studentId }, { assignment: assignment }] })
+    const existedScoreBook = await ScoreBook.findOne({ "$and": [{ "student.studentID": user.studentID }, { assignment: assignment }] })
     const scoreBookSchema = {
         course,
-        student: studentId,
+        student: studentProfile,
         assignment,
         sendingStatus: scoreBookSendingStatus,
         score: scoreBookTotalScores
@@ -150,6 +156,12 @@ export const CreateScoreByString = asyncHandler(async (req: Request, res: Respon
     const user = req.user as IUser
     const studentId = user.id
     const student = await User.findById(studentId)
+    const studentProfile = {
+        studentID: user.studentID,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+    }
     const { course, assignment, question, score }: IScore = req.body
     const code = req.body.answer
 
@@ -237,10 +249,10 @@ export const CreateScoreByString = asyncHandler(async (req: Request, res: Respon
         }
     }
 
-    const existedScoreBook = await ScoreBook.findOne({ "$and": [{ student: studentId }, { assignment: assignment }] })
+    const existedScoreBook = await ScoreBook.findOne({ "$and": [{ "student.studentID": user.studentID }, { assignment: assignment }] })
     const scoreBookSchema = {
         course,
-        student: studentId,
+        student: studentProfile,
         assignment,
         sendingStatus: scoreBookSendingStatus,
         score: scoreBookTotalScores
@@ -295,14 +307,47 @@ export const GetAnswerByScoreId = asyncHandler(async (req: Request, res: Respons
 // @access Private
 export const GetSendingStatusByStudentId = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const user = req.user as IUser
-    const studentId = user.id
+    const studentId = user.studentID
     const courseId: any = req.params.id
 
-    const scoreBooks = await ScoreBook.find({ "$and": [{ student: studentId }, { course: courseId }] })
+    const scoreBooks = await ScoreBook.find({ "$and": [{ 'student.studentID': studentId }, { course: courseId }] })
     if (scoreBooks.length === 0) return next(new ErrorResponse(`Bad input`, 400))
 
     res.status(201).json({
         success: true,
         detail: scoreBooks
+    })
+})
+
+// @desc Get Sending status by course id
+// @route GET /api/score/course/:id/status
+// @access Private
+export const GetSendingStatusByCourseId = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const courseId: any = req.params.id
+    const page: number = req.query.page as any
+    const limit: number = parseInt(req.query.limit as string)
+    const search: string = req.query.search as string
+    const queryArray = []
+
+    let scoreBooks
+    // if (scoreBooks.length === 0) return next(new ErrorResponse(`Bad input`, 400))
+    queryArray.push({ course: courseId })
+    if (!isEmpty(search)) {
+        queryArray.push({ "$or": [{ "student.firstName": { $regex: search, $options: 'i' } }, { "student.email": { $regex: search } }] })
+    }
+    let scoreBooksSearchCount
+
+    scoreBooks = await ScoreBook.find({ "$and": queryArray })
+        .skip(page > 0 ? ((page - 1) * limit) : 0)
+        .limit(limit).exec()
+    scoreBooksSearchCount = (await ScoreBook.find({ "$and": queryArray })).length
+
+
+    const scoreBooksCount = (await ScoreBook.estimatedDocumentCount()).toFixed()
+    res.status(201).json({
+        success: true,
+        detail: scoreBooks,
+        count: scoreBooksCount,
+        searchCount: scoreBooksSearchCount
     })
 })
