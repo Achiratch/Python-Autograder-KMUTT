@@ -79,7 +79,6 @@ class ExercisesPage extends Component {
           <Sidebar course={course} />
           <div className="page-content">
             <div className="head-content-member">
-              <h1>Assignment</h1>
               <Breadcrumb>
                 <Breadcrumb.Item href="/home">My Course</Breadcrumb.Item>
                 <Breadcrumb.Item>
@@ -87,6 +86,7 @@ class ExercisesPage extends Component {
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>Assignment </Breadcrumb.Item>
               </Breadcrumb>
+              <h1 id="title-name">Assignment</h1>
             </div>
 
             <div className="flex">

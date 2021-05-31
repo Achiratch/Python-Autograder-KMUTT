@@ -130,12 +130,12 @@ function MemberPage(props) {
         <Sidebar course={props.course} />
         <div className="page-content">
           <div className="head-content-member">
-            <h1>Member</h1>
             <Breadcrumb>
               <Breadcrumb.Item href="/home">My Course</Breadcrumb.Item>
               <Breadcrumb.Item>{props.course.course.courseID}</Breadcrumb.Item>
               <Breadcrumb.Item>Member</Breadcrumb.Item>
             </Breadcrumb>
+            <h1 id="title-name">Member</h1>
           </div>
           <div className="flex">
             <div className="search-member">
