@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Sidebar from "../../layout/sidebar";
 import Navbar from "../../layout/navbar";
 import Footer from "../../layout/footer";
+import { Link } from "react-router-dom";
 
 //ANTD
 import { Breadcrumb } from "antd";
@@ -23,14 +24,16 @@ class ScoreBookPage extends Component {
           <Sidebar course={course} />
           <div className="page-content">
             <div className="head-content-member">
-              <h1>Score Book</h1>
               <Breadcrumb>
-                <Breadcrumb.Item href="/home">My Course</Breadcrumb.Item>
+                <Breadcrumb.Item>
+                  <Link to={`/home`}>My Course</Link>
+                </Breadcrumb.Item>
                 <Breadcrumb.Item>
                   {this.props.course.course.courseID}
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>Score Book</Breadcrumb.Item>
               </Breadcrumb>
+              <h1 id="title-name">Score Book</h1>
             </div>
           </div>
         </div>

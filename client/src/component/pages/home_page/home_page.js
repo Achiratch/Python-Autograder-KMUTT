@@ -84,7 +84,7 @@ class HomePage extends Component {
         <Navbar />
         <div className="body">
           <div className="page-content container">
-            <Link to={`/home/student/${this.props.auth.user.id}`}>
+            <Link to={`/home/student`}>
               <button>Student</button>
             </Link>
             <div className="head-content ">
