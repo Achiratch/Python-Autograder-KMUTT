@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import CourseCard from "../home_page/courseCard";
+import CourseCard from "./courseCard";
 //Layout
-import Navbar from "../../layout/navbar";
-import Footer from "../../layout/footer";
+import Navbar from "../../../layout/navbarStudent";
+import Footer from "../../../layout/footer";
 
 //ANTD
 import { Skeleton } from "antd";
@@ -18,11 +18,11 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
 //Dialog Form
-import CourseFrom from "../home_page/courseForm";
+import CourseFrom from "../../home_page/courseForm";
 
 //Redux
 import { connect } from "react-redux";
-import { getStudentCourses } from "../../../redux/actions/courseActions";
+import { getStudentCourses } from "../../../../redux/actions/courseActions";
 
 //PropTypes
 import { PropTypes } from "prop-types";
@@ -55,7 +55,8 @@ class HomePageStudent extends Component {
     console.log(this.state.year);
   }
   filter() {
-    this.props.getCoursesByFilter(
+    this.props.getStudentCourses(
+      this.props.auth.user.id,
       this.state.value,
       this.state.semester,
       this.state.year
@@ -92,7 +93,7 @@ class HomePageStudent extends Component {
                   <Grid item xs={12} lg={12} md={12} sm={12}>
                     <div className="components">
                       <div className="search-field">
-                        <div className="space-between-field">
+                        <div className="">
                           <FormControl
                             variant="outlined"
                             className="space-between-field"

@@ -8,7 +8,9 @@ import { Route, Switch } from "react-router-dom";
 import { ProtectedRoute } from "./component/auth/protected_route";
 
 //STUDENT-PAGE----------------------------------
-import HomePageStudent from "./component/pages/student/home_page";
+import HomePageStudent from "./component/pages/student/home_page/home_page";
+import AssignmentPageStudent from "./component/pages/student/assignment_page/assignment_page";
+import AssignmentQuestionPageStudent from "./component/pages/student/assignment_page/assignmentQuestion"
 //ADMIN-PAGE------------------------------------
 import LandingPage from "./component/pages/landing_page";
 import RegisterPage from "./component/pages/register_page";
@@ -59,21 +61,21 @@ function App() {
           {/* STUDENT */}
           <ProtectedRoute
             exact
-            path="/home/student/:id"
+            path="/home/student"
             role={ROLE.STUDENT}
             component={HomePageStudent}
           />
           <ProtectedRoute
             exact
-            path="/collections/student"
+            path="/assignment/:id/student"
             role={ROLE.STUDENT}
-            component={CollectionsPage}
+            component={AssignmentPageStudent}
           />
           <ProtectedRoute
             exact
-            path="/assignment/:id/student"
+            path="/assignment/:id/:id/student"
             role={ROLE.STUDENT}
-            component={ExercisesPage}
+            component={AssignmentQuestionPageStudent}
           />
           <ProtectedRoute
             exact

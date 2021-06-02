@@ -94,7 +94,7 @@ export const getStudentCourses = (id, search, semester, year) => (dispatch) => {
     .then((res) =>
       dispatch({
         type: GET_COURSES_BY_FILTER,
-        payload: res.data.courses,
+        payload: res.data.courses.map((course)=> course.course),
       })
     )
     .catch((err) =>
