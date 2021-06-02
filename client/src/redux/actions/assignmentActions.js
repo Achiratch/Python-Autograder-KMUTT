@@ -3,6 +3,7 @@ import {
   GET_ASSIGNMENT,
   GET_ASSIGNMENTS,
   ADD_ASSIGNMENT,
+  GET_QUESTIONS_BY_ASSIGNMENT,
   DELETE_ASSIGNMENT,
   UPDATE_ASSIGNMENT,
   ASSIGNMENT_LOADING,
@@ -87,7 +88,24 @@ export const getAssignmentsByCourseId = (search, level, id) => (dispatch) => {
       })
     );
 };
-
+//Get Questions by assignment id
+export const getQuestionsByAssignmentId = (id) => (dispatch) => {
+  dispatch(setAssignmentLoading());
+  axios
+    .get(`/api/question/${id}`)
+    .then((res) =>
+      dispatch({
+        type: GET_QUESTIONS_BY_ASSIGNMENT,
+        payload: res.data.detail,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_QUESTIONS_BY_ASSIGNMENT,
+        payload: null,
+      })
+    );
+};
 //Update Assignment by id
 export const editAssignment = (id, assignmentData) => (dispatch) => {
     axios
