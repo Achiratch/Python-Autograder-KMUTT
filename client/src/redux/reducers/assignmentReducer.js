@@ -11,7 +11,6 @@ import {
 const initailState = {
   assignments: [],
   assignment: {},
-  questions: [],
   questionsByAssignment:[],
   loading: false,
 };
@@ -34,7 +33,6 @@ export default function d(state = initailState, action) {
       return {
         ...state,
         assignment: action.payload,
-        questions: action.payload.questions,
         loading: false,
       };
     case ADD_ASSIGNMENT:
@@ -45,7 +43,8 @@ export default function d(state = initailState, action) {
     case GET_QUESTIONS_BY_ASSIGNMENT:
       return {
         ...state,
-        questionsByAssignment: [...state.questionsByAssignment, action.payload],
+        questionsByAssignment: action.payload,
+        loading: false,
       };
     case UPDATE_ASSIGNMENT:
       return {

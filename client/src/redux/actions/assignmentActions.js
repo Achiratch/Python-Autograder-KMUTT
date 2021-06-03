@@ -92,7 +92,7 @@ export const getAssignmentsByCourseId = (search, level, id) => (dispatch) => {
 export const getQuestionsByAssignmentId = (id) => (dispatch) => {
   dispatch(setAssignmentLoading());
   axios
-    .get(`/api/question/${id}`)
+    .get(`/api/assignment/${id}/questions`)
     .then((res) =>
       dispatch({
         type: GET_QUESTIONS_BY_ASSIGNMENT,
