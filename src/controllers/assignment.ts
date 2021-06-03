@@ -222,8 +222,8 @@ export const UpdateAssignmentById = asyncHandler(async (req: Request, res: Respo
     });
 })
 
-// @desc    Get Assignment by id
-// @route   GET /api/assignment/:id
+// @desc    Get Assignment by course id
+// @route   GET /api/assignment/course/:id
 // @acess   Private
 export const GetAssignmentByCourseId = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const courseId: any = req.params.id
@@ -257,4 +257,29 @@ export const GetAssignmentByCourseId = asyncHandler(async (req: Request, res: Re
         count: assignmentCount,
         searchCount: assignmentSearchCount
     })
+})
+
+// @desc    Get Assignment by id
+// @route   GET /api/assignment/:id/questions
+// @acess   Private
+export const GetQuestionsByAssignmentId = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const assignmentId = req.params.id
+
+    const assignment = await Assignment.findById(assignmentId)
+    if (!assignment) return next(new ErrorResponse(`We don't have this assignment`, 404))
+
+    const questions = assignment.questions
+    const questionsId = questions.map(q => q._id)
+    let questionsDetail = []
+    for (const id of questionsId) {
+        const question = await Question.findById(id)
+        if (question) questionsDetail.push(question)
+    }
+    const questionsCount = questionsDetail.length
+    res.status(200).json({
+        success: true,
+        detail: questionsDetail,
+        count: questionsCount
+    })
+
 })
