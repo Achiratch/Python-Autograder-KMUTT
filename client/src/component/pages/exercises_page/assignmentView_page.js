@@ -5,6 +5,7 @@ import Sidebar from "../../layout/sidebar";
 import EditAssignment from "./editAssignment";
 import DeleteAssignment from "./deleteAssignment";
 import QuestionBox from "./questionBox";
+import { Link } from "react-router-dom";
 
 //CSS
 import "./exercises_page.css";
@@ -89,11 +90,11 @@ class AssignmentViewPage extends Component {
           <div className="page-content">
             <div className="head-content-member">
               <Breadcrumb>
-                <Breadcrumb.Item href="/home">My Course</Breadcrumb.Item>
+                <Breadcrumb.Item><Link to={`/home`}>My Course</Link></Breadcrumb.Item>
                 <Breadcrumb.Item>
                   {this.props.course.course.courseID}
                 </Breadcrumb.Item>
-                <Breadcrumb.Item>Assignment</Breadcrumb.Item>
+                <Breadcrumb.Item><Link to={`/assignment/${assignment.course}`}>Assignment</Link></Breadcrumb.Item>
                 <Breadcrumb.Item>{assignment.name}</Breadcrumb.Item>
               </Breadcrumb>
               <div className="flex">

@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 import PersonIcon from "@material-ui/icons/Person";
 import AssignmentIcon from "@material-ui/icons/Assignment";
-import StarsIcon from '@material-ui/icons/Stars';
+import StarsIcon from "@material-ui/icons/Stars";
+
+//ANTD
+import { Tag } from "antd";
 
 //Redux
 import { connect } from "react-redux";
@@ -35,7 +38,7 @@ class QuestionItem extends Component {
           </div>
           <div className="level-group">
             <h1 className="level">
-            <span className="icon-button">
+              <span className="icon-button">
                 <StarsIcon />
               </span>
               {question.level} Score
@@ -46,8 +49,14 @@ class QuestionItem extends Component {
               Level {question.level}
             </h1>
           </div>
-          
-          <Link to={`/collections/question/${question._id}`}>
+          <div id="level-box">
+            <h3 className="level">
+              <Tag id="tag-Complete">Complete</Tag>
+              <Tag id="tag-Late">Late</Tag>
+              <Tag id="tag-Incomplete">Incomplete</Tag>
+            </h3>
+          </div>
+          <Link to={`/assignment/question/${question._id}`}>
             <div className="button-train">
               <button className="question-button">
                 <span className="icon-button">

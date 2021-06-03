@@ -151,3 +151,8 @@ li:hover{
   z-index: -1;
 }
 
+.footer{
+  font-size: 16px;
+  padding-top: 1rem;
+  color: white;
+}

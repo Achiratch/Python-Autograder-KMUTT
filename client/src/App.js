@@ -11,6 +11,9 @@ import { ProtectedRoute } from "./component/auth/protected_route";
 import HomePageStudent from "./component/pages/student/home_page/home_page";
 import AssignmentPageStudent from "./component/pages/student/assignment_page/assignment_page";
 import AssignmentQuestionPageStudent from "./component/pages/student/assignment_page/assignmentQuestion"
+import CodePageStudent from "./component/pages/student/assignment_page/code_page"
+import MemberPageStudent from "./component/pages/student/member_page/member_page"
+import ScoreBookPageStudent from "./component/pages/student/scorebook_page/scorebook_page"
 //ADMIN-PAGE------------------------------------
 import LandingPage from "./component/pages/landing_page";
 import RegisterPage from "./component/pages/register_page";
@@ -79,15 +82,21 @@ function App() {
           />
           <ProtectedRoute
             exact
+            path="/assignment/question/:id"
+            role={ROLE.STUDENT}
+            component={CodePageStudent}
+          />
+          <ProtectedRoute
+            exact
             path="/scorebook/:id/student"
             role={ROLE.STUDENT}
-            component={ScoreBookPage}
+            component={ScoreBookPageStudent}
           />
           <ProtectedRoute
             exact
             path="/member/:id/student"
             role={ROLE.STUDENT}
-            component={MemberPage}
+            component={MemberPageStudent}
           />
           {/* ADMIN */}
           <ProtectedRoute

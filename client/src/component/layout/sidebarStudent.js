@@ -32,7 +32,7 @@ function Sidebar(props) {
         </NavLink>
         <NavLink
           exact
-          to={`/scorebook/${course._id}`}
+          to={`/scorebook/${course._id}/student`}
           className="menu-link"
           activeClassName="active-sidebar"
         >
@@ -43,7 +43,7 @@ function Sidebar(props) {
         </NavLink>
         <NavLink
           exact
-          to={`/member/${course._id}`}
+          to={`/member/${course._id}/student`}
           className="menu-link "
           activeClassName="active-sidebar"
         >
