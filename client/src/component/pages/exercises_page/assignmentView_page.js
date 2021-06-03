@@ -14,17 +14,7 @@ import "./exercises_page.css";
 import { Breadcrumb } from "antd";
 
 //Material-UI
-import DeleteIcon from "@material-ui/icons/Delete";
 import { LinearProgress } from "@material-ui/core";
-import DescriptionIcon from "@material-ui/icons/Description";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import Button from "@material-ui/core/Button";
-import SearchIcon from "@material-ui/icons/Search";
 
 //Redux
 import { connect } from "react-redux";
@@ -36,39 +26,9 @@ import {
 class AssignmentViewPage extends Component {
   componentDidMount() {
     this.props.getAssignment(this.props.match.params.id);
-    if (this.props.assignment.loading !== true) {
-      console.log(this.props.assignment.questions);
-    }
-    const id = [
-      "609fe9f195c48b7e005faec3",
-      "609fe9ed95c48b7e005faec1",
-      "609fe9e995c48b7e005faebf",
-    ];
-    id.map((i) => this.props.getQuestionsByAssignmentId(i));
-    //this.props.getQuestionsByAssignmentId("");
-    // if (this.props.assignment.loading === false) {
-    //   console.log(this.props.assignment.assignment);
-    // }
-    // for (let i = 0; i < 2; i++) {
-    //   console.log(i);
-    // }
-
-    //console.log(this.props.assignment.assignment.questions[0]._id)
-    //this.props.getQuestion(this.props.)
+    console.log(this.props.match.params);
+    this.props.getQuestionsByAssignmentId(this.props.match.params.id);
   }
-  //    UNSAFE_componentWillReceiveProps(newProps) {
-  //     if(newProps.assignment.loading === false){
-  //         const length = newProps.assignment.questions.length;
-  //         console.log(length)
-  //         for(let i = 0; i < length; i++){
-  //             console.log("Questions",newProps.assignment.questions[i]);
-  //             //this.props.getQuestionsByAssignmentId()
-  //         }
-  //     }
-  //     if(this.props.assignment.loading !== true){
-  //         console.log(this.props.assignment.questions)
-  //     }
-  //    }
   render() {
     const { course, auth } = this.props;
     const { loading, assignment, questions, questionsByAssignment } =
@@ -90,11 +50,17 @@ class AssignmentViewPage extends Component {
           <div className="page-content">
             <div className="head-content-member">
               <Breadcrumb>
-                <Breadcrumb.Item><Link to={`/home`}>My Course</Link></Breadcrumb.Item>
+                <Breadcrumb.Item>
+                  <Link to={`/home`}>My Course</Link>
+                </Breadcrumb.Item>
                 <Breadcrumb.Item>
                   {this.props.course.course.courseID}
                 </Breadcrumb.Item>
-                <Breadcrumb.Item><Link to={`/assignment/${assignment.course}`}>Assignment</Link></Breadcrumb.Item>
+                <Breadcrumb.Item>
+                  <Link to={`/assignment/${assignment.course}`}>
+                    Assignment
+                  </Link>
+                </Breadcrumb.Item>
                 <Breadcrumb.Item>{assignment.name}</Breadcrumb.Item>
               </Breadcrumb>
               <div className="flex">

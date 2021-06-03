@@ -25,39 +25,9 @@ import {
 class AssignmentQuestionPageStudent extends Component {
   componentDidMount() {
     this.props.getAssignment(this.props.match.params.id);
-    if (this.props.assignment.loading !== true) {
-      console.log(this.props.assignment.questions);
-    }
-    const id = [
-      "609fe9f195c48b7e005faec3",
-      "609fe9ed95c48b7e005faec1",
-      "609fe9e995c48b7e005faebf",
-    ];
-    id.map((i) => this.props.getQuestionsByAssignmentId(i));
-    //this.props.getQuestionsByAssignmentId("");
-    // if (this.props.assignment.loading === false) {
-    //   console.log(this.props.assignment.assignment);
-    // }
-    // for (let i = 0; i < 2; i++) {
-    //   console.log(i);
-    // }
-
-    //console.log(this.props.assignment.assignment.questions[0]._id)
-    //this.props.getQuestion(this.props.)
+    this.props.getQuestionsByAssignmentId(this.props.match.params.id)
   }
-  //    UNSAFE_componentWillReceiveProps(newProps) {
-  //     if(newProps.assignment.loading === false){
-  //         const length = newProps.assignment.questions.length;
-  //         console.log(length)
-  //         for(let i = 0; i < length; i++){
-  //             console.log("Questions",newProps.assignment.questions[i]);
-  //             //this.props.getQuestionsByAssignmentId()
-  //         }
-  //     }
-  //     if(this.props.assignment.loading !== true){
-  //         console.log(this.props.assignment.questions)
-  //     }
-  //    }
+ 
   render() {
     const { course, auth } = this.props;
     const { loading, assignment, questions, questionsByAssignment } =

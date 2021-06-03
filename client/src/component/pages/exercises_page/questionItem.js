@@ -39,7 +39,7 @@ class QuestionItem extends Component {
                 <StarsIcon />
               </span>
               {/* Change level to score props */}
-              {question.level} Score
+              {question.score} Score
             </h1>
           </div>
           <div className="level-group">

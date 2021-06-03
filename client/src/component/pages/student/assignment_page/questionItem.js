@@ -41,7 +41,7 @@ class QuestionItem extends Component {
               <span className="icon-button">
                 <StarsIcon />
               </span>
-              {question.level} Score
+              {question.score} Score
             </h1>
           </div>
           <div className="level-group">
