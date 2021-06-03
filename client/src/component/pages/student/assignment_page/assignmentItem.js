@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 
 //Material-UI
 import EmojiObjectsIcon from "@material-ui/icons/EmojiObjects";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import CodeIcon from '@material-ui/icons/Code';
+import CodeIcon from "@material-ui/icons/Code";
 import moment from "moment";
+
+//ANTD
+import { Tag } from "antd";
 
 class AssignmentItem extends Component {
   render() {
@@ -39,7 +41,16 @@ class AssignmentItem extends Component {
               Level {assignment.level}
             </h3>
           </div>
-          <Link to={`/assignment/${assignment.course}/${assignment._id}/student`}>
+          <div className="tag">
+            <h3 className="level">
+              <Tag id="tag-Complete">Complete</Tag>
+              <Tag id="tag-Late">Late</Tag>
+              <Tag id="tag-Incomplete">Incomplete</Tag>
+            </h3>
+          </div>
+          <Link
+            to={`/assignment/${assignment.course}/${assignment._id}/student`}
+          >
             <div className="exercise-name">
               <button className="code-button">
                 <span className="icon-button">

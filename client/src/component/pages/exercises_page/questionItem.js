@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 import PersonIcon from "@material-ui/icons/Person";
 import AssignmentIcon from "@material-ui/icons/Assignment";
-import IconButton from "@material-ui/core/IconButton";
-import EditIcon from "@material-ui/icons/Edit";
+import StarsIcon from "@material-ui/icons/Stars";
 
 //Redux
 import { connect } from "react-redux";
@@ -33,6 +32,15 @@ class QuestionItem extends Component {
               </span>
               {question.createdBy.firstName}
             </h2>
+          </div>
+          <div className="level-group">
+            <h1 className="level">
+              <span className="icon-button">
+                <StarsIcon />
+              </span>
+              {/* Change level to score props */}
+              {question.level} Score
+            </h1>
           </div>
           <div className="level-group">
             <h1 id={"level-" + question.level} className="level">

@@ -281,3 +281,23 @@
   margin-bottom: 0px;
   margin-right: 15rem;
 }
+
+#tag-Complete{
+  color: #389e0d;
+  background: #f6ffed;
+  border-color: #b7eb8f;
+}
+#tag-Late{
+  color: #d48806;
+  background: #fffbe6;
+  border-color: #ffe58f;
+}
+#tag-Incomplete{
+  color: #cf1322;
+    background: #fff1f0;
+    border-color: #ffa39e;
+}
+
+.submit-button{
+  margin: 1.5rem;
+}
