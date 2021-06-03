@@ -271,9 +271,14 @@ export const GetQuestionsByAssignmentId = asyncHandler(async (req: Request, res:
     const questions = assignment.questions
     const questionsId = questions.map(q => q._id)
     let questionsDetail = []
-    for (const id of questionsId) {
-        const question = await Question.findById(id)
-        if (question) questionsDetail.push(question)
+    for (const q of questions) {
+        let question = await Question.findById(q._id)
+
+        if (question) {
+            let leanQuestion: any = question.toObject()
+            leanQuestion.score = q.score
+            questionsDetail.push(leanQuestion)
+        }
     }
     const questionsCount = questionsDetail.length
     res.status(200).json({
