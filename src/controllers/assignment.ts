@@ -14,6 +14,7 @@ import Assignment from '../models/Assignment'
 import Question from '../models/Question'
 import IProfile from '../interfaces/Profile'
 import IsDulpicateInArray from '../validation/is-dulplicateInArray'
+import { ObjectId } from 'mongoose'
 
 // @desc    Create assignment
 // @route   POST /api/assignment/create
@@ -285,6 +286,38 @@ export const GetQuestionsByAssignmentId = asyncHandler(async (req: Request, res:
         success: true,
         detail: questionsDetail,
         count: questionsCount
+    })
+
+})
+
+// @desc    Get question in assignment
+// @route   GET /api/assignment/:id/question
+// @acess   Private
+export const GetQuestionByAssignmentIdAndQuestionId = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const assignmentId = req.params.id
+    const questionId = req.body.question
+    let thisQuestion = await Question.findById(questionId)
+    if (!thisQuestion) return next(new ErrorResponse(`We don't have this question`, 404))
+    const assignment = await Assignment.findById(assignmentId)
+    if (!assignment) return next(new ErrorResponse(`We don't have this assignment`, 404))
+
+    const questions = assignment.questions
+    const questionsId = questions.map(q => q._id)
+    let questionsDetail = []
+    for (const q of questions) {
+        if (q._id === thisQuestion._id) {
+            let question = await Question.findById(q._id)
+
+            if (question) {
+                let leanQuestion: any = question.toObject()
+                leanQuestion.score = q.score
+                questionsDetail.push(leanQuestion)
+            }
+        }
+    }
+    res.status(200).json({
+        success: true,
+        detail: questionsDetail,
     })
 
 })
