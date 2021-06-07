@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 
 class QuestionItem extends Component {
   render() {
-    const { question, auth } = this.props;
+    const { question, assignmentId } = this.props;
     return (
       <div>
         <div className="flex question-boxs">
@@ -56,7 +56,7 @@ class QuestionItem extends Component {
               <Tag id="tag-Incomplete">Incomplete</Tag>
             </h3>
           </div>
-          <Link to={`/assignment/question/${question._id}`}>
+          <Link to={`/assignment/${assignmentId}/question/${question._id}`}>
             <div className="button-train">
               <button className="question-button">
                 <span className="icon-button">

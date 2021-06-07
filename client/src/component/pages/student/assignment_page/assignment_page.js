@@ -28,9 +28,7 @@ import { connect } from "react-redux";
 import { getCourse } from "../../../../redux/actions/courseActions";
 import {
   getStudents,
-  getAllStudents,
 } from "../../../../redux/actions/memberAction";
-import { getQuestionsNoLimit } from "../../../../redux/actions/collectionAction";
 import { getAssignmentsByCourseId } from "../../../../redux/actions/assignmentActions";
 
 //PropTypes
@@ -60,9 +58,7 @@ class AssignmentPageStudent extends Component {
   componentDidMount() {
     this.props.getCourse(this.props.match.params.id);
     this.props.getStudents(this.props.match.params.id, "");
-    this.props.getAllStudents(this.props.match.params.id, "");
     this.props.getAssignmentsByCourseId("", "", this.props.match.params.id);
-    this.props.getQuestionsNoLimit();
   }
   render() {
     const { course, auth } = this.props;
@@ -180,7 +176,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getCourse,
   getStudents,
-  getAllStudents,
-  getQuestionsNoLimit,
   getAssignmentsByCourseId,
 })(AssignmentPageStudent);

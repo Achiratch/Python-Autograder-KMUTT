@@ -82,7 +82,7 @@ function App() {
           />
           <ProtectedRoute
             exact
-            path="/assignment/question/:id"
+            path="/assignment/:assignmentId/question/:id"
             role={ROLE.STUDENT}
             component={CodePageStudent}
           />

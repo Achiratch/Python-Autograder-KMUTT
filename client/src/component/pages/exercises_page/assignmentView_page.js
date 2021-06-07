@@ -31,15 +31,15 @@ class AssignmentViewPage extends Component {
   }
   render() {
     const { course, auth } = this.props;
-    const { loading, assignment, questions, questionsByAssignment } =
+    const { loading, assignment, questions } =
       this.props.assignment;
     let questionBox;
-    if (loading === true || questionsByAssignment === null) {
+    if (loading === true || questions === null) {
       questionBox = <LinearProgress />;
     } else {
-      console.log(questionsByAssignment);
+      console.log(questions);
       questionBox = (
-        <QuestionBox questionsByAssignment={questionsByAssignment} />
+        <QuestionBox questions={questions} />
       );
     }
     return (
