@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../../collections_page/collections_page.css";
+import ConfirmSubmit from "./confirmSubmit";
 //Layout
 import Navbar from "../../../layout/navbarStudent";
 import Footer from "../../../layout/footer";
@@ -19,29 +20,23 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 
 //Redux
 import { connect } from "react-redux";
-import { getQuestion } from "../../../../redux/actions/collectionAction";
+import { getQuestionsInAssignment } from "../../../../redux/actions/assignmentActions";
 
-function loadScript(url) {
+function loadsScript(url, callback) {
   // Adding the script tag to the head as suggested before
   var head = document.head;
   var script = document.createElement("script");
   script.type = "text/javascript";
   script.src = url;
 
+  // Then bind the event to the callback function.
+  // There are several events for cross browser compatibility.
+  script.onreadystatechange = callback;
+  script.onload = callback;
+
   // Fire the loading
   head.appendChild(script);
 }
-
-// function ready() {
-//   DCL.init();
-//   DCL.instances["exercise"].on("feedback", (payload) => {
-//     if (payload.correct) {
-//       alert("You rock!");
-//     } else {
-//       alert("You fuck!");
-//     }
-//   });
-// }
 
 const ColorButton = withStyles((theme) => ({
   root: {
@@ -53,6 +48,20 @@ const ColorButton = withStyles((theme) => ({
   },
 }))(Button);
 
+function onSubmit() {
+  if (window.DCL !== undefined) {
+    if (window.DCL.instances["question"] !== undefined) {
+      console.log(window.DCL);
+      window.DCL.instances["question"].on("submit", (action, payload) => {
+        console.log(payload.code);
+      });
+      window.DCL.instances["question"].on("feedback", (action, payload) => {
+        console.log(payload);
+      });
+    }
+  }
+}
+
 class CodePageStudent extends Component {
   constructor(props) {
     super(props);
@@ -60,20 +69,40 @@ class CodePageStudent extends Component {
       is_requesting: false,
       errors: {},
       code: {},
+      correct: null,
     };
 
     this.formRef = React.createRef();
   }
   componentDidMount() {
-    console.log(this.props.match.params.id);
-    this.props.getQuestion(this.props.match.params.id);
+    console.log(this.props.match.params);
+    this.props.getQuestionsInAssignment(
+      this.props.match.params.assignmentId,
+      this.props.match.params.id
+    );
   }
+
+  onSubmit = () => {
+    if (window.DCL !== undefined) {
+      if (window.DCL.instances["question"] !== undefined) {
+        console.log(window.DCL);
+        window.DCL.instances["question"].on("submit", (action, payload) => {
+          console.log(payload.code);
+          this.setState({ code: payload.code });
+          console.log(this.state.code);
+        });
+        window.DCL.instances["question"].on("feedback", (action, payload) => {
+          console.log(payload);
+          this.setState({ correct: payload.correct });
+        });
+      }
+    }
+  };
 
   render() {
     const { TextArea } = Input;
-
-    const { loading, question, sct, preExercise, sample, solution } =
-      this.props.collection;
+    const { question, loading, sct, preExercise, sample, solution } =
+      this.props.assignment;
     let dataCamp;
     if (loading === true) {
       dataCamp = (
@@ -82,40 +111,22 @@ class CodePageStudent extends Component {
         </div>
       );
     } else if (loading === false) {
-      loadScript("https://cdn.datacamp.com/dcl-react.js.gz");
-      const asd = (DCL) => {
-        DCL.init();
-        DCL.instances["exercise"].on("feedback", (payload) => {
-          console.log("mother fux")
-          if (payload.correct === true) {
-            alert("You rock!");
-          } else {
-            alert("You fuck!");
-          }
-        });
+      const eventCode = function () {
+        onSubmit();
       };
+      loadsScript("https://cdn.datacamp.com/dcl-react.js.gz", eventCode);
       dataCamp = (
         <div className="page-content">
           <div className="header flex">
             <div className="name-header">
-              <h1>Python Calculate</h1>
+              <h1>{question.name}</h1>
             </div>
             <div className="description-header">
               <span id="description">
                 <b>Description</b>
               </span>
               <TextArea
-                defaultValue="In the Python script on the right, you can type
-        Python code to solve the exercises. If you hit Run Code or
-        Submit Answer, your python script (script.py) is executed and
-        the output is shown in the IPython Shell. Submit Answer checks
-        whether your submission is correct and gives you feedback. You
-        can hit Run Code and Submit Answer as often as you want. If
-        you're stuck, you can click Get Hint, and ultimately Get
-        Solution. You can also use the IPython Shell interactively by
-        simply typing commands and hitting Enter. When you work in the
-        shell directly, your code will not be checked for correctness
-        so it is a great way to experiment."
+                defaultValue={`${question.description}`}
                 disabled={false}
                 autoSize={{ minRows: 3, maxRows: 4 }}
                 id="outputText"
@@ -144,7 +155,8 @@ class CodePageStudent extends Component {
               data-show-run-button
               data-lang="python"
               data-height="550rem"
-              id="exercise"
+              id="question"
+              onClick={this.onSubmit}
             >
               <code data-type="pre-exercise-code">{preExercise}</code>
               <code data-type="sample-code">{sample}</code>
@@ -158,15 +170,7 @@ class CodePageStudent extends Component {
             </div>
           </div>
           <div className="submit-button">
-            {this.state.code === null ? (
-              <ColorButton
-                variant="contained"
-                color="primary"
-                startIcon={<DoneIcon />}
-              >
-                Submit Assignment
-              </ColorButton>
-            ) : (
+            {this.state.code === null || this.state.correct === null ? (
               <ColorButton
                 variant="contained"
                 color="primary"
@@ -175,6 +179,16 @@ class CodePageStudent extends Component {
               >
                 Submit Assignment
               </ColorButton>
+            ) : (
+              <ConfirmSubmit
+                maxScore={question.score}
+                question={question}
+                correct={this.state.correct}
+                code={this.state.code}
+                questionId={this.props.match.params.id}
+                assignmentId={this.props.match.params.assignmentId}
+                courseId={this.props.course.course._id}
+              />
             )}
           </div>
         </div>
@@ -191,7 +205,10 @@ class CodePageStudent extends Component {
   }
 }
 const mapStateToProps = (state) => ({
-  collection: state.collection,
+  assignment: state.assignment,
+  course: state.course,
 });
 
-export default connect(mapStateToProps, { getQuestion })(CodePageStudent);
+export default connect(mapStateToProps, { getQuestionsInAssignment })(
+  CodePageStudent
+);
