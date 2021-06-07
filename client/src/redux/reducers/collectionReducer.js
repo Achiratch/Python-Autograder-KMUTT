@@ -33,7 +33,7 @@ export default function d(state = initailState, action) {
         ...state,
         question: action.payload,
         sct: action.payload.sct.code,
-        solution: action.payload.sct.code,
+        solution: action.payload.solution.code,
         sample: action.payload.sample.code,
         preExercise: action.payload.preExercise.code,
         loading: false,
