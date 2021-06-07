@@ -6,12 +6,16 @@ import {
   UPDATE_ASSIGNMENT,
   ASSIGNMENT_LOADING,
   GET_QUESTIONS_BY_ASSIGNMENT,
+  GET_QUESTION_IN_ASSIGNMENT,
+  SUBMIT_QUESTION,
 } from "../actions/type";
 
 const initailState = {
   assignments: [],
   assignment: {},
-  questionsByAssignment:[],
+  questions: [],
+  question:{},
+  submit:[],
   loading: false,
 };
 
@@ -40,12 +44,28 @@ export default function d(state = initailState, action) {
         ...state,
         assignments: [action.payload, ...state.assignments],
       };
+    case SUBMIT_QUESTION:
+      return {
+        ...state,
+        submit: [action.payload, ...state.submit]
+      }
     case GET_QUESTIONS_BY_ASSIGNMENT:
       return {
         ...state,
-        questionsByAssignment: action.payload,
+        questions: action.payload,
         loading: false,
       };
+    case GET_QUESTION_IN_ASSIGNMENT:
+      return {
+        ...state,
+        question: action.payload[0],
+        sct: action.payload[0].sct.code,
+        solution: action.payload[0].solution.code,
+        sample: action.payload[0].sample.code,
+        preExercise: action.payload[0].preExercise.code,
+        loading: false,
+      };
+
     case UPDATE_ASSIGNMENT:
       return {
         ...state,

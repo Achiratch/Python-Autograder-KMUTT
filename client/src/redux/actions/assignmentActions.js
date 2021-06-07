@@ -3,7 +3,9 @@ import {
   GET_ASSIGNMENT,
   GET_ASSIGNMENTS,
   ADD_ASSIGNMENT,
+  SUBMIT_QUESTION,
   GET_QUESTIONS_BY_ASSIGNMENT,
+  GET_QUESTION_IN_ASSIGNMENT,
   DELETE_ASSIGNMENT,
   UPDATE_ASSIGNMENT,
   ASSIGNMENT_LOADING,
@@ -18,6 +20,24 @@ export const addAssignment = (assignmentData) => (dispatch) => {
       dispatch({
         type: ADD_ASSIGNMENT,
         payload: res.data.detail,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+//Create Score via datacamp
+export const submitQuestion = (questionData) => (dispatch) => {
+  axios
+    .post("/api/score/create", questionData)
+    .then((res) =>
+      dispatch({
+        type: SUBMIT_QUESTION,
+        payload: res.data,
       })
     )
     .catch((err) =>
@@ -88,7 +108,7 @@ export const getAssignmentsByCourseId = (search, level, id) => (dispatch) => {
       })
     );
 };
-//Get Questions by assignment id
+//Get questions by assignment id
 export const getQuestionsByAssignmentId = (id) => (dispatch) => {
   dispatch(setAssignmentLoading());
   axios
@@ -106,6 +126,25 @@ export const getQuestionsByAssignmentId = (id) => (dispatch) => {
       })
     );
 };
+// Get question in assignment
+export const getQuestionsInAssignment= (assignmentId,questionId) => (dispatch) => {
+  dispatch(setAssignmentLoading());
+  axios
+    .get(`/api/assignment/${assignmentId}/question/${questionId}`)
+    .then((res) =>
+      dispatch({
+        type: GET_QUESTION_IN_ASSIGNMENT,
+        payload: res.data.detail,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_QUESTION_IN_ASSIGNMENT,
+        payload: null,
+      })
+    );
+};
+
 //Update Assignment by id
 export const editAssignment = (id, assignmentData) => (dispatch) => {
     axios
