@@ -295,7 +295,7 @@ export const GetQuestionsByAssignmentId = asyncHandler(async (req: Request, res:
 // @acess   Private
 export const GetQuestionByAssignmentIdAndQuestionId = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const assignmentId = req.params.id
-    const questionId = req.body.question
+    const questionId = req.params.questionId
     let thisQuestion = await Question.findById(questionId)
     if (!thisQuestion) return next(new ErrorResponse(`We don't have this question`, 404))
     const assignment = await Assignment.findById(assignmentId)
@@ -305,7 +305,7 @@ export const GetQuestionByAssignmentIdAndQuestionId = asyncHandler(async (req: R
     const questionsId = questions.map(q => q._id)
     let questionsDetail = []
     for (const q of questions) {
-        if (q._id === thisQuestion._id) {
+        if (String(q._id) === String(thisQuestion._id)) {
             let question = await Question.findById(q._id)
 
             if (question) {
