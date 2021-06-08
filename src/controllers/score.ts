@@ -101,7 +101,7 @@ export const CreateScoreByUpload = asyncHandler(async (req: Request, res: Respon
     const assignmentQuestionCount = assignmentQuestions.questions.length
 
 
-    const assignmentScoreDetail = await Score.find({ assignment: assignment })
+    const assignmentScoreDetail = await Score.find({ "$and": [{ student: studentId }, { assignment: assignment }] })
     const assignmentScoreDetailCount = assignmentScoreDetail.length
 
 
@@ -224,7 +224,7 @@ export const CreateScoreByString = asyncHandler(async (req: Request, res: Respon
     const assignmentQuestionCount = assignmentQuestions.questions.length
 
 
-    const assignmentScoreDetail = await Score.find({ assignment: assignment })
+    const assignmentScoreDetail = await Score.find({ "$and": [{ student: studentId }, { assignment: assignment }] })
     const assignmentScoreDetailCount = assignmentScoreDetail.length
 
 
@@ -243,7 +243,7 @@ export const CreateScoreByString = asyncHandler(async (req: Request, res: Respon
         }
     } else {
         if (sendingStatuses.includes('Late')) {
-            scoreBookSendingStatus = `Complete`
+            scoreBookSendingStatus = `Late`
         } else {
             scoreBookSendingStatus = `Complete`
         }
