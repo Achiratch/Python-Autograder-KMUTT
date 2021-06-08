@@ -5,6 +5,7 @@ import courseReducer from "./courseReducer";
 import memberReducer from "./memberReducer";
 import collectionReducer from "./collectionReducer";
 import assignmentReducer from "./assignmentReducer";
+import statusReducer from "./statusReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   member: memberReducer,
   collection: collectionReducer,
   assignment: assignmentReducer,
+  status: statusReducer,
 });
