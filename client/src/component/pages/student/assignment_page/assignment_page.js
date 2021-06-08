@@ -30,7 +30,7 @@ import {
   getStudents,
 } from "../../../../redux/actions/memberAction";
 import { getAssignmentsByCourseId } from "../../../../redux/actions/assignmentActions";
-
+import { getStatusAssignments } from "../../../../redux/actions/statusActions"
 //PropTypes
 import { PropTypes } from "prop-types";
 
@@ -59,11 +59,13 @@ class AssignmentPageStudent extends Component {
     this.props.getCourse(this.props.match.params.id);
     this.props.getStudents(this.props.match.params.id, "");
     this.props.getAssignmentsByCourseId("", "", this.props.match.params.id);
+    this.props.getStatusAssignments(this.props.match.params.id)
   }
   render() {
     const { course, auth } = this.props;
     const { questions } = this.props.collection;
     const { loading, assignments } = this.props.assignment;
+    const { statusAssignments } = this.props.status;
     let assignmentBox;
     if (loading === true) {
       assignmentBox = (
@@ -72,6 +74,15 @@ class AssignmentPageStudent extends Component {
         </div>
       );
     } else {
+      if(this.props.status.statusAssignments.length !== 0){
+        for (const a of assignments){
+          for(const s of statusAssignments){
+            if(a._id === s.assignment){
+              a.status = s.sendingStatus
+            }
+          }
+        }
+      }
       assignmentBox = <AssignmentBox assignments={assignments} />;
     }
     return (
@@ -171,10 +182,12 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   assignment: state.assignment,
   collection: state.collection,
+  status: state.status,
 });
 
 export default connect(mapStateToProps, {
   getCourse,
   getStudents,
   getAssignmentsByCourseId,
+  getStatusAssignments,
 })(AssignmentPageStudent);

@@ -22,23 +22,37 @@ import {
   getAssignment,
   getQuestionsByAssignmentId,
 } from "../../../../redux/actions/assignmentActions";
+import { getStatusQuestions } from "../../../../redux/actions/statusActions";
 class AssignmentQuestionPageStudent extends Component {
   componentDidMount() {
     this.props.getAssignment(this.props.match.params.id);
-    this.props.getQuestionsByAssignmentId(this.props.match.params.id)
+    this.props.getQuestionsByAssignmentId(this.props.match.params.id);
+    this.props.getStatusQuestions(this.props.match.params.id);
   }
- 
+
   render() {
     const { course, auth } = this.props;
-    const { loading, assignment, questions } =
-      this.props.assignment;
+    const { loading, assignment, questions } = this.props.assignment;
+    const { statusQuestions } = this.props.status;
     let questionBox;
-    if (loading === true || questions === null) {
+    if (loading === true)  {
       questionBox = <LinearProgress />;
     } else {
-      console.log(questions);
+      if(statusQuestions.length !== 0){
+        for (const q of questions){
+          for(const s of statusQuestions){
+            if(q._id === s.question){
+              q.status = s.sendingStatus
+            }
+          }
+        }
+        console.log(questions)
+      }
       questionBox = (
-        <QuestionBox questions={questions} assignmentId={this.props.match.params.id}/>
+        <QuestionBox
+          questions={questions}
+          assignmentId={this.props.match.params.id}
+        />
       );
     }
     return (
@@ -49,11 +63,17 @@ class AssignmentQuestionPageStudent extends Component {
           <div className="page-content">
             <div className="head-content-member">
               <Breadcrumb>
-                <Breadcrumb.Item><Link to={`/home/student`}>My Course</Link></Breadcrumb.Item>
+                <Breadcrumb.Item>
+                  <Link to={`/home/student`}>My Course</Link>
+                </Breadcrumb.Item>
                 <Breadcrumb.Item>
                   {this.props.course.course.courseID}
                 </Breadcrumb.Item>
-                <Breadcrumb.Item><Link to={`/assignment/${assignment.course}/student`}>Assignment</Link></Breadcrumb.Item>
+                <Breadcrumb.Item>
+                  <Link to={`/assignment/${assignment.course}/student`}>
+                    Assignment
+                  </Link>
+                </Breadcrumb.Item>
                 <Breadcrumb.Item>{assignment.name}</Breadcrumb.Item>
               </Breadcrumb>
               <div className="flex">
@@ -93,9 +113,11 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   assignment: state.assignment,
   collection: state.collection,
+  status: state.status,
 });
 export default connect(mapStateToProps, {
   getAssignment,
   getQuestion,
   getQuestionsByAssignmentId,
+  getStatusQuestions,
 })(AssignmentQuestionPageStudent);
