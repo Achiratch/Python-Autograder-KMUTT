@@ -8,6 +8,7 @@ import {
 
 const initailState = {
   answer: {},
+  edit: [],
   statusAssignments: [],
   statusQuestions: [],
   loading: false,
@@ -39,6 +40,11 @@ export default function d(state = initailState, action) {
         answer: action.payload.detail,
         code: action.payload.detail.answer.code,
         loading: false,
+      };
+    case UPDATE_ANSWER:
+      return {
+        ...state,
+        edit: [action.payload, ...state.edit],
       };
     default:
       return state;

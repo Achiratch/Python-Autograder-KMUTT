@@ -65,6 +65,25 @@ export const getAnswer = (scoreId) => (dispatch) => {
       );
   };
 
+//Update Answer by id
+export const editAnswer = (questionData) => (dispatch) => {
+  dispatch(setStatusLoading());
+  axios
+    .put(`/api/score/edit`,questionData)
+    .then((res) =>
+      dispatch({
+        type: UPDATE_ANSWER,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
 //Set loading state
 export const setStatusLoading = () => {
   return {
