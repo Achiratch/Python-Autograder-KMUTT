@@ -79,7 +79,9 @@ class AssignmentPageStudent extends Component {
           for(const s of statusAssignments){
             if(a._id === s.assignment){
               a.status = s.sendingStatus
+              a.sentOn = s.sentDate
             }
+            
           }
         }
       }

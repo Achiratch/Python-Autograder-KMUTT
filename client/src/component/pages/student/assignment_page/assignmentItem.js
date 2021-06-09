@@ -23,14 +23,11 @@ class AssignmentItem extends Component {
               </span>
               {assignment.type} : {assignment.name}
             </h1>
-            <h2>
-              By {assignment.createdBy.firstName + " "}
-              {assignment.createdBy.lastName}
-            </h2>
+            <h2>Published on: {moment(assignment.dateCreate).format("LLL")}</h2>
           </div>
           <div className="pub-date">
-            <h1>Publish Date</h1>
-            <h2>{moment(assignment.dateCreate).format("LLL")}</h2>
+            <h1>Sent on</h1>
+            <h2>{moment(assignment.sentOn).format("LLL")}</h2>
           </div>
           <div className="due-date">
             <h1>Due Date</h1>
@@ -40,12 +37,14 @@ class AssignmentItem extends Component {
             <h3 id={"level-" + assignment.level} className="level">
               Level {assignment.level}
             </h3>
+            <Tag
+              className={`${assignment.status}`}
+              id={`tag-${assignment.status}`}
+            >
+              {assignment.status}
+            </Tag>
           </div>
-          <div className="tag">
-            <h3 className="level">
-              <Tag id={`tag-${assignment.status}`}>{assignment.status}</Tag>
-            </h3>
-          </div>
+
           <div className="exercise-name">
             <Link
               to={`/assignment/${assignment.course}/${assignment._id}/student`}
@@ -70,16 +69,9 @@ class AssignmentItem extends Component {
               </span>
               {assignment.type} : {assignment.name}
             </h1>
-            <h2>
-              By {assignment.createdBy.firstName + " "}
-              {assignment.createdBy.lastName}
-            </h2>
+            <h2>Published on: {moment(assignment.dateCreate).format("LLL")}</h2>
           </div>
-          <div className="pub-date">
-            <h1>Publish Date</h1>
-            <h2>{moment(assignment.dateCreate).format("LLL")}</h2>
-          </div>
-          <div className="due-date">
+          <div className="due-date-2">
             <h1>Due Date</h1>
             <h2>{moment(assignment.dueDate).format("LLL")}</h2>
           </div>
@@ -87,12 +79,11 @@ class AssignmentItem extends Component {
             <h3 id={"level-" + assignment.level} className="level">
               Level {assignment.level}
             </h3>
+            <Tag className="New" id={`tag-New`}>
+              New
+            </Tag>
           </div>
-          <div className="tag">
-            <h3 className="level">
-              <Tag id={`tag-Complete`}>New</Tag>
-            </h3>
-          </div>
+
           <div className="exercise-name">
             <Link
               to={`/assignment/${assignment.course}/${assignment._id}/student`}

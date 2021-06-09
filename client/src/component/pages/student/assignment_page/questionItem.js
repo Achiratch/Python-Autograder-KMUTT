@@ -52,10 +52,9 @@ class QuestionItem extends Component {
           </div>
           <div id="level-box">
             <h3 className="level">
-              <Tag id={`tag-${question.status}`}>{question.status}</Tag>
+              <Tag className={`${question.status}`} id={`tag-${question.status}`}>{question.status}</Tag>
             </h3>
           </div>
-          {/* Fix here */}
           <Link to={`/assignment/${assignmentId}/question/${question._id}`}>
             <div className="button-train">
               <button className="question-edit-button">

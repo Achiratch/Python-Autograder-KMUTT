@@ -144,17 +144,17 @@ class AddExercise extends Component {
                   },
                   ({ getFieldValue }) => ({
                     validator(rule, value) {
-                      if (!value || value.length >= 6) {
+                      if (!value || value.length > 0 ) {
                         return Promise.resolve();
                       }
                       return Promise.reject(
-                        `Assignment Name must be at least 6 characters!`
+                        `Assignment Name limit 15 characters!`
                       );
                     },
                   }),
                 ]}
               >
-                <Input autoComplete="off" />
+                <Input maxLength={20} autoComplete="off" />
               </Form.Item>
               <Form.Item
                 className="space"

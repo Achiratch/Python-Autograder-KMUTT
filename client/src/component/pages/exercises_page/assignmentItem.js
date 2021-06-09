@@ -33,7 +33,7 @@ class AssignmentItem extends Component {
             <h1>Due Date</h1>
             <h2>{moment(assignment.dueDate).format("LLL")}</h2>
           </div>
-          <div id="level-box">
+          <div className="level-assignment" id="level-box">
             <h3 id={"level-" + assignment.level} className="level">
               Level {assignment.level}
             </h3>

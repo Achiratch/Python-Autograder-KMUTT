@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "../../collections_page/collections_page.css";
 import ConfirmSubmit from "./confirmSubmit";
+import ConfirmEditSubmit from "./confirmEditSubmit";
+
 //Layout
 import Navbar from "../../../layout/navbarStudent";
 import Footer from "../../../layout/footer";
@@ -189,7 +191,7 @@ class CodePageStudent extends Component {
                     Submit Assignment
                   </ColorButton>
                 ) : (
-                  <ConfirmSubmit
+                  <ConfirmEditSubmit
                     maxScore={question.score}
                     question={question}
                     correct={this.state.correct}

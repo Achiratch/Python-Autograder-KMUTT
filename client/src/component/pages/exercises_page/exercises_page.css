@@ -89,6 +89,19 @@
   margin-left: 0px;
 }
 
+.due-date-2{
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.sent-on{
+  margin-right: 0;
+  margin-left: auto;
+}
+
+#dum{
+  visibility: hidden;
+}
 @media only screen and (min-width: 1344px) {
   .level-box{
     margin-top: 1.5rem;
@@ -148,7 +161,7 @@
     text-align: center;
     justify-content: center;
     border-radius: 10px;
-    margin: 1.6rem 2rem 0rem;
+    margin: 1.6rem 1.7rem 0rem;
     padding: 12px 60px ;
     font-family: Roboto;
     font-size: 17px;
@@ -172,7 +185,7 @@
     text-align: center;
     justify-content: center;
     border-radius: 10px;
-    margin: 0.8rem 2rem 0rem;
+    margin: 0.8rem 1.7rem 0rem;
     padding: 12px 60px ;
     font-family: Roboto;
     font-size: 17px;
@@ -215,8 +228,9 @@
 }
 
 .execercise-box h3{
-  padding-left: 2rem;
-  padding-top: 2.4rem;
+  padding-left: 0.7rem;
+  padding-top: 1.2rem;
+  margin-bottom: 0.8rem;
   font-size: 16px;
 }
 
@@ -282,6 +296,33 @@
   margin-right: 15rem;
 }
 
+.Complete{
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+}
+
+.Sent{
+  padding-left: 1.7rem;
+  padding-right: 1.7rem;
+}
+.New{
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+}
+
+.Late{
+  padding-left: 1.7rem;
+  padding-right: 1.7rem;
+}
+
+.level{
+  justify-content: center;
+  left: auto;
+  right: inherit;
+}
+.level-assignment{
+  margin-top: 1.3rem;
+}
 #tag-Sent{
   color: #389e0d;
   background: #f6ffed;
@@ -302,6 +343,12 @@
   color: #cf1322;
     background: #fff1f0;
     border-color: #ffa39e;
+}
+
+#tag-New{
+  color: #096dd9;
+  background: #e6f7ff;
+  border-color: #91d5ff;
 }
 
 .submit-button{
