@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 //ANTD
 import { Modal, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
@@ -96,12 +96,14 @@ class ConfirmSubmit extends Component {
             >
               Cancel
             </button>
-            <button
-              className="btn btn-success delete"
-              onClick={this.onSubmit.bind(this)}
-            >
-              Submit
-            </button>
+            <Link to={`/assignment/${this.props.courseId}/student`}>
+              <button
+                className="btn btn-success delete"
+                onClick={this.onSubmit.bind(this)}
+              >
+                Submit
+              </button>
+            </Link>
           </div>
         </Modal>
       </>
