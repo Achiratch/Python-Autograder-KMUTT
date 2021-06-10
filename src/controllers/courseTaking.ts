@@ -149,23 +149,45 @@ export const ResignCourse = asyncHandler(async (req: Request, res: Response, nex
 // @acess   Private
 export const GetAllRegisterdCourses = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const studentId: any = req.params.id
+    const search = req.query.search as string
+    const semester = req.query.semester as any
+    const year = req.query.year as any
+
+    const queryArray = []
+    if (!isEmpty(search)) queryArray.push({ '$or': [{ courseID: { $regex: search, $options: 'i' } }, { courseName: { $regex: search, $options: 'i' } }] })
+    if (!isEmpty(semester)) queryArray.push({ semester: semester })
+    if (!isEmpty(year)) queryArray.push({ academicYear: year })
     let student = await User.findOne({ _id: studentId })
+
     if (student === null) {
         return next(new ErrorResponse('We dont have this student!', 400))
     }
+    const courseArray = []
 
     try {
         let registerdCourses = await CourseTaking.find({ 'student._id': studentId })
-            .select('course')
-            .populate('course')
+
 
         if (registerdCourses.length === 0) {
             return next(new ErrorResponse(`You didn't register any courses!`, 404))
         }
 
+        for (const r of registerdCourses) {
+            const loopQueryArray: any = queryArray
+            loopQueryArray.push({ _id: String(r.course) })
+            const course = await Course.find({ '$and': loopQueryArray })
+            if (course.length > 0) {
+                courseArray.push(course[0])
+            }
+            loopQueryArray.pop()
+        }
+
+        if (courseArray.length === 0) {
+            return next(new ErrorResponse(`You didn't register any courses!`, 404))
+        }
         res.status(200).json({
             success: true,
-            courses: registerdCourses
+            courses: courseArray
 
         });
     } catch (error) {
