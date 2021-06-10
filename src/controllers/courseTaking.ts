@@ -278,7 +278,6 @@ export const AddStudentsToCourse = asyncHandler(async (req: Request, res: Respon
         return next(new ErrorResponse('We do not have this course!', 404))
     }
 
-    const newStudentsArray = []
     const students: string[] = JSON.parse(req.body.students)
     for (const student_id of students) {
 
@@ -302,11 +301,11 @@ export const AddStudentsToCourse = asyncHandler(async (req: Request, res: Respon
             student: StudentSchema,
             status,
         })
-        newStudentsArray.push(register_course)
     }
 
+    const updatedStudent = await CourseTaking.find({ course: course })
     res.status(201).json({
         success: true,
-        detail: newStudentsArray
+        detail: updatedStudent
     })
 })
