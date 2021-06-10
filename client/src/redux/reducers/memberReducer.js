@@ -36,7 +36,7 @@ export default function d(state = initailState, action) {
     case ADD_STUDENT:
       return {
         ...state,
-        students: [action.payload, ...state.students],
+        students: action.payload,
       };
     case DELETE_STUDENT:
       return{
