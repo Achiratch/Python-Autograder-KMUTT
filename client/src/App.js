@@ -14,6 +14,7 @@ import AssignmentQuestionPageStudent from "./component/pages/student/assignment_
 import CodePageStudent from "./component/pages/student/assignment_page/code_page"
 import MemberPageStudent from "./component/pages/student/member_page/member_page"
 import ScoreBookPageStudent from "./component/pages/student/scorebook_page/scorebook_page"
+import ScorebookQuestion from "./component/pages/student/scorebook_page/scorebookQuestion"
 //ADMIN-PAGE------------------------------------
 import LandingPage from "./component/pages/landing_page";
 import RegisterPage from "./component/pages/register_page";
@@ -91,6 +92,12 @@ function App() {
             path="/scorebook/:id/student"
             role={ROLE.STUDENT}
             component={ScoreBookPageStudent}
+          />
+          <ProtectedRoute
+            exact
+            path="/scorebook/:id/:id/student"
+            role={ROLE.STUDENT}
+            component={ScorebookQuestion}
           />
           <ProtectedRoute
             exact

@@ -93,7 +93,10 @@
   margin-right: 0;
   margin-left: auto;
 }
-
+.score-box{
+  margin-left: auto;
+  margin-right: 0;
+}
 .sent-on{
   margin-right: 0;
   margin-left: auto;
@@ -360,9 +363,11 @@
 }
 
 #lightcancel {
-  color: #f00909;
+  color: #666666;
 }
-
+#font-0{
+  color: #850812;
+}
 .score-button {
   text-align: center;
   justify-content: center;
@@ -376,6 +381,12 @@
   border: none;
   background-color: #15c43b;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.096), 0px 0px 5px rgba(0, 0, 0, 0.096);
+  transition: all ease-in-out 0.1s;
+}
+.score-button:hover{
+  z-index: 1;
+  background-color: #10972e;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.151), 0px 0px 5px rgb(0, 0, 0.151, 0);
   transition: all ease-in-out 0.1s;
 }
 
