@@ -320,10 +320,11 @@ export const GetSendingStatusByStudentId = asyncHandler(async (req: Request, res
 })
 
 // @desc Get Sending status by course id
-// @route GET /api/score/course/:id/status
+// @route GET /api/score/course/:id/assignment/:aid/status
 // @access Private
 export const GetSendingStatusByCourseId = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const courseId: any = req.params.id
+    const assignmentId: any = req.params.aid
     const page: number = req.query.page as any
     const limit: number = parseInt(req.query.limit as string)
     const search: string = req.query.search as string
@@ -331,7 +332,7 @@ export const GetSendingStatusByCourseId = asyncHandler(async (req: Request, res:
 
     let scoreBooks
     // if (scoreBooks.length === 0) return next(new ErrorResponse(`Bad input`, 400))
-    queryArray.push({ course: courseId })
+    queryArray.push({ "$and": [{ course: courseId }, { assignment: assignmentId }] })
     if (!isEmpty(search)) {
         queryArray.push({ "$or": [{ "student.firstName": { $regex: search, $options: 'i' } }, { "student.email": { $regex: search } }] })
     }
@@ -684,5 +685,20 @@ export const EditScoreByScoreId = asyncHandler(async (req: Request, res: Respons
     res.status(201).json({
         success: true,
         detail: updatedScore
+    })
+})
+
+// @desc    Get all answer by assignment and studentId
+// @route   GET /api/score/assignment/:id/student/:sid
+// @access   Private
+export const GetAllAnswerByStudentIdForTeacher = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const studentId: any = req.params.sid
+    const assignmentId: any = req.params.id
+
+    const allAnswer = await Score.find({ "$and": [{ student: studentId }, { assignment: assignmentId }] }).select('-answer')
+    if (allAnswer.length === 0) return next(new ErrorResponse(`Bad input`, 400))
+    res.status(201).json({
+        success: true,
+        detail: allAnswer
     })
 })
