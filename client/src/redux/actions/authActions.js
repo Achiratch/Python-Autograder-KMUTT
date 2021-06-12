@@ -1,4 +1,10 @@
-import { GET_ERRORS, SET_CURRENT_USER } from "./type";
+import {
+  GET_ERRORS,
+  SET_CURRENT_USER,
+  GET_ALL_USERS,
+  UPDATE_ROLE,
+  USERS_LOADING,
+} from "./type";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "../utills/setAuthToken";
 import axios from "axios";
@@ -45,9 +51,53 @@ export const setCurrentUser = (decoded) => {
 //Log user out
 export const logoutUser = () => (dispath) => {
   //Remove token from localStorage
-  localStorage.removeItem('jwtToken');
+  localStorage.removeItem("jwtToken");
   //Remove auth header for future requests
   setAuthToken(false);
   //Set current user to {} which will set isAuthenticated to false
-  dispath(setCurrentUser({}))
+  dispath(setCurrentUser({}));
+};
+
+
+//Get All user
+export const getUsers = (search) => (dispatch) => {
+  dispatch(setUserLoading());
+  axios
+    .get(`/api/users?search=${search}`)
+    .then((res) =>
+      dispatch({
+        type: GET_ALL_USERS,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ALL_USERS,
+        payload: null,
+      })
+    );
+};
+
+export const editRole = (id) => (dispatch) => {
+  axios
+    .put(`/api/users/role/edit`, id)
+    .then((res) =>
+      dispatch({
+        type: UPDATE_ROLE,
+        payload: res.data,
+      })
+    )
+    .catch((err) => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: null,
+      });
+    });
+};
+
+//Set loading state
+export const setUserLoading = () => {
+  return {
+    type: USERS_LOADING,
+  };
 };
