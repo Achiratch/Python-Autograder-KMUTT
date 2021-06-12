@@ -27,7 +27,8 @@ import ScorebookStudent from "./component/pages/scorebook_page/scorebookStudent"
 import EditScore from "./component/pages/scorebook_page/editScore"
 import MemberPage from "./component/pages/member_page/member_page";
 import CollectionsPage from "./component/pages/collections_page/collections_page";
-import QuestionPage from "./component/pages/collections_page/question_page"
+import QuestionPage from "./component/pages/collections_page/question_page";
+import RoleManagement from "./component/pages/role_page/roleManagement"
 //----------------------------------------
 
 //Error-Page------------------------------
@@ -112,62 +113,68 @@ function App() {
           <ProtectedRoute
             exact
             path="/home"
-            role={ROLE.STUDENT}
+            role={ROLE.ADMIN}
             component={HomePage}
           />
           <ProtectedRoute
             exact
             path="/collections"
-            role={ROLE.STUDENT}
+            role={ROLE.ADMIN}
             component={CollectionsPage}
           />
           <ProtectedRoute
             exact
             path="/collections/question/:id"
-            role={ROLE.STUDENT}
+            role={ROLE.ADMIN}
             component={QuestionPage}
           />
           <ProtectedRoute
             exact
             path="/assignment/:id"
-            role={ROLE.STUDENT}
+            role={ROLE.ADMIN}
             component={ExercisesPage}
           />
           <ProtectedRoute
             exact
             path="/assignment/:id/:id"
-            role={ROLE.STUDENT}
+            role={ROLE.ADMIN}
             component={AssignmentViewPage}
           />
           <ProtectedRoute
             exact
             path="/scorebook/:id"
-            role={ROLE.STUDENT}
+            role={ROLE.ADMIN}
             component={ScoreBookPage}
           />
           <ProtectedRoute
             exact
             path="/scorebook/:courseId/:assignmentId"
-            role={ROLE.STUDENT}
+            role={ROLE.ADMIN}
             component={ScorebookAllQuestion}
           />
           <ProtectedRoute
             exact
             path="/scorebook/:courseId/:assignmentId/:studentId"
-            role={ROLE.STUDENT}
+            role={ROLE.ADMIN}
             component={ScorebookStudent}
           />
           <ProtectedRoute
             exact
             path="/scorebook/:courseId/:assignmentId/:questionId/:scoreId/edit"
-            role={ROLE.STUDENT}
+            role={ROLE.ADMIN}
             component={EditScore}
           />
           <ProtectedRoute
             exact
             path="/member/:id"
-            role={ROLE.STUDENT}
+            role={ROLE.ADMIN}
             component={MemberPage}
+          />
+          <ProtectedRoute
+            exact
+            path="/role"
+            role={ROLE.ADMIN}
+            component={RoleManagement}
           />
           <Route path="/403" component={PageNeedPerrmission} />
           <Route path="*" component={PageNotFound} />

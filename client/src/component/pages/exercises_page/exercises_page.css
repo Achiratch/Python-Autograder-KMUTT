@@ -62,6 +62,11 @@
   margin-left: auto;
   margin-right: 1.5rem;
 }
+.search-role{
+  display: flex;
+  margin-left: auto;
+  margin-right: 0rem;
+}
 
 .icon-button{
     padding-right: 1rem ;
@@ -354,6 +359,23 @@
   border-color: #91d5ff;
 }
 
+#tag-student{
+  color: #389e0d;
+  background: #f6ffed;
+  border-color: #b7eb8f;
+}
+
+#tag-admin{
+  color: #096dd9;
+  background: #e6f7ff;
+  border-color: #91d5ff;
+}
+
+.admin{
+  padding-left: 0.725rem;
+  padding-right: 0.725rem;
+}
+
 .submit-button{
   margin: 1.5rem;
 }
@@ -432,3 +454,26 @@
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.151), 0px 0px 5px rgb(0, 0, 0.151, 0);
   background-color: #00695f
   ;}
+
+  .id-group{
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .user-group{
+    margin-left: 0;
+    margin-right: auto;
+  }
+ .email-group{
+  
+ }
+ .role-group{
+
+ }
+ .search-user{
+   margin-top: 1rem;
+ }
+ .search-button{
+  margin-top: 1rem;
+  padding-left: 0.5rem;
+ }

@@ -116,6 +116,9 @@ function Navbar(props) {
         <NavLink className="nav-link" to="/collections">
           Collection
         </NavLink>
+        <NavLink className="nav-link" to="/role">
+          Role Management
+        </NavLink>
       </Menu>
       <Menu></Menu>
       <Menu></Menu>
