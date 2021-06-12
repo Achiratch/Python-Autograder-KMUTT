@@ -68,7 +68,6 @@ class AddExercise extends Component {
 
   //Submit form
   onFormSubmitHandler() {
-    console.log("[Create assignment]");
     const data = this.formRef.current.getFieldsValue();
     const length = data.questions.length;
 

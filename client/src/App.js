@@ -22,6 +22,9 @@ import HomePage from "./component/pages/home_page/home_page";
 import ExercisesPage from "./component/pages/exercises_page/exercises_page";
 import AssignmentViewPage from "./component/pages/exercises_page/assignmentView_page"
 import ScoreBookPage from "./component/pages/scorebook_page/scorebook_page";
+import ScorebookAllQuestion from "./component/pages/scorebook_page/scorebookAllQuestion";
+import ScorebookStudent from "./component/pages/scorebook_page/scorebookStudent"
+import EditScore from "./component/pages/scorebook_page/editScore"
 import MemberPage from "./component/pages/member_page/member_page";
 import CollectionsPage from "./component/pages/collections_page/collections_page";
 import QuestionPage from "./component/pages/collections_page/question_page"
@@ -141,6 +144,24 @@ function App() {
             path="/scorebook/:id"
             role={ROLE.STUDENT}
             component={ScoreBookPage}
+          />
+          <ProtectedRoute
+            exact
+            path="/scorebook/:courseId/:assignmentId"
+            role={ROLE.STUDENT}
+            component={ScorebookAllQuestion}
+          />
+          <ProtectedRoute
+            exact
+            path="/scorebook/:courseId/:assignmentId/:studentId"
+            role={ROLE.STUDENT}
+            component={ScorebookStudent}
+          />
+          <ProtectedRoute
+            exact
+            path="/scorebook/:courseId/:assignmentId/:questionId/:scoreId/edit"
+            role={ROLE.STUDENT}
+            component={EditScore}
           />
           <ProtectedRoute
             exact

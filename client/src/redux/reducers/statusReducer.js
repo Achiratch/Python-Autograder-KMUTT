@@ -3,6 +3,8 @@ import {
   GET_ANSWER,
   GET_STATUS_ASSIGNMENTS,
   GET_STATUS_QUESTIONS,
+  GET_STATUS_BY_STUDENT,
+  UPDATE_SCORE,
   STATUS_LOADING,
 } from "../actions/type";
 
@@ -11,6 +13,7 @@ const initailState = {
   edit: [],
   statusAssignments: [],
   statusQuestions: [],
+  statusStudent: [],
   loading: false,
 };
 
@@ -34,6 +37,12 @@ export default function d(state = initailState, action) {
         statusQuestions: action.payload.detail,
         loading: false,
       };
+    case GET_STATUS_BY_STUDENT:
+      return {
+        ...state,
+        statusStudent: action.payload.detail,
+        loading: false,
+      };
     case GET_ANSWER:
       return {
         ...state,
@@ -45,6 +54,11 @@ export default function d(state = initailState, action) {
       return {
         ...state,
         edit: [action.payload, ...state.edit],
+      };
+    case UPDATE_SCORE:
+      return {
+        ...state,
+        answer: action.payload,
       };
     default:
       return state;

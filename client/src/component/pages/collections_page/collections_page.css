@@ -30,6 +30,24 @@
   padding: 0.9rem ;
   font-size: 18px;
 }
+.question-button-disable{
+  text-align: center;
+  justify-content: center;
+  border-radius: 0px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin: 0rem 0rem 0rem;
+  padding: 12.5px 92px ;
+  font-family: Roboto;
+  font-size: 17px;
+  color: #F0F3F4;
+  font-weight: 700; 
+  border: none;
+  background-color: #757575
+  ;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.096), 0px 0px 5px rgba(0, 0, 0, 0.096) ;
+  transition: all ease-in-out 0.1s;
+}
 
 .question-button{
   text-align: center;
@@ -59,8 +77,13 @@
 }
 .name-group{
   margin-left: 0; 
-  margin-right: auto;
+  margin-right: 0;
   position: inherit;
+}
+
+.score-group{
+  margin-left: auto;
+  margin-right: 0;
 }
 
 .createby-group{
@@ -68,12 +91,16 @@
   margin-right: 0;
   position: inherit;
 }
-
+.flname-group{
+  margin-left: 0;
+  margin-right: auto; 
+}
 .level-group{
   margin-left: 0; 
   margin-right: 0;
   position: inherit;
 }
+
 
 .button-train{
   margin-left: 0; 
@@ -197,4 +224,22 @@
  }
  .edit-code .datacamp-exercise {
   margin-bottom: 0em;
+}
+
+.score-edit{
+  margin: 1rem 1rem;
+  display: flex;
+}
+.sent-date{
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  border-radius: 10rem;
+}
+
+.edit{
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+}
+
+.edit-score-button{
+  padding: 0.6rem;
 }

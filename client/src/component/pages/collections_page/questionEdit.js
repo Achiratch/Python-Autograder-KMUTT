@@ -44,7 +44,6 @@ class QuestionEdit extends Component {
     }
   }
   onFormSubmitHandler(id) {
-    console.log("[Create question]");
     const data = this.formRef.current.getFieldsValue();
     //solution 1
     let data_ = new FormData();
@@ -55,7 +54,6 @@ class QuestionEdit extends Component {
     data_.append("sample", this.state.sample);
     data_.append("sct", this.state.sct);
     data_.append("solution", this.state.solution);
-    console.log(data_);
     this.props.editQuestion(id, data_);
     this.handleCancel();
     message.success("This Question has been edited.");

@@ -60,7 +60,6 @@ class EditAssignment extends Component {
 
   //Submit form
   onFormSubmitHandler() {
-    console.log("[Edit assignment]");
     const data = this.formRef.current.getFieldsValue();
     const length = data.questions.length;
 

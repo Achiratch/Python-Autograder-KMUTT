@@ -9,7 +9,7 @@ import {
   DELETE_ASSIGNMENT,
   UPDATE_ASSIGNMENT,
   ASSIGNMENT_LOADING,
-  GET_ERRORS
+  GET_ERRORS,
 } from "./type";
 
 //Create Assignment
@@ -50,30 +50,28 @@ export const submitQuestion = (questionData) => (dispatch) => {
 
 //Get Assignment by id
 export const getAssignment = (id) => (dispatch) => {
-    dispatch(setAssignmentLoading());
-    axios
-      .get(`/api/assignment/${id}`)
-      .then((res) =>
-        dispatch({
-          type: GET_ASSIGNMENT,
-          payload: res.data.detail,
-        })
-      )
-      .catch((err) =>
-        dispatch({
-          type: GET_ASSIGNMENT,
-          payload: null,
-        })
-      );
-  };
+  dispatch(setAssignmentLoading());
+  axios
+    .get(`/api/assignment/${id}`)
+    .then((res) =>
+      dispatch({
+        type: GET_ASSIGNMENT,
+        payload: res.data.detail,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ASSIGNMENT,
+        payload: null,
+      })
+    );
+};
 
 //Get all Assignments
 export const getAssignments = (search, level, page) => (dispatch) => {
   dispatch(setAssignmentLoading());
   axios
-    .get(
-      `/api/assignment`
-    )
+    .get(`/api/assignment`)
     .then((res) =>
       dispatch({
         type: GET_ASSIGNMENTS,
@@ -92,9 +90,7 @@ export const getAssignments = (search, level, page) => (dispatch) => {
 export const getAssignmentsByCourseId = (search, level, id) => (dispatch) => {
   dispatch(setAssignmentLoading());
   axios
-    .get(
-      `/api/assignment/course/${id}?search=${search}&level=${level}`
-    )
+    .get(`/api/assignment/course/${id}?search=${search}&level=${level}`)
     .then((res) =>
       dispatch({
         type: GET_ASSIGNMENTS,
@@ -119,73 +115,73 @@ export const getQuestionsByAssignmentId = (id) => (dispatch) => {
         payload: res.data.detail,
       })
     )
-    .catch((err) =>
+    .catch((err) => {
       dispatch({
-        type: GET_QUESTIONS_BY_ASSIGNMENT,
+        type: GET_ERRORS,
         payload: null,
-      })
-    );
+      });
+    });
 };
 // Get question in assignment
-export const getQuestionsInAssignment= (assignmentId,questionId) => (dispatch) => {
-  dispatch(setAssignmentLoading());
-  axios
-    .get(`/api/assignment/${assignmentId}/question/${questionId}`)
-    .then((res) =>
-      dispatch({
-        type: GET_QUESTION_IN_ASSIGNMENT,
-        payload: res.data.detail,
-      })
-    )
-    .catch((err) =>
-      dispatch({
-        type: GET_QUESTION_IN_ASSIGNMENT,
-        payload: null,
-      })
-    );
-};
-
-//Update Assignment by id
-export const editAssignment = (id, assignmentData) => (dispatch) => {
+export const getQuestionsInAssignment =
+  (assignmentId, questionId) => (dispatch) => {
+    dispatch(setAssignmentLoading());
     axios
-      .put(`/api/assignment/${id}/update`, assignmentData)
+      .get(`/api/assignment/${assignmentId}/question/${questionId}`)
       .then((res) =>
         dispatch({
-          type: UPDATE_ASSIGNMENT,
+          type: GET_QUESTION_IN_ASSIGNMENT,
           payload: res.data.detail,
-        })
-      )
-      .catch((err) => {
-        console.log(err)
-        dispatch({
-          type: GET_ERRORS,
-          payload: err.response.error,
-        })}
-      );
-      
-  };
-
-//Delete Assignment by id
-export const deleteAssignment = (id) => (dispatch) => {
-    axios
-      .delete(`/api/assignment/${id}`)
-      .then((res) =>
-        dispatch({
-          type: DELETE_ASSIGNMENT,
-          payload: id,
         })
       )
       .catch((err) =>
         dispatch({
-          type: GET_ERRORS,
-          payload: err.response.data,
+          type: GET_QUESTION_IN_ASSIGNMENT,
+          payload: null,
         })
       );
   };
 
+//Update Assignment by id
+export const editAssignment = (id, assignmentData) => (dispatch) => {
+  axios
+    .put(`/api/assignment/${id}/update`, assignmentData)
+    .then((res) =>
+      dispatch({
+        type: UPDATE_ASSIGNMENT,
+        payload: res.data.detail,
+      })
+    )
+    .catch((err) => {
+      console.log(err);
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.error,
+      });
+    });
+};
+
+//Delete Assignment by id
+export const deleteAssignment = (id) => (dispatch) => {
+  axios
+    .delete(`/api/assignment/${id}`)
+    .then((res) =>
+      dispatch({
+        type: DELETE_ASSIGNMENT,
+        payload: id,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
 //Set loading state
 export const setAssignmentLoading = () => {
-    return {
-      type: ASSIGNMENT_LOADING,
-    };
+  return {
+    type: ASSIGNMENT_LOADING,
   };
+};

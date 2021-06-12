@@ -26,7 +26,6 @@ import {
 class AssignmentViewPage extends Component {
   componentDidMount() {
     this.props.getAssignment(this.props.match.params.id);
-    console.log(this.props.match.params);
     this.props.getQuestionsByAssignmentId(this.props.match.params.id);
   }
   render() {
@@ -37,7 +36,6 @@ class AssignmentViewPage extends Component {
     if (loading === true || questions === null) {
       questionBox = <LinearProgress />;
     } else {
-      console.log(questions);
       questionBox = (
         <QuestionBox questions={questions} />
       );

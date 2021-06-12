@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import Footer from "../../../layout/footer";
-import Navbar from "../../../layout/navbarStudent";
-import Sidebar from "../../../layout/sidebarStudent";
+import Footer from "../../layout/footer";
+import Navbar from "../../layout/navbar";
+import Sidebar from "../../layout/sidebar";
 import { Link } from "react-router-dom";
+import QuestionBox from "./questionBox";
 //CSS
-import "../../exercises_page/exercises_page.css";
-import QuestionBox from "./questionBox"
+import "../exercises_page/exercises_page.css";
 
 //ANTD
 import { Breadcrumb } from "antd";
@@ -15,41 +15,45 @@ import { LinearProgress } from "@material-ui/core";
 
 //Redux
 import { connect } from "react-redux";
-import { getQuestion } from "../../../../redux/actions/collectionAction";
 import {
   getAssignment,
   getQuestionsByAssignmentId,
-} from "../../../../redux/actions/assignmentActions";
-import { getStatusQuestions } from "../../../../redux/actions/statusActions";
-
-class ScorebookQuestion extends Component {
+} from "../../../redux/actions/assignmentActions";
+import { getSendingStatusAssignments } from "../../../redux/actions/statusActions";
+import { getStudents } from "../../../redux/actions/memberAction";
+class ScorebookAllQuestion extends Component {
   componentDidMount() {
-    this.props.getAssignment(this.props.match.params.id);
-    this.props.getQuestionsByAssignmentId(this.props.match.params.id);
-    this.props.getStatusQuestions(this.props.match.params.id);
+    this.props.getAssignment(this.props.match.params.assignmentId);
+    this.props.getQuestionsByAssignmentId(this.props.match.params.assignmentId);
+    this.props.getStudents(this.props.match.params.courseId, "");
+    this.props.getSendingStatusAssignments(
+      this.props.match.params.courseId,
+      this.props.match.params.assignmentId
+    );
   }
   render() {
     const { course } = this.props;
-    const { loading, assignment, questions } = this.props.assignment;
+    const { loading, assignment } = this.props.assignment;
     const { statusQuestions } = this.props.status;
+    const { students } = this.props.member;
     let questionBox;
-    if (loading === true)  {
+    if (loading === true) {
       questionBox = <LinearProgress />;
     } else {
-      if(statusQuestions.length !== 0){
-        for (const q of questions){
-          for(const s of statusQuestions){
-            if(q._id === s.question){
-              q.myScore = s.score
+      if (statusQuestions.length !== 0) {
+        for (const m of students) {
+          for (const s of statusQuestions) {
+            if (m.student.studentID === s.student.studentID) {
+              m.studentScore = s.score;
+              m.status = s.sendingStatus;
             }
           }
         }
-        console.log(questions)
       }
       questionBox = (
         <QuestionBox
-          questions={questions}
-          assignmentId={this.props.match.params.id}
+          students={students}
+          assignmentId={this.props.match.params.assignmentId}
         />
       );
     }
@@ -62,15 +66,13 @@ class ScorebookQuestion extends Component {
             <div className="head-content-member">
               <Breadcrumb>
                 <Breadcrumb.Item>
-                  <Link to={`/home/student`}>My Course</Link>
+                  <Link to={`/home`}>My Course</Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
                   {this.props.course.course.courseID}
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                  <Link to={`/scorebook/${assignment.course}/student`}>
-                    Score Book
-                  </Link>
+                  <Link to={`/scorebook/${assignment.course}`}>Score Book</Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>{assignment.name}</Breadcrumb.Item>
               </Breadcrumb>
@@ -88,13 +90,13 @@ class ScorebookQuestion extends Component {
 }
 const mapStateToProps = (state) => ({
   course: state.course,
+  member: state.member,
   assignment: state.assignment,
   status: state.status,
 });
-
 export default connect(mapStateToProps, {
   getAssignment,
-  getQuestion,
   getQuestionsByAssignmentId,
-  getStatusQuestions,
-})(ScorebookQuestion);
+  getSendingStatusAssignments,
+  getStudents,
+})(ScorebookAllQuestion);
