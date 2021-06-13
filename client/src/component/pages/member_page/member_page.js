@@ -50,10 +50,12 @@ export const columns = [
     description: "This column has a value getter and is not sortable.",
     sortable: false,
     width: 200,
-    valueGetter: (params) =>
-      `${params.getValue("firstName") || ""} ${
-        params.getValue("lastName") || ""
-      }`,
+    valueGetter: (params) =>{
+      return `${params.row.firstName || ""} ${
+        params.row.lastName || ""
+      }`
+    }
+     
   },
 ];
 
