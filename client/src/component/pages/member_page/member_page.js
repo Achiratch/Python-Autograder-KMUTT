@@ -50,13 +50,9 @@ export const columns = [
     description: "This column has a value getter and is not sortable.",
     sortable: false,
     width: 200,
-    valueGetter: (params) =>{
-      console.log(params)
-      return `${params.row.firstName || ""} ${
-        params.row.lastName || ""
-      }`
-    }
-     
+    valueGetter: (params) => {
+      return `${params.row.firstName || ""} ${params.row.lastName || ""}`;
+    },
   },
 ];
 
@@ -64,21 +60,24 @@ function MemberPage(props) {
   const [data, setData] = useState([]);
   const [selecter, setSelecter] = useState([]);
   const [search, setSearch] = useState("");
-  
 
   //------Fetch Data---------------------------------------------
   useEffect(() => {
-    const fetchMembers = () => {
-      const a = props.member.students;
-      a.forEach((i) => {
-        i.student.registerID = i._id;
-      });
-      const c = a.map((data) => data.student);
-      c.forEach((i) => (i.id = i._id));
-      setData(c);
-      console.log(c);
-    };
-    fetchMembers();
+    if (props.member.student) {
+      if (props.member.students !== null ) {
+        const fetchMembers = () => {
+          const a = props.member.students;
+          a.forEach((i) => {
+            i.student.registerID = i._id;
+          });
+          const c = a.map((data) => data.student);
+          c.forEach((i) => (i.id = i._id));
+          setData(c);
+          console.log(c);
+        };
+        fetchMembers();
+      }
+    }
   }, [props.member.students]);
   //---------------------------------------------------------------
 
@@ -91,10 +90,17 @@ function MemberPage(props) {
   };
   //---------------------------------------------------------------
 
+  let numberStudent;
+  if (props.member.students) {
+    if (props.member.students !== null) {
+      numberStudent = props.member.students.length;
+    } 
+  }
+
   let studentTable;
   if (props.member.loading === true) {
     studentTable = <LinearProgress />;
-  } else if(data.length !==0){
+  } else if (data.length !== 0) {
     studentTable = (
       <div className="table-content">
         <div className="flex" style={{ height: 720, width: "100%" }}>
@@ -109,8 +115,8 @@ function MemberPage(props) {
         </div>
       </div>
     );
-  } 
-    
+  }
+
   // else if (props.errors.success === false ) {
   //   <div className="table-content">
   //     <div className="flex" style={{ height: 720, width: "100%" }}>
@@ -163,11 +169,11 @@ function MemberPage(props) {
                   <AddPopup course={props.course} />
                 </span>
               </div>
-            ) : <div className="block-invisible"></div>}
+            ) : (
+              <div className="block-invisible"></div>
+            )}
             <div className="number-student">
-              <h6 className="font-size-number">
-                {props.member.students.length} Students
-              </h6>
+              <h6 className="font-size-number">{numberStudent} Students</h6>
             </div>
           </div>
           {studentTable}

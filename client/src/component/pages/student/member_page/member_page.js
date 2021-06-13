@@ -45,10 +45,9 @@ export const columns = [
     description: "This column has a value getter and is not sortable.",
     sortable: false,
     width: 200,
-    valueGetter: (params) =>
-      `${params.getValue("firstName") || ""} ${
-        params.getValue("lastName") || ""
-      }`,
+    valueGetter: (params) => {
+      return `${params.row.firstName || ""} ${params.row.lastName || ""}`;
+    },
   },
 ];
 
@@ -85,7 +84,7 @@ function MemberPageStudent(props) {
   if (props.member.loading === true) {
     studentTable = <LinearProgress />;
   } else if (data.length !== 0) {
-    console.log(data)
+    console.log(data);
     studentTable = (
       <div className="table-content">
         <div className="flex" style={{ height: 720, width: "100%" }}>
@@ -100,7 +99,7 @@ function MemberPageStudent(props) {
         </div>
       </div>
     );
-  } 
+  }
 
   return (
     <div>

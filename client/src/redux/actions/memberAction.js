@@ -21,8 +21,8 @@ export const getStudents = (id, search) => (dispatch) => {
     )
     .catch((err) =>
       dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data,
+        type: GET_STUDENTS,
+        payload: null,
       })
     );
 };
@@ -40,8 +40,8 @@ export const getAllStudents = (id, search) => (dispatch) => {
     )
     .catch((err) =>
       dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data,
+        type: GET_ALLSTUDENTS,
+        payload: null,
       })
     );
 };
