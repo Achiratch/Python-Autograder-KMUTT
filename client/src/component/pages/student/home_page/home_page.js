@@ -80,9 +80,6 @@ class HomePageStudent extends Component {
         <Navbar />
         <div className="body">
           <div className="page-content container">
-            <Link to={`/home`}>
-              <button>ADMIN</button>
-            </Link>
             <div className="head-content ">
               <h1 className="course-h1">All Course</h1>
               <h5 className="description">
