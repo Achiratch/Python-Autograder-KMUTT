@@ -67,7 +67,7 @@ class HomePage extends Component {
   }
   componentDidMount() {
     this.props.getCoursesByFilter("", "", "");
-    console.log(this.props.auth.user.id)
+    console.log(this.props.auth.user.id);
   }
   render() {
     const { courses, loading } = this.props.course;
@@ -84,29 +84,6 @@ class HomePage extends Component {
         <Navbar />
         <div className="body">
           <div className="page-content container">
-            <Link to={`/home/student/${this.props.auth.user.id}`}>
-              <button>Student</button>
-            </Link>
-            {/* <div data-datacamp-exercise data-lang="python" data-height="500rem">
-              <code data-type="pre-exercise-code">
-                # This will get executed each time the exercise gets initialized
-                b = 6
-              </code>
-              <code data-type="sample-code">
-                # Create a variable a, equal to 5 # Print out a
-              </code>
-              <code data-type="solution"></code>
-              <code data-type="sct">
-                test_object("a") test_function("print") success_msg("Great
-                job!")
-              </code>
-
-              <div data-type="hint">
-                Use the assignment operator (<code>=</code>) to create the
-                variable
-                <code>a</code>.
-              </div>
-            </div> */}
             <div className="head-content ">
               <h1 className="course-h1">All Course</h1>
               <h5 className="description">

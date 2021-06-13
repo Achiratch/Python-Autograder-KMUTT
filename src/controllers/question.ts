@@ -88,7 +88,7 @@ export const CreateQuestion = asyncHandler(async (req: Request, res: Response, n
     const questionSchema = {
         name,
         description,
-        teacher: TeacherSchema,
+        createdBy: TeacherSchema,
         level,
         sct: sctDesc,
         solution: solutionDesc,
@@ -133,20 +133,27 @@ export const GetAllQuestion = asyncHandler(async (req: Request, res: Response, n
     if (!isEmpty(level)) queryArray.push({ level: level })
 
     let question
+    let questionSearchCount
     if (queryArray.length > 0) {
         question = await Question.find({ "$and": queryArray })
             .skip(page > 0 ? ((page - 1) * limit) : 0)
             .limit(limit).exec()
+        questionSearchCount = await (await Question.find({ "$and": queryArray })).length
 
     } else {
         question = await Question.find()
             .skip(page > 0 ? ((page - 1) * limit) : 0)
             .limit(limit).exec()
-    }
+        questionSearchCount = await (await Question.find()).length
 
+    }
+    const questionCount = (await Question.estimatedDocumentCount()).toFixed()
+    console.log(questionCount)
     res.status(200).json({
         success: true,
-        detail: question
+        detail: question,
+        count: questionCount,
+        searchCount: questionSearchCount
     })
 
 })
@@ -304,6 +311,8 @@ export const EditQuestion = asyncHandler(async (req: Request, res: Response, nex
     if (isEmpty(level)) level = question.level
     if (isEmpty(description)) description = question.description
 
+    const questionCreatedBy = question.createdBy
+
     const TeacherSchema = {
         _id: teacher?._id,
         studentID: teacher?.studentID,
@@ -314,7 +323,7 @@ export const EditQuestion = asyncHandler(async (req: Request, res: Response, nex
     const questionSchema = {
         name,
         description,
-        teacher: TeacherSchema,
+        createdBy: questionCreatedBy,
         level,
         sct: sctDesc,
         solution: solutionDesc,

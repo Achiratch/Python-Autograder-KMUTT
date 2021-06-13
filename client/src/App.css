@@ -46,9 +46,6 @@
     transition: all 0.3s ease-in-out;
   }
 
-  .datacamp-exercise {
-    margin-bottom: 0em;
-  }
 
   .body{
     display: flex;
@@ -57,6 +54,7 @@
     overflow-y: hidden;
     min-height: 100vh;
     background-color:rgb(240, 240, 240) ;
+    scroll-behavior: smooth;
   }
 
   .page-content{

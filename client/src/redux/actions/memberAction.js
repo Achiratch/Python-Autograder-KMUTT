@@ -5,11 +5,11 @@ import {
   GET_ALLSTUDENTS,
   GET_ERRORS,
   ADD_STUDENT,
-  DELETE_STUDENT
+  DELETE_STUDENT,
 } from "./type";
 
 //Get Students
-export const getStudents = (id,search) => (dispatch) => {
+export const getStudents = (id, search) => (dispatch) => {
   dispatch(setStudentLoading());
   axios
     .get(`/api/course/${id}/students?search=${search}`)
@@ -28,7 +28,7 @@ export const getStudents = (id,search) => (dispatch) => {
 };
 
 //Get All Students
-export const getAllStudents = (id,search) => (dispatch) => {
+export const getAllStudents = (id, search) => (dispatch) => {
   dispatch(setStudentLoading());
   axios
     .get(`/api/course/${id}/invite?search=${search}`)
@@ -53,15 +53,15 @@ export const addStudent = (studentData) => (dispatch) => {
     .then((res) =>
       dispatch({
         type: ADD_STUDENT,
-        payload: res.data,
+        payload: res.data.detail,
       })
     )
-    .catch((err) =>
+    .catch((err) => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data,
-      })
-    );
+      });
+    });
 };
 
 //Delete student

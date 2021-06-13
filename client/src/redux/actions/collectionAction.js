@@ -16,25 +16,44 @@ export const addQuestion = (questionData) => (dispatch) => {
     .then((res) =>
       dispatch({
         type: ADD_QUESTION,
-        payload: res.data,
+        payload: res.data.detail,
       })
     )
     .catch((err) =>
       dispatch({
-        type: ADD_QUESTION,
+        type: GET_ERRORS,
         payload: err.response.data,
       })
     );
 };
 //Get all Questions
-export const getQuestions = () => (dispatch) => {
+export const getQuestions = (search,level,page) => (dispatch) => {
   dispatch(setQuestionLoading());
   axios
-    .get("/api/question")
+    .get(`/api/question?search=${search}&level=${level}&limit=${"10"}&page=${page}`)
     .then((res) =>
       dispatch({
         type: GET_QUESTIONS,
-        payload: res.data.detail,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_QUESTIONS,
+        payload: null,
+      })
+    );
+};
+
+//Get all Questions with no limit
+export const getQuestionsNoLimit = () => (dispatch) => {
+  dispatch(setQuestionLoading());
+  axios
+    .get(`/api/question`)
+    .then((res) =>
+      dispatch({
+        type: GET_QUESTIONS,
+        payload: res.data,
       })
     )
     .catch((err) =>
@@ -53,7 +72,7 @@ export const getQuestion = (id) => (dispatch) => {
     .then((res) =>
       dispatch({
         type: GET_QUESTION,
-        payload: res.data,
+        payload: res.data.detail,
       })
     )
     .catch((err) =>
@@ -62,6 +81,26 @@ export const getQuestion = (id) => (dispatch) => {
         payload: null,
       })
     );
+};
+
+//Update Question by id
+export const editQuestion = (id, questionData) => (dispatch) => {
+  axios
+    .put(`/api/question/${id}/edit`, questionData)
+    .then((res) =>
+      dispatch({
+        type: UPDATE_QUESTION,
+        payload: res.data.detail,
+      })
+    )
+    .catch((err) => {
+      console.log(err)
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.error,
+      })}
+    );
+    
 };
 
 //Delete Question by id

@@ -5,7 +5,9 @@ import { Modal, message, Col, Form, Input, Select } from "antd";
 
 //Material-UI
 import IconButton from "@material-ui/core/IconButton";
-import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from "@material-ui/icons/Edit";
+import Button from "@material-ui/core/Button";
+import Tooltip from "@material-ui/core/Tooltip";
 
 //PropTypes
 import { PropTypes } from "prop-types";
@@ -58,9 +60,11 @@ class CourseEdit extends Component {
     return (
       <div>
         <div className="edit-button">
-          <IconButton size="small" onClick={this.showModal}>
-            <EditIcon style={{ fontSize: "20px" }} />
-          </IconButton>
+          <Tooltip title="Edit">
+            <IconButton size="small" onClick={this.showModal}>
+              <EditIcon style={{ fontSize: "20px" }} />
+            </IconButton>
+          </Tooltip>
         </div>
         <Modal
           visible={visible}
@@ -140,7 +144,6 @@ class CourseEdit extends Component {
                     },
                   }),
                 ]}
-                
               >
                 <TextArea rows="3" autoComplete="off" />
               </Form.Item>

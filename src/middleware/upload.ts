@@ -21,11 +21,12 @@ const storage = multer.diskStorage({
 })
 
 const fileFilter = (req: e.Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
-    if (file.mimetype === 'text/plain' || file.mimetype === 'application/octet-stream') {
+    if (file.mimetype === 'text/plain' || file.mimetype === 'application/octet-stream' || file.mimetype === 'text/x-python-script' || file.mimetype === 'text/x-python') {
         cb(null, true)
         console.log(`upload Ja`)
     } else {
         cb(null, false)
+        console.log('Upload Error')
     }
 }
 export const upload = multer({

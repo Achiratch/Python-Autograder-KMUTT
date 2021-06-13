@@ -116,6 +116,9 @@ function Navbar(props) {
         <NavLink className="nav-link" to="/collections">
           Collection
         </NavLink>
+        <NavLink className="nav-link" to="/role">
+          Role Management
+        </NavLink>
       </Menu>
       <Menu></Menu>
       <Menu></Menu>
@@ -130,7 +133,6 @@ function Navbar(props) {
             <FontAwesomeIcon icon={faChevronDown} size="lg" color="white" />
           </ChevonDown>
           <div className="Drop-Down-Link">
-            <li>Edit Profile</li>
             <li>
               <Link to="/" className="drop-down-link" onClick={onLogoutClick}>
                 <FontAwesomeIcon icon={faSignOutAlt} size="lg" />

@@ -11,6 +11,8 @@ import isEmpty from '../validation/is-empty'
 // Load User models
 
 import { IUser, default as User } from '../models/User'
+import asyncHandler from '../middleware/async'
+import ErrorResponse from '../utils/errorResponse'
 
 
 export const Register = (req: Request, res: Response) => {
@@ -124,4 +126,62 @@ export const Login = (req: Request, res: Response) => {
     })
 }
 
+// @desc    Edit Role
+// @route   PUT /api/users/role/edit
+// @acess   Private
+export const EditRole = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const { user, role } = req.body
 
+
+    let currentUser = await User.findById(user)
+    if (!currentUser) {
+        return next(new ErrorResponse(`We don't have this user!`, 400))
+    }
+
+    const newUser = {
+        studentID: currentUser.studentID,
+        password: currentUser.password,
+        email: currentUser.email,
+        firstName: currentUser.firstName,
+        lastName: currentUser.lastName,
+        role: role
+    }
+    const update = await currentUser.updateOne(newUser)
+
+    let updatedUser = await User.findById(user).select("-password")
+
+    res.status(201).json({
+        success: true,
+        detail: updatedUser
+    });
+})
+
+// @desc    Get all user info
+// @route   GET /api/users/
+// @acess   Private
+export const GetUsersInfo = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+
+    const search = req.query.search as string
+    const page: number = req.query.page as any
+    const limit: number = parseInt(req.query.limit as string)
+
+
+    const queryArray = []
+    if (!isEmpty(search)) queryArray.push({ "$or": [{ "firstName": { $regex: search, $options: 'i' } }, { "email": { $regex: search } }] })
+
+    let users
+    if (isEmpty(search)) {
+        users = await User.find().select("-password")
+    } else {
+        users = await User.find({ $and: queryArray }).select("-password")
+    }
+
+    if (!users) {
+        return next(new ErrorResponse(`We don't have any user!`, 404))
+    }
+
+    res.status(201).json({
+        success: true,
+        detail: users
+    });
+})

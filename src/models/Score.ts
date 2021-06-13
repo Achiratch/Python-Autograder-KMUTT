@@ -20,19 +20,38 @@ const ScoreSchema = new Schema({
         ref: 'assignments',
         required: true
     },
+    question: {
+        type: Schema.Types.ObjectId,
+        ref: 'questions',
+        required: true
+    },
     sendingStatus: {
         type: String,
         requried: true
+    },
+    answer: {
+        filename: {
+            type: String,
+            required: true
+        },
+        filepath: {
+            type: String,
+            required: true
+        },
+        code: {
+            type: String,
+            required: true
+        }
     },
     score: {
         type: String,
         required: true,
     },
-    dateCreate: {
+    sentDate: {
         type: Date,
         default: Date.now()
     },
 
 });
 
-export default mongoose.model<IScore>('score', ScoreSchema);
+export default mongoose.model<IScore>('scores', ScoreSchema);

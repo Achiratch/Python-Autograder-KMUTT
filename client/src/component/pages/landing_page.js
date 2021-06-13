@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import auth from "../auth/auth";
 import { Link } from "react-router-dom";
-import { Form, Col, Input, Checkbox } from "antd";
+import { Form, Col, Input, Checkbox, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import coding_image from "../images/coding.jpg";
@@ -9,6 +9,7 @@ import logo_python from "../images/logo_python.png";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../redux/actions/authActions";
+import ROLE from "../auth/Role";
 ///Stlyed-------------------------------
 const Coding_Image = styled.div`
   width: 100%;
@@ -77,22 +78,35 @@ class LandingPage extends Component {
     super(props);
     this.state = {
       is_requesting: false,
+      errors: "",
     };
     this.formRef = React.createRef();
     this.onFormSubmitHandler = this.onFormSubmitHandler.bind(this);
   }
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      auth.login(() => {
-        this.props.history.push("/home");
-      });
+      if (this.props.auth.user.role === ROLE.ADMIN) {
+        auth.login(() => {
+          this.props.history.push("/home");
+        });
+      } else if (this.props.auth.user.role === ROLE.STUDENT) {
+        auth.login(() => {
+          this.props.history.push("/home/student");
+        });
+      }
     }
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      auth.login(() => {
-        this.props.history.push("/home");
-      });
+      if (nextProps.auth.user.role === ROLE.ADMIN) {
+        auth.login(() => {
+          this.props.history.push("/home");
+        });
+      } else if (nextProps.auth.user.role === ROLE.STUDENT) {
+        auth.login(() => {
+          this.props.history.push("/home/student");
+        });
+      }
     }
 
     if (nextProps.errors) {
@@ -190,6 +204,12 @@ class LandingPage extends Component {
               </Form.Item>
             </Form>
           </Col>
+          {errors.password !== undefined
+            ? message.error(`${this.props.errors.password}`)
+            : null}
+          {errors.studentID !== undefined
+            ? message.error(`${this.props.errors.studentID}`)
+            : null}
         </Landing_Content>
       </Landing>
     );

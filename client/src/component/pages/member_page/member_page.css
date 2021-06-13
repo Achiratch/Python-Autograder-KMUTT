@@ -90,7 +90,10 @@
     z-index: 1;
   }
   .head-content-member{
-    padding: 2rem 2rem 2rem;
+    padding-top: 2rem;
+    padding-left: 2rem;
+    padding-bottom: 1rem;
+
   }
 
   .table{
