@@ -51,6 +51,7 @@ export const columns = [
     sortable: false,
     width: 200,
     valueGetter: (params) =>{
+      console.log(params)
       return `${params.row.firstName || ""} ${
         params.row.lastName || ""
       }`
