@@ -70,6 +70,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 // ErrorHandler
 app.use(errorHandler)
-const port: any = 5000
+const port: any = process.env.PORT || 5000
 
 app.listen(port, () => console.log(`Server running on port ${port}`))
