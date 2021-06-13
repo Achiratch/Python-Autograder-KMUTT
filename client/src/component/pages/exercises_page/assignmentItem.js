@@ -44,7 +44,7 @@ class AssignmentItem extends Component {
                 <span className="icon-button">
                   <VisibilityIcon />
                 </span>
-                View
+                VIEW
               </button>
             </div>
           </Link>

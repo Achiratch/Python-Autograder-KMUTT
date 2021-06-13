@@ -6,6 +6,7 @@ import EqualizerIcon from "@material-ui/icons/Equalizer";
 import PersonIcon from "@material-ui/icons/Person";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import StarsIcon from "@material-ui/icons/Stars";
+import VisibilityIcon from "@material-ui/icons/Visibility";
 
 //Redux
 import { connect } from "react-redux";
@@ -55,9 +56,9 @@ class QuestionItem extends Component {
             <div className="button-train">
               <button className="question-button">
                 <span className="icon-button">
-                  <EqualizerIcon />
+                  <VisibilityIcon />
                 </span>
-                TRAIN NOW
+                VIEW
               </button>
             </div>
           </Link>
