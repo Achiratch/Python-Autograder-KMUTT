@@ -122,7 +122,7 @@ class HomePage extends Component {
                               //value={this.state.search}
                               onChange={this.filterBySemester}
                               label="Semester"
-                              value=""
+                              value={this.state.semester}
                               style={{ width: 120 }}
                             >
                               <MenuItem value={""}>All</MenuItem>
@@ -142,7 +142,7 @@ class HomePage extends Component {
                               //value={this.state.year}
                               onChange={this.filterByYear}
                               label="Year"
-                              value=""
+                              value={this.state.year}
                               style={{ width: 100 }}
                             >
                               <MenuItem value="">All</MenuItem>
