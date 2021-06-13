@@ -118,6 +118,7 @@ class HomePageStudent extends Component {
                               //value={this.state.search}
                               onChange={this.filterBySemester}
                               label="Semester"
+                              value=""
                               style={{ width: 120 }}
                             >
                               <MenuItem value={""}>All</MenuItem>
@@ -137,6 +138,7 @@ class HomePageStudent extends Component {
                               //value={this.state.year}
                               onChange={this.filterByYear}
                               label="Year"
+                              value=""
                               style={{ width: 100 }}
                             >
                               <MenuItem value={""}>All</MenuItem>
@@ -155,7 +157,7 @@ class HomePageStudent extends Component {
                             color="primary"
                             onClick={this.filter}
                           >
-                            <SearchIcon fontSize="medium" />
+                            <SearchIcon fontSize="default" />
                           </Button>
                         </div>
                       </div>

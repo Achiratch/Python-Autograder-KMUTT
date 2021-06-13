@@ -62,7 +62,6 @@ function MemberPage(props) {
   const [selecter, setSelecter] = useState([]);
   const [search, setSearch] = useState("");
   
-  console.log(selecter.selecter);
 
   //------Fetch Data---------------------------------------------
   useEffect(() => {
@@ -77,7 +76,6 @@ function MemberPage(props) {
       console.log(c);
     };
     fetchMembers();
-    console.log("useEffect");
   }, [props.member.students]);
   //---------------------------------------------------------------
 
@@ -93,7 +91,7 @@ function MemberPage(props) {
   let studentTable;
   if (props.member.loading === true) {
     studentTable = <LinearProgress />;
-  } else
+  } else if(data.length !==0){
     studentTable = (
       <div className="table-content">
         <div className="flex" style={{ height: 720, width: "100%" }}>
@@ -108,6 +106,8 @@ function MemberPage(props) {
         </div>
       </div>
     );
+  } 
+    
   // else if (props.errors.success === false ) {
   //   <div className="table-content">
   //     <div className="flex" style={{ height: 720, width: "100%" }}>

@@ -67,7 +67,6 @@ class HomePage extends Component {
   }
   componentDidMount() {
     this.props.getCoursesByFilter("", "", "");
-    console.log(this.props.auth.user.id);
   }
   render() {
     const { courses, loading } = this.props.course;
@@ -123,6 +122,7 @@ class HomePage extends Component {
                               //value={this.state.search}
                               onChange={this.filterBySemester}
                               label="Semester"
+                              value=""
                               style={{ width: 120 }}
                             >
                               <MenuItem value={""}>All</MenuItem>
@@ -142,14 +142,15 @@ class HomePage extends Component {
                               //value={this.state.year}
                               onChange={this.filterByYear}
                               label="Year"
+                              value=""
                               style={{ width: 100 }}
                             >
-                              <MenuItem value={""}>All</MenuItem>
-                              <MenuItem value={"2020"}>2020</MenuItem>
-                              <MenuItem value={"2021"}>2021</MenuItem>
-                              <MenuItem value={"2022"}>2022</MenuItem>
-                              <MenuItem value={"2023"}>2023</MenuItem>
-                              <MenuItem value={"2024"}>2024</MenuItem>
+                              <MenuItem value="">All</MenuItem>
+                              <MenuItem value="2020">2020</MenuItem>
+                              <MenuItem value="2021">2021</MenuItem>
+                              <MenuItem value="2022">2022</MenuItem>
+                              <MenuItem value="2023">2023</MenuItem>
+                              <MenuItem value="2024">2024</MenuItem>
                             </Select>
                           </FormControl>
                         </div>
@@ -160,7 +161,7 @@ class HomePage extends Component {
                             color="primary"
                             onClick={this.filter}
                           >
-                            <SearchIcon fontSize="medium" />
+                            <SearchIcon fontSize="default" />
                           </Button>
                         </div>
                       </div>
@@ -182,10 +183,7 @@ class HomePage extends Component {
   }
 }
 
-HomePage.propTypes = {
-  getCourses: PropTypes.func.isRequired,
-  course: PropTypes.object.isRequired,
-};
+
 
 const mapStateToProps = (state) => ({
   course: state.course,

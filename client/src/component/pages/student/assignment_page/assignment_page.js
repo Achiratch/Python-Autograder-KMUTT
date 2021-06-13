@@ -160,7 +160,7 @@ class AssignmentPageStudent extends Component {
                       color="primary"
                       onClick={this.filter}
                     >
-                      <SearchIcon fontSize="medium" />
+                      <SearchIcon fontSize="default" />
                     </Button>
                   </div>
                 </div>

@@ -57,8 +57,6 @@ function MemberPageStudent(props) {
   const [selecter, setSelecter] = useState([]);
   const [search, setSearch] = useState("");
 
-  console.log(selecter.selecter);
-
   //------Fetch Data---------------------------------------------
   useEffect(() => {
     const fetchMembers = () => {
@@ -69,10 +67,8 @@ function MemberPageStudent(props) {
       const c = a.map((data) => data.student);
       c.forEach((i) => (i.id = i._id));
       setData(c);
-      console.log(c);
     };
     fetchMembers();
-    console.log("useEffect");
   }, [props.member.students]);
   //---------------------------------------------------------------
 
@@ -88,7 +84,8 @@ function MemberPageStudent(props) {
   let studentTable;
   if (props.member.loading === true) {
     studentTable = <LinearProgress />;
-  } else
+  } else if (data.length !== 0) {
+    console.log(data)
     studentTable = (
       <div className="table-content">
         <div className="flex" style={{ height: 720, width: "100%" }}>
@@ -103,20 +100,7 @@ function MemberPageStudent(props) {
         </div>
       </div>
     );
-  // else if (props.errors.success === false ) {
-  //   <div className="table-content">
-  //     <div className="flex" style={{ height: 720, width: "100%" }}>
-  //       <DataGrid
-  //         rows={[]}
-  //         columns={columns}
-  //         pageSize={10}
-  //         checkboxSelection
-  //         Toolbar
-  //         onSelectionModelChange={(item) => console.log(item)}
-  //       />
-  //     </div>
-  //   </div>;
-  // }
+  } 
 
   return (
     <div>
@@ -149,16 +133,6 @@ function MemberPageStudent(props) {
               </FormControl>
             </div>
             <div className="block-invisible"></div>
-            {/* {props.course.course.createdBy === props.auth.user.id ? (
-              <div>
-                <span className="button-member">
-                  <DeletePopup selecter={selecter} />
-                </span>
-                <span className="button-member">
-                  <AddPopup course={props.course} />
-                </span>
-              </div>
-            ) : <div className="block-invisible"></div>} */}
             <div className="number-student">
               <h6 className="font-size-number">
                 {props.member.students.length} Students

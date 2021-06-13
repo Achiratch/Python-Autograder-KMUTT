@@ -67,7 +67,6 @@ class AddPopup extends Component {
   componentDidMount() {
     this.props.getAllStudents(this.props.course.course._id, "");
     const allStudent = this.props.member.allStudents;
-    console.log(allStudent);
     allStudent.forEach((i) => (i.id = i._id));
     allStudent.map((data) => data.student);
     this.setState({ user: allStudent });
@@ -76,7 +75,6 @@ class AddPopup extends Component {
     // Typical usage (don't forget to compare props):
     if (this.props.member.allStudents !== prevProps.member.allStudents) {
       const allStudent = this.props.member.allStudents;
-      console.log(allStudent);
       allStudent.forEach((i) => (i.id = i._id));
       allStudent.map((data) => data.student);
       this.setState({ user: allStudent });
@@ -90,6 +88,23 @@ class AddPopup extends Component {
 
   render() {
     const { visible } = this.state;
+    let table;
+    if (this.state.user) {
+      table = (
+        <DataGrid
+          autoPageSize={true}
+          rows={this.state.user}
+          columns={columns}
+          pageSize={10}
+          checkboxSelection
+          onSelectionModelChange={(item) =>
+            this.setState(() => {
+              return { selection: item.selectionModel };
+            })
+          }
+        />
+      );
+    }
     return (
       <div>
         <button className="add-member-button" onClick={this.showModal}>
@@ -113,20 +128,7 @@ class AddPopup extends Component {
             onChange={this.filterByInput}
             style={{ margin: 10 }}
           />
-          <div className="flex" style={{ height: 390, width: "100%" }}>
-            <DataGrid
-              autoPageSize={true}
-              rows={this.state.user}
-              columns={columns}
-              pageSize={10}
-              checkboxSelection
-              onSelectionModelChange={(item) =>
-                this.setState(() => {
-                  return { selection: item.selectionModel };
-                })
-              }
-            />
-          </div>
+          <div className="flex" style={{ height: 390, width: "100%" }}>{table}</div>
           <div className="group-button-add">
             <button
               onClick={this.handleCancel}
