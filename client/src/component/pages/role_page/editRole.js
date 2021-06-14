@@ -28,7 +28,6 @@ class EditRole extends Component {
         user: this.props.user._id,
         role: data.role
     }
-    console.log(dataRole)
     this.props.editRole(dataRole);
     this.handleCancel();
     message.success("This User has been edited.");

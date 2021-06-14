@@ -199,7 +199,6 @@ class QuestionEdit extends Component {
                   ]}
                   onChange={(info) => {
                     if (info.file.status !== "uploading") {
-                      console.log(info.file.originFileObj);
                     }
                     if (info.file.status === "done") {
                       message.success(
@@ -243,7 +242,6 @@ class QuestionEdit extends Component {
                   ]}
                   onChange={(info) => {
                     if (info.file.status !== "uploading") {
-                      console.log(info.file.originFileObj);
                     }
                     if (info.file.status === "done") {
                       message.success(
@@ -287,7 +285,6 @@ class QuestionEdit extends Component {
                   ]}
                   onChange={(info) => {
                     if (info.file.status !== "uploading") {
-                      console.log(info.file.originFileObj);
                     }
                     if (info.file.status === "done") {
                       message.success(
@@ -331,7 +328,6 @@ class QuestionEdit extends Component {
                   ]}
                   onChange={(info) => {
                     if (info.file.status !== "uploading") {
-                      console.log(info.file.originFileObj);
                     }
                     if (info.file.status === "done") {
                       message.success(

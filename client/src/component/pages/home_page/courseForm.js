@@ -63,7 +63,6 @@ class CourseForm extends Component {
   };
 
   async onFormSubmitHandler() {
-    console.log("[Create course]");
     const data = this.formRef.current.getFieldsValue();
     this.props.addCourse(data);
     this.handleCancel();

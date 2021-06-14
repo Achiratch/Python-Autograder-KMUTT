@@ -88,7 +88,6 @@ function MemberPage(props) {
   //------Search---------------------------------------------------
   const filterByInput = (e) => {
     setSearch({ search: e.target.value });
-    console.log(e.target.value);
     props.getStudents(props.course.course._id, e.target.value);
     props.getAllStudents(props.course.course._id, "");
   };

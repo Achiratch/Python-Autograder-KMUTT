@@ -38,10 +38,8 @@ class ConfirmEditSubmit extends Component {
     let score;
     if (correct === true) {
       score = maxScore;
-      console.log(score);
     } else {
       score = 0;
-      console.log(score);
     }
     const data = {
       course: courseId,
@@ -50,7 +48,6 @@ class ConfirmEditSubmit extends Component {
       score: score,
       answer: code,
     };
-    console.log(data);
     this.props.editAnswer(data);
     this.handleCancel();
     message.success(`Question ${this.props.question.name} has been edited.`);

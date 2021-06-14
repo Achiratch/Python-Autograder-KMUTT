@@ -44,7 +44,6 @@ class CollectionsPage extends Component {
     this.props.getQuestions(this.state.value, this.state.level, this.state.page);
   }
   handleChange(event, value) {
-    console.log(value)
     this.setState({page: value});
     this.props.getQuestions(this.state.value, this.state.level, value);
   }

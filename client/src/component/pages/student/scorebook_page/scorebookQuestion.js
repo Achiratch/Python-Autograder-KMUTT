@@ -46,7 +46,6 @@ class ScorebookQuestion extends Component {
             }
           }
         }
-        console.log(questions)
       }
       questionBox = (
         <QuestionBox

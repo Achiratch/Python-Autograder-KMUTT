@@ -94,7 +94,6 @@ export const editQuestion = (id, questionData) => (dispatch) => {
       })
     )
     .catch((err) => {
-      console.log(err)
       dispatch({
         type: GET_ERRORS,
         payload: err.response.error,
