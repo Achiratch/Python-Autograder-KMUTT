@@ -25,6 +25,7 @@ class ScorebookStudent extends Component {
       this.props.match.params.assignmentId,
       this.props.match.params.studentId
     );
+    console.log(this.props.match.params)
   }  
   render() {
     const { course } = this.props;
@@ -35,7 +36,7 @@ class ScorebookStudent extends Component {
     if(loading === true){
         studentBox = <LinearProgress />;
     } else{
-        if(statusStudent.lenght !==0){
+        if(statusStudent !== null){
             for(const q of questions){
                 for(const s of statusStudent){
                     if(q._id === s.question){

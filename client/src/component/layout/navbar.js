@@ -13,7 +13,7 @@ import "./layout.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../redux/actions/authActions";
-
+import bell from "../sound/bell.mp3"
 import auth from "../auth/auth";
 
 const Logo_Python = styled.div`
@@ -99,7 +99,11 @@ const AccountName = styled.a`
 function Navbar(props) {
   const { isAuthenticated, user } = props.auth;
   const onLogoutClick = () => props.logoutUser();
+  let audio = new Audio(bell)
 
+  const start = () => {
+    audio.play()
+  }
   return (
     <Nav>
       <NavLink className="logo-link" to="/home">
@@ -123,7 +127,7 @@ function Navbar(props) {
       <Menu></Menu>
       <Menu></Menu>
       <Menu>
-        <Bell>
+        <Bell onClick={start}>
           <FontAwesomeIcon icon={faBell} size="lg" color="white" />
         </Bell>
 

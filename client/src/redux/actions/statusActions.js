@@ -30,23 +30,24 @@ export const getStatusAssignments = (courseId) => (dispatch) => {
 };
 
 //Get Sending status by course id and assignment id
-export const getSendingStatusAssignments = (courseId,assignmentID) => (dispatch) => {
-  dispatch(setStatusLoading());
-  axios
-    .get(`/api/score/course/${courseId}/assignment/${assignmentID}/status`)
-    .then((res) =>
-      dispatch({
-        type: GET_STATUS_QUESTIONS,
-        payload: res.data,
-      })
-    )
-    .catch((err) =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: null,
-      })
-    );
-};
+export const getSendingStatusAssignments =
+  (courseId, assignmentID) => (dispatch) => {
+    dispatch(setStatusLoading());
+    axios
+      .get(`/api/score/course/${courseId}/assignment/${assignmentID}/status`)
+      .then((res) =>
+        dispatch({
+          type: GET_STATUS_QUESTIONS,
+          payload: res.data.detail,
+        })
+      )
+      .catch((err) =>
+        dispatch({
+          type: GET_STATUS_QUESTIONS,
+          payload: null,
+        })
+      );
+  };
 
 //Get Status by assignmentId
 export const getStatusQuestions = (assignmentId) => (dispatch) => {
@@ -56,12 +57,12 @@ export const getStatusQuestions = (assignmentId) => (dispatch) => {
     .then((res) =>
       dispatch({
         type: GET_STATUS_QUESTIONS,
-        payload: res.data,
+        payload: res.data.detail,
       })
     )
     .catch((err) =>
       dispatch({
-        type: GET_ERRORS,
+        type: GET_STATUS_QUESTIONS,
         payload: null,
       })
     );
@@ -69,31 +70,12 @@ export const getStatusQuestions = (assignmentId) => (dispatch) => {
 
 //Get Answer by scoreId
 export const getAnswer = (scoreId) => (dispatch) => {
-    dispatch(setStatusLoading());
-    axios
-      .get(`/api/score/${scoreId}`)
-      .then((res) =>
-        dispatch({
-          type: GET_ANSWER,
-          payload: res.data,
-        })
-      )
-      .catch((err) =>
-        dispatch({
-          type: GET_ERRORS,
-          payload: null,
-        })
-      );
-  };
-
-//Get Sending status by assignment id and student id
-export const getSendingStatusByStudentId = (assignmentID,studentID) => (dispatch) => {
   dispatch(setStatusLoading());
   axios
-    .get(`/api/score/assignment/${assignmentID}/student/${studentID}`)
+    .get(`/api/score/${scoreId}`)
     .then((res) =>
       dispatch({
-        type: GET_STATUS_BY_STUDENT,
+        type: GET_ANSWER,
         payload: res.data,
       })
     )
@@ -105,11 +87,32 @@ export const getSendingStatusByStudentId = (assignmentID,studentID) => (dispatch
     );
 };
 
+//Get Sending status by assignment id and student id
+export const getSendingStatusByStudentId =
+  (assignmentID, studentID) => (dispatch) => {
+    dispatch(setStatusLoading());
+    axios
+      .get(`/api/score/assignment/${assignmentID}/student/${studentID}`)
+      .then((res) =>
+        dispatch({
+          type: GET_STATUS_BY_STUDENT,
+          payload: res.data.detail,
+        })
+      )
+      .catch((err) => {
+        console.log(err)
+        dispatch({
+          type: GET_ERRORS,
+          payload: err,
+        });
+      });
+  };
+
 //Update Answer by id
 export const editAnswer = (questionData) => (dispatch) => {
   dispatch(setStatusLoading());
   axios
-    .put(`/api/score/edit`,questionData)
+    .put(`/api/score/edit`, questionData)
     .then((res) =>
       dispatch({
         type: UPDATE_ANSWER,
@@ -125,10 +128,10 @@ export const editAnswer = (questionData) => (dispatch) => {
 };
 
 //Update Score by score id
-export const editScore = (newScore,scoreId) => (dispatch) => {
+export const editScore = (newScore, scoreId) => (dispatch) => {
   dispatch(setStatusLoading());
   axios
-    .put(`/api/score/${scoreId}/editscore`,newScore)
+    .put(`/api/score/${scoreId}/editscore`, newScore)
     .then((res) =>
       dispatch({
         type: UPDATE_SCORE,
@@ -142,7 +145,6 @@ export const editScore = (newScore,scoreId) => (dispatch) => {
       })
     );
 };
-
 
 //Set loading state
 export const setStatusLoading = () => {

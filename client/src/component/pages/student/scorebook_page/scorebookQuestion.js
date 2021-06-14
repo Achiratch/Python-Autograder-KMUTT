@@ -36,7 +36,7 @@ class ScorebookQuestion extends Component {
     if (loading === true)  {
       questionBox = <LinearProgress />;
     } else {
-      if(statusQuestions.length !== 0){
+      if(statusQuestions !== null){
         for (const q of questions){
           for(const s of statusQuestions){
             if(q._id === s.question){

@@ -34,13 +34,13 @@ export default function d(state = initailState, action) {
     case GET_STATUS_QUESTIONS:
       return {
         ...state,
-        statusQuestions: action.payload.detail,
+        statusQuestions: action.payload,
         loading: false,
       };
     case GET_STATUS_BY_STUDENT:
       return {
         ...state,
-        statusStudent: action.payload.detail,
+        statusStudent: action.payload,
         loading: false,
       };
     case GET_ANSWER:

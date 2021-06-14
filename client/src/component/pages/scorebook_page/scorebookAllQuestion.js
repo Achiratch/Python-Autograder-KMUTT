@@ -40,22 +40,25 @@ class ScorebookAllQuestion extends Component {
     if (loading === true) {
       questionBox = <LinearProgress />;
     } else {
-      if (statusQuestions.length !== 0) {
-        for (const m of students) {
-          for (const s of statusQuestions) {
-            if (m.student.studentID === s.student.studentID) {
-              m.studentScore = s.score;
-              m.status = s.sendingStatus;
+      if(students !== null){
+        if (statusQuestions.length !== 0 ) {
+          for (const m of students) {
+            for (const s of statusQuestions) {
+              if (m.student.studentID === s.student.studentID) {
+                m.studentScore = s.score;
+                m.status = s.sendingStatus;
+              }
             }
           }
         }
+        questionBox = (
+          <QuestionBox
+            students={students}
+            assignmentId={this.props.match.params.assignmentId}
+          />
+        );
       }
-      questionBox = (
-        <QuestionBox
-          students={students}
-          assignmentId={this.props.match.params.assignmentId}
-        />
-      );
+      
     }
     return (
       <div>
