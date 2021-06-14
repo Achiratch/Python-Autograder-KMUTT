@@ -63,13 +63,15 @@ class AddPopup extends Component {
     this.setState({ visible: false });
   };
 
-  componentDidMount() {
-    this.props.getAllStudents(this.props.course.course._id, "");
-    const allStudent = this.props.member.allStudents;
-    allStudent.forEach((i) => (i.id = i._id));
-    allStudent.map((data) => data.student);
-    this.setState({ user: allStudent });
-  }
+  // componentDidMount() {
+  //   this.props.getAllStudents(this.props.course.course._id, "");
+  //   if (this.props.member.allStudents) {
+  //     const allStudent = this.props.member.allStudents;
+  //     allStudent.forEach((i) => (i.id = i._id));
+  //     allStudent.map((data) => data.student);
+  //     this.setState({ user: allStudent });
+  //   }
+  // }
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
     if (this.props.member.allStudents !== prevProps.member.allStudents) {
@@ -126,7 +128,9 @@ class AddPopup extends Component {
             onChange={this.filterByInput}
             style={{ margin: 10 }}
           />
-          <div className="flex" style={{ height: 390, width: "100%" }}>{table}</div>
+          <div className="flex" style={{ height: 390, width: "100%" }}>
+            {table}
+          </div>
           <div className="group-button-add">
             <button
               onClick={this.handleCancel}
