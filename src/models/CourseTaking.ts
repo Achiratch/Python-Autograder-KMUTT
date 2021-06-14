@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 
 const StudentSchema = new Schema<IProfile>({
     studentID: {
-        type: Number,
+        type: String,
         required: true
 
     },
