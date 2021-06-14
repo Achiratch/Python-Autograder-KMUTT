@@ -70,7 +70,6 @@ export default function d(state = initailState, action) {
       return {
         ...state,
         assignments: state.assignments.map((assignment) => {
-          console.log(action.payload._id);
           if (assignment._id === action.payload._id) {
             return {
               ...assignment,

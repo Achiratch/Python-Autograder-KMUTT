@@ -44,10 +44,7 @@ class CourseEdit extends Component {
   };
 
   async onFormSubmitHandler(id) {
-    console.log("[Edit course]");
     const data = this.formRef.current.getFieldsValue();
-    console.log(data);
-    console.log(id);
     this.props.editCourse(id, data);
     this.handleCancel();
     message.success("This Course has been edited.");

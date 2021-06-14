@@ -31,7 +31,6 @@ function loadScript(url) {
 class QuestionPage extends Component {
   componentDidMount() {
     //loadScript("https://cdn.datacamp.com/dcl-react.js.gz");
-    console.log(this.props.match.params.id);
     this.props.getQuestion(this.props.match.params.id);
   }
   render() {

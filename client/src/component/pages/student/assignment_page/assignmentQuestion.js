@@ -48,7 +48,6 @@ class AssignmentQuestionPageStudent extends Component {
             }
           }
         }
-        console.log(questions)
       }
       questionBox = (
         <QuestionBox

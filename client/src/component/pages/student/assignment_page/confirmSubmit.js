@@ -40,10 +40,8 @@ class ConfirmSubmit extends Component {
     let score;
     if (correct === true) {
       score = maxScore;
-      console.log(score);
     } else {
       score = 0;
-      console.log(score);
     }
     const data = {
       course: courseId,

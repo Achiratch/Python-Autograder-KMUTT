@@ -126,7 +126,6 @@ class RegisterPage extends Component {
   }
   async onFormSubmitHandler() {
     // Theese function will be exceuted if user passed the antd validation state
-    console.log("[FORM]: Submitting the form");
     const _data = this.formRef.current.getFieldsValue();
     this.props.registerUser(_data, this.props.history);
   }

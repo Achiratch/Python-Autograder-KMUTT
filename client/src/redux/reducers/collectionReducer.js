@@ -47,7 +47,6 @@ export default function d(state = initailState, action) {
       return {
         ...state,
         questions: state.questions.map((question) => {
-          console.log(action.payload._id);
           if (question._id === action.payload._id) {
             return {
               ...question,

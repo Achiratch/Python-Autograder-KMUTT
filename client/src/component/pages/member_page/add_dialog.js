@@ -43,7 +43,6 @@ class AddPopup extends Component {
       this.handleCancel();
       this.props.getAllStudents(this.props.course.course._id, "");
       const allStudent = this.props.member.allStudents;
-      console.log(allStudent);
       allStudent.forEach((i) => (i.id = i._id));
       allStudent.map((data) => data.student);
       this.setState({ user: allStudent });
@@ -82,7 +81,6 @@ class AddPopup extends Component {
   }
   filterByInput(e) {
     this.setState({ search: e.target.value });
-    console.log(e.target.value);
     this.props.getAllStudents(this.props.course.course._id, e.target.value);
   }
 

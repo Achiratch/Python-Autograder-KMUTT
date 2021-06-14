@@ -42,17 +42,14 @@ class HomePageStudent extends Component {
     this.setState({ value: e.target.value });
     //this.props.getCoursesByFilter(e.target.value, "", "");
     //console.log(e.target.value)
-    console.log(this.state.value);
   }
   filterBySemester(e) {
     this.setState({ semester: e.target.value });
     //this.props.getCoursesByFilter("", e.target.value, "");
-    console.log(this.state.semester);
   }
   filterByYear(e) {
     this.setState({ year: e.target.value });
     //this.props.getCoursesByFilter("", "", e.target.value);
-    console.log(this.state.year);
   }
   filter() {
     this.props.getStudentCourses(
@@ -63,7 +60,6 @@ class HomePageStudent extends Component {
     );
   }
   componentDidMount() {
-    console.log(this.props.auth.user.id);
     this.props.getStudentCourses(this.props.auth.user.id, "", "", "");
   }
   render() {

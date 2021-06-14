@@ -93,14 +93,10 @@ class CodePageStudent extends Component {
   onSubmit = () => {
     if (window.DCL !== undefined) {
       if (window.DCL.instances["question"] !== undefined) {
-        console.log(window.DCL);
         window.DCL.instances["question"].on("submit", (action, payload) => {
-          console.log(payload.code);
           this.setState({ code: payload.code });
-          console.log(this.state.code);
         });
         window.DCL.instances["question"].on("feedback", (action, payload) => {
-          console.log(payload);
           this.setState({ correct: payload.correct });
         });
       }

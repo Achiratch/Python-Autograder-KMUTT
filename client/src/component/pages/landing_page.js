@@ -107,7 +107,6 @@ class LandingPage extends Component {
   }
 
   async onFormSubmitHandler() {
-    console.log("[FORM]: Submitting the form");
     const _data = this.formRef.current.getFieldsValue();
     this.props.loginUser(_data, this.props.history);
   }
