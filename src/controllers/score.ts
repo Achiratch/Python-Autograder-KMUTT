@@ -58,7 +58,6 @@ export const CreateScoreByUpload = asyncHandler(async (req: Request, res: Respon
     }
     const newFilePath = fs.rename(file.path, destinationFileName, function (err) {
         if (err) throw err;
-        console.log('File Renamed!');
     })
     let answer: fileDesc = {
         filename: file.originalname,
@@ -180,7 +179,6 @@ export const CreateScoreByString = asyncHandler(async (req: Request, res: Respon
     }
     fs.appendFile(destinationFileName, code, function (err) {
         if (err) throw err;
-        console.log('Saved!');
     });
 
 
@@ -394,7 +392,6 @@ export const EditScoreByUpload = asyncHandler(async (req: Request, res: Response
     }
     const newFilePath = fs.rename(file.path, destinationFileName, function (err) {
         if (err) throw err;
-        console.log('File Renamed!');
     })
     let answer: fileDesc = {
         filename: file.originalname,
@@ -519,7 +516,6 @@ export const EditScoreByString = asyncHandler(async (req: Request, res: Response
     }
     fs.appendFile(destinationFileName, code, function (err) {
         if (err) throw err;
-        console.log('Saved!');
     });
 
 

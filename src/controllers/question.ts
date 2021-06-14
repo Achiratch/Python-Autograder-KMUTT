@@ -148,7 +148,6 @@ export const GetAllQuestion = asyncHandler(async (req: Request, res: Response, n
 
     }
     const questionCount = (await Question.estimatedDocumentCount()).toFixed()
-    console.log(questionCount)
     res.status(200).json({
         success: true,
         detail: question,
@@ -170,7 +169,6 @@ export const DeleteQuestionById = asyncHandler(async (req: Request, res: Respons
     }
 
     const assignment = await Assignment.find({ "questions._id": questionId })
-    console.log(assignment)
     if (assignment.length > 0) {
         return next(new ErrorResponse('This question is in assignment, please delete assignment first!', 400))
     }
@@ -333,7 +331,6 @@ export const EditQuestion = asyncHandler(async (req: Request, res: Response, nex
 
     const updated = await question.updateOne(questionSchema)
     let updatedQuestion = await Question.findById(req.params.id)
-    console.log(updated)
     res.status(200).json({
         success: true,
         detail: updatedQuestion

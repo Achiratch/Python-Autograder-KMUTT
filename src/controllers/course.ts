@@ -68,7 +68,6 @@ export const GetAllCourse = asyncHandler(async (req: Request, res: Response, nex
 
         res.status(201).json(courses);
     } catch (error) {
-        console.log(error)
         return next(new ErrorResponse('No course found', 404))
 
     }
@@ -108,7 +107,6 @@ export const GetAllCourseByCreator = asyncHandler(async (req: Request, res: Resp
             data: courses
         });
     } catch (error) {
-        console.log(error)
         return next(new ErrorResponse('No course that created by this user found', 404))
     }
 

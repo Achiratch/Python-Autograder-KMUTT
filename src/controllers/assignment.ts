@@ -193,7 +193,6 @@ export const UpdateAssignmentById = asyncHandler(async (req: Request, res: Respo
 
     questions.forEach(async question => {
         try {
-            console.log(question)
             const IsQuestion = await Question.findById(question._id)
             if (!IsQuestion) {
                 return next(new ErrorResponse('Please input valid question id!!', 400))

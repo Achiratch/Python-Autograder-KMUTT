@@ -44,21 +44,6 @@ app.use('/api/assignment', assignment)
 app.use('/api/score', score)
 
 
-// Test Api
-app.get('/test', (req, res) => {
-    // fs.readFile('F:/Senior Project/test/helloworld.py', 'utf8', (err, data) => {
-    //     if (err) {
-    //         console.error(err)
-    //         return
-    //     }
-    //     console.log(data)
-    //     const eiei = { code: data }
-    //     console.log(eiei.code)
-    //     res.json({ code: data })
-    // })
-    res.send("sdfdsf")
-});
-
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') {
     // Set static folder

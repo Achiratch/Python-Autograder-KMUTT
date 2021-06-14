@@ -51,7 +51,6 @@ export const Register = (req: Request, res: Response) => {
         let dbErrors = await checkDuplicate()
         const noDuplicate = isEmpty(dbErrors)
         if (!noDuplicate) {
-            console.log(dbErrors)
             return res.status(400).json(dbErrors)
 
         } else {

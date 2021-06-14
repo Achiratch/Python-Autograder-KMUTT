@@ -135,7 +135,6 @@ export const ResignCourse = asyncHandler(async (req: Request, res: Response, nex
         return next(new ErrorResponse(`You didn't register this course`, 404))
     }
 
-    console.log("before resign")
     let resign = await CourseTaking.findOneAndRemove({ _id: courseTakingId })
 
     res.status(200).json({
@@ -192,7 +191,6 @@ export const GetAllRegisterdCourses = asyncHandler(async (req: Request, res: Res
 
         });
     } catch (error) {
-        console.log(error)
         return next(new ErrorResponse(`You didn't register any courses!`, 404))
     }
 
