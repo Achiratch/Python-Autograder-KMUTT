@@ -17,6 +17,7 @@ import { connect } from "react-redux";
 class QuestionItem extends Component {
   render() {
     const { question, assignmentId } = this.props;
+    console.log(this.props)
     let questionItem;
     if (question.status) {
       questionItem = (

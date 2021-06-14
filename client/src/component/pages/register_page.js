@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import writing_image from "../images/writing.jpg";
 import logo_python from "../images/logo_python.png";
-import { Form, Input, Tooltip, Col ,message} from "antd";
+import { Form, Input, Tooltip, Col, message } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { registerUser } from "../../redux/actions/authActions";
 import { PropTypes } from "prop-types";
+import ROLE from "../auth/Role";
 ///Stlyed-------------------------------
 const Landing = styled.div`
   height: auto;
@@ -86,7 +87,6 @@ const formItemLayout = {
 };
 
 const Holder_Form = styled.div`
-
   h2 {
     text-align: center;
   }
@@ -96,7 +96,6 @@ const Holder_Form = styled.div`
   }
 `;
 ///-------------------------------
-
 
 class RegisterPage extends Component {
   constructor(props) {
@@ -118,7 +117,11 @@ class RegisterPage extends Component {
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/home");
+      if (this.props.auth.user.role === ROLE.ADMIN) {
+        this.props.history.push("/home");
+      } else if (this.props.auth.user.role === ROLE.STUDENT) {
+        this.props.history.push("/home/student");
+      }
     }
   }
   async onFormSubmitHandler() {
@@ -129,7 +132,6 @@ class RegisterPage extends Component {
   }
 
   render() {
-
     return (
       <Landing>
         <Landing_Content>

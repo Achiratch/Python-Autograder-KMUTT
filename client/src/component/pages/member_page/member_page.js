@@ -60,9 +60,14 @@ function MemberPage(props) {
   const [data, setData] = useState([]);
   const [selecter, setSelecter] = useState([]);
   const [search, setSearch] = useState("");
-
+  useEffect(() => {
+    props.getCourse(props.match.params.id);
+    props.getStudents(props.match.params.id,"");
+    props.getAllStudents(props.match.params.id, "");
+  }, []);
   //------Fetch Data---------------------------------------------
   useEffect(() => {
+    // need to fix
     if (props.member.student) {
       if (props.member.students !== null ) {
         const fetchMembers = () => {
@@ -73,7 +78,6 @@ function MemberPage(props) {
           const c = a.map((data) => data.student);
           c.forEach((i) => (i.id = i._id));
           setData(c);
-          console.log(c);
         };
         fetchMembers();
       }

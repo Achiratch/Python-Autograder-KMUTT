@@ -12,6 +12,9 @@ import { LinearProgress } from "@material-ui/core";
 
 //Redux
 import { connect } from "react-redux";
+import { getCourse } from "../../../redux/actions/courseActions";
+import { getStudents } from "../../../redux/actions/memberAction";
+
 import {
   getAssignment,
   getQuestionsByAssignmentId,
@@ -20,12 +23,14 @@ import { getSendingStatusByStudentId } from "../../../redux/actions/statusAction
 
 class ScorebookStudent extends Component {
   componentDidMount() {
+    this.props.getCourse(this.props.match.params.courseId);
+    this.props.getAssignment(this.props.match.params.assignmentId);
+    this.props.getStudents(this.props.match.params.courseId, "");
     this.props.getQuestionsByAssignmentId(this.props.match.params.assignmentId);
     this.props.getSendingStatusByStudentId(
       this.props.match.params.assignmentId,
       this.props.match.params.studentId
     );
-    console.log(this.props.match.params)
   }  
   render() {
     const { course } = this.props;
@@ -108,6 +113,9 @@ const mapStateToProps = (state) => ({
   member: state.member,
 });
 export default connect(mapStateToProps, {
+  getCourse,
+  getStudents,
+  getAssignment,
   getSendingStatusByStudentId,
   getQuestionsByAssignmentId,
 })(ScorebookStudent);

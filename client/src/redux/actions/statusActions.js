@@ -100,7 +100,6 @@ export const getSendingStatusByStudentId =
         })
       )
       .catch((err) => {
-        console.log(err)
         dispatch({
           type: GET_ERRORS,
           payload: err,

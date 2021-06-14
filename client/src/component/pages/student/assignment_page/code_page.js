@@ -24,6 +24,8 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import { connect } from "react-redux";
 import { getQuestionsInAssignment } from "../../../../redux/actions/assignmentActions";
 import { getAnswer } from "../../../../redux/actions/statusActions";
+import { getStatusQuestions } from "../../../../redux/actions/statusActions";
+
 function loadsScript(url, callback) {
   // Adding the script tag to the head as suggested before
   var head = document.head;
@@ -53,12 +55,9 @@ const ColorButton = withStyles((theme) => ({
 function onSubmit() {
   if (window.DCL !== undefined) {
     if (window.DCL.instances["question"] !== undefined) {
-      console.log(window.DCL);
       window.DCL.instances["question"].on("submit", (action, payload) => {
-        console.log(payload.code);
       });
       window.DCL.instances["question"].on("feedback", (action, payload) => {
-        console.log(payload);
       });
     }
   }
@@ -77,6 +76,7 @@ class CodePageStudent extends Component {
     this.formRef = React.createRef();
   }
   componentDidMount() {
+    this.props.getStatusQuestions(this.props.match.params.assignmentId);
     this.props.getQuestionsInAssignment(
       this.props.match.params.assignmentId,
       this.props.match.params.id
@@ -307,6 +307,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
+  getStatusQuestions,
   getQuestionsInAssignment,
   getAnswer,
 })(CodePageStudent);

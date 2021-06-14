@@ -55,6 +55,11 @@ function MemberPageStudent(props) {
   const [data, setData] = useState([]);
   const [selecter, setSelecter] = useState([]);
   const [search, setSearch] = useState("");
+  useEffect(() => {
+    props.getCourse(props.match.params.id);
+    props.getStudents(props.match.params.id,"");
+    props.getAllStudents(props.match.params.id, "");
+  }, []);
 
   //------Fetch Data---------------------------------------------
   useEffect(() => {
@@ -74,7 +79,6 @@ function MemberPageStudent(props) {
   //------Search---------------------------------------------------
   const filterByInput = (e) => {
     setSearch({ search: e.target.value });
-    console.log(e.target.value);
     props.getStudents(props.course.course._id, e.target.value);
     props.getAllStudents(props.course.course._id, "");
   };
@@ -84,7 +88,6 @@ function MemberPageStudent(props) {
   if (props.member.loading === true) {
     studentTable = <LinearProgress />;
   } else if (data.length !== 0) {
-    console.log(data);
     studentTable = (
       <div className="table-content">
         <div className="flex" style={{ height: 720, width: "100%" }}>

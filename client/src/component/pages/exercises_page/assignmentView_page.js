@@ -19,14 +19,16 @@ import { LinearProgress } from "@material-ui/core";
 //Redux
 import { connect } from "react-redux";
 import { getQuestion } from "../../../redux/actions/collectionAction";
+import { getCourse } from "../../../redux/actions/courseActions";
 import {
   getAssignment,
   getQuestionsByAssignmentId,
 } from "../../../redux/actions/assignmentActions";
 class AssignmentViewPage extends Component {
   componentDidMount() {
-    this.props.getAssignment(this.props.match.params.id);
-    this.props.getQuestionsByAssignmentId(this.props.match.params.id);
+    this.props.getCourse(this.props.match.params.courseId);
+    this.props.getAssignment(this.props.match.params.assignmentId);
+    this.props.getQuestionsByAssignmentId(this.props.match.params.assignmentId);
   }
   render() {
     const { course, auth } = this.props;
@@ -100,6 +102,7 @@ const mapStateToProps = (state) => ({
   collection: state.collection,
 });
 export default connect(mapStateToProps, {
+  getCourse,
   getAssignment,
   getQuestion,
   getQuestionsByAssignmentId,

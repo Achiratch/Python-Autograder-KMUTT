@@ -86,26 +86,18 @@ class LandingPage extends Component {
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       if (this.props.auth.user.role === ROLE.ADMIN) {
-        auth.login(() => {
           this.props.history.push("/home");
-        });
       } else if (this.props.auth.user.role === ROLE.STUDENT) {
-        auth.login(() => {
           this.props.history.push("/home/student");
-        });
       }
     }
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       if (nextProps.auth.user.role === ROLE.ADMIN) {
-        auth.login(() => {
-          this.props.history.push("/home");
-        });
+        this.props.history.push("/home");
       } else if (nextProps.auth.user.role === ROLE.STUDENT) {
-        auth.login(() => {
-          this.props.history.push("/home/student");
-        });
+        this.props.history.push("/home/student");
       }
     }
 

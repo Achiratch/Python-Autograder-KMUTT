@@ -1,15 +1,16 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import auth from "./auth";
+// import auth from "./auth";
+import { connect } from "react-redux";
 import { useSelector } from "react-redux";
 
-export const ProtectedRoute = ({ component: Component, role, ...rest }) => {
+const ProtectedRoute = ({ component: Component, auth, role, ...rest }) => {
   const roleChecked = useSelector((state) => state.auth.user.role);
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (auth.isAuthenticated()) {
+        if (auth.isAuthenticated === true) {
           if (role !== roleChecked) {
             return (
               <Redirect
@@ -40,3 +41,7 @@ export const ProtectedRoute = ({ component: Component, role, ...rest }) => {
     />
   );
 };
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps)(ProtectedRoute);

@@ -48,6 +48,7 @@ class ScoreBookPage extends Component {
     );
   }
   componentDidMount() {
+    this.props.getCourse(this.props.match.params.id);
     this.props.getAssignmentsByCourseId("", "", this.props.match.params.id);
     //this.props.getStatusAssignments(this.props.match.params.id);
   }

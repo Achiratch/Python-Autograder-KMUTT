@@ -15,6 +15,7 @@ import { LinearProgress } from "@material-ui/core";
 
 //Redux
 import { connect } from "react-redux";
+import { getCourse } from "../../../../redux/actions/courseActions";
 import { getQuestion } from "../../../../redux/actions/collectionAction";
 import {
   getAssignment,
@@ -24,9 +25,10 @@ import { getStatusQuestions } from "../../../../redux/actions/statusActions";
 
 class ScorebookQuestion extends Component {
   componentDidMount() {
-    this.props.getAssignment(this.props.match.params.id);
-    this.props.getQuestionsByAssignmentId(this.props.match.params.id);
-    this.props.getStatusQuestions(this.props.match.params.id);
+    this.props.getCourse(this.props.match.params.courseId)
+    this.props.getAssignment(this.props.match.params.assignmentId);
+    this.props.getQuestionsByAssignmentId(this.props.match.params.assignmentId);
+    this.props.getStatusQuestions(this.props.match.params.assignmentId);
   }
   render() {
     const { course } = this.props;
@@ -49,7 +51,7 @@ class ScorebookQuestion extends Component {
       questionBox = (
         <QuestionBox
           questions={questions}
-          assignmentId={this.props.match.params.id}
+          assignmentId={this.props.match.params.assignmentId}
         />
       );
     }
@@ -93,6 +95,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
+  getCourse,
   getAssignment,
   getQuestion,
   getQuestionsByAssignmentId,
