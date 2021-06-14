@@ -81,7 +81,7 @@ class CodePageStudent extends Component {
       this.props.match.params.assignmentId,
       this.props.match.params.id
     );
-    if (this.props.status.statusQuestions.length !== 0) {
+    if (this.props.status.statusQuestions !== null) {
       for (const q of this.props.status.statusQuestions) {
         if (q.question === this.props.match.params.id) {
           this.props.getAnswer(q._id);
