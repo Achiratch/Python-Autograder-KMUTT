@@ -12,7 +12,7 @@ const ScoreBookSchema = new Schema({
     },
     student: {
         studentID: {
-            type: Number,
+            type: String,
             required: true
         },
         email: {

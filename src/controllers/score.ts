@@ -334,7 +334,11 @@ export const GetSendingStatusByCourseId = asyncHandler(async (req: Request, res:
     // if (scoreBooks.length === 0) return next(new ErrorResponse(`Bad input`, 400))
     queryArray.push({ "$and": [{ course: courseId }, { assignment: assignmentId }] })
     if (!isEmpty(search)) {
-        queryArray.push({ "$or": [{ "student.firstName": { $regex: search, $options: 'i' } }, { "student.email": { $regex: search } }] })
+        queryArray.push({
+            "$or": [{ "student.firstName": { $regex: search, $options: 'i' } },
+            { "student.email": { $regex: search } },
+            { "student.studentID": { $regex: search } }]
+        })
     }
     let scoreBooksSearchCount
 

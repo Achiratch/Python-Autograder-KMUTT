@@ -3,7 +3,7 @@ import ROLE from './Role'
 const Schema = mongoose.Schema;
 
 export interface IUser extends mongoose.Document {
-    studentID: number;
+    studentID: string;
     password: string;
     email: string;
     firstName: string;
@@ -15,7 +15,7 @@ export interface IUser extends mongoose.Document {
 //Create Schema
 const UserSchema = new Schema({
     studentID: {
-        type: Number,
+        type: String,
         required: true
 
     },

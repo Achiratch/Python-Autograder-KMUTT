@@ -20,7 +20,7 @@ export const Register = (req: Request, res: Response) => {
     const { errors, isValid } = validateRegisterInput(req.body)
 
     const email: string = req.body.email
-    const studentID: number = req.body.studentID
+    const studentID: string = req.body.studentID
     // Check Validation
     if (!isValid) {
         return res.status(400).json(errors);
@@ -31,7 +31,7 @@ export const Register = (req: Request, res: Response) => {
     }
 
     const checkStudentID = () => {
-        return User.findOne({ studentID })
+        return User.findOne({ studentID: studentID })
     }
 
     const checkDuplicate = async () => {
@@ -88,12 +88,12 @@ export const Login = (req: Request, res: Response) => {
         return res.status(400).json(errors);
     }
 
-    const studentID: number = req.body.studentID
+    const studentID: string = req.body.studentID
     const password = req.body.password
 
     //Find user by student id
 
-    User.findOne({ studentID }).then((user: IUser | null) => {
+    User.findOne({ studentID: studentID }).then((user: IUser | null) => {
         //check for user
         if (!user) {
             errors.studentID = "User not found"
@@ -167,7 +167,11 @@ export const GetUsersInfo = asyncHandler(async (req: Request, res: Response, nex
 
 
     const queryArray = []
-    if (!isEmpty(search)) queryArray.push({ "$or": [{ "firstName": { $regex: search, $options: 'i' } }, { "email": { $regex: search } }] })
+    if (!isEmpty(search)) queryArray.push({
+        "$or": [{ "firstName": { $regex: search, $options: 'i' } },
+        { "email": { $regex: search } },
+        { "studentID": { $regex: search } }]
+    })
 
     let users
     if (isEmpty(search)) {

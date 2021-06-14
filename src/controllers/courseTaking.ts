@@ -68,10 +68,11 @@ export const GetAllStudentInCourse = asyncHandler(async (req: Request, res: Resp
 
     const queryArray = []
     queryArray.push({ course: courseId })
-    if (!isEmpty(search)) queryArray.push({ "$or": [{ "student.firstName": { $regex: search, $options: 'i' } }, { "student.email": { $regex: search } }] })
-    console.log(queryArray)
-    console.log(search)
-
+    if (!isEmpty(search)) queryArray.push({
+        "$or": [{ "student.firstName": { $regex: search, $options: 'i' } },
+        { "student.email": { $regex: search } },
+        { "student.studentID": { $regex: search } }]
+    })
     try {
         let c = await Course.findOne({ _id: courseId })
 
@@ -247,7 +248,11 @@ export const GetAllStudentNotInCourse = asyncHandler(async (req: Request, res: R
 
     const queryArray = []
     queryArray.push({ studentID: { $nin: courseTakingDetail } })
-    if (!isEmpty(search)) queryArray.push({ "$or": [{ "firstName": { $regex: search, $options: 'i' } }, { "email": { $regex: search } }] })
+    if (!isEmpty(search)) queryArray.push({
+        "$or": [{ "firstName": { $regex: search, $options: 'i' } },
+        { "email": { $regex: search } },
+        { "studentID": { $regex: search } }]
+    })
 
     let unregisteredStudent = await User.find({ "$and": queryArray })
         .select('_id studentID email firstName lastName')
