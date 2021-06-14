@@ -128,7 +128,6 @@ function Navbar(props) {
             <FontAwesomeIcon icon={faChevronDown} size="lg" color="white" />
           </ChevonDown>
           <div className="Drop-Down-Link">
-            <li>Edit Profile</li>
             <li>
               <Link to="/" className="drop-down-link" onClick={onLogoutClick}>
                 <FontAwesomeIcon icon={faSignOutAlt} size="lg" />
