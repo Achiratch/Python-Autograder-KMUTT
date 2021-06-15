@@ -47,7 +47,7 @@ class StudentItem extends Component {
               </Tag>
             </h3>
           </div>
-          {this.props.auth.user.id === question.createdBy._id ? (
+          {(this.props.auth.user.id === question.createdBy._id || this.props.auth.user.id === question.assignmentOwner) ? (
             <Link
               to={`/scorebook/${question.course}/${question.assignment}/${question.question}/${question.scoreID}/edit`}
             >

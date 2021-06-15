@@ -11,7 +11,7 @@ import { studentUpload } from '../../middleware/studentUpload'
 router.route("/create/upload").post(protect, studentUpload, CreateScoreByUpload)
 router.route("/create").post(protect, CreateScoreByString)
 router.route("/student/assignment/:id").get(protect, GetAllAnswerByStudentId)
-router.route("/assignment/:id/student/:sid").get(protect, GetAllAnswerByStudentId)
+router.route("/assignment/:id/student/:sid").get(protect, GetAllAnswerByStudentIdForTeacher)
 router.route("/:id").get(protect, GetAnswerByScoreId)
 router.route("/student/course/:id/status").get(protect, GetSendingStatusByStudentId)
 router.route("/course/:id/assignment/:aid/status").get(protect, GetSendingStatusByCourseId)

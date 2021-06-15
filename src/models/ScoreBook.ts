@@ -11,6 +11,10 @@ const ScoreBookSchema = new Schema({
 
     },
     student: {
+        _id: {
+            type: mongoose.Schema.Types.ObjectId,
+            require: true
+        },
         studentID: {
             type: String,
             required: true

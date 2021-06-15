@@ -33,6 +33,7 @@ export const CreateScoreByUpload = asyncHandler(async (req: Request, res: Respon
     const studentId = user.id
     const student = await User.findById(studentId)
     const studentProfile = {
+        _id: user._id,
         studentID: user.studentID,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -156,6 +157,7 @@ export const CreateScoreByString = asyncHandler(async (req: Request, res: Respon
     const studentId = user.id
     const student = await User.findById(studentId)
     const studentProfile = {
+        _id: user._id,
         studentID: user.studentID,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -363,6 +365,7 @@ export const EditScoreByUpload = asyncHandler(async (req: Request, res: Response
     const studentId = user.id
     const student = await User.findById(studentId)
     const studentProfile = {
+        _id: user._id,
         studentID: user.studentID,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -489,6 +492,7 @@ export const EditScoreByString = asyncHandler(async (req: Request, res: Response
     const studentId = user.id
     const student = await User.findById(studentId)
     const studentProfile = {
+        _id: user._id,
         studentID: user.studentID,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -661,6 +665,7 @@ export const EditScoreByScoreId = asyncHandler(async (req: Request, res: Respons
     const student = await User.findById(answer.student).select('-password')
     if (!student) return next(new ErrorResponse(`DB keep wrong data`, 500))
     const studentProfile = {
+        _id: student._id,
         studentID: student.studentID,
         firstName: student.firstName,
         lastName: student.lastName,

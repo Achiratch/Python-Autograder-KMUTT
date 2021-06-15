@@ -52,6 +52,7 @@ class ScorebookStudent extends Component {
                         q.scoreID = s._id
                         q.status = s.sendingStatus
                         q.studentID = s.student
+                        q.assignmentOwner = assignment.createdBy._id
                     }
                 }
             }

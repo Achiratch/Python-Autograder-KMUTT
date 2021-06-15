@@ -26,7 +26,7 @@ export const CreateAssignment = asyncHandler(async (req: Request, res: Response,
     } catch {
         return next(new ErrorResponse('No course with that id', 400))
     }
-    const user = await User.findById((req.user as IUser).id).select('studentID firstName lastName email -_id') as IUser
+    const user = await User.findById((req.user as IUser).id).select('studentID firstName lastName email _id') as IUser
     const createdBy = {
         studentID: user.studentID,
         firstName: user.firstName,

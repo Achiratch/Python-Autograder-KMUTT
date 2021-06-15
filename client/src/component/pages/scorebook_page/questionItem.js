@@ -51,7 +51,7 @@ class QuestionItem extends Component {
             </h3>
           </div>
           <Link
-            to={`/scorebook/${student.course}/${assignmentId}/${student._id}`}
+            to={`/scorebook/${student.course}/${assignmentId}/${student.student._id}`}
           >
             <div className="button-train">
               <button className="question-button">

@@ -32,6 +32,10 @@ const AssignmentSchema = new Schema({
 
     },
     createdBy: {
+        _id: {
+            type: mongoose.Schema.Types.ObjectId,
+            require: true
+        },
         studentID: {
             type: Number,
             required: true
